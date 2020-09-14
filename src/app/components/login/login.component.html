@@ -1,0 +1,68 @@
+<div class="container">
+
+  <div class="login" *ngIf="!cargandoApp">
+
+    <div class="encabezado">
+      <img class="logo" src="assets/images/logo.svg" alt="logo">
+      <h1>INICIAR SESIÓN</h1>
+    </div>
+
+    <form [formGroup]="loginForm" (ngSubmit)="login()">
+
+      <div class="error" *ngIf="loginFail">
+        <span>Correo Electrónico o Contraseña incorrectos</span>
+      </div>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Correo Electrónico</mat-label>
+        <input matInput type="email" errorState="true" formControlName="correoElectronico">
+        <mat-icon matSuffix *ngIf="!correoElectronico.value">email</mat-icon>
+        <mat-error *ngIf="correoElectronico.errors?.email">
+          Correo electrónico inválido.
+        </mat-error>
+        <mat-error *ngIf="correoElectronico.errors?.required">
+          Correo electrónico requerido.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Contraseña</mat-label>
+        <input matInput type="password" formControlName="password" #passwordTemplateRef>
+        <mat-icon matSuffix *ngIf="!password.value">vpn_key</mat-icon>
+        <button mat-button matSuffix  mat-icon-button type="button"
+          *ngIf="password.value"
+          tabindex="-1"
+          (click)="passwordTemplateRef.type === 'password'?
+            passwordTemplateRef.type = 'text' : passwordTemplateRef.type = 'password'">
+          <mat-icon *ngIf="passwordTemplateRef.type === 'password'">visibility_off</mat-icon>
+          <mat-icon *ngIf="passwordTemplateRef.type === 'text'">visibility</mat-icon>
+        </button>
+        <mat-error *ngIf="password.errors?.required">
+          Contraseña requerida.
+        </mat-error>
+      </mat-form-field>
+
+      <div class="recordarme-registrarse">
+        <mat-checkbox formControlName="recuerdame">Recuerdame</mat-checkbox>
+        <a [routerLink]="['/nuevo-usuario']">Registrarse</a>
+      </div>
+
+      <div class="ingresar">
+        <button mat-raised-button
+          color="primary" type="submit" >Ingresar</button>
+      </div>
+
+      <div class="recuperar-contrasena">
+        <a href="#">¿Ha olvidado su contraseña?</a>
+      </div>
+
+    </form>
+
+  </div>
+
+  <div *ngIf="cargandoApp" class="cargando-app">
+    <h1>Cargando</h1>
+    <mat-spinner color="accent"></mat-spinner>
+  </div>
+
+</div>

@@ -1,0 +1,44 @@
+<input
+  type="file"
+  accept="image/png, image/jpeg, image/jpg"
+  #inputFile
+  (change)="onFileAdded()"
+/>
+
+<h1 mat-dialog-title>{{ data.title }}</h1>
+
+<!-- This is the content of the dialog, containing a list of the files to upload -->
+<div mat-dialog-content class="dialog-content">
+
+  <img #img src="" alt="">
+
+  <h4 mat-line>{{ file ? file.name : '' }}</h4>
+
+  <mat-progress-bar
+    *ngIf="uploading"
+    mode="deter55minate"
+    [value]="progress" >
+  </mat-progress-bar>
+
+  <button
+    *ngIf="file && !uploading && !uploadSuccessful"
+    type="button"
+    mat-button
+    (click)="addFiles()">
+    Cambiar Foto
+  </button>
+
+</div>
+
+<!-- This are the actions of the dialog, containing the primary and the cancel button-->
+<div mat-dialog-actions class="actions">
+  <button *ngIf="showCancelButton" mat-button mat-dialog-close>Cancelar</button>
+  <button
+    mat-raised-button
+    color="primary"
+    [disabled]="!canBeClosed"
+    (click)="closeDialog()"
+  >
+    {{ primaryButtonText }}
+  </button>
+</div>

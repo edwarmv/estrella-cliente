@@ -1,0 +1,43 @@
+<app-header *ngIf="showHeader"></app-header>
+
+<mat-sidenav-container class="sidenav-container">
+
+  <mat-sidenav
+    #sidenav
+    mode="over"
+    [opened]="false">
+    <!-- [opened]="!mediaQueryList.matches"> -->
+
+    <app-sidebar></app-sidebar>
+
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+
+    <div class="sidenav-content">
+
+      <app-breadcrumbs></app-breadcrumbs>
+
+      <div class="sidenav-inner-content">
+
+        <div
+          *ngIf="mediaQueryList.matches"
+          class="menu-container">
+          <div class="menu">
+            <app-sidebar></app-sidebar>
+          </div>
+        </div>
+
+        <div class="component">
+          <router-outlet></router-outlet>
+        </div>
+
+      </div>
+
+      <app-footer></app-footer>
+
+    </div>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

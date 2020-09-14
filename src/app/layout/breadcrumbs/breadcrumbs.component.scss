@@ -1,0 +1,44 @@
+.container {
+  background: var(--primary-color);
+  padding-left: 20px;
+
+  .breadcrumb {
+    padding: 28px 8px;
+    list-style-type: none;
+    background: none;
+    font-weight: 300;
+    font-size: 20px;
+    margin: 0;
+
+    li {
+      list-style: none;
+      display: inline;
+
+      &::after {
+        content: '/';
+        color: black;
+      }
+
+      &:last-child::after {
+        content: "";
+      }
+
+      a {
+        color: black;
+
+        &:link, visited, hover, active {
+          text-decoration: none;
+        }
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .active-link {
+        color: black;
+        font-weight: 400;
+      }
+    }
+  }
+}

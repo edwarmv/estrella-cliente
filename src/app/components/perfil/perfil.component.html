@@ -1,0 +1,91 @@
+<div class="container" *ngIf="usuario$ | async as usuario">
+
+  <div class="foto-perfil-container">
+
+    <h2>Foto de perfil</h2>
+
+    <div class="foto-button">
+
+      <img class="responsive-img" [src]="usuario.fotoPerfil | images: 'usuario'">
+
+      <div class="actualizar-foto-button">
+        <app-upload
+          [inputName]="'Actualizar foto'"
+          [url]="uploadUrl(usuario.id)"
+          buttonColor="primary"
+          title="Actulizar foto de perfil"
+          (uploadedEvent)="$event ? actualizarUsuarioConectado() : ''"
+          [keyName]="keyName">
+        </app-upload>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="informacion-usuario">
+
+    <h2>Información personal</h2>
+
+    <form [formGroup]="perfilForm" (ngSubmit)="actualizarUsuario(usuario.id)">
+
+      <mat-form-field appearance="standard">
+        <mat-label>Nombres</mat-label>
+        <input matInput value="nombres" formControlName="nombres">
+      </mat-form-field>
+
+      <mat-form-field appearance="standard">
+        <mat-label>Apellidos</mat-label>
+        <input matInput value="apellidos" formControlName="apellidos">
+      </mat-form-field>
+
+      <mat-form-field appearance="standard">
+        <mat-label>NIT/CI</mat-label>
+        <input matInput value="nitCI" formControlName="nitCI">
+      </mat-form-field>
+
+      <mat-form-field appearance="standard">
+        <mat-label>Teléfono fijo</mat-label>
+        <input matInput value="telefonoFijo" formControlName="telefonoFijo">
+      </mat-form-field>
+
+      <mat-form-field appearance="standard">
+        <mat-label>Teléfono móvil</mat-label>
+        <input matInput value="telefonoMovil" formControlName="telefonoMovil">
+      </mat-form-field>
+
+      <mat-form-field appearance="standard">
+        <mat-label>Dirección de domicilio</mat-label>
+        <input matInput value="direccionDomicilio" formControlName="direccionDomicilio">
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit">Actualizar datos</button>
+
+    </form>
+
+    <form [formGroup]="correoElectronicoForm" class="correo-electronico">
+
+      <mat-form-field appearance="standard">
+        <mat-label>Correo electrónico</mat-label>
+        <input matInput value="correoElectronico" formControlName="correoElectronico">
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit">Actualizar correo electrónico</button>
+
+    </form>
+
+    <div class="roles-asignados">
+
+      <h2>Roles asignados</h2>
+
+      <mat-list>
+        <mat-list-item> Pepper </mat-list-item>
+        <mat-list-item> Salt </mat-list-item>
+        <mat-list-item> Paprika </mat-list-item>
+      </mat-list>
+
+    </div>
+
+  </div>
+
+</div>

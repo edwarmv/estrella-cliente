@@ -1,0 +1,21 @@
+input {
+  display: none;
+}
+.dialog-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  img {
+    max-width: 180px;
+
+    @media only screen and (min-width: 600px) {
+      max-width: 250px;
+    }
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}

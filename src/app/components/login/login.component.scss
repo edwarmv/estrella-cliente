@@ -1,0 +1,64 @@
+.container {
+  background-color: #10ae2e;
+  padding: 20px;
+  box-sizing: border-box;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .login {
+    background-color: #f9faf9;
+    box-sizing: border-box;
+    padding: 20px;
+    max-width: 350px;
+    border-radius: 5px;
+
+    .encabezado {
+      text-align: center;
+
+      .logo {
+        width: 200px;
+      }
+    }
+
+    form {
+      .error {
+        color: #f44236;
+        border: solid 2px  #f44236;
+        border-radius: 5px;
+        background-color: rgba(244, 67, 54, 0.2);
+        padding-left: 10px;
+        margin-bottom: 18px;
+      }
+      mat-form-field {
+        width: 100%;
+      }
+
+      .recordarme-registrarse {
+        height: 55px;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .ingresar {
+        button {
+          width: 100%;
+        }
+      }
+
+      .recuperar-contrasena {
+        text-align: center;
+        margin-top: 15px;
+      }
+    }
+  }
+
+  .cargando-app {
+    h1 {
+      text-align: center;
+      color: white;
+    }
+  }
+}

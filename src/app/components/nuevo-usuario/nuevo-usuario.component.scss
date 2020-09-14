@@ -1,0 +1,44 @@
+.container {
+  background-color: #10ae2e;
+  padding: 20px;
+  box-sizing: border-box;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .nuevo-usuario {
+    background-color: #f9faf9;
+    box-sizing: border-box;
+    padding: 20px;
+    max-width: 350px;
+    border-radius: 5px;
+
+    .encabezado {
+      text-align: center;
+
+      .logo {
+        width: 200px;
+      }
+    }
+
+    form {
+      mat-form-field {
+        width: 100%;
+      }
+
+      .hr {
+        margin-bottom: 1.34375em;
+      }
+
+      .registrarse {
+        margin-top: 1.34375em;
+
+        button {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

@@ -29,6 +29,14 @@ const routes: Routes = [
     }
   },
   {
+    path: 'usuarios',
+    loadChildren: () => import('./components/usuarios/usuarios.module')
+    .then(m => m.UsuariosModule),
+    data: {
+      breadcrumb: 'Administrar usuarios'
+    }
+  },
+  {
     path: 'perfil',
     loadChildren: () => import('./components/perfil/pefil.module')
     .then(m => m.PefilModule),

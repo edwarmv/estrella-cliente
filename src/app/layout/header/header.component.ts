@@ -37,7 +37,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
-    this.mediaQueryList = this.mediaMatcher.matchMedia('(max-width: 999px)');
+    this.mediaQueryList = this.mediaMatcher.matchMedia('(min-width: 999px)');
     this.mediaQueryListenner = () => this.changeDetector.detectChanges();
     this.mediaQueryList.addEventListener('change', this.mediaQueryListenner);
 

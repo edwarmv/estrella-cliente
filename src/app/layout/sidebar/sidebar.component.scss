@@ -1,3 +1,29 @@
 mat-nav-list {
+  padding-top: 0;
   padding-bottom: 144px;
+  // prevent doubleclick selection
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;          /* Likely future */
+
+  .activated {
+    background-color: rgb(63, 181, 64, .15);
+    color: #306816;
+  }
+
+  .mat-list-base {
+    padding: 0;
+  }
+
+  .child {
+    overflow: hidden;
+    transition: height 0.4s ease;
+
+    .cerrar-sesion {
+      span {
+        padding-right: 20px;
+      }
+    }
+  }
 }

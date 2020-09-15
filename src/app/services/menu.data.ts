@@ -1,49 +1,57 @@
-type Submenu = { nombre: string, path: string };
+type Submenu = {
+  nombre: string,
+  path: string,
+  activated: boolean
+};
 
 export type Menu = {
   nombre: string,
   path?: string,
   collapsed: boolean,
+  activated: boolean,
   submenus: Submenu[],
   autorizacion?: string[]
 };
 
-export const menus: Menu[] = [
-  {
-    nombre: 'Gestionar usuarios',
-    path: '',
-    collapsed: true,
-    submenus: [
-      {
-        nombre: 'Usuarios',
-        path: '/usuarios'
-      },
-      {
-        nombre: 'Roles',
-        path: '/roles'
-      }
-    ]
-  },
-  {
-    nombre: 'Gestionar usuarios',
-    path: '/usuarios',
-    collapsed: true,
-    submenus: [
-      {
-        nombre: 'Gestionar roles',
-        path: '/roles'
-      }
-    ]
-  },
-  {
-    nombre: 'Gestionar usuarios',
-    path: '/usuarios',
-    collapsed: true,
-    submenus: [
-      {
-        nombre: 'Gestionar roles',
-        path: '/roles'
-      }
-    ]
-  },
-];
+export class MenuData {
+  public static menus: Menu[] = [
+    {
+      nombre: 'Gestionar usuarios',
+      path: undefined,
+      collapsed: true,
+      activated: false,
+      submenus: [
+        {
+          nombre: 'Usuarios',
+          path: '/usuarios',
+          activated: false
+        },
+        {
+          nombre: 'Roles',
+          path: '/roles',
+          activated: false
+        }
+      ]
+    },
+    {
+      nombre: 'Gestionar usuarios',
+      path: '/usuarios',
+      collapsed: undefined,
+      activated: false,
+      submenus: []
+    },
+    {
+      nombre: 'Gestionar usuarios',
+      path: undefined,
+      collapsed: true,
+      activated: false,
+      submenus: [
+        {
+          nombre: 'Gestionar roles',
+          path: '/roles',
+          activated: false
+        }
+      ]
+    },
+  ];
+} 

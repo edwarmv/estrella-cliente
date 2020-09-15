@@ -29,6 +29,7 @@ mat-sidenav-container {
         .menu {
           height: calc(100vh - var(--header-space));
           overflow: auto;
+          border-right: 1px solid #dcdcdc;
 
           &::-webkit-scrollbar {
             width: 4px;

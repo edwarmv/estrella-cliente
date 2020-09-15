@@ -4,23 +4,23 @@
     <div class="container">
 
       <div class="left">
-          <button
-            *ngIf="mediaQueryList.matches"
-            mat-icon-button
-            (click)="this.toggleSidevar()">
-            <mat-icon *ngIf="!opened">menu</mat-icon>
-            <mat-icon *ngIf="opened">menu_open</mat-icon>
-          </button>
-        <div class="nombre-empresa">
+        <button
+          *ngIf="mediaQueryList.matches"
+          mat-icon-button
+          (click)="this.toggleSidevar()">
+          <mat-icon *ngIf="!opened">menu</mat-icon>
+          <mat-icon *ngIf="opened">menu_open</mat-icon>
+        </button>
+        <a class="nombre-empresa" routerLink="/home">
           LA ESTRELLA DEL SUR
-        </div>
+        </a>
       </div>
 
       <div class="right" [matMenuTriggerFor]="menu">
         <img
-        class="foto-perfil-toolbar"
-        [src]="usuario.fotoPerfil | images: 'usuario'"
-        alt="imagen de perfil">
+          class="foto-perfil-toolbar"
+          [src]="usuario.fotoPerfil | images: 'usuario'"
+          alt="imagen de perfil">
       </div>
 
     </div>
@@ -32,9 +32,9 @@
     <div class="nombre-rol-usuario" (click)="$event.stopPropagation()">
 
       <img
-      class="foto-perfil-menu"
-      [src]="usuario.fotoPerfil | images: 'usuario'"
-      alt="imagen de perfil">
+        class="foto-perfil-menu"
+        [src]="usuario.fotoPerfil | images: 'usuario'"
+        alt="imagen de perfil">
 
       <div>
         <p>{{ usuario.nombres + ' ' + usuario.apellidos }}</p>

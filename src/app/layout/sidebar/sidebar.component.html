@@ -1,3 +1,52 @@
 <mat-nav-list>
-  <a mat-list-item href="#" *ngFor="let menu of menus"> {{ menu }} </a>
+
+  <ng-container *ngFor="let menu of menus; let i = index">
+
+    <a
+      mat-list-item
+      [ngClass]="menu.activated ? 'activated' : ''"
+      (click)="toggleMenu(i)">
+
+      <span matLine>{{ menu.nombre }}</span>
+
+      <mat-icon *ngIf="menu.submenus.length > 0"
+        [@arrow]="menu.collapsed? 'right' : 'down'">
+        keyboard_arrow_right
+      </mat-icon>
+
+    </a>
+
+    <ng-template #segundo>
+      <a
+        mat-list-item
+        *ngIf="menu.submenus.length > 0; else segundo"
+        (click)="toggleMenu(i)"
+        [ngClass]="menu.activated ? 'activated' : ''"
+        [routerLink]="menu.path">
+
+        <span matLine>{{ menu.nombre }}</span>
+
+      </a>
+    </ng-template>
+
+    <div
+      class="child"
+      #child
+      *ngIf="!menu.collapsed"
+      >
+      <!-- [style.height.px]="!menu.collapsed ? child.scrollHeight : 0"> -->
+
+      <a
+        mat-list-item
+        class="animate__animated animate__fadeIn"
+        [ngClass]="submenu.activated ? 'activated' : ''"
+        *ngFor="let submenu of menu.submenus"
+        [routerLink]="submenu.path">
+        <span matLine>{{ submenu.nombre }}</span>
+      </a>
+
+    </div>
+
+  </ng-container>
+
 </mat-nav-list>

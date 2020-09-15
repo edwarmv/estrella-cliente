@@ -23,7 +23,16 @@ mat-toolbar {
       align-items: center;
 
       .nombre-empresa {
+        color: black;
         font-size: 17px;
+
+        &:link, visited, hover, active {
+          text-decoration: none;
+        }
+
+        &:hover {
+          cursor: pointer;
+        }
       }
     }
 
@@ -80,7 +89,7 @@ mat-toolbar {
       }
 
       // &:visited {
-        // text-decoration: none;
+      // text-decoration: none;
       // }
 
       &:hover {
@@ -88,7 +97,7 @@ mat-toolbar {
       }
 
       // &:active {
-        // text-decoration: none;
+      // text-decoration: none;
       // }
     }
   }

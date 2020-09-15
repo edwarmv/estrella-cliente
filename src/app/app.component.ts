@@ -12,7 +12,7 @@ import { SidebarService } from '@services/sidebar.service';
 export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('sidenav') sidenav: MatSidenav;
   mediaQueryList: MediaQueryList;
-  private mediaQueryListenner: () => void;
+  private mediaQueryListener: () => void;
 
   title = 'estrella-cliente';
   showHeader = false;
@@ -23,7 +23,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     private router: Router,
     private activatedRoute: ActivatedRoute,
     private mediaMatcher: MediaMatcher,
-    private changeDetector: ChangeDetectorRef,
+    private changeDetectorRef: ChangeDetectorRef,
     private sidebarService: SidebarService
   ) {}
 
@@ -36,8 +36,8 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit(): void {
     this.mediaQueryList = this.mediaMatcher.matchMedia('(min-width: 1000px)');
-    this.mediaQueryListenner = () => this.changeDetector.detectChanges();
-    this.mediaQueryList.addEventListener('change', this.mediaQueryListenner);
+    this.mediaQueryListener = () => this.changeDetectorRef.detectChanges();
+    this.mediaQueryList.addEventListener('change', this.mediaQueryListener);
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -50,6 +50,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy(): void {
-    this.mediaQueryList.removeEventListener('change', this.mediaQueryListenner);
+    this.mediaQueryList.removeEventListener('change', this.mediaQueryListener);
   }
 }

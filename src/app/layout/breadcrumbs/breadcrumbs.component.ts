@@ -57,7 +57,6 @@ export class BreadcrumbsComponent implements OnInit {
       label,
       url: nextURL
     };
-    console.log(breadcrumb);
 
     const newBreadcrumbs = breadcrumb.label
       ? [...breadcrumbs, breadcrumb]

@@ -9,8 +9,8 @@
 
     <form [formGroup]="loginForm" (ngSubmit)="login()">
 
-      <div class="error" *ngIf="loginFail">
-        <span>Correo Electrónico o Contraseña incorrectos</span>
+      <div class="error" *ngIf="message">
+        <span>{{ message }}</span>
       </div>
 
       <mat-form-field appearance="outline">
@@ -48,8 +48,12 @@
       </div>
 
       <div class="ingresar">
-        <button mat-raised-button
-          color="primary" type="submit" >Ingresar</button>
+        <button
+          mat-raised-button
+          [disabled]="loginForm.invalid"
+          color="primary" type="submit">
+          Ingresar
+        </button>
       </div>
 
       <div class="recuperar-contrasena">

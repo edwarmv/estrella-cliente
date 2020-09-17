@@ -9,7 +9,7 @@ export class ImagesPipe implements PipeTransform {
   transform(value: string, tipo?: 'usuario'): string {
     let url: string;
 
-    if (value === '') {
+    if (!value) {
       return 'assets/images/no-profile-image.png';
     }
 

@@ -10,7 +10,7 @@ import { AutenticacionService } from '@services/autenticacion.service';
 })
 export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup;
-  loginFail = false;
+  message = '';
   cargandoApp = false;
   private subscription: Subscription = new Subscription();
 
@@ -36,14 +36,16 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   login(): void {
     this.cargandoApp = true;
-    this.subscription = this.autenticacionService.login( this.correoElectronico.value, this.password.value)
+    this.subscription = this.autenticacionService
+      .login( this.correoElectronico.value, this.password.value)
       .subscribe(() => {
         if (this.recuerdame.value) {
           localStorage.setItem('correoElectronico', this.correoElectronico.value);
         }
         this.cargandoApp = false;
-      }, () => {
-        this.loginFail = true;
+      }, (error) => {
+        console.log(error);
+        this.message = error.error.error;
         this.cargandoApp = false;
       });
   }

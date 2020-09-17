@@ -8,16 +8,29 @@ const routes: Routes = [
     .then(m => m.LoginModule),
     data: {
       showHeader: false,
-      showSidebar: false
+      showSidebar: false,
+      showBreadcrumbs: false
     }
   },
   {
     path: 'nuevo-usuario',
-    loadChildren: () => import('./components/nuevo-usuario/nuevo-usuario.module')
-    .then(m => m.NuevoUsuarioModule),
+    loadChildren: () =>
+      import('./components/nuevo-usuario/nuevo-usuario.module')
+      .then(m => m.NuevoUsuarioModule),
     data: {
       showHeader: false,
-      showSidebar: false
+      showSidebar: false,
+      showBreadcrumbs: false
+    }
+  },
+  {
+    path: 'verificar-usuario/:token',
+    loadChildren: () => import('@components/verificar-usuario/verificar-usuario.module')
+    .then(m => m.VerificarUsuarioModule),
+    data: {
+      showHeader: false,
+      showSidebar: false,
+      showBreadcrumbs: false
     }
   },
   {

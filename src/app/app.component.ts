@@ -18,6 +18,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   showHeader = false;
   showSidebar = false;
   showFooter = false;
+  showBreadcrumbs = false;
 
   constructor(
     private router: Router,
@@ -45,6 +46,7 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
         this.showHeader = data.showHeader !== false;
         this.showSidebar = data.showSidebar !== false;
         this.showFooter = data.showFooter !== false;
+        this.showBreadcrumbs = data.showBreadcrumbs !== false;
       }
     });
   }

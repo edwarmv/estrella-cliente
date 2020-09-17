@@ -1,0 +1,27 @@
+<div class="container">
+
+  <ng-container *ngIf="!loading; else loadingRef">
+
+    <img class="logo" src="assets/images/logo.svg" alt="logo">
+
+    <h1 [ngClass]="mensaje.ok ? '' : 'mensaje-error'">{{ mensaje.mensaje }}</h1>
+
+    <mat-icon *ngIf="mensaje.ok" class="icon-success">check_circle</mat-icon>
+
+    <mat-icon *ngIf="!mensaje.ok" class="icon-error">error</mat-icon>
+
+    <a
+      mat-raised-button
+      [color]="mensaje.ok ? 'primary' : 'warn'"
+      routerLink="/login"
+    >
+      {{ mensaje.ok ? 'Aceptar' : 'Error' }}
+    </a>
+
+  </ng-container>
+
+  <ng-template #loadingRef>
+    <mat-spinner></mat-spinner>
+  </ng-template>
+
+</div>

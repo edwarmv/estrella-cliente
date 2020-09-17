@@ -9,6 +9,7 @@ import { Rol } from '@models/rol.model';
 
 type Login = { token: string, usuario: Usuario, rolPorDefecto: Rol };
 type Payload = { exp: number, iat: number, roles: Rol[], sub: number };
+type VerificarCuenta = { mensaje: string };
 
 @Injectable({
   providedIn: 'root'
@@ -34,6 +35,11 @@ export class AutenticacionService {
       }),
       catchError(error => throwError(error))
     );
+  }
+
+  verificarCuenta(token: string): Observable<VerificarCuenta> {
+    const url = `${environment.apiURL}/verificar-usuario/${token}`;
+    return this.http.get<VerificarCuenta>(url);
   }
 
   cerrarSesion(): void {

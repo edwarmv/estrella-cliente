@@ -1,6 +1,8 @@
 <app-header *ngIf="showHeader"></app-header>
 
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container
+  [ngClass]="!showHeader ? 'hidden-header' : ''"
+  class="sidenav-container">
 
   <mat-sidenav
     #sidenav
@@ -8,7 +10,7 @@
     [opened]="false">
     <!-- [opened]="!mediaQueryList.matches"> -->
 
-    <app-sidebar></app-sidebar>
+    <app-sidebar *ngIf="showHeader"></app-sidebar>
 
   </mat-sidenav>
 
@@ -16,12 +18,12 @@
 
     <div class="sidenav-content">
 
-      <app-breadcrumbs></app-breadcrumbs>
+      <app-breadcrumbs *ngIf="showBreadcrumbs"></app-breadcrumbs>
 
       <div class="sidenav-inner-content">
 
         <div
-          *ngIf="mediaQueryList.matches"
+          *ngIf="showSidebar && mediaQueryList.matches"
           class="menu-container">
           <div class="menu">
             <app-sidebar></app-sidebar>
@@ -34,7 +36,7 @@
 
       </div>
 
-      <app-footer></app-footer>
+      <app-footer *ngIf="showFooter"></app-footer>
 
     </div>
 

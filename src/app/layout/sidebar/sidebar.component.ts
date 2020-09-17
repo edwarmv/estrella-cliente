@@ -34,7 +34,7 @@ import { Subscription } from 'rxjs';
 export class SidebarComponent implements OnInit, OnDestroy {
   menus: Menu[];
 
-  private subscription: Subscription;
+  private subscription: Subscription = new Subscription();
 
   constructor(
     private rolService: RolService,

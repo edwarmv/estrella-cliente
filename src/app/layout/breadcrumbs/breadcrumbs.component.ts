@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { distinctUntilChanged, filter } from 'rxjs/operators';
 
 export type BreadCrumb = {
@@ -12,8 +13,9 @@ export type BreadCrumb = {
   templateUrl: './breadcrumbs.component.html',
   styleUrls: ['./breadcrumbs.component.scss']
 })
-export class BreadcrumbsComponent implements OnInit {
+export class BreadcrumbsComponent implements OnInit, OnDestroy {
   breadcrumbs: BreadCrumb[];
+  private subscription = new Subscription();
 
   constructor(
     private router: Router,
@@ -21,7 +23,13 @@ export class BreadcrumbsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.router.events.pipe(
+    // cuando se recarga la pagina
+    this.breadcrumbs = this.buildBreadCrumb(
+      this.activatedRoute.root
+    );
+
+    // solo se activa si hay un cambio en el path
+    this.subscription = this.router.events.pipe(
       filter(event => event instanceof NavigationEnd),
       distinctUntilChanged()
     ).subscribe(() => {
@@ -71,6 +79,10 @@ export class BreadcrumbsComponent implements OnInit {
     }
 
     return newBreadcrumbs;
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 }

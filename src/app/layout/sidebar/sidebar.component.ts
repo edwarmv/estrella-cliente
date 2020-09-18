@@ -1,5 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { state, style, transition, animate, trigger } from '@angular/animations';
+import {
+  state,
+  style,
+  transition,
+  animate,
+  trigger
+} from '@angular/animations';
 import { RolService } from 'src/app/services/rol.service';
 import { SidebarService } from '@services/sidebar.service';
 import { Menu, MenuData } from '@services/menu.data';
@@ -47,30 +53,26 @@ export class SidebarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // cargamos los menus y marcamos el menu cuando cuando el componente se
     // destruye o crea debido al diseno responsive
-    const firstChild = this.activatedRoute.firstChild;
-    if (firstChild) {
-      const path = firstChild.routeConfig.path;
+    let path: string = this.activatedRoute.firstChild.routeConfig.path;
+    // hacemos una copia local de los menus
+    this.menus = this.cargarMenus(
+      JSON.parse(JSON.stringify(MenuData.menus)),
+      path
+    );
+    // cargamos los menus y marcamos el menu seleccionado cada vez que
+    // se cambia de ruta
+    this.subscription = this.router.events.
+      pipe(
+        filter(event => event instanceof NavigationEnd),
+    ).subscribe(() => {
+      path = this.activatedRoute.firstChild.routeConfig.path;
+
       // hacemos una copia local de los menus
       this.menus = this.cargarMenus(
         JSON.parse(JSON.stringify(MenuData.menus)),
         path
       );
-    } else {
-      // cargamos los menus y marcamos el menu seleccionado cada vez que
-      // se cambia de ruta
-      this.subscription = this.router.events.
-        pipe(
-          filter(event => event instanceof NavigationEnd),
-      ).subscribe(() => {
-        const path: string = this.activatedRoute.firstChild.routeConfig.path;
-
-        // hacemos una copia local de los menus
-        this.menus = this.cargarMenus(
-          JSON.parse(JSON.stringify(MenuData.menus)),
-          path
-        );
-      });
-    }
+    });
   }
 
   toggleMenu(index: number): void {

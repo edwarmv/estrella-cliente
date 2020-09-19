@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { UsuariosComponent } from './usuarios.component';
 import { UsuarioComponent } from './usuario/usuario.component';
@@ -37,6 +37,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
+    FormsModule,
     PipesSharedModule,
     MatTableModule,
     MatPaginatorModule,

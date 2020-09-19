@@ -16,6 +16,19 @@ export type Menu = {
 export class MenuData {
   public static menus: Menu[] = [
     {
+      nombre: 'Gestionar pedidos',
+      path: undefined,
+      collapsed: true,
+      activated: false,
+      submenus: [
+        {
+          nombre: 'Pedidos',
+          path: '/pedidos',
+          activated: false
+        }
+      ]
+    },
+    {
       nombre: 'Gestionar usuarios',
       path: undefined,
       collapsed: true,

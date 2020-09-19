@@ -4,7 +4,6 @@ import { Usuario } from '@models/usuario.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { PageEvent } from '@angular/material/paginator';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -26,19 +25,14 @@ export class UsuariosComponent implements OnInit {
   pageSize = 5;
   usuarios$: Observable<Usuario[]>;
 
-  buscadorForm: FormGroup;
+  termino = '';
 
   constructor(
     private usuarioService: UsuarioService,
-    private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
     this.usuarios$ = this.obtenerUsuarios(0, 5);
-
-    this.buscadorForm = this.fb.group({
-      termino: ['', Validators.required]
-    });
   }
 
   updateTable(pageEvent: PageEvent): void {
@@ -47,9 +41,8 @@ export class UsuariosComponent implements OnInit {
     this.pageIndex = pageEvent.pageIndex;
     this.pageSize = pageEvent.pageSize;
 
-    const termino = this.buscadorForm.get('termino').value;
-    if (termino) {
-      this.usuarios$ = this.obtenerUsuarios(skip, take, termino);
+    if (this.termino) {
+      this.usuarios$ = this.obtenerUsuarios(skip, take, this.termino);
     } else {
       this.usuarios$ = this.obtenerUsuarios(skip, take);
     }
@@ -70,8 +63,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   buscar(): void {
-    const termino = this.buscadorForm.get('termino').value;
-    this.usuarios$ = this.obtenerUsuarios(0, this.pageSize, termino);
+    this.usuarios$ = this.obtenerUsuarios(0, this.pageSize, this.termino);
   }
 
   eliminarUsuario(id: number, nombreCompleto: string): void {

@@ -1,4 +1,4 @@
 .container {
-  height: 100px;
+  height: var(--footer-height);
   background-color: var(--primary-color);
 }

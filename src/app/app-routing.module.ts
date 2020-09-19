@@ -46,7 +46,7 @@ const routes: Routes = [
     loadChildren: () => import('./components/usuarios/usuarios.module')
     .then(m => m.UsuariosModule),
     data: {
-      breadcrumb: 'Administrar usuarios'
+      breadcrumb: 'Gestionar usuarios'
     }
   },
   {

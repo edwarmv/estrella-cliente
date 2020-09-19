@@ -39,6 +39,9 @@ $estrella-cliente-theme: mat-light-theme((
   --primary-color: #4caf50;
   --accent-color: #ffd600;
   --warn-color: #f44336;
+
+  // Elements sizes
+  --footer-height: 100px;
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

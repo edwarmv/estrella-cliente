@@ -46,14 +46,19 @@ export class UsuarioService {
     return this.http.get<Usuario>(url);
   }
 
-  obtenerUsuario(id: number): Observable<Usuario> {
+  obtenerUsuario(id: number | string): Observable<Usuario> {
     const url = `${this.usuarioURL}/${id}`;
 
     return this.http.get<Usuario>(url);
   }
 
-  obtenerUsuarios(skip: number, take: number): Observable<ObtenerUsuarios> {
-    const url = `${this.usuarioURL}?skip=${skip}&take=${take}`;
+  obtenerUsuarios(
+    skip: number,
+    take: number,
+    termino: string = ''
+  ): Observable<ObtenerUsuarios> {
+    const url = `${this.usuarioURL}\
+?skip=${skip}&take=${take}&termino=${termino}`;
     return this.http.get<ObtenerUsuarios>(url);
   }
 
@@ -80,6 +85,12 @@ export class UsuarioService {
         return resp;
       })
     );
+  }
+
+  eliminarUsuario(id: number): Observable<{ mensaje: string }> {
+    const url = `${this.usuarioURL}/${id}`;
+
+    return this.http.delete<{ mensaje: string }>(url);
   }
 
 }

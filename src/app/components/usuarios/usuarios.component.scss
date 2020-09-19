@@ -1,0 +1,44 @@
+.container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  min-height: calc(100vh - 240px);
+
+  .buscador {
+    display: flex;
+    align-items: center;
+
+    h3, button {
+      margin: .25em 0 calc(.25em + 1.343775em) 0;
+    }
+
+    h3 {
+      padding-right: 20px;
+    }
+
+    mat-form-field {
+      flex: 1 1 auto;
+    }
+
+    button {
+      margin-left: 20px;
+    }
+  }
+
+  .table-container {
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),
+    0 8px 10px 1px rgba(0,0,0,.14),
+    0 3px 14px 2px rgba(0,0,0,.12);
+
+    table {
+      width: 100%;
+
+      .icon {
+        margin-right: 20px;
+      }
+    }
+  }
+}

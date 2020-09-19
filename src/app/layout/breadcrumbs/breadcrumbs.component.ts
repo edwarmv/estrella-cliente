@@ -56,7 +56,9 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
     if (isDynamicRoute && !!route.snapshot) {
       const paramName = lastRoutePart.split(':')[1];
       path = path.replace(lastRoutePart, route.snapshot.params[paramName]);
-      label = route.snapshot.params[paramName];
+      if (!label) {
+        label = route.snapshot.params[paramName];
+      }
     }
 
     const nextURL = path ? `${url}/${path}` : url;

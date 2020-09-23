@@ -66,6 +66,11 @@ export class UsuariosComponent implements OnInit {
     this.usuarios$ = this.obtenerUsuarios(0, this.pageSize, this.termino);
   }
 
+  limpiarBusqueda(): void {
+    this.termino = '';
+    this.usuarios$ = this.obtenerUsuarios(0, this.pageSize);
+  }
+
   eliminarUsuario(id: number, nombreCompleto: string): void {
     Swal.fire({
       title: `Eliminar usuario: ${nombreCompleto}`,

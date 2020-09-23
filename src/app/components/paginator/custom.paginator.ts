@@ -1,12 +1,13 @@
 import { MatPaginatorIntl } from '@angular/material/paginator';
-export function UsuariosPaginator(): MatPaginatorIntl {
+export function customPaginator(itemsPerPageLabel: string): MatPaginatorIntl {
   const usuariosPaginator = new MatPaginatorIntl();
-  usuariosPaginator.itemsPerPageLabel = 'Usuarios por página';
+  usuariosPaginator.itemsPerPageLabel = itemsPerPageLabel;
   usuariosPaginator.nextPageLabel = 'Siguiente página';
   usuariosPaginator.previousPageLabel = 'Página anterior';
   usuariosPaginator.firstPageLabel = 'Primera página';
   usuariosPaginator.lastPageLabel = 'Última página';
-  usuariosPaginator.getRangeLabel = (page: number, pageSize: number, length: number) => {
+  usuariosPaginator.getRangeLabel
+  = (page: number, pageSize: number, length: number) => {
     if (length === 0 || pageSize === 0) {
       return `0 de ${length}`;
     }

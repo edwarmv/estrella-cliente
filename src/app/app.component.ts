@@ -1,4 +1,11 @@
-import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { MediaMatcher } from '@angular/cdk/layout';
@@ -30,8 +37,10 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.sidebarService.sidenav = this.sidenav;
-    this.sidenav.openedStart.subscribe(() => this.sidebarService.opened.next(true));
-    this.sidenav.closedStart.subscribe(() => this.sidebarService.opened.next(false));
+    this.sidenav.openedStart
+      .subscribe(() => this.sidebarService.opened.next(true));
+    this.sidenav.closedStart
+      .subscribe(() => this.sidebarService.opened.next(false));
   }
 
 

@@ -1,0 +1,17 @@
+<h2 mat-dialog-title>{{ title }}</h2>
+
+<mat-dialog-content>
+  <div class="event" *ngFor="let event of events">
+    <p class="event-title">{{ event.title }}</p>
+    <p class="">
+      {{ event.start | date: 'shortTime' }} -
+      {{ event.end | date: 'shortTime' }}
+    </p>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+  <button mat-button [mat-dialog-close]="true">Delete</button>
+</mat-dialog-actions>

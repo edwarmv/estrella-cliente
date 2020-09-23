@@ -33,7 +33,7 @@
 
     <div class="table">
 
-      <table mat-table [dataSource]="usuarios$ | async">
+      <table mat-table [dataSource]="roles$ | async">
 
         <ng-container matColumnDef="posicion">
           <th mat-header-cell *matHeaderCellDef>No.</th>
@@ -42,25 +42,28 @@
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="nombres">
-          <th mat-header-cell *matHeaderCellDef>Nombres</th>
-          <td mat-cell *matCellDef="let usuario">{{ usuario.nombres }}</td>
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef>Nombre</th>
+          <td mat-cell *matCellDef="let rol">{{ rol.nombre }}</td>
         </ng-container>
 
-        <ng-container matColumnDef="apellidos">
-          <th mat-header-cell *matHeaderCellDef>Apellidos</th>
-          <td mat-cell *matCellDef="let usuario">{{ usuario.apellidos }}</td>
+        <ng-container matColumnDef="descripcion">
+          <th mat-header-cell *matHeaderCellDef>Descripción</th>
+          <td mat-cell *matCellDef="let rol">
+            <button
+              (click)="verDescripcion(rol.nombre, rol.descripcion)"
+              mat-mini-fab
+              color="primary"
+            >
+              <mat-icon>visibility</mat-icon>
+            </button>
+          </td>
         </ng-container>
 
-        <ng-container matColumnDef="nitCI">
-          <th mat-header-cell *matHeaderCellDef>NIT/CI</th>
-          <td mat-cell *matCellDef="let usuario">{{ usuario.nitCI }}</td>
-        </ng-container>
-
-        <ng-container matColumnDef="masInformacion">
-          <th mat-header-cell *matHeaderCellDef>Mas informacion</th>
-          <td mat-cell *matCellDef="let usuario">
-            <a class="icon" [routerLink]="usuario.id" mat-mini-fab color="accent">
+        <ng-container matColumnDef="modificar">
+          <th mat-header-cell *matHeaderCellDef>Modificar</th>
+          <td mat-cell *matCellDef="let rol">
+            <a class="icon" [routerLink]="rol.id" mat-mini-fab color="accent">
               <mat-icon>edit</mat-icon>
             </a>
           </td>
@@ -68,15 +71,12 @@
 
         <ng-container matColumnDef="eliminar">
           <th mat-header-cell *matHeaderCellDef>Eliminar</th>
-          <td mat-cell *matCellDef="let usuario">
+          <td mat-cell *matCellDef="let rol">
             <button
               class="icon"
               mat-mini-fab
               color="warn"
-              (click)="eliminarUsuario(
-                usuario.id,
-                usuario.nombres + ' ' + usuario.apellidos
-              )"
+              (click)="eliminarRol(rol.id, rol.nombre)"
             >
               <mat-icon>delete_forever</mat-icon>
             </button>
@@ -91,7 +91,7 @@
     </div>
 
     <mat-paginator
-      [length]="totalUsuarios"
+      [length]="totalRoles"
       [pageSizeOptions]="[5, 10, 20]"
       (page)="updateTable($event)"
       showFirstLastButtons>

@@ -40,14 +40,12 @@ export class UsuarioComponent implements OnInit {
       tap(usuario => {
         if (usuario) {
           this.usuarioForm.patchValue(usuario);
-          console.log(this.usuarioForm.value);
         }
       })
     );
   }
 
   guardarCambios(id: number): void {
-    console.log(this.usuarioForm.value);
     this.usuarioService
     .actualizarUsuario(this.usuarioForm.value, id).subscribe();
   }

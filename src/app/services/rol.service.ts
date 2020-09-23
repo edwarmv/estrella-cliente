@@ -6,6 +6,10 @@ import { Observable } from 'rxjs';
 import { AutenticacionService } from './autenticacion.service';
 import Swal from 'sweetalert2';
 
+type ObtenerRoles = { roles: Rol[], total: number };
+type EliminarRol = { mensaje: string };
+type ActualizarRol = { mensaje: string };
+
 @Injectable({
   providedIn: 'root'
 })
@@ -43,8 +47,31 @@ export class RolService {
     return this.http.get<Rol>(url);
   }
 
-  obtenerRoles(): Observable<Rol[]> {
-    return this.http.get<Rol[]>(this.rolURL);
+  obtenerRoles(
+    skip: number,
+    take: number,
+    termino: string = ''
+  ): Observable<ObtenerRoles> {
+    const url = `${this.rolURL}?skip=${skip}&take=${take}&termino=${termino}`;
+
+    return this.http.get<ObtenerRoles>(url);
   }
 
+  obtenerRol(id: number): Observable<Rol> {
+    const url = `${this.rolURL}/${id}`;
+
+    return this.http.get<Rol>(url);
+  }
+
+  actualiarRol(id: number, rol: Rol): Observable<ActualizarRol> {
+    const url = `${this.rolURL}/${id}`;
+
+    return this.http.put<ActualizarRol>(url, rol);
+  }
+
+  eliminarRol(id: number): Observable<EliminarRol> {
+    const url = `${this.rolURL}/${id}`;
+
+    return this.http.delete<EliminarRol>(url);
+  }
 }

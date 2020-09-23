@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { map, catchError, tap } from 'rxjs/operators';
 import { Usuario } from '../models/usuario.model';
-import { throwError, Observable, BehaviorSubject, Subject } from 'rxjs';
+import { throwError, Observable, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { MatSnackBar } from '@angular/material/snack-bar';

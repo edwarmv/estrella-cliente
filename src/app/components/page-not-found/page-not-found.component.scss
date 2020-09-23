@@ -1,0 +1,19 @@
+.container {
+  height: calc(100vh - var(--footer-height));
+  box-sizing: border-box;
+  padding: 60px 20px 20px 20px;
+  background-color: #3fae3d;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1 {
+    background-color: #f2f2f2;
+    padding: 10px;
+    font-size: calc(20px + (60 - 20) * ((100vw - 300px) / (1600 - 300)));
+    line-height: 1.2;
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+  }
+}

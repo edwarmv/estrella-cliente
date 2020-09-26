@@ -2,7 +2,8 @@
   background-color: #10ae2e;
   padding: 20px;
   box-sizing: border-box;
-  min-height: calc(100vh - 100px);
+  min-height: calc(100vh - var(--footer-height));
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;

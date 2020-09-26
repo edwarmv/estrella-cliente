@@ -1,0 +1,35 @@
+.container {
+  padding: 40px 20px;
+
+  .title {
+    font-weight: 500;
+    font-size: 16px;
+  }
+
+  .eliminar-rol {
+    margin-left: 20px;
+  }
+
+  .form {
+    margin-top: 40px;
+
+    .mensaje {
+      color: var(--warn-color);
+      border: solid 2px  var(--warn-color);
+      border-radius: 5px;
+      background-color: rgba(244, 67, 54, 0.2);
+      padding-left: 10px;
+      margin-bottom: 18px;
+    }
+
+    form {
+      mat-form-field {
+        width: 100%;
+      }
+
+      .volver {
+        margin-left: 10px;
+      }
+    }
+  }
+}

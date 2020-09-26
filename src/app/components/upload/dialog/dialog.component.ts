@@ -1,4 +1,13 @@
-import { Component, OnInit, ViewChild, Inject, ElementRef, OnDestroy, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  Inject,
+  ElementRef,
+  OnDestroy,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UploadService } from '../upload.service';
 import { Subscription } from 'rxjs';
@@ -56,7 +65,9 @@ export class DialogComponent implements OnInit, OnDestroy {
       return;
     }
     if (this.uploadSuccessful) {
-      this.uploadService.completeUploadedSubject();
+      // no puede completarse en el dialog, porque dejaria de emitir
+      // su estado
+      // this.uploadService.completeUploadedSubject();
 
       return this.dialogRef.close();
     }
@@ -71,8 +82,11 @@ export class DialogComponent implements OnInit, OnDestroy {
 
     this.showCancelButton = false;
 
-    this.subscription = this.uploadService.upload(this.file, this.data.url, this.data.keyName)
-    .subscribe(progress => {
+    this.subscription = this.uploadService.upload(
+      this.file,
+      this.data.url,
+      this.data.keyName
+    ).subscribe(progress => {
       this.progress = progress;
     }, error => {
       console.log(error);

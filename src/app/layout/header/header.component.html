@@ -59,11 +59,16 @@
   </mat-menu>
 
   <mat-menu #rolesMenu="matMenu">
-    <button mat-menu-item *ngIf="roles && roles.length === 0">
-      No tiene asignado ningún rol
-    </button>
-    <button mat-menu-item *ngFor="let rol of roles" type="button">
-      {{ rol.nombre }}
-    </button>
+    <ng-container *ngIf="usuario.rolesUsuarios.length > 0; else sinRoles">
+      <button mat-menu-item *ngFor="let rolUsuario of usuario.rolesUsuarios" type="button">
+        {{ rolUsuario.rol.nombre }}
+      </button>
+    </ng-container>
+
+    <ng-template #sinRoles>
+      <button mat-menu-item>
+        No tiene asignado ningún rol
+      </button>
+    </ng-template>
   </mat-menu>
 </ng-container>

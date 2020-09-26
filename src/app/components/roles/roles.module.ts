@@ -21,6 +21,13 @@ import { MatDialogModule } from '@angular/material/dialog';
 const routes: Routes = [
   { path: '', component: RolesComponent },
   {
+    path: 'nuevo-rol',
+    component: RolComponent,
+    data: {
+      breadcrumb: 'Regisrat rol'
+    }
+  },
+  {
     path: ':id',
     component: RolComponent,
     data: {

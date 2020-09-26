@@ -1,4 +1,4 @@
-<div class="container" *ngIf="rol$ | async as rol">
+<div class="container" *ngIf="rol$ | async as rol; else nuevoRol">
 
   <h2>Modificar rol</h2>
 
@@ -35,3 +35,45 @@
   </form>
 
 </div>
+
+<ng-template #nuevoRol>
+
+  <div class="container">
+
+    <h2>Nuevo rol</h2>
+
+    <form [formGroup]="rolForm" (ngSubmit)="crearRol()">
+
+      <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Descripción</mat-label>
+        <textarea
+          matInput
+          cdkTextareaAutosize
+          #autosize="cdkTextareaAutosize"
+          cdkAutosizeMinRows="1"
+          cdkAutosizeMaxRows="5"
+          formControlName="descripcion"
+        >
+        </textarea>
+      </mat-form-field>
+
+      <div class="buttons">
+        <button mat-raised-button color="primary" type="submit">
+          Guardar cambios
+        </button>
+
+        <a mat-button type="button" routerLink="/roles">
+          Volver
+        </a>
+      </div>
+
+    </form>
+
+  </div>
+
+</ng-template>

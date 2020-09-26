@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
 import { UploadService } from './upload.service';
@@ -8,7 +15,7 @@ import { UploadService } from './upload.service';
   templateUrl: './upload.component.html',
   styleUrls: ['./upload.component.scss']
 })
-export class UploadComponent implements OnInit {
+export class UploadComponent implements OnInit, OnDestroy {
   @Input() url: string;
   @Input() keyName: string;
   @Input() inputName = '';
@@ -43,4 +50,7 @@ export class UploadComponent implements OnInit {
     this.uploadedEvent.emit(true);
   }
 
+  ngOnDestroy(): void {
+    this.uploadService.completeUploadedSubject();
+  }
 }

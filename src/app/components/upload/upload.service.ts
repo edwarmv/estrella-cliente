@@ -16,7 +16,12 @@ export class UploadService {
 
     formData.append(keyName, file, file.name);
 
-    const req = new HttpRequest('POST', url, formData, { reportProgress: true });
+    const req = new HttpRequest(
+      'POST',
+      url,
+      formData,
+      { reportProgress: true }
+    );
 
     const progress = new Subject<number>();
 

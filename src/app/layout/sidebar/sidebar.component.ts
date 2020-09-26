@@ -55,24 +55,21 @@ export class SidebarComponent implements OnInit, OnDestroy {
     // destruye o crea debido al diseno responsive
     let path: string = this.activatedRoute.firstChild.routeConfig.path;
     // hacemos una copia local de los menus
-    this.menus = this.cargarMenus(
-      JSON.parse(JSON.stringify(MenuData.menus)),
-      path
-    );
+    this.menus = MenuData.menus;
     // cargamos los menus y marcamos el menu seleccionado cada vez que
     // se cambia de ruta
-    this.subscription = this.router.events.
-      pipe(
-        filter(event => event instanceof NavigationEnd),
-    ).subscribe(() => {
-      path = this.activatedRoute.firstChild.routeConfig.path;
+    // this.subscription = this.router.events.
+      // pipe(
+        // filter(event => event instanceof NavigationEnd),
+    // ).subscribe(() => {
+      // path = this.activatedRoute.firstChild.routeConfig.path;
 
       // hacemos una copia local de los menus
-      this.menus = this.cargarMenus(
-        JSON.parse(JSON.stringify(MenuData.menus)),
-        path
-      );
-    });
+      // this.menus = this.cargarMenus(
+        // JSON.parse(JSON.stringify(MenuData.menus)),
+        // path
+      // );
+    // });
   }
 
   toggleMenu(index: number): void {
@@ -86,22 +83,22 @@ export class SidebarComponent implements OnInit, OnDestroy {
    * Cambia el estado activo de los menus
    * @param path Nombre de menu a activar
    */
-  cargarMenus(menus: Menu[], path: string): Menu[] {
-    menus.forEach((menu, index) => {
-      if (menu.path && menu.path.includes(path)) {
-        menu.activated = true;
-      } else {
-        menu.submenus.forEach(submenu => {
-          if (submenu.path.includes(path)) {
-            submenu.activated = true;
-            menu.activated = true;
-            menu.collapsed = false;
-          }
-        });
-      }
-    });
-    return menus;
-  }
+  // cargarMenus(menus: Menu[], path: string): Menu[] {
+    // menus.forEach((menu, index) => {
+      // if (menu.path && menu.path.includes(path)) {
+        // menu.activated = true;
+      // } else {
+        // menu.submenus.forEach(submenu => {
+          // if (submenu.path.includes(path)) {
+            // submenu.activated = true;
+            // menu.activated = true;
+            // menu.collapsed = false;
+          // }
+        // });
+      // }
+    // });
+    // return menus;
+  // }
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

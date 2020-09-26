@@ -66,6 +66,14 @@ const routes: Routes = [
     }
   },
   {
+    path: 'productos',
+    loadChildren: () => import('@components/productos/productos.module')
+    .then(m => m.ProductosModule),
+    data: {
+      breadcrumb: 'Productos'
+    }
+  },
+  {
     path: 'pedidos',
     loadChildren: () => import('@components/pedidos/pedidos.module')
     .then(m => m.PedidosModule),

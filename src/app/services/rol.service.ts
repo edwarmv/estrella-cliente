@@ -35,12 +35,6 @@ export class RolService {
     return JSON.parse(localStorage.getItem('rolSeleccionado'));
   }
 
-  obtenerRolesUsuario(idUsuario: number): Observable<Rol[]> {
-    const url = `${environment.apiURL}/rol-usuario/${idUsuario}`;
-
-    return this.http.get<Rol[]>(url);
-  }
-
   obtenerRolUsuario(idRol: number, idUsuario: number): Observable<Rol> {
     const url = `${environment.apiURL}/rol-usuario/${idRol}/${idUsuario}`;
 
@@ -61,6 +55,10 @@ export class RolService {
     const url = `${this.rolURL}/${id}`;
 
     return this.http.get<Rol>(url);
+  }
+
+  crearRol(rol: Rol): Observable<{ mensaje: string }> {
+    return this.http.post<{mensaje: string}>(this.rolURL, rol);
   }
 
   actualiarRol(id: number, rol: Rol): Observable<ActualizarRol> {

@@ -6,12 +6,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UploadModule } from '@components/upload/upload.module';
 
 import { PerfilComponent } from './perfil.component';
+import { DescripcionRolComponent } from './descripcion-rol/descripcion-rol.component';
 import { PipesSharedModule } from '@pipes/pipes-shared.module';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 
 const routes: Routes = [
   {
@@ -21,7 +24,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [ PerfilComponent ],
+  declarations: [ PerfilComponent, DescripcionRolComponent ],
   imports: [
     CommonModule,
     PipesSharedModule,
@@ -32,6 +35,8 @@ const routes: Routes = [
     MatInputModule,
     MatButtonModule,
     MatListModule,
+    MatIconModule,
+    MatDialogModule,
   ]
 })
 export class PefilModule { }

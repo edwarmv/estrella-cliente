@@ -6,16 +6,20 @@ import { environment } from 'src/environments/environment';
 })
 export class ImagesPipe implements PipeTransform {
 
-  transform(value: string, tipo?: 'usuario'): string {
+  transform(value: string, tipo: 'usuario' | 'producto'): string {
     let url: string;
 
     if (!value) {
-      return 'assets/images/no-profile-image.png';
+      return tipo === 'usuario' ?
+        'assets/images/no-profile-image.png' : 'assets/images/no-image.png';
     }
 
     switch (tipo) {
       case 'usuario':
         url = `${environment.apiURL}/foto-usuario/${value}`;
+        break;
+      case 'producto':
+        url = `${environment.apiURL}/foto-producto/${value}`;
         break;
     }
 

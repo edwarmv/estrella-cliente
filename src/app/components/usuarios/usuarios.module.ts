@@ -5,6 +5,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { UsuariosComponent } from './usuarios.component';
 import { UsuarioComponent } from './usuario/usuario.component';
+import { RolesComponent } from './roles/roles.component';
 import { PipesSharedModule } from '@pipes/pipes-shared.module';
 
 import { MatTableModule } from '@angular/material/table';
@@ -16,6 +17,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatListModule } from '@angular/material/list';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 
 const routes: Routes = [
@@ -29,11 +33,18 @@ const routes: Routes = [
     data: {
       breadcrumb: 'Más información'
     }
+  },
+  {
+    path: ':id/roles',
+    component: RolesComponent,
+    data: {
+      breadcrumb: 'Roles de usuario'
+    }
   }
 ];
 
 @NgModule({
-  declarations: [UsuariosComponent, UsuarioComponent],
+  declarations: [UsuariosComponent, UsuarioComponent, RolesComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
@@ -47,7 +58,10 @@ const routes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatListModule,
+    MatAutocompleteModule,
+    MatSnackBarModule,
   ],
   providers: [
     {

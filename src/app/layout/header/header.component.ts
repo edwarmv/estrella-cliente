@@ -23,7 +23,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   opened: boolean;
 
   usuario$: Observable<Usuario>;
-  roles: Rol[] = [];
 
 
   constructor(
@@ -32,7 +31,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private sidebarService: SidebarService,
     private usuarioService: UsuarioService,
     private autenticacionService: AutenticacionService,
-    private rolService: RolService,
 
   ) { }
 
@@ -45,8 +43,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     this.usuario$ = this.usuarioService.usuarioConectadoSubject;
     this.usuarioService.actualizarUsuarioConectado();
-    this.roles = this.rolService.obtenerRolesUsuarioConectado();
-
   }
 
   toggleSidevar(): void {

@@ -79,9 +79,24 @@
       <h2>Roles asignados</h2>
 
       <mat-list>
-        <mat-list-item> Pepper </mat-list-item>
-        <mat-list-item> Salt </mat-list-item>
-        <mat-list-item> Paprika </mat-list-item>
+        <ng-container *ngIf="usuario.rolesUsuarios.length > 0; else sinRoles">
+          <mat-list-item *ngFor="let rolUsuario of usuario.rolesUsuarios">
+            <h3 mat-line>{{ rolUsuario.rol.nombre }}</h3>
+            <button
+              *ngIf="rolUsuario.rol.descripcion.length > 0"
+              class="eliminar-rol"
+              mat-icon-button
+              color="primary"
+              (click)="mostrarDescripcionRol(rolUsuario.rol)"
+            >
+              <mat-icon>add_circle</mat-icon>
+            </button>
+          </mat-list-item>
+        </ng-container>
+
+        <ng-template #sinRoles>
+          <mat-list-item>No tiene ningún rol asignado</mat-list-item>
+        </ng-template>
       </mat-list>
 
     </div>

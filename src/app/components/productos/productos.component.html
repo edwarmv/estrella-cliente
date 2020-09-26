@@ -1,0 +1,61 @@
+<div class="container">
+
+  <h2 class="titulo">Productos disponibles</h2>
+
+  <form class="buscador" [formGroup]="buscadorForm">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Buscador</mat-label>
+
+      <input matInput type="text" formControlName="termino">
+
+      <button
+        mat-icon-button
+        matSuffix
+        *ngIf="termino.value"
+        (click)="limpiarBusqueda()"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+
+    </mat-form-field>
+
+  </form>
+
+  <div class="grid" *ngIf="productos$ | async as productos">
+
+    <div class="producto" *ngFor="let producto of productos">
+
+      <p class="nombre">{{ producto.nombre }}</p>
+
+      <img
+        class="imagen"
+        [src]="producto.foto | images: 'producto'"
+      >
+
+      <p class="descripcion">
+        {{
+          producto.descripcion ?
+          (producto.descripcion | slice: 0 : 120) + '...'
+          : 'Sin descripción'
+        }}
+      </p>
+
+      <p class="precio">
+        <span>Precio:</span>
+        {{ producto.precio | currency: 'BOB' }}
+      </p>
+
+      <a
+        class="buttons"
+        mat-button
+        [routerLink]="producto.id"
+      >
+        Ver más
+      </a>
+
+    </div>
+
+  </div>
+
+</div>

@@ -11,7 +11,11 @@
     }
 
     .button {
-      margin: .25em 0 calc(.25em + 1.343775em) 20px;
+      margin: .25em 0 calc(.25em + 1.343775em);
+
+      @media only screen and (min-width: 321px) {
+        margin-left: 20px;
+      }
     }
 
     @media only screen and (min-width: 321px) {
@@ -46,7 +50,7 @@
         width: 100%;
 
         .icon {
-          margin-right: 20px;
+          text-align: center;
         }
 
         th, td {

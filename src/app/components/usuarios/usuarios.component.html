@@ -57,10 +57,19 @@
           <td mat-cell *matCellDef="let usuario">{{ usuario.nitCI }}</td>
         </ng-container>
 
+        <ng-container matColumnDef="roles">
+          <th mat-header-cell *matHeaderCellDef>Roles</th>
+          <td class="icon" mat-cell *matCellDef="let usuario">
+            <a [routerLink]="usuario.id + '/roles'" mat-mini-fab color="accent">
+              <mat-icon>business</mat-icon>
+            </a>
+          </td>
+        </ng-container>
+
         <ng-container matColumnDef="masInformacion">
           <th mat-header-cell *matHeaderCellDef>Mas informacion</th>
-          <td mat-cell *matCellDef="let usuario">
-            <a class="icon" [routerLink]="usuario.id" mat-mini-fab color="accent">
+          <td class="icon" mat-cell *matCellDef="let usuario">
+            <a [routerLink]="usuario.id" mat-mini-fab color="accent">
               <mat-icon>edit</mat-icon>
             </a>
           </td>
@@ -68,9 +77,8 @@
 
         <ng-container matColumnDef="eliminar">
           <th mat-header-cell *matHeaderCellDef>Eliminar</th>
-          <td mat-cell *matCellDef="let usuario">
+          <td class="icon" mat-cell *matCellDef="let usuario">
             <button
-              class="icon"
               mat-mini-fab
               color="warn"
               (click)="eliminarUsuario(

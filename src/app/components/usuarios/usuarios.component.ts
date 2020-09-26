@@ -17,6 +17,7 @@ export class UsuariosComponent implements OnInit {
     'nombres',
     'apellidos',
     'nitCI',
+    'roles',
     'masInformacion',
     'eliminar',
   ];

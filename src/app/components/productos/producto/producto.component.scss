@@ -1,0 +1,39 @@
+.container {
+  box-sizing: border-box;
+  padding: 40px 20px;
+
+  .foto-producto {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+
+    .imagen {
+      width: 180px;
+      align-self: center;
+      margin-bottom: 20px;
+    }
+
+    .upload-button {
+      align-self: center;
+    }
+  }
+
+  form {
+    max-width: 300px;
+
+    mat-form-field {
+      width: 100%;
+    }
+
+    .buttons {
+      a {
+        margin-left: 10px;
+      }
+    }
+  }
+
+  .eliminar-producto {
+    margin-top: 80px;
+    text-align: center;
+  }
+}

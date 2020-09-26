@@ -4,6 +4,6 @@ import { Usuario } from './usuario.model';
 export class RolUsuario {
   constructor(
     public rol: Rol,
-    public usuario?: Usuario,
+    public usuario: Usuario,
   ) {}
 }

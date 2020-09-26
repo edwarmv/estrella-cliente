@@ -6,7 +6,6 @@ type Submenu = {
 
 export type Menu = {
   nombre: string,
-  path?: string,
   collapsed: boolean,
   activated: boolean,
   submenus: Submenu[],
@@ -17,7 +16,6 @@ export class MenuData {
   public static menus: Menu[] = [
     {
       nombre: 'Gestionar pedidos',
-      path: undefined,
       collapsed: true,
       activated: false,
       submenus: [
@@ -29,8 +27,24 @@ export class MenuData {
       ]
     },
     {
+      nombre: 'Gestionar productos',
+      collapsed: undefined,
+      activated: false,
+      submenus: [
+        {
+          nombre: 'Productos',
+          path: '/productos',
+          activated: false
+        },
+        {
+          nombre: 'Registrar producto',
+          path: '/productos/nuevo-producto',
+          activated: false
+        }
+      ]
+    },
+    {
       nombre: 'Gestionar usuarios',
-      path: undefined,
       collapsed: true,
       activated: false,
       submenus: [
@@ -39,29 +53,26 @@ export class MenuData {
           path: '/usuarios',
           activated: false
         },
-        {
-          nombre: 'Roles',
-          path: '/roles',
-          activated: false
-        }
+        // {
+          // nombre: 'Registrar usuario',
+          // path: '/usuarios/nuevo-usuario',
+          // activated: false
+        // }
       ]
     },
     {
-      nombre: 'Gestionar usuarios',
-      path: '/usuarios',
-      collapsed: undefined,
-      activated: false,
-      submenus: []
-    },
-    {
-      nombre: 'Gestionar usuarios',
-      path: undefined,
+      nombre: 'Gestionar roles',
       collapsed: true,
       activated: false,
       submenus: [
         {
-          nombre: 'Gestionar roles',
+          nombre: 'Roles',
           path: '/roles',
+          activated: false
+        },
+        {
+          nombre: 'Registrar rol',
+          path: '/roles/nuevo-rol',
           activated: false
         }
       ]

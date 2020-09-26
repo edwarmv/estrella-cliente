@@ -2,9 +2,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UsuarioService } from '@services/usuario.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Usuario } from '@models/usuario.model';
-import { Subscription, scheduled, queueScheduler, Observable } from 'rxjs';
-import { concatAll, tap } from 'rxjs/operators';
+import { Subscription, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { tap } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { DescripcionRolComponent } from './descripcion-rol/descripcion-rol.component';
+import { Rol } from '@models/rol.model';
 
 @Component({
   selector: 'app-perfil',
@@ -24,6 +27,7 @@ export class PerfilComponent implements OnInit, OnDestroy {
   constructor(
     public usuarioService: UsuarioService,
     private fb: FormBuilder,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -60,6 +64,10 @@ export class PerfilComponent implements OnInit, OnDestroy {
       this.usuarioService.actualizarUsuarioConectado();
     });
 
+  }
+
+  mostrarDescripcionRol(rol: Rol): void {
+    this.dialog.open(DescripcionRolComponent, { data: rol });
   }
 
   actualizarUsuarioConectado(): void {

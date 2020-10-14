@@ -1,6 +1,9 @@
 .container {
   box-sizing: border-box;
-  padding: 40px 20px;
+  margin: 40px 20px;
+  padding: 20px;
+  border-radius: 5px;
+  background: white;
 
   .foto-producto {
     display: flex;

@@ -33,13 +33,14 @@
   .grid {
     grid-area: productos;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     grid-gap: 1rem;
 
     .producto {
       border: 1px solid;
       border-radius: 4px;
       padding: 10px;
+      background: white;
       display: grid;
       grid-template-rows: auto 180px 100px 40px 40px;
       grid-template-areas: 'nombre' 'imagen' 'descripcion' 'precio' 'buttons';
@@ -53,7 +54,7 @@
       .imagen {
         grid-area: imagen;
         place-self: center;
-        height: 150px;
+        max-width: 220px;
         border-radius: 4px;
         object-fit: cover;
       }

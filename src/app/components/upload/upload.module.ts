@@ -14,7 +14,7 @@ import { UploadService } from './upload.service';
 
 
 @NgModule({
-  declarations: [ UploadComponent, DialogComponent ],
+  declarations: [UploadComponent, DialogComponent],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -24,7 +24,7 @@ import { UploadService } from './upload.service';
     // BrowserAnimationsModule,
     MatProgressBarModule
   ],
-  exports: [ UploadComponent ],
-  providers: [ UploadService ]
+  exports: [UploadComponent],
+  providers: [UploadService]
 })
 export class UploadModule { }

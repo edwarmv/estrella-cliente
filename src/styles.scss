@@ -11,6 +11,8 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
+// $estrella-cliente-primary: mat-palette($mat-green);
+// $estrella-cliente-accent: mat-palette($mat-yellow, A700);
 $estrella-cliente-primary: mat-palette($mat-green);
 $estrella-cliente-accent: mat-palette($mat-yellow, A700);
 
@@ -38,10 +40,11 @@ $estrella-cliente-theme: mat-light-theme((
   --primary-color: #4caf50;
   --accent-color: #ffd600;
   --warn-color: #f44336;
+  --bg-color: #f7f7e9;
 
   // Elements sizes
   --header-height: 64px;
-  --breadcrumbs-height: 74px;
+  --breadcrumbs-height: 76px;
   --footer-height: 64px;
 }
 html, body { height: 100%; }
@@ -50,3 +53,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 // .cal-month-view .cal-day-cell {
   // min-height: 50px;
 // }
+.mat-input-white .mat-form-field-outline {
+  background: white;
+  border-radius: 5px;
+}

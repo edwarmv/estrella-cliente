@@ -9,23 +9,44 @@
 
     <form [formGroup]="loginForm" (ngSubmit)="login()">
 
-      <div class="error" *ngIf="message">
-        <span>{{ message }}</span>
+      <div class="error" *ngIf="mensaje">
+        <span>{{ mensaje.mensaje.mensaje }}</span>
       </div>
 
+      <p *ngIf="mensaje && mensaje.status === 401">
+        <button
+          type="button"
+          mat-stroked-button
+          color="primary"
+          (click)="reenviarCorreoVerificacion()"
+        >
+          Reenviar correo de virificación
+        </button>
+      </p>
+
       <mat-form-field appearance="outline">
+
         <mat-label>Correo Electrónico</mat-label>
-        <input matInput type="email" errorState="true" formControlName="correoElectronico">
+        <input
+          matInput
+          type="email"
+          errorState="true"
+          formControlName="correoElectronico"
+        >
         <mat-icon matSuffix *ngIf="!correoElectronico.value">email</mat-icon>
+
         <mat-error *ngIf="correoElectronico.errors?.email">
           Correo electrónico inválido.
         </mat-error>
+
         <mat-error *ngIf="correoElectronico.errors?.required">
           Correo electrónico requerido.
         </mat-error>
+
       </mat-form-field>
 
       <mat-form-field appearance="outline">
+
         <mat-label>Contraseña</mat-label>
         <input matInput type="password" formControlName="password" #passwordTemplateRef>
         <mat-icon matSuffix *ngIf="!password.value">vpn_key</mat-icon>
@@ -34,15 +55,23 @@
           tabindex="-1"
           (click)="passwordTemplateRef.type === 'password'?
             passwordTemplateRef.type = 'text' : passwordTemplateRef.type = 'password'">
-          <mat-icon *ngIf="passwordTemplateRef.type === 'password'">visibility_off</mat-icon>
+          <mat-icon *ngIf="passwordTemplateRef.type === 'password'">
+            visibility_off
+          </mat-icon>
           <mat-icon *ngIf="passwordTemplateRef.type === 'text'">visibility</mat-icon>
         </button>
+
         <mat-error *ngIf="password.errors?.required">
           Contraseña requerida.
         </mat-error>
+
+        <mat-error *ngIf="password.errors?.minlength">
+          El tama&ntilde;o m&iacute;nimo es de 8 caracteres
+        </mat-error>
+
       </mat-form-field>
 
-      <div class="recordarme-registrarse">
+      <div class="recordarme">
         <mat-checkbox formControlName="recuerdame">Recuerdame</mat-checkbox>
         <a [routerLink]="['/nuevo-usuario']">Registrarse</a>
       </div>
@@ -50,8 +79,9 @@
       <div class="ingresar">
         <button
           mat-raised-button
-          [disabled]="loginForm.invalid"
-          color="primary" type="submit">
+          color="primary"
+          type="submit"
+        >
           Ingresar
         </button>
       </div>

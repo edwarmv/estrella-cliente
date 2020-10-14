@@ -10,38 +10,49 @@
     <form [formGroup]="nuevoUsuarioForm" (ngSubmit)="crearUsuario()">
 
       <mat-form-field appearance="outline">
+
         <mat-label>Nombres</mat-label>
         <input matInput type="text" formControlName="nombres">
         <mat-hint>Campo requerido</mat-hint>
+
         <mat-error *ngIf="nombres.errors?.required">
           Campo requerido
         </mat-error>
+
       </mat-form-field>
 
       <mat-form-field appearance="outline">
+
         <mat-label>Apellidos</mat-label>
         <input matInput type="text" formControlName="apellidos">
         <mat-hint>Campo requerido</mat-hint>
+
         <mat-error *ngIf="apellidos.errors?.required">
           Campo requerido
         </mat-error>
+
       </mat-form-field>
 
       <div class="hr"></div>
 
       <mat-form-field appearance="outline">
+
         <mat-label>Correo Electrónico</mat-label>
         <input matInput type="email" formControlName="correoElectronico">
         <mat-hint>Campo Requerido</mat-hint>
+
         <mat-error *ngIf="correoElectronico.errors?.required">
           Campo requerido
         </mat-error>
+
         <mat-error *ngIf="correoElectronico.errors?.email">
           Correo electrónico inválido
         </mat-error>
+
       </mat-form-field>
 
       <mat-form-field appearance="outline">
+
         <mat-label>Contraseña</mat-label>
         <input matInput type="password" formControlName="password" #passwordRef>
         <button mat-button matSuffix  mat-icon-button type="button"
@@ -53,12 +64,15 @@
           <mat-icon *ngIf="passwordRef.type === 'text'">visibility</mat-icon>
         </button>
         <mat-hint>Campo Requerido</mat-hint>
+
         <mat-error *ngIf="password.errors?.required">
           Campo requerido
         </mat-error>
+
         <mat-error *ngIf="password.errors?.minlength">
           Al menos 8 caracteres
         </mat-error>
+
       </mat-form-field>
 
       <mat-form-field appearance="outline">

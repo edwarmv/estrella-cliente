@@ -4,7 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Producto } from '@models/producto.model';
 import { ProductoService } from '@services/producto.service';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { mergeMap, tap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
@@ -83,7 +83,6 @@ export class ProductoComponent implements OnInit {
     this.productoService.borrarProducto(id)
     .subscribe(resp => {
       this.snackBar.open(resp.mensaje, 'Aceptar', { duration: 2000 });
-
       this.router.navigate(['/productos']);
     });
   }

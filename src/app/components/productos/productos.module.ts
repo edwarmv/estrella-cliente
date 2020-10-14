@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 const routes: Routes = [
   { path: '', component: ProductosComponent },
@@ -47,6 +48,7 @@ const routes: Routes = [
     MatIconModule,
     TextFieldModule,
     MatSnackBarModule,
+    ScrollingModule,
   ]
 })
 export class ProductosModule { }

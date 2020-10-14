@@ -26,16 +26,24 @@ export class ProductosComponent implements OnInit {
       termino: ['']
     });
 
-    this.productos$ = this.buscadorForm.get('termino').valueChanges.pipe(
-      startWith(''),
-      debounceTime(1000),
+    this.productos$ = this.productoService.obtenerProductos(0, 0)
+    .pipe(map(resp => resp.productos));
+
+    this.buscadorForm.get('termino').valueChanges.pipe(
+      debounceTime(500),
       switchMap((termino: string) => {
         console.log(termino);
-        return this.productoService.obtenerProductos(0, 0, termino).pipe(
+        return this.productos$ = this.productoService
+        .obtenerProductos(0, 0, termino)
+        .pipe(
           map(resp => resp.productos)
         );
       })
-    );
+    ).subscribe();
+  }
+
+  buscar(): void {
+    console.log('buscado');
   }
 
   limpiarBusqueda(): void {

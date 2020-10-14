@@ -2,7 +2,6 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnDestroy,
   OnInit,
   Output
 } from '@angular/core';
@@ -15,7 +14,7 @@ import { UploadService } from './upload.service';
   templateUrl: './upload.component.html',
   styleUrls: ['./upload.component.scss']
 })
-export class UploadComponent implements OnInit, OnDestroy {
+export class UploadComponent implements OnInit {
   @Input() url: string;
   @Input() keyName: string;
   @Input() inputName = '';
@@ -48,9 +47,5 @@ export class UploadComponent implements OnInit, OnDestroy {
 
   updateUploadStatus(): void {
     this.uploadedEvent.emit(true);
-  }
-
-  ngOnDestroy(): void {
-    this.uploadService.completeUploadedSubject();
   }
 }

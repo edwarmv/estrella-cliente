@@ -65,10 +65,6 @@ export class DialogComponent implements OnInit, OnDestroy {
       return;
     }
     if (this.uploadSuccessful) {
-      // no puede completarse en el dialog, porque dejaria de emitir
-      // su estado
-      // this.uploadService.completeUploadedSubject();
-
       return this.dialogRef.close();
     }
 

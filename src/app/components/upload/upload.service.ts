@@ -8,7 +8,9 @@ export class UploadService {
   private uploaded = new BehaviorSubject<boolean>(false);
   uploaded$ = this.uploaded.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    console.log('upload service');
+  }
 
   upload(file: File, url: string, keyName: string): Observable<number> {
 

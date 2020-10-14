@@ -4,8 +4,11 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { Observable, throwError } from 'rxjs';
 import { Usuario } from '../models/usuario.model';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, tap } from 'rxjs/operators';
 import { Rol } from '@models/rol.model';
+import {
+  MessageDialogService
+} from '@components/message-dialog/message-dialog.service';
 
 type Login = { token: string, usuario: Usuario, rolPorDefecto: Rol };
 type Payload = { exp: number, iat: number, roles: Rol[], sub: number };
@@ -18,7 +21,7 @@ export class AutenticacionService {
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
   ) { }
 
   login( correoElectronico: string, password: string): Observable<string> {
@@ -45,6 +48,13 @@ export class AutenticacionService {
   cerrarSesion(): void {
     this.limpiarLocalStorage();
     this.router.navigate(['/login']);
+  }
+
+  reenviarCorreoVerificacion(idUsuario: number):
+    Observable<{ mensaje: string }> {
+    const url = `${environment.apiURL}/reenviar-correo-verificacion/${idUsuario}`;
+
+    return this.http.get<{ mensaje: string }>(url);
   }
 
   guardarLocalStorage(token: string): void {

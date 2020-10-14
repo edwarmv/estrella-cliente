@@ -18,11 +18,11 @@ export class NuevoUsuarioComponent implements OnInit, OnDestroy {
     private usuarioService: UsuarioService,
   ) {
     this.nuevoUsuarioForm = this.fb.group({
-      nombres: [ '', Validators.required ],
-      apellidos: [ '', Validators.required ],
-      correoElectronico: [ '', [ Validators.required, Validators.email ] ],
-      password: [ '', [ Validators.required, Validators.minLength(8) ] ],
-      confirmarPassword: [ '', Validators.required ]
+      nombres: ['', Validators.required],
+      apellidos: ['', Validators.required],
+      correoElectronico: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      confirmarPassword: ['', Validators.required]
     }, {
       validator: passwordMatch('password', 'confirmarPassword')
     });
@@ -33,7 +33,8 @@ export class NuevoUsuarioComponent implements OnInit, OnDestroy {
 
   crearUsuario(): void {
     if (this.nuevoUsuarioForm.valid) {
-      this.subscription = this.usuarioService.crearUsuario(this.nuevoUsuarioForm.value)
+      this.subscription = this.usuarioService
+      .crearUsuario(this.nuevoUsuarioForm.value)
       .subscribe();
     }
   }

@@ -1,27 +1,33 @@
 <div class="container">
 
-  <ng-container *ngIf="!loading; else loadingRef">
+  <div class="inner-container">
 
-    <img class="logo" src="assets/images/logo.svg" alt="logo">
+    <ng-container *ngIf="!loading; else loadingRef">
 
-    <h1 [ngClass]="mensaje.ok ? '' : 'mensaje-error'">{{ mensaje.mensaje }}</h1>
+      <img class="logo" src="assets/images/logo.svg" alt="logo">
 
-    <mat-icon *ngIf="mensaje.ok" class="icon-success">check_circle</mat-icon>
+      <h1 [ngClass]="mensaje.ok ? '' : 'mensaje-error'">
+        {{ mensaje.mensaje }}
+      </h1>
 
-    <mat-icon *ngIf="!mensaje.ok" class="icon-error">error</mat-icon>
+      <mat-icon *ngIf="mensaje.ok" class="icon-success">check_circle</mat-icon>
 
-    <a
-      mat-raised-button
-      [color]="mensaje.ok ? 'primary' : 'warn'"
-      routerLink="/login"
-    >
-      {{ mensaje.ok ? 'Aceptar' : 'Error' }}
-    </a>
+      <mat-icon *ngIf="!mensaje.ok" class="icon-error">error</mat-icon>
 
-  </ng-container>
+      <a
+        mat-raised-button
+        [color]="mensaje.ok ? 'primary' : 'warn'"
+        routerLink="/login"
+      >
+        {{ mensaje.ok ? 'Aceptar' : 'Error' }}
+      </a>
 
-  <ng-template #loadingRef>
-    <mat-spinner></mat-spinner>
-  </ng-template>
+    </ng-container>
+
+  </div>
 
 </div>
+
+<ng-template #loadingRef>
+  <mat-spinner></mat-spinner>
+</ng-template>

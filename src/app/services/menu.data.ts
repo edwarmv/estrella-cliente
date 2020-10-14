@@ -9,7 +9,7 @@ export type Menu = {
   collapsed: boolean,
   activated: boolean,
   submenus: Submenu[],
-  autorizacion?: string[]
+  // autorizacion?: string[]
 };
 
 export class MenuData {
@@ -28,7 +28,7 @@ export class MenuData {
     },
     {
       nombre: 'Gestionar productos',
-      collapsed: undefined,
+      collapsed: true,
       activated: false,
       submenus: [
         {

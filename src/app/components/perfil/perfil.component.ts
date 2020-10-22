@@ -8,6 +8,8 @@ import { tap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { DescripcionRolComponent } from './descripcion-rol/descripcion-rol.component';
 import { Rol } from '@models/rol.model';
+import { RolUsuario } from '@models/rol-usuario.model';
+import { RolUsuarioService } from '@services/rol-usuario.service';
 
 @Component({
   selector: 'app-perfil',
@@ -22,10 +24,13 @@ export class PerfilComponent implements OnInit, OnDestroy {
 
   usuario$: Observable<Usuario>;
 
+  rolesUsuario$: Observable<RolUsuario[]>;
+
   keyName: string;
 
   constructor(
     public usuarioService: UsuarioService,
+    private rolUsuarioService: RolUsuarioService,
     private fb: FormBuilder,
     private dialog: MatDialog,
   ) { }
@@ -46,22 +51,24 @@ export class PerfilComponent implements OnInit, OnDestroy {
 
     this.keyName = 'foto-usuario';
 
-    this.usuario$ = this.usuarioService.usuarioConectadoSubject
-    .pipe(tap(usuario => {
-      if (usuario) {
-        this.perfilForm.patchValue(usuario);
+    this.usuario$ = this.usuarioService.usuario
+    .pipe(
+      tap(usuario => {
+        if (usuario) {
+          this.perfilForm.patchValue(usuario);
+          this.correoElectronicoForm.patchValue(usuario);
+        }
+      })
+    );
 
-        this.correoElectronicoForm.patchValue(usuario);
-      }
-    }));
-    this.usuarioService.actualizarUsuarioConectado();
+    this.rolesUsuario$ = this.rolUsuarioService.rolesUsuario;
   }
 
   actualizarUsuario(id: number): void {
     this.subscription = this.usuarioService
     .actualizarUsuario(this.perfilForm.value, id)
     .subscribe(() => {
-      this.usuarioService.actualizarUsuarioConectado();
+      this.usuarioService.usuarioSubject.next(undefined);
     });
 
   }
@@ -71,7 +78,7 @@ export class PerfilComponent implements OnInit, OnDestroy {
   }
 
   actualizarUsuarioConectado(): void {
-    this.usuarioService.actualizarUsuarioConectado();
+    this.usuarioService.usuarioSubject.next(undefined);
   }
 
   ngOnDestroy(): void {

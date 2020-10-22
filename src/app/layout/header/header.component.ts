@@ -1,13 +1,14 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material/menu';
-import { Rol } from '@models/rol.model';
+import { RolUsuario } from '@models/rol-usuario.model';
 import { Usuario } from '@models/usuario.model';
 import { AutenticacionService } from '@services/autenticacion.service';
-import { RolService } from '@services/rol.service';
+import { RolUsuarioService } from '@services/rol-usuario.service';
 import { SidebarService } from '@services/sidebar.service';
 import { UsuarioService } from '@services/usuario.service';
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',
@@ -24,12 +25,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   usuario$: Observable<Usuario>;
 
+  rolesUsuario$: Observable<RolUsuario[]>;
 
   constructor(
     private mediaMatcher: MediaMatcher,
     private changeDetector: ChangeDetectorRef,
     private sidebarService: SidebarService,
     private usuarioService: UsuarioService,
+    private rolUsuarioService: RolUsuarioService,
     private autenticacionService: AutenticacionService,
 
   ) { }
@@ -41,15 +44,24 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
     this.sidebarService.opened$.subscribe(opened => this.opened = opened);
 
-    this.usuario$ = this.usuarioService.usuarioConectadoSubject;
-    this.usuarioService.actualizarUsuarioConectado();
+    this.usuario$ = this.usuarioService.usuario;
+
+    this.rolesUsuario$ = this.rolUsuarioService.rolesUsuario;
+  }
+
+  cambiarRolPorDefecto(idRol: number): void {
+    this.rolUsuarioService.cambiarRolPorDefecto(idRol)
+    .pipe(take(1))
+    .subscribe(() => {
+      this.rolUsuarioService.rolesUsuarioSubject.next(undefined);
+    });
   }
 
   toggleSidevar(): void {
     this.sidebarService.toggle();
   }
 
-  openMenu(): void {
+  abrirMenu(): void {
     this.trigger.openMenu();
   }
 

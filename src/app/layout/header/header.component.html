@@ -29,17 +29,27 @@
 
   <mat-menu #menu="matMenu">
 
-    <div class="nombre-rol-usuario" (click)="$event.stopPropagation()">
+    <div class="menu" (click)="$event.stopPropagation()">
 
       <img
         class="foto-perfil-menu"
         [src]="usuario.fotoPerfil | images: 'usuario'"
         alt="imagen de perfil">
 
-      <div>
-        <p>{{ usuario.nombres + ' ' + usuario.apellidos }}</p>
-        <p>{{ usuario.correoElectronico }}</p>
-        <a routerLink="/perfil" (click)="cerrarMenu()">Ver perfil</a>
+      <div class="informacion-usuario">
+
+        <p class="nombre">
+          {{ usuario.nombres + ' ' + usuario.apellidos }}
+        </p>
+
+        <p class="correo">
+          {{ usuario.correoElectronico }}
+        </p>
+
+        <a class="ver-perfil" routerLink="/perfil" (click)="cerrarMenu()">
+          Ver perfil
+        </a>
+
       </div>
 
     </div>
@@ -59,8 +69,13 @@
   </mat-menu>
 
   <mat-menu #rolesMenu="matMenu">
-    <ng-container *ngIf="usuario.rolesUsuarios.length > 0; else sinRoles">
-      <button mat-menu-item *ngFor="let rolUsuario of usuario.rolesUsuarios" type="button">
+    <ng-container *ngIf="rolesUsuario$ | async as rolesUsuario; else sinRoles">
+      <button
+        mat-menu-item
+        *ngFor="let rolUsuario of rolesUsuario"
+        [ngClass]="rolUsuario.rolPorDefecto ? 'rol-por-defecto' : ''"
+        (click)="cambiarRolPorDefecto(rolUsuario.rol.id)"
+        type="button">
         {{ rolUsuario.rol.nombre }}
       </button>
     </ng-container>

@@ -3,14 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { Observable, throwError } from 'rxjs';
-import { Usuario } from '../models/usuario.model';
-import { map, catchError, tap } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 import { Rol } from '@models/rol.model';
-import {
-  MessageDialogService
-} from '@components/message-dialog/message-dialog.service';
 
-type Login = { token: string, usuario: Usuario, rolPorDefecto: Rol };
 type Payload = { exp: number, iat: number, roles: Rol[], sub: number };
 type VerificarCuenta = { mensaje: string };
 
@@ -61,7 +56,7 @@ export class AutenticacionService {
     const payload: Payload = JSON.parse(atob(token.split('.')[1]));
     console.log(payload);
     localStorage.setItem('idUsuario', payload.sub.toString());
-    localStorage.setItem('roles', JSON.stringify(payload.roles));
+    // localStorage.setItem('roles', JSON.stringify(payload.roles));
     localStorage.setItem('token', token);
   }
 

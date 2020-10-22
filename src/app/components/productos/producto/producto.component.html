@@ -1,86 +1,31 @@
 <div
   class="container"
-  *ngIf="producto$ | async as producto; else nuevoProducto"
->
+  *ngIf="producto$ | async as producto; else nuevoProducto">
 
-  <h2 class="titulo">{{ producto.nombre }}</h2>
+  <div class="content">
 
-  <div class="foto-producto">
+    <h2 class="titulo">{{ producto.nombre }}</h2>
 
-    <h3>Foto de perfil</h3>
+    <div class="foto-producto">
 
-    <img
-      class="imagen"
-      [src]="producto.foto | images: 'producto'"
-    >
+      <h3>Foto de perfil</h3>
+      <img
+        class="imagen"
+        [src]="producto.foto | images: 'producto'">
 
-    <app-upload
-      class="upload-button"
-      [inputName]="'Actualizar foto'"
-      [url]="urlActualizarFoto(producto.id)"
-      buttonColor="primary"
-      title="Actualizar foto de producto"
-      (uploadedEvent)="obtenerNuevoProducto($event)"
-      keyName="foto-producto"
-    >
-    </app-upload>
+      <app-upload
+        class="upload-button"
+        [inputName]="'Actualizar foto'"
+        [url]="urlActualizarFoto(producto.id)"
+        buttonColor="primary"
+        title="Actualizar foto de producto"
+        (uploadedEvent)="obtenerNuevoProducto()"
+        keyName="foto-producto">
+      </app-upload>
 
-  </div>
-
-  <form [formGroup]="productoForm" (ngSubmit)="actualizarProducto(producto.id)">
-
-    <mat-form-field>
-      <mat-label>Nombre</mat-label>
-      <input matInput type="text" formControlName="nombre">
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Descripción</mat-label>
-      <textarea
-        matInput
-        type="text"
-        cdkTextareaAutosize
-        #autosize="cdkTextareaAutosize"
-        cdkAutosizeMinRows="1"
-        cdkAutosizeMaxRows="5"
-        formControlName="descripcion"
-      >
-      </textarea>
-    </mat-form-field>
-
-    <mat-form-field>
-      <mat-label>Precio</mat-label>
-      <input matInput type="number" formControlName="precio">
-    </mat-form-field>
-
-    <div class="buttons">
-
-      <button mat-raised-button color="primary" type="submit">
-        Guardar cambios
-      </button>
-
-      <a mat-button routerLink="/productos">Volver</a>
     </div>
-  </form>
 
-  <div class="eliminar-producto">
-    <button
-      mat-raised-button
-      color="warn"
-      (click)="borrarProducto(producto.id)"
-    >
-      Eliminar producto
-    </button>
-  </div>
-
-</div>
-
-<ng-template #nuevoProducto>
-  <div class="container">
-
-    <h2 class="titulo">Nuevo producto</h2>
-
-    <form [formGroup]="productoForm" (ngSubmit)="crearProducto()">
+    <form [formGroup]="productoForm" (ngSubmit)="actualizarProducto(producto.id)">
 
       <mat-form-field>
         <mat-label>Nombre</mat-label>
@@ -96,8 +41,7 @@
           #autosize="cdkTextareaAutosize"
           cdkAutosizeMinRows="1"
           cdkAutosizeMaxRows="5"
-          formControlName="descripcion"
-        >
+          formControlName="descripcion">
         </textarea>
       </mat-form-field>
 
@@ -108,13 +52,76 @@
 
       <div class="buttons">
 
-        <button mat-raised-button color="primary" type="submit">
-          Registrar producto
+        <a class="button" mat-stroked-button routerLink="/productos">Volver</a>
+
+        <button class="button" mat-stroked-button color="primary" type="submit">
+          Guardar cambios
         </button>
 
-        <a mat-button routerLink="/productos">Volver</a>
+        <button
+          class="button"
+          mat-stroked-button
+          type="button"
+          color="warn"
+          (click)="borrarProducto(producto.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
+
       </div>
+
     </form>
 
   </div>
+
+</div>
+
+<ng-template #nuevoProducto>
+
+  <div class="container">
+
+    <div class="content">
+
+      <h2 class="titulo">Nuevo producto</h2>
+
+      <form [formGroup]="productoForm" (ngSubmit)="crearProducto()">
+
+        <mat-form-field>
+          <mat-label>Nombre</mat-label>
+          <input matInput type="text" formControlName="nombre">
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Descripción</mat-label>
+          <textarea
+            matInput
+            type="text"
+            cdkTextareaAutosize
+            #autosize="cdkTextareaAutosize"
+            cdkAutosizeMinRows="1"
+            cdkAutosizeMaxRows="5"
+            formControlName="descripcion">
+          </textarea>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Precio</mat-label>
+          <input matInput type="number" formControlName="precio">
+        </mat-form-field>
+
+        <div class="buttons">
+
+          <a class="button" mat-stroked-button routerLink="/productos">Volver</a>
+
+          <button class="button" mat-stroked-button color="primary" type="submit">
+            Registrar producto
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
 </ng-template>

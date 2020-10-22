@@ -54,8 +54,7 @@ export class ProductoComponent implements OnInit {
     }
   }
 
-  obtenerNuevoProducto(evet: any): void {
-    console.log('hola', evet);
+  obtenerNuevoProducto(): void {
     this.subject.next(undefined);
   }
 

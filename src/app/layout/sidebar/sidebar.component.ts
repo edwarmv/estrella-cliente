@@ -6,13 +6,11 @@ import {
   animate,
   trigger
 } from '@angular/animations';
-import { RolService } from 'src/app/services/rol.service';
-import { SidebarService } from '@services/sidebar.service';
-import { Menu, MenuData } from '@services/menu.data';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
+import { MenuSidebar, RolMenuService } from '@services/rol-menu.service';
 
 
 @Component({
@@ -37,25 +35,38 @@ import { Subscription } from 'rxjs';
   ]
 })
 export class SidebarComponent implements OnInit, OnDestroy {
-  menus: Menu[];
+  menus: MenuSidebar[];
 
   private subscription: Subscription = new Subscription();
 
   constructor(
     public usuarioService: UsuarioService,
+    private rolMenuService: RolMenuService,
     private router: Router,
   ) { }
 
   ngOnInit(): void {
     let path: string = this.router.url;
-    this.menus = this.cargarMenus(MenuData.menus, path);
-    this.subscription = this.router.events.
-      pipe(
+
+    this.rolMenuService.obtenerMenusRol(101);
+
+    this.subscription.add(
+      this.rolMenuService.menus
+      .subscribe(menus => {
+        this.menus = this.cargarMenus(menus, path);
+      })
+    );
+
+    this.subscription.add(
+      this.router.events
+      .pipe(
         filter(event => event instanceof NavigationEnd),
-    ).subscribe(() => {
-      path = this.router.url;
-      this.menus = this.cargarMenus(MenuData.menus, path);
-    });
+      )
+      .subscribe(() => {
+        path = this.router.url;
+        this.menus = this.cargarMenus(this.menus, path);
+      })
+    );
   }
 
   toggleMenu(index: number): void {
@@ -68,7 +79,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
    * Cambia el estado activo de los menus
    * @param path Nombre de menu a activar
    */
-  cargarMenus(menus: Menu[], path: string): Menu[] {
+  cargarMenus(menus: MenuSidebar[], path: string): MenuSidebar[] {
     menus.forEach(menu => {
       menu.activated = false;
       menu.submenus.forEach(submenu => submenu.activated = false);

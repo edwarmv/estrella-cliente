@@ -4,7 +4,7 @@ type Submenu = {
   activated: boolean
 };
 
-export type Menu = {
+type Menu = {
   nombre: string,
   collapsed: boolean,
   activated: boolean,

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { map, catchError, tap } from 'rxjs/operators';
+import { map, catchError, switchMap } from 'rxjs/operators';
 import { Usuario } from '../models/usuario.model';
 import { throwError, Observable, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
@@ -15,7 +15,7 @@ export type ObtenerUsuarios = { usuarios: Usuario[], total: number };
   providedIn: 'root'
 })
 export class UsuarioService {
-  usuarioConectadoSubject = new BehaviorSubject<Usuario>(undefined);
+  usuarioSubject = new BehaviorSubject<undefined>(undefined);
   usuarioURL = `${environment.apiURL}/usuario`;
 
   constructor(
@@ -24,18 +24,13 @@ export class UsuarioService {
     private snackBar: MatSnackBar,
   ) { }
 
-
-  actualizarUsuarioConectado(): void {
+  get usuario(): Observable<Usuario> {
     const idUsuario = parseInt(localStorage.getItem('idUsuario'), 10);
-    const url = `${this.usuarioURL}/${idUsuario}`;
 
-    this.http.get<Usuario>(url)
-    .pipe(tap(resp => console.log(resp)))
-    .subscribe(
-      usuario => {
-      this.usuarioConectadoSubject.next(usuario);
-      },
-      error => console.log(error)
+    return this.usuarioSubject.pipe(
+      switchMap(() => {
+        return this.obtenerUsuario(idUsuario);
+      })
     );
   }
 

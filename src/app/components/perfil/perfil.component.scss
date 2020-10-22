@@ -6,25 +6,22 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 40px;
 
-  @media only screen and (min-width: 870px) {
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: center;
-  }
+  .inner-content {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
 
-  .foto-perfil-container {
-    margin-bottom: 40px;
-
-    h2 {
-      min-width: 280px;
-    }
-
-    .foto-button {
+    .foto-perfil-container {
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin-bottom: 40px;
+
+      h2 {
+        min-width: 280px;
+      }
 
       .responsive-img {
         width: 180px;
@@ -33,34 +30,46 @@
         object-fit: cover;
         margin-bottom: 20px;
       }
-
-      .actualizar-foto-button {
-        text-align: center;
-      }
     }
 
-    @media only screen and (min-width: 870px) {
-      margin-right: 40px;
-    }
-  }
-
-  .informacion-usuario {
-    display: flex;
-    flex-direction: column;
-
-    form {
+    .informacion-usuario {
       display: flex;
       flex-direction: column;
-      min-width: 280px;
-    }
 
-    .correo-electronico {
-      margin-top: 30px;
-    }
+      form {
+        display: flex;
+        flex-direction: column;
+        min-width: 280px;
+      }
 
-    .roles-asignados {
-      min-width: 280px;
-      margin-top: 40px;
+      .correo-electronico {
+        margin-top: 30px;
+      }
+
+      .roles-asignados {
+        min-width: 280px;
+        margin-top: 40px;
+
+        .list-item {
+          p {
+            margin: 0;
+          }
+
+          .nombre-rol {
+            display: flex;
+            align-items: flex-end;
+
+            p {
+              padding: 10px 0;
+              flex-grow: 1;
+            }
+          }
+
+          .rol-por-defecto {
+            font-size: 12px;
+          }
+        }
+      }
     }
   }
 }

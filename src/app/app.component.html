@@ -10,7 +10,9 @@
     [opened]="false">
     <!-- [opened]="!mediaQueryList.matches"> -->
 
-    <app-sidebar *ngIf="showHeader"></app-sidebar>
+    <app-sidebar
+      *ngIf="showHeader && !mediaQueryList.matches">
+    </app-sidebar>
 
   </mat-sidenav>
 

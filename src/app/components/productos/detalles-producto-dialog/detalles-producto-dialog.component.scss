@@ -1,0 +1,45 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 350px;
+
+  .imagen {
+    width: 100%;
+  }
+
+  .descripcion {
+    text-align: justify;
+    flex-grow: 1;
+  }
+
+  .precio {
+    grid-area: precio;
+    place-self: start;
+    background-color: #ffd600;
+    border-radius: 4px;
+    padding: 2px;
+    margin: 0;
+
+    span {
+      font-weight: 500;
+      margin-right: 4px;
+    }
+  }
+
+}
+
+.dialog-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  margin-top: 20px;
+
+  .aceptar-btn {
+    margin: 0;
+
+    @media only screen and (min-width: 1000px) {
+      margin: 0;
+    }
+  }
+}

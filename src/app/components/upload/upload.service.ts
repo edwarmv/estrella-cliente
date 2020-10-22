@@ -9,7 +9,6 @@ export class UploadService {
   uploaded$ = this.uploaded.asObservable();
 
   constructor(private http: HttpClient) {
-    console.log('upload service');
   }
 
   upload(file: File, url: string, keyName: string): Observable<number> {

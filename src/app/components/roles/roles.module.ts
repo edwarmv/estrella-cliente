@@ -6,7 +6,9 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { RolComponent } from './rol/rol.component';
-import { DescripcionDialogComponent } from './descripcion-dialog/descripcion-dialog.component';
+import {
+  DescripcionDialogComponent
+} from './descripcion-dialog/descripcion-dialog.component';
 
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { customPaginator } from '@components/paginator/custom.paginator';

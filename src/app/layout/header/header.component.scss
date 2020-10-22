@@ -51,7 +51,7 @@ mat-toolbar {
   }
 }
 
-.nombre-rol-usuario {
+.menu {
   padding-left: 16px;
   padding-right: 16px;
   padding-bottom: 10px;
@@ -72,33 +72,25 @@ mat-toolbar {
     margin-right: 10px;
   }
 
-  div {
+  .informacion-usuario {
     p {
       margin: 0;
-
-      &:nth-child(1) {
-        font-weight: bold;
-      }
     }
 
-    a {
+    .nombre {
+      font-weight: bold;
+    }
+
+    .ver-perfil {
       color: #038209;
 
       &:link, visited, hover, active {
         text-decoration: none;
       }
 
-      // &:visited {
-      // text-decoration: none;
-      // }
-
       &:hover {
         text-decoration: underline;
       }
-
-      // &:active {
-      // text-decoration: none;
-      // }
     }
   }
 }
@@ -107,3 +99,7 @@ mat-toolbar {
   color: #f44236;
 }
 
+.rol-por-defecto {
+  background-color: rgb(63, 181, 64, .15);
+  color: #306816;
+}

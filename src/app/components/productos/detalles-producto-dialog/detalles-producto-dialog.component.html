@@ -1,0 +1,39 @@
+<div class="content" mat-dialog-content>
+
+  <h1>{{ producto.nombre }}</h1>
+
+  <img
+    class="imagen"
+    [src]="producto.foto | images: 'producto'"
+  >
+
+  <p class="descripcion">{{ producto.descripcion + producto.descripcion }}</p>
+
+  <p class="precio">
+    <span>Precio:</span>
+    {{ producto.precio | currency: 'BOB' }}
+  </p>
+
+</div>
+
+<div class="dialog-actions" mat-dialog-actions>
+
+  <button
+    class="aceptar-btn"
+    mat-button
+    (click)="onNoClick()"
+    cdkFocusInitial
+  >
+    Aceptar
+  </button>
+
+  <button
+    class="editar-informacion"
+    mat-stroked-button
+    color="warn"
+    (click)="editarInformacion()"
+  >
+    <mat-icon>create</mat-icon>
+  </button>
+
+</div>

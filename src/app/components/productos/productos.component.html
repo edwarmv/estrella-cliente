@@ -33,29 +33,30 @@
         [src]="producto.foto | images: 'producto'"
       >
 
-      <p class="descripcion">
-        {{
-          producto.descripcion ?
-          (producto.descripcion | slice: 0 : 120) + '...'
-          : 'Sin descripción'
-        }}
-      </p>
-
       <p class="precio">
         <span>Precio:</span>
         {{ producto.precio | currency: 'BOB' }}
       </p>
 
-      <a
+      <button
         class="buttons"
         mat-button
-        [routerLink]="producto.id"
-      >
+        (click)="verDetalles(producto)">
         Ver más
-      </a>
+      </button>
 
     </div>
 
   </div>
+
+  <mat-paginator
+    class="paginator"
+    #paginator
+    hidePageSize
+    showFirstLastButtons
+    [length]="totalProductos"
+    [pageSize]="12"
+    (page)="updateTable($event)">
+  </mat-paginator>
 
 </div>

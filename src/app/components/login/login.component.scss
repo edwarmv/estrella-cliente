@@ -1,9 +1,8 @@
 .container {
   background-color: var(--bg-color);
-  padding: 20px;
+  margin: 20px;
   box-sizing: border-box;
-  min-height: calc(100vh - var(--footer-height));
-  width: 100vw;
+  height: calc(100vh - var(--footer-height));
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -18,7 +18,9 @@ import {
 } from 'date-fns';
 import { Subject } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { DayClickedDialogComponent } from './day-clicked-dialog/day-clicked-dialog.component';
+import {
+  DayClickedDialogComponent
+} from './day-clicked-dialog/day-clicked-dialog.component';
 
 const colors: any = {
   red: {

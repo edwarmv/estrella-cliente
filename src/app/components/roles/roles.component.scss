@@ -1,21 +1,12 @@
 .container {
-  padding: 20px 0 40px 0;
+  padding: 40px;
 
   .buscador {
     display: flex;
     flex-direction: column;
-    align-items: center;
 
     mat-form-field {
       flex: 1 1 auto;
-    }
-
-    .button {
-      margin: .25em 0 calc(.25em + 1.343775em);
-
-      @media only screen and (min-width: 321px) {
-        margin-left: 20px;
-      }
     }
 
     @media only screen and (min-width: 321px) {
@@ -30,14 +21,14 @@
       0 5px 5px -3px rgba(0,0,0,.2),
       0 8px 10px 1px rgba(0,0,0,.14),
       0 3px 14px 2px rgba(0,0,0,.12);
-    max-width: calc(100vw - 60px);
+    max-width: calc(100vw - 80px);
 
     @media only screen and (min-width: 1000px) {
       width: 100%;
     }
 
     .table {
-      width: calc(100vw - 60px);
+      width: calc(100vw - 80px);
       overflow: auto;
 
       @media only screen and (min-width: 1000px) {
@@ -48,7 +39,7 @@
         width: 100%;
 
         .icon {
-          text-align: center;
+          text-align: left;
         }
 
         th, td {

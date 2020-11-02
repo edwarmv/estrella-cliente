@@ -1,12 +1,15 @@
-<div class="container" *ngIf="rol$ | async as rol; else nuevoRol">
+<div class="container">
 
-  <h2>Modificar rol</h2>
+  <form
+    [formGroup]="rolForm"
+    (ngSubmit)="rol ? guardarCambios(rol.id) : crearRol()">
 
-  <form [formGroup]="rolForm" (ngSubmit)="guardarCambios(rol.id)">
+    <h2>{{ rol ? rol.nombre : 'Nuevo rol' }}</h2>
 
     <mat-form-field>
       <mat-label>Nombre</mat-label>
       <input matInput formControlName="nombre">
+      <mat-error *ngIf="nombre.invalid">El nombre es requerido</mat-error>
     </mat-form-field>
 
     <mat-form-field>
@@ -23,57 +26,20 @@
     </mat-form-field>
 
     <div class="buttons">
-      <button mat-raised-button color="primary" type="submit">
-        Guardar cambios
-      </button>
-
-      <a mat-button type="button" routerLink="/roles">
+      <a class="button" mat-stroked-button type="button" routerLink="/roles">
         Volver
       </a>
+
+      <button
+        class="button"
+        mat-stroked-button
+        color="primary"
+        [disabled]="rolForm.valid ? false : true"
+        type="submit">
+        Guardar cambios
+      </button>
     </div>
 
   </form>
 
 </div>
-
-<ng-template #nuevoRol>
-
-  <div class="container">
-
-    <h2>Nuevo rol</h2>
-
-    <form [formGroup]="rolForm" (ngSubmit)="crearRol()">
-
-      <mat-form-field>
-        <mat-label>Nombre</mat-label>
-        <input matInput formControlName="nombre">
-      </mat-form-field>
-
-      <mat-form-field>
-        <mat-label>Descripción</mat-label>
-        <textarea
-          matInput
-          cdkTextareaAutosize
-          #autosize="cdkTextareaAutosize"
-          cdkAutosizeMinRows="1"
-          cdkAutosizeMaxRows="5"
-          formControlName="descripcion"
-        >
-        </textarea>
-      </mat-form-field>
-
-      <div class="buttons">
-        <button mat-raised-button color="primary" type="submit">
-          Guardar cambios
-        </button>
-
-        <a mat-button type="button" routerLink="/roles">
-          Volver
-        </a>
-      </div>
-
-    </form>
-
-  </div>
-
-</ng-template>

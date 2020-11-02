@@ -6,9 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { RolComponent } from './rol/rol.component';
-import {
-  DescripcionDialogComponent
-} from './descripcion-dialog/descripcion-dialog.component';
 
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { customPaginator } from '@components/paginator/custom.paginator';
@@ -19,6 +16,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const routes: Routes = [
   { path: '', component: RolesComponent },
@@ -42,7 +40,6 @@ const routes: Routes = [
   declarations: [
     RolesComponent,
     RolComponent,
-    DescripcionDialogComponent
   ],
   imports: [
     CommonModule,
@@ -57,6 +54,7 @@ const routes: Routes = [
     MatIconModule,
     MatTooltipModule,
     MatDialogModule,
+    MatSnackBarModule,
   ],
   providers: [
     {

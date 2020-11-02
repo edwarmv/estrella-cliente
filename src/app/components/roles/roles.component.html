@@ -1,33 +1,25 @@
 <div class="container">
 
-  <div class="buscador">
-    <mat-form-field appearance="outline">
+  <form class="buscador" [formGroup]="buscadorForm">
+
+    <mat-form-field class="mat-input-white" appearance="outline">
+
       <mat-label>Buscador</mat-label>
-      <input
-        type="text"
-        matInput
-        [(ngModel)]="termino"
-        (keyup.enter)="buscar()"
-      >
+
+      <input type="text" matInput formControlName="termino">
+
       <button
         mat-icon-button
         matSuffix
-        *ngIf="termino.length"
+        *ngIf="termino.value"
         (click)="limpiarBusqueda()"
-        matTooltip="Limpiar búsqueda"
-      >
+        matTooltip="Limpiar búsqueda">
         <mat-icon>clear</mat-icon>
       </button>
+
     </mat-form-field>
-    <button
-      class="button"
-      mat-raised-button
-      color="primary"
-      (click)="buscar()"
-    >
-      Buscar
-    </button>
-  </div>
+
+  </form>
 
   <div class="table-container">
 
@@ -76,7 +68,7 @@
             <button
               mat-mini-fab
               color="warn"
-              (click)="eliminarRol(rol.id, rol.nombre)"
+              (click)="eliminarRol(rol)"
             >
               <mat-icon>delete_forever</mat-icon>
             </button>
@@ -91,6 +83,7 @@
     </div>
 
     <mat-paginator
+      #paginator
       [length]="totalRoles"
       [pageSizeOptions]="[5, 10, 20]"
       (page)="updateTable($event)"

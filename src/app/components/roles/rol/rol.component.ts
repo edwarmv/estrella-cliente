@@ -1,12 +1,17 @@
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Rol } from '@models/rol.model';
 import { RolService } from '@services/rol.service';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { switchMap, take, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { take, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-rol',
@@ -15,16 +20,14 @@ import { switchMap, take, tap } from 'rxjs/operators';
 })
 export class RolComponent implements OnInit {
   @ViewChild('autosize') autosize: CdkTextareaAutosize;
-
-  rol$: Observable<Rol>;
-
+  rol: Rol;
+  idRol: number;
   rolForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
     private rolService: RolService,
     private route: ActivatedRoute,
-    private ngZone: NgZone,
     private snackBar: MatSnackBar
   ) { }
 
@@ -34,20 +37,28 @@ export class RolComponent implements OnInit {
       descripcion: ['']
     });
 
-    const id = this.route.snapshot.params.id;
+    this.idRol = this.route.snapshot.params.id;
 
-    if (id) {
-      this.rol$ = this.rolService.obtenerRol(id).pipe(
-        tap(rol => {
-          this.rolForm.patchValue(rol);
-        })
-      );
+    if (this.idRol) {
+      this.actualizarFormulario(this.idRol);
     }
+  }
+
+  actualizarFormulario(idRol: number): void {
+    this.rolService.obtenerRol(idRol)
+    .pipe(
+      take(1),
+      tap(rol => {
+        this.rolForm.patchValue(rol);
+      })
+    )
+    .subscribe(rol => this.rol = rol);
   }
 
   guardarCambios(id: number): void {
     this.rolService.actualiarRol(id, this.rolForm.value)
-    .subscribe(resp => {
+    .subscribe(() => {
+      this.actualizarFormulario(this.idRol);
       this.snackBar.open('Rol actualizado', 'Hecho', { duration: 2000 });
     });
   }
@@ -57,5 +68,9 @@ export class RolComponent implements OnInit {
     .subscribe(resp => {
       this.snackBar.open(resp.mensaje, 'Aceptar', { duration: 2000 });
     });
+  }
+
+  get nombre(): AbstractControl {
+    return this.rolForm.get('nombre');
   }
 }

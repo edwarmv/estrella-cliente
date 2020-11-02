@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { PageEvent } from '@angular/material/paginator';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import {
+  MessageDialogService
+} from '@components/message-dialog/message-dialog.service';
 import { Rol } from '@models/rol.model';
 import { RolService } from '@services/rol.service';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import Swal from 'sweetalert2';
-import { DescripcionDialogComponent } from './descripcion-dialog/descripcion-dialog.component';
+import { debounceTime, map, switchMap, take as takeRX } from 'rxjs/operators';
 
 @Component({
   selector: 'app-roles',
@@ -26,45 +28,58 @@ export class RolesComponent implements OnInit {
   totalRoles: number;
   pageIndex = 0;
   pageSize = 5;
+  @ViewChild('paginator') paginator: MatPaginator;
 
-  termino = '';
+  buscadorForm: FormGroup;
 
   constructor(
     private rolService: RolService,
-    private dialog: MatDialog,
+    private fb: FormBuilder,
+    private messageDialogService: MessageDialogService,
+    private snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
+    this.buscadorForm = this.fb.group({
+      termino: ['']
+    });
+
     this.roles$ = this.obtenerRoles(this.pageIndex, this.pageSize);
+
+    this.termino.valueChanges.pipe(
+      debounceTime(500),
+      switchMap(() => {
+        this.paginator.firstPage();
+
+        return this.roles$ = this.obtenerRoles(this.pageIndex, this.pageSize);
+      })
+    ).subscribe();
+
   }
 
   verDescripcion(nombre: string, descripcion: string): void {
-    this.dialog.open(
-      DescripcionDialogComponent,
+    this.messageDialogService.openDialog(
       {
-        data: { nombre, descripcion }
-      }
+        title: nombre,
+        message: descripcion
+      },
+      { maxWidth: '400px' }
     );
   }
 
   updateTable(pageEvent: PageEvent): void {
     const take = pageEvent.pageSize;
     const skip = pageEvent.pageIndex * take;
-    this.pageIndex = pageEvent.pageIndex;
-    this.pageSize = pageEvent.pageSize;
 
-    if (this.termino) {
-      this.roles$ = this.obtenerRoles(skip, take, this.termino);
-    } else {
-      this.roles$ = this.obtenerRoles(skip, take);
-    }
+    this.roles$ = this.obtenerRoles(skip, take);
   }
 
   obtenerRoles(
     skip: number,
-    take: number,
-    termino: string = ''
+    take: number
   ): Observable<Rol[]> {
+    const termino = this.termino.value;
+
     return this.rolService.obtenerRoles(skip, take, termino)
     .pipe(
       map(resp => {
@@ -74,36 +89,37 @@ export class RolesComponent implements OnInit {
     );
   }
 
-  buscar(): void {
-    this.roles$ = this.obtenerRoles(0, this.pageSize, this.termino);
-  }
-
   limpiarBusqueda(): void {
-    this.termino = '';
-    this.roles$ = this.obtenerRoles(0, this.pageSize);
+    this.termino.setValue('');
   }
 
-  eliminarRol(id: number, nombre: string): void {
-    Swal.fire({
-      title: `Eliminar rol: ${nombre}`,
-      showCancelButton: true,
-      showConfirmButton: true,
-      cancelButtonText: 'Cancelar',
-      confirmButtonText: 'Eliminar',
-      confirmButtonColor: '#f44336',
-      showClass: {
-        popup: 'animate__animated animate__fadeIn animate__faster'
-      },
-      hideClass: {
-        popup: 'animate__animated animate__fadeOut animate__faster'
+  eliminarRol(rol: Rol): void {
+    this.messageDialogService.openDialog({
+      title: `Eliminar rol`,
+      message: `¿Desea eliminar el rol ${rol.nombre}?`,
+      messageDialogConfig: {
+        confirmButtonText: 'Si',
+        confirmButtonColor: 'warn',
+        showCancelButton: true,
       }
-    }).then(result => {
+    })
+    .afterClosed()
+    .pipe(takeRX(1))
+    .subscribe(result => {
       if (result.isConfirmed) {
-        this.rolService.eliminarRol(id).subscribe(resp => {
+        this.rolService.eliminarRol(rol.id)
+        .pipe(takeRX(1))
+        .subscribe(resp => {
           this.roles$ = this.obtenerRoles(0, this.pageSize);
-          Swal.fire(resp.mensaje);
+          this.snackBar.open(resp.mensaje, 'Aceptar', {
+            duration: 2000,
+          });
         });
       }
     });
+  }
+
+  get termino(): AbstractControl {
+    return this.buscadorForm.get('termino');
   }
 }

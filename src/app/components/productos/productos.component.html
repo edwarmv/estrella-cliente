@@ -5,6 +5,7 @@
   <form class="buscador" [formGroup]="buscadorForm">
 
     <mat-form-field class="mat-input-white" appearance="outline">
+
       <mat-label>Buscador</mat-label>
 
       <input matInput type="text" formControlName="termino">
@@ -13,8 +14,7 @@
         mat-icon-button
         matSuffix
         *ngIf="termino.value"
-        (click)="limpiarBusqueda()"
-      >
+        (click)="limpiarBusqueda()">
         <mat-icon>clear</mat-icon>
       </button>
 

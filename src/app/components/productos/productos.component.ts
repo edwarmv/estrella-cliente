@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MessageDialogService } from '@components/message-dialog/message-dialog.service';
 import { Producto } from '@models/producto.model';
 import { ProductoService } from '@services/producto.service';
 import { Observable } from 'rxjs';
@@ -35,11 +34,10 @@ export class ProductosComponent implements OnInit {
 
     this.productos$ = this.obtenerProductos(0, 12);
 
-    this.buscadorForm.get('termino').valueChanges.pipe(
+    this.termino.valueChanges.pipe(
       debounceTime(500),
       switchMap(() => {
         this.paginator.firstPage();
-        console.log('obtener productos');
 
         return this.productos$ = this.obtenerProductos(0, 12);
       })

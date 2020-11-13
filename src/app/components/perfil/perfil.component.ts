@@ -37,8 +37,8 @@ export class PerfilComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.perfilForm = this.fb.group({
-      nombres: [ '', Validators.required ],
-      apellidos: [ '', Validators.required ],
+      nombre: [ '', Validators.required ],
+      apellido: [ '', Validators.required ],
       nitCI: [ '' ],
       telefonoFijo: [ '' ],
       telefonoMovil: [ '' ],

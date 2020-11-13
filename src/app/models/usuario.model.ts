@@ -3,8 +3,8 @@ import { RolUsuario } from './rol-usuario.model';
 export class Usuario {
   constructor(
     public id: number,
-    public nombres: string,
-    public apellidos: string,
+    public nombre: string,
+    public apellido: string,
     public nitCI: string,
     public telefonoMovil: string,
     public telefonoFijo: string,

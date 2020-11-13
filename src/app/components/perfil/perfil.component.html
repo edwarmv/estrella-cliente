@@ -26,32 +26,32 @@
 
       <form [formGroup]="perfilForm" (ngSubmit)="actualizarUsuario(usuario.id)">
 
-        <mat-form-field appearance="standard">
-          <mat-label>Nombres</mat-label>
-          <input matInput value="nombres" formControlName="nombres">
+        <mat-form-field>
+          <mat-label>Nombre</mat-label>
+          <input matInput formControlName="nombre">
         </mat-form-field>
 
-        <mat-form-field appearance="standard">
-          <mat-label>Apellidos</mat-label>
-          <input matInput value="apellidos" formControlName="apellidos">
+        <mat-form-field>
+          <mat-label>Apellido</mat-label>
+          <input matInput formControlName="apellido">
         </mat-form-field>
 
-        <mat-form-field appearance="standard">
+        <mat-form-field>
           <mat-label>NIT/CI</mat-label>
           <input matInput value="nitCI" formControlName="nitCI">
         </mat-form-field>
 
-        <mat-form-field appearance="standard">
+        <mat-form-field>
           <mat-label>Teléfono fijo</mat-label>
           <input matInput value="telefonoFijo" formControlName="telefonoFijo">
         </mat-form-field>
 
-        <mat-form-field appearance="standard">
+        <mat-form-field>
           <mat-label>Teléfono móvil</mat-label>
           <input matInput value="telefonoMovil" formControlName="telefonoMovil">
         </mat-form-field>
 
-        <mat-form-field appearance="standard">
+        <mat-form-field>
           <mat-label>Dirección de domicilio</mat-label>
           <input
             matInput
@@ -59,15 +59,17 @@
             formControlName="direccionDomicilio">
         </mat-form-field>
 
-        <button mat-raised-button color="primary" type="submit">
-          Actualizar datos
-        </button>
+        <div class="actualizar-datos-btn">
+          <button mat-raised-button color="primary" type="submit">
+            Actualizar datos
+          </button>
+        </div>
 
       </form>
 
       <form [formGroup]="correoElectronicoForm" class="correo-electronico">
 
-        <mat-form-field appearance="standard">
+        <mat-form-field>
           <mat-label>Correo electrónico</mat-label>
           <input
             matInput
@@ -75,9 +77,11 @@
             formControlName="correoElectronico">
         </mat-form-field>
 
-        <button mat-raised-button color="primary" type="submit">
-          Actualizar correo electrónico
-        </button>
+        <div class="actualizar-correo-btn">
+          <button mat-raised-button color="primary" type="submit">
+            Actualizar correo electrónico
+          </button>
+        </div>
 
       </form>
 

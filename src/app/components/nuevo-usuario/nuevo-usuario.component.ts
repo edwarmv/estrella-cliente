@@ -18,8 +18,8 @@ export class NuevoUsuarioComponent implements OnInit, OnDestroy {
     private usuarioService: UsuarioService,
   ) {
     this.nuevoUsuarioForm = this.fb.group({
-      nombres: ['', Validators.required],
-      apellidos: ['', Validators.required],
+      nombre: ['', Validators.required],
+      apellido: ['', Validators.required],
       correoElectronico: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmarPassword: ['', Validators.required]
@@ -39,11 +39,11 @@ export class NuevoUsuarioComponent implements OnInit, OnDestroy {
     }
   }
 
-  get nombres(): AbstractControl {
+  get nombre(): AbstractControl {
     return this.nuevoUsuarioForm.get('nombres');
   }
 
-  get apellidos(): AbstractControl {
+  get apellido(): AbstractControl {
     return this.nuevoUsuarioForm.get('apellidos');
   }
 

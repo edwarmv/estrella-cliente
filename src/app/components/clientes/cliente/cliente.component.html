@@ -1,1 +1,59 @@
-<p>cliente works!</p>
+<div class="container">
+
+  <form
+    [formGroup]="clienteForm"
+    (ngSubmit)="cliente ? actualiarCliente() : crearCliente()">
+
+    <h1>{{ cliente ? 'Cliente' : 'Nuevo cliente' }}</h1>
+
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre">
+      <mat-error *ngIf="nombre.invalid">El nombre es requerido</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Apellido</mat-label>
+      <input matInput formControlName="apellido">
+      <mat-error *ngIf="apellido.invalid">El apellido es requerido</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>NIT/CI</mat-label>
+      <input matInput formControlName="nitCI">
+      <mat-error *ngIf="nitCI.invalid">El NIT/CI es requerido</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Teléfono fijo</mat-label>
+      <input matInput formControlName="telefonoFijo">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Teléfono móvil</mat-label>
+      <input matInput formControlName="telefonoMovil">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Direccion de domicilio</mat-label>
+      <input matInput formControlName="direccionDomicilio">
+    </mat-form-field>
+
+
+    <div class="buttons">
+      <a class="button" mat-stroked-button type="button" routerLink="/clientes">
+        Volver
+      </a>
+
+      <button
+        class="button"
+        mat-stroked-button
+        [color]="clienteForm.valid ? 'primary' : 'warn'"
+        type="submit">
+        {{ cliente ? 'Guardar cambios' : 'Registrar Cliente' }}
+      </button>
+    </div>
+
+  </form>
+
+</div>

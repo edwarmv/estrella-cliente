@@ -58,6 +58,14 @@ const routes: Routes = [
     }
   },
   {
+    path: 'clientes',
+    loadChildren: () => import('@components/clientes/clientes.module')
+    .then(m => m.ClientesModule),
+    data: {
+      breadcrumb: 'Gestionar Clientes'
+    }
+  },
+  {
     path: 'perfil',
     loadChildren: () => import('@components/perfil/pefil.module')
     .then(m => m.PefilModule),

@@ -16,6 +16,7 @@ import { LayoutModule as MatLayoutModule } from '@angular/cdk/layout';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { registerLocaleData } from '@angular/common';
+import { httpInterceptorProviders } from './http-interceptors';
 
 registerLocaleData(localeEsBO);
 
@@ -34,7 +35,10 @@ registerLocaleData(localeEsBO);
     MatSidenavModule,
     MatSnackBarModule,
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'es-BO' }],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'es-BO' },
+    httpInterceptorProviders,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

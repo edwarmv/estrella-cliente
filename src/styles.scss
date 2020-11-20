@@ -57,3 +57,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   background: white;
   border-radius: 5px;
 }
+
+.error-snackbar {
+  background: white;
+  border: solid var(--warn-color);
+  color: var(--warn-color);
+
+  .mat-simple-snackbar-action {
+    color: var(--warn-color);
+  }
+}

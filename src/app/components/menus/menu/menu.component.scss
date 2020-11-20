@@ -1,0 +1,49 @@
+.container {
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    border-radius: 5px;
+    padding: 20px;
+
+    .submenus {
+      display: flex;
+      flex-direction: column;
+      margin-top: 16px;
+
+      .agregar-submenu {
+        text-align: center;
+        margin-bottom: 16px;
+
+        .error {
+          color: var(--warn-color);
+        }
+
+        .submenus-duplicados {
+          text-align: left;
+        }
+      }
+
+      .submenu {
+        .nombre {
+          display: flex;
+        }
+
+        .mat-form-field {
+          width: 100%;
+        }
+      }
+    }
+
+    .buttons {
+      .button {
+        margin-right: 8px;
+      }
+    }
+  }
+}

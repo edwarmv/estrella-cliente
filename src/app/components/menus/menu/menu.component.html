@@ -1,0 +1,80 @@
+<div class="container">
+
+  <form
+    [formGroup]="menuForm"
+    (ngSubmit)="menu ? actualizarMenu() : crearMenu()">
+
+    <h1>{{ menu ? 'Menú' : 'Nuevo menú' }}</h1>
+
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre">
+      <mat-error *ngIf="nombre.invalid">El nombre es requerido</mat-error>
+    </mat-form-field>
+
+    <div class="submenus" formArrayName="submenus">
+
+      <h2>Submenús asignados</h2>
+
+      <div class="agregar-submenu">
+        <button mat-stroked-button
+          (click)="seleccionarSubmenu()"
+          [color]="submenus.invalid ? 'warn' : 'primary'"
+          type="button">
+          Seleccionar submenú
+        </button>
+        <div class="error submenus-duplicados"
+          *ngIf="submenus.errors?.idsDuplicados">
+          <p>
+            Submenús duplicados
+          </p>
+          <ul>
+            <li *ngFor="let submenu of submenus.errors.values">
+              {{ submenu.value.nombre }}
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <ng-container *ngFor="let submenu of submenus.controls; let i = index">
+        <div class="submenu" [formGroupName]="i">
+
+          <div class="nombre">
+
+            <mat-form-field>
+              <mat-label>Nombre</mat-label>
+              <input matInput formControlName="nombre" readonly type="text">
+            </mat-form-field>
+
+            <button
+              (click)="eliminarSubmenu(i)"
+              mat-icon-button
+              type="button"
+              color="warn">
+              <mat-icon>delete</mat-icon>
+            </button>
+
+          </div>
+
+        </div>
+      </ng-container>
+
+    </div>
+
+    <div class="buttons">
+      <a class="button" mat-stroked-button type="button" routerLink="/menus">
+        Volver
+      </a>
+
+      <button
+        class="button"
+        mat-stroked-button
+        [color]="menuForm.valid ? 'primary' : 'warn'"
+        type="submit">
+        {{ menu ? 'Guardar cambios' : 'Crear Menu' }}
+      </button>
+    </div>
+
+  </form>
+
+</div>

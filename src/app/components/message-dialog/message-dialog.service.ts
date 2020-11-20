@@ -26,7 +26,7 @@ export class MessageDialogService {
       {
         data,
         maxHeight: maxHeight ? maxHeight : 'auto',
-        maxWidth: maxWidth ? maxWidth : 'auto',
+        maxWidth: maxWidth ? maxWidth : '80vw',
       }
     );
 

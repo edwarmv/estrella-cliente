@@ -1,0 +1,38 @@
+<div class="container">
+
+  <form
+    [formGroup]="submenuForm"
+    (ngSubmit)="idSubmenu ? actualizarSubmenu(idSubmenu) : crearSubmenu()">
+
+    <h1>{{ idSubmenu ? 'Submenú' : 'Nuevo submenú' }}</h1>
+
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre">
+      <mat-error *ngIf="nombre.invalid">El nombre es requerido</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Path</mat-label>
+      <input matInput formControlName="path">
+      <mat-error *ngIf="path.invalid">El path es requerido</mat-error>
+    </mat-form-field>
+
+
+    <div class="buttons">
+      <a class="button" mat-stroked-button type="button" routerLink="/submenus">
+        Volver
+      </a>
+
+      <button
+        class="button"
+        mat-stroked-button
+        [color]="submenuForm.valid ? 'primary' : 'warn'"
+        type="submit">
+        {{ idSubmenu ? 'Guardar cambios' : 'Crear Submenú' }}
+      </button>
+    </div>
+
+  </form>
+
+</div>

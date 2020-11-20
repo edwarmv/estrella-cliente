@@ -1,0 +1,30 @@
+.content {
+  form {
+    .mat-form-field {
+      width: 100%;
+    }
+  }
+
+  .productos {
+    padding: 0;
+
+    .producto {
+      border-bottom: solid 0.5px;
+      margin-bottom: 16px;
+
+      .nombre {
+        font-weight: bold;
+      }
+
+      .precio {
+        margin: 0;
+      }
+    }
+  }
+}
+
+.dialog-actions {
+  .cancelar {
+    margin-bottom: 16px;
+  }
+}

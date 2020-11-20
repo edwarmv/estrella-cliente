@@ -1,0 +1,114 @@
+.container {
+  margin: 40px;
+  display: flex;
+  flex-direction: column;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 5px;
+    background: white;
+
+    .cliente {
+      display: grid;
+      grid-template-rows: auto;
+      grid-template-areas:
+        'titulo'
+        'seleccionar-cliente'
+        'nombre'
+        'apellido'
+        'nit-ci';
+
+      .titulo {
+        grid-area: titulo;
+      }
+
+      .seleccionar-cliente {
+        grid-area: seleccionar-cliente;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 16px;
+
+        .error {
+          color: var(--warn-color);
+        }
+      }
+
+      .nombre {
+        grid-area: nombre;
+      }
+
+      .apellido {
+        grid-area: apellido;
+      }
+
+      .nit-ci {
+        grid-area: nit-ci;
+      }
+    }
+
+    .con-servicio-entrega {
+      margin-bottom: 16px;
+    }
+
+    .detalle {
+      margin-top: 16px;
+
+      .error {
+        color: var(--warn-color);
+      }
+
+      .agregar-producto {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 16px;
+      }
+
+      .productos {
+        display: flex;
+        flex-direction: column;
+
+        .producto {
+          display: grid;
+          grid-template-rows: auto;
+          grid-template-areas:
+            'indice'
+            'nombre'
+            'precio-unitario'
+            'cantidad'
+            'subtotal';
+          margin-bottom: 16px;
+
+          .indice {
+            grid-area: indice;
+            display: flex;
+            justify-content: space-between;
+
+            .numero {
+              margin-top: 8px;
+            }
+          }
+
+          .nombre {
+            grid-area: nombre;
+          }
+
+          .precio-unitario {
+            grid-area: precio-unitario;
+          }
+
+          .cantidad {
+            grid-area: cantidad;
+          }
+
+          .subtotal {
+            grid-area: subtotal;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,186 @@
+<div class="container">
+
+  <form [formGroup]="pedidoForm" (ngSubmit)="registrarPedido()">
+
+    <!--cliente-->
+    <div class="cliente" formGroupName="cliente">
+
+      <h2 class="titulo">Cliente</h2>
+
+      <div class="seleccionar-cliente">
+        <button
+          mat-stroked-button
+          [color]="cliente.pristine && cliente.untouched ?
+                  '' : cliente.valid ? 'primary' : 'warn'"
+          (click)="abrirSeleccionarCliente()"
+          type="button">
+          Seleccionar cliente
+        </button>
+        <p class="error" *ngIf="cliente.invalid && cliente.touched">
+          Debe seleccionar un cliente
+        </p>
+      </div>
+
+      <mat-form-field class="nombre">
+        <mat-label>Nombre</mat-label>
+        <input
+          matInput
+          formControlName="nombre"
+          readonly
+          type="text">
+      </mat-form-field>
+
+      <mat-form-field class="apellido">
+        <mat-label>Apellido</mat-label>
+        <input
+          matInput
+          formControlName="apellido"
+          readonly
+          type="text">
+      </mat-form-field>
+
+      <mat-form-field class="nit-ci">
+        <mat-label>NIT/CI</mat-label>
+        <input
+          matInput
+          formControlName="nitCI"
+          readonly
+          type="text">
+      </mat-form-field>
+
+    </div> <!--fin-cliente-->
+
+    <mat-checkbox
+      class="con-servicio-entrega"
+      formControlName="conServicioEntrega">
+      ¬øCon entrega a domicilio?
+    </mat-checkbox>
+
+    <mat-form-field *ngIf="conServicioEntrega.value">
+      <textarea
+        placeholder="Direcci√≥n de entrega"
+        matInput
+        formControlName="direccionEntrega"
+        type="text">
+      </textarea>
+    </mat-form-field>
+
+    <mat-form-field class="fecha-entrega">
+      <mat-label>Fecha de entrega</mat-label>
+      <input matInput formControlName="fechaEntrega" type="datetime-local">
+    </mat-form-field>
+
+    <!--detalle-->
+    <div class="detalle" formArrayName="detallesPedidos">
+
+      <h2 class="titulo">Detalle</h2>
+
+      <div class="agregar-producto">
+        <button mat-stroked-button
+          (click)="abrirAgregarProducto()"
+          [color]="detallesPedidos.pristine && detallesPedidos.untouched ?
+                  '' : detallesPedidos.errors?.invalidSize ?
+                  'warn' : 'primary'"
+          type="button">
+          Agregar producto
+        </button>
+        <p class="error" *ngIf="detallesPedidos.errors?.invalidSize && cliente.touched">
+          Debe seleccionar un cliente
+        </p>
+      </div>
+
+      <div
+        *ngFor="let detallePedido of detallesPedidos.controls; let i = index"
+        class="productos">
+
+        <div
+          [formGroupName]="i"
+          class="producto">
+
+          <div class="indice">
+            <h3 class="numero">
+              <span>Nº</span>
+              {{ i + 1 }}
+            </h3>
+            <button
+              (click)="eliminarProducto(i)"
+              mat-icon-button
+              color="warn">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+
+          <ng-container formGroupName="producto">
+            <mat-form-field class="nombre">
+              <mat-label>Nombre</mat-label>
+              <input
+                matInput
+                formControlName="nombre"
+                readonly
+                type="text">
+            </mat-form-field>
+          </ng-container>
+
+          <mat-form-field class="precio-unitario">
+            <mat-label>Precio unitario (Bs)</mat-label>
+            <input
+              matInput
+              formControlName="precioUnitario"
+              readonly
+              type="number">
+          </mat-form-field>
+
+          <mat-form-field class="cantidad">
+            <mat-label>Cantidad</mat-label>
+            <input
+              matInput
+              formControlName="cantidad"
+              type="number">
+            <mat-error
+              *ngIf="obtenerDetallePedido(i)
+                    .get('cantidad').errors as errors">
+              <ng-container *ngIf="errors.required">
+                El campo es requerido
+              </ng-container>
+              <ng-container *ngIf="errors.min">
+                Debe ser mayor a 0
+              </ng-container>
+              <ng-container *ngIf="errors.noInteger">
+                Solo n√∫meros enteros
+              </ng-container>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="subtotal">
+            <mat-label>Subtotal (Bs)</mat-label>
+            <input
+              matInput
+              readonly
+              formControlName="subtotal"
+              type="number">
+          </mat-form-field>
+
+        </div>
+
+      </div>
+
+    </div> <!--fin - detalle-->
+
+    <mat-form-field class="total" *ngIf="detallesPedidos.length > 0">
+      <mat-label>Total (Bs)</mat-label>
+      <input
+        matInput
+        readonly
+        formControlName="total"
+        type="number">
+    </mat-form-field>
+
+    <button
+      mat-stroked-button
+      type="submit">
+      Registrar pedido
+    </button>
+
+  </form>
+
+</div>

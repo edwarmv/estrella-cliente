@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Producto } from '@models/producto.model';
 import { ProductoService } from '@services/producto.service';
-import { Observable } from 'rxjs';
-import { debounceTime, map, switchMap } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { debounceTime, map, takeUntil } from 'rxjs/operators';
 import {
   DetallesProductoDialogComponent
 } from './detalles-producto-dialog/detalles-producto-dialog.component';
@@ -15,8 +15,9 @@ import {
   templateUrl: './productos.component.html',
   styleUrls: ['./productos.component.scss']
 })
-export class ProductosComponent implements OnInit {
+export class ProductosComponent implements OnInit, OnDestroy {
   productos$: Observable<Producto[]>;
+  private unsubscribe = new Subject<void>();
   buscadorForm: FormGroup;
   totalProductos: number;
   @ViewChild('paginator') paginator: MatPaginator;
@@ -35,10 +36,10 @@ export class ProductosComponent implements OnInit {
     this.productos$ = this.obtenerProductos(0, 12);
 
     this.termino.valueChanges.pipe(
-      debounceTime(500),
-      switchMap(() => {
+      takeUntil(this.unsubscribe),
+      debounceTime(300),
+      map(() => {
         this.paginator.firstPage();
-
         return this.productos$ = this.obtenerProductos(0, 12);
       })
     ).subscribe();
@@ -76,5 +77,10 @@ export class ProductosComponent implements OnInit {
 
   get termino(): AbstractControl {
     return this.buscadorForm.get('termino');
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 }

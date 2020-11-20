@@ -1,6 +1,5 @@
 .container {
-  box-sizing: border-box;
-  padding: 40px;
+  padding: 40px 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -13,16 +12,39 @@
     border-radius: 5px;
     max-width: 300px;
 
-    .mat-form-field {
-      width: 100%;
-      flex-grow: 1;
-    }
+    .menus {
+      display: flex;
+      flex-direction: column;
+      margin-top: 16px;
 
+      .agregar-menu {
+        text-align: center;
+        margin-bottom: 16px;
+
+        .error {
+          color: var(--warn-color);
+        }
+
+        .menus-duplicados {
+          text-align: left;
+        }
+      }
+
+      .menu {
+        .nombre {
+          display: flex;
+        }
+
+        .mat-form-field {
+          width: 100%;
+        }
+      }
+    }
     .buttons {
       text-align: left;
 
       .button {
-        margin-right: 10px;
+        margin-right: 8px;
       }
     }
   }

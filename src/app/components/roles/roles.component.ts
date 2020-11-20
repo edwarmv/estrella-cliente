@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -7,16 +7,17 @@ import {
 } from '@components/message-dialog/message-dialog.service';
 import { Rol } from '@models/rol.model';
 import { RolService } from '@services/rol.service';
-import { Observable } from 'rxjs';
-import { debounceTime, map, switchMap, take as takeRX } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
+import { debounceTime, map, take as takeRxJS, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-roles',
   templateUrl: './roles.component.html',
   styleUrls: ['./roles.component.scss']
 })
-export class RolesComponent implements OnInit {
+export class RolesComponent implements OnInit, OnDestroy {
   roles$: Observable<Rol[]>;
+  private unsubscribe = new Subject<void>();
 
   displayedColumns: string[] = [
     'posicion',
@@ -47,11 +48,11 @@ export class RolesComponent implements OnInit {
     this.roles$ = this.obtenerRoles(this.pageIndex, this.pageSize);
 
     this.termino.valueChanges.pipe(
-      debounceTime(500),
-      switchMap(() => {
+      takeUntil(this.unsubscribe),
+      debounceTime(300),
+      map(() => {
         this.paginator.firstPage();
-
-        return this.roles$ = this.obtenerRoles(this.pageIndex, this.pageSize);
+        this.roles$ = this.obtenerRoles(this.pageIndex, this.pageSize);
       })
     ).subscribe();
 
@@ -62,8 +63,7 @@ export class RolesComponent implements OnInit {
       {
         title: nombre,
         message: descripcion
-      },
-      { maxWidth: '400px' }
+      }
     );
   }
 
@@ -104,12 +104,13 @@ export class RolesComponent implements OnInit {
       }
     })
     .afterClosed()
-    .pipe(takeRX(1))
+    .pipe(takeRxJS(1))
     .subscribe(result => {
       if (result.isConfirmed) {
         this.rolService.eliminarRol(rol.id)
-        .pipe(takeRX(1))
+        .pipe(takeRxJS(1))
         .subscribe(resp => {
+          this.paginator.firstPage();
           this.roles$ = this.obtenerRoles(0, this.pageSize);
           this.snackBar.open(resp.mensaje, 'Aceptar', {
             duration: 2000,
@@ -121,5 +122,10 @@ export class RolesComponent implements OnInit {
 
   get termino(): AbstractControl {
     return this.buscadorForm.get('termino');
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
   }
 }

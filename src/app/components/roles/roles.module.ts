@@ -17,6 +17,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SeleccionarMenuComponent } from './seleccionar-menu/seleccionar-menu.component';
+import { MatRippleModule } from '@angular/material/core';
 
 const routes: Routes = [
   { path: '', component: RolesComponent },
@@ -24,7 +26,7 @@ const routes: Routes = [
     path: 'nuevo-rol',
     component: RolComponent,
     data: {
-      breadcrumb: 'Regisrat rol'
+      breadcrumb: 'Registrar rol'
     }
   },
   {
@@ -40,6 +42,7 @@ const routes: Routes = [
   declarations: [
     RolesComponent,
     RolComponent,
+    SeleccionarMenuComponent,
   ],
   imports: [
     CommonModule,
@@ -55,6 +58,7 @@ const routes: Routes = [
     MatTooltipModule,
     MatDialogModule,
     MatSnackBarModule,
+    MatRippleModule,
   ],
   providers: [
     {

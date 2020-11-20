@@ -2,9 +2,9 @@
 
   <form
     [formGroup]="rolForm"
-    (ngSubmit)="rol ? guardarCambios(rol.id) : crearRol()">
+    (ngSubmit)="idRol ? actualizarRol() : crearRol()">
 
-    <h2>{{ rol ? rol.nombre : 'Nuevo rol' }}</h2>
+    <h1>{{ idRol ? 'Rol' : 'Nuevo rol' }}</h1>
 
     <mat-form-field>
       <mat-label>Nombre</mat-label>
@@ -25,6 +25,55 @@
       </textarea>
     </mat-form-field>
 
+    <div class="menus" formArrayName="rolesMenus">
+
+      <h2>Menús asignados</h2>
+
+      <div class="agregar-menu">
+        <button mat-stroked-button
+          (click)="seleccionarMenu()"
+          [color]="rolesMenus.invalid ? 'warn' : 'primary'"
+          type="button">
+          Seleccionar menú
+        </button>
+        <div class="error menus-duplicados"
+          *ngIf="rolesMenus.errors?.idsDuplicados">
+          <p>
+            Menús duplicados
+          </p>
+          <ul>
+            <li *ngFor="let value of rolesMenus.errors.values">
+              {{ value.nombre }}
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <ng-container *ngFor="let rolMenu of rolesMenus.controls; let i = index">
+        <div class="menu" [formGroupName]="i">
+
+          <div class="nombre" formGroupName="menu">
+
+            <mat-form-field>
+              <mat-label>Nombre</mat-label>
+              <input matInput formControlName="nombre" readonly type="text">
+            </mat-form-field>
+
+            <button
+              (click)="eliminarMenu(i)"
+              mat-icon-button
+              type="button"
+              color="warn">
+              <mat-icon>delete</mat-icon>
+            </button>
+
+          </div>
+
+        </div>
+      </ng-container>
+
+    </div>
+
     <div class="buttons">
       <a class="button" mat-stroked-button type="button" routerLink="/roles">
         Volver
@@ -33,10 +82,9 @@
       <button
         class="button"
         mat-stroked-button
-        color="primary"
-        [disabled]="rolForm.valid ? false : true"
+        [color]="rolForm.valid ? 'primary' : 'warn'"
         type="submit">
-        Guardar cambios
+        {{ idRol ? 'Guardar cambios' : 'Registrar rol' }}
       </button>
     </div>
 

@@ -73,4 +73,13 @@ export class RolMenuService {
 
     return this.http.get<Menu[]>(url);
   }
+
+  borrarRolMenu(
+    idRol: number,
+    idMenu: number
+  ): Observable<{ mensaje: string }> {
+    const url = `${this.rolMenuURL}/${idRol}/${idMenu}`;
+
+    return this.http.delete<{ mensaje: string }>(url);
+  }
 }

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
 import { Usuario } from '@models/usuario.model';
 import { UsuarioService } from '@services/usuario.service';
 import { Observable } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { take, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-usuario',
@@ -13,41 +14,53 @@ import { switchMap, tap } from 'rxjs/operators';
 })
 export class UsuarioComponent implements OnInit {
   usuario$: Observable<Usuario>;
+  idUsuario: number;
   usuarioForm: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
     private usuarioService: UsuarioService,
     private fb: FormBuilder,
+    private snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
     this.usuarioForm = this.fb.group({
-      nombres: ['', [Validators.required]],
-      apellidos: ['', [Validators.required]],
+      nombre: ['', [Validators.required]],
+      apellido: ['', [Validators.required]],
       nitCI: [''],
       telefonoMovil: [''],
       telefonoFijo: [''],
       direccionDomicilio: [''],
       correoElectronico: [''],
-      esEmpleado: []
+      cuentaVerificada: [{ value: undefined, disabled: true }],
+      esEmpleado: [],
+      estado: [],
     });
 
-    this.usuario$ = this.route.paramMap.pipe(
-      switchMap((params: ParamMap) => {
-        return this.usuarioService.obtenerUsuario(params.get('id'));
-      }),
-      tap(usuario => {
-        if (usuario) {
-          this.usuarioForm.patchValue(usuario);
-        }
-      })
-    );
+    this.idUsuario = this.route.snapshot.params.id;
+
+    if (this.idUsuario) {
+      this.usuario$ = this.usuarioService.obtenerUsuario(this.idUsuario)
+      .pipe(
+        tap(usuario => {
+          if (usuario) {
+            this.usuarioForm.patchValue(usuario);
+          }
+        })
+      );
+    }
   }
 
-  guardarCambios(id: number): void {
-    this.usuarioService
-    .actualizarUsuario(this.usuarioForm.value, id).subscribe();
+  actualizarUsuario(id: number): void {
+    console.log(this.usuarioForm);
+    if (this.usuarioForm.valid) {
+      this.usuarioService
+      .actualizarUsuario(this.usuarioForm.value, id)
+      .pipe(take(1))
+      .subscribe(resp => {
+        this.snackBar.open(resp.mensaje, 'Aceptar', { duration: 2000 });
+      });
+    }
   }
-
 }

@@ -45,10 +45,8 @@ export class RolUsuarioService {
     );
   }
 
-  asignarRolUsuario(idRol: number, idUsuario: number):
-    Observable<{ mensaje: string }> {
-    const body = { idRol, idUsuario };
-    return this.http.post<{mensaje: string}>(this.rolUsuarioURL, body);
+  asignarRolUsuario(rolUsuario: RolUsuario): Observable<{ mensaje: string }> {
+    return this.http.post<{mensaje: string}>(this.rolUsuarioURL, rolUsuario);
   }
 
   borrarRolUsuario(idRol: number, idUsuario: number):

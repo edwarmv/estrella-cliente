@@ -70,19 +70,16 @@ export class UsuarioService {
     );
   }
 
-  actualizarUsuario(usuario: Usuario, id: number): Observable<Usuario> {
+  actualizarUsuario(
+    usuario: Usuario,
+    id: number
+  ): Observable<{ mensaje: string }> {
     const url = `${this.usuarioURL}/${id}`;
 
-    return this.http.put<Usuario>(url, usuario)
-    .pipe(
-      map(resp => {
-        this.snackBar.open('Usuario actualizado', 'Hecho', { duration: 2000 });
-        return resp;
-      })
-    );
+    return this.http.put<{ mensaje: string }>(url, usuario);
   }
 
-  eliminarUsuario(id: number): Observable<{ mensaje: string }> {
+  cambiarEstado(id: number): Observable<{ mensaje: string }> {
     const url = `${this.usuarioURL}/${id}`;
 
     return this.http.delete<{ mensaje: string }>(url);

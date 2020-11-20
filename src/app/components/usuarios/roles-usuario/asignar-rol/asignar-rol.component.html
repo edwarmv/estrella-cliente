@@ -1,0 +1,26 @@
+<div mat-dialog-content class="container">
+
+  <h2>Seleccionar rol</h2>
+
+  <form [formGroup]="buscadorForm">
+    <mat-form-field>
+      <mat-label>Buscador</mat-label>
+      <input matInput formControlName="termino" placeholder="Nombre rol">
+    </mat-form-field>
+  </form>
+
+  <ul>
+    <li
+      matRipple
+      (click)="seleccionarRol(rol)"
+      *ngFor="let rol of roles$ | async; let i = index">
+      {{ rol.nombre }}
+    </li>
+  </ul>
+
+</div>
+<div mat-dialog-actions>
+  <button class="button" mat-stroked-button (click)="closeDialog()">
+    Cancelar
+  </button>
+</div>

@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { UsuariosComponent } from './usuarios.component';
 import { UsuarioComponent } from './usuario/usuario.component';
-import { RolesComponent } from './roles/roles.component';
+import { RolesUsuarioComponent } from './roles-usuario/roles-usuario.component';
+import { AsignarRolComponent } from './roles-usuario/asignar-rol/asignar-rol.component';
 import { PipesSharedModule } from '@pipes/pipes-shared.module';
 
 import { MatTableModule } from '@angular/material/table';
@@ -15,11 +16,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatListModule } from '@angular/material/list';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
 
 
 const routes: Routes = [
@@ -36,7 +36,7 @@ const routes: Routes = [
   },
   {
     path: ':id/roles',
-    component: RolesComponent,
+    component: RolesUsuarioComponent,
     data: {
       breadcrumb: 'Roles de usuario'
     }
@@ -44,12 +44,16 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [UsuariosComponent, UsuarioComponent, RolesComponent],
+  declarations: [
+    UsuariosComponent,
+    UsuarioComponent,
+    RolesUsuarioComponent,
+    AsignarRolComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
-    FormsModule,
     PipesSharedModule,
     MatTableModule,
     MatPaginatorModule,
@@ -57,11 +61,10 @@ const routes: Routes = [
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule,
-    MatTooltipModule,
     MatListModule,
-    MatAutocompleteModule,
     MatSnackBarModule,
+    MatDialogModule,
+    MatSelectModule,
   ],
   providers: [
     {

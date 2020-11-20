@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  flex-direction: column;
+
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+
+    li {
+      padding: 10px 0;
+    }
+  }
+}
+
+.button {
+  margin-bottom: 13px;
+}

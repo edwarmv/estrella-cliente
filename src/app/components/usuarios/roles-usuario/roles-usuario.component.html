@@ -1,0 +1,43 @@
+<div class="container" *ngIf="usuario$ | async as usuario">
+
+  <div class="inner-container">
+
+    <h1>{{ usuario.nombre + ' ' + usuario.apellido }}</h1>
+
+    <button
+      mat-stroked-button
+      (click)="asignarRol()"
+      class="asignar-rol-btn"
+      type="button">
+      Asignar rol
+    </button>
+
+    <h2>Roles asignados</h2>
+
+    <mat-list>
+
+      <ng-container *ngIf="usuario.rolesUsuarios.length > 0; else sinRol">
+        <mat-list-item *ngFor="let rolUsuario of usuario.rolesUsuarios">
+          <h3 matLine>{{ rolUsuario.rol.nombre }}</h3>
+          <button
+            class="eliminar-rol"
+            mat-icon-button
+            color="warn"
+            (click)="borrarRolUsuario(rolUsuario.rol.id, usuario.id)"
+          >
+            <mat-icon>delete_forever</mat-icon>
+          </button>
+        </mat-list-item>
+      </ng-container>
+
+      <ng-template #sinRol>
+        <mat-list-item>
+          No tiene ningún rol asignado
+        </mat-list-item>
+      </ng-template>
+
+    </mat-list>
+
+  </div>
+
+</div>

@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { UsuarioService } from '@services/usuario.service';
 import { Usuario } from '@models/usuario.model';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { PageEvent } from '@angular/material/paginator';
-import Swal from 'sweetalert2';
+import { Observable, Subject } from 'rxjs';
+import { debounceTime, map, take as takeRxJS, takeUntil } from 'rxjs/operators';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-usuarios',
@@ -14,46 +15,56 @@ import Swal from 'sweetalert2';
 export class UsuariosComponent implements OnInit {
   displayedColumns: string[] = [
     'posicion',
-    'nombres',
-    'apellidos',
+    'nombre',
+    'apellido',
     'nitCI',
+    'email',
     'roles',
     'masInformacion',
-    'eliminar',
+    'estado',
   ];
   totalUsuarios: number;
   pageIndex = 0;
   pageSize = 5;
   usuarios$: Observable<Usuario[]>;
-
-  termino = '';
+  unsubscribe = new Subject<void>();
+  buscadorForm: FormGroup;
+  @ViewChild('paginator') paginator: MatPaginator;
 
   constructor(
     private usuarioService: UsuarioService,
+    private fb: FormBuilder,
+    private snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
-    this.usuarios$ = this.obtenerUsuarios(0, 5);
+
+    this.buscadorForm = this.fb.group({
+      termino: ['']
+    });
+
+    this.usuarios$ = this.obtenerUsuarios(0, this.pageSize);
+
+    this.termino.valueChanges
+    .pipe(
+      takeUntil(this.unsubscribe),
+      debounceTime(300),
+    )
+    .subscribe(() => {
+      this.paginator.firstPage();
+      this.usuarios$ = this.obtenerUsuarios(0, this.pageSize);
+    });
   }
 
   updateTable(pageEvent: PageEvent): void {
     const take = pageEvent.pageSize;
     const skip = pageEvent.pageIndex * take;
-    this.pageIndex = pageEvent.pageIndex;
-    this.pageSize = pageEvent.pageSize;
 
-    if (this.termino) {
-      this.usuarios$ = this.obtenerUsuarios(skip, take, this.termino);
-    } else {
-      this.usuarios$ = this.obtenerUsuarios(skip, take);
-    }
+    this.usuarios$ = this.obtenerUsuarios(skip, take);
   }
 
-  obtenerUsuarios(
-    skip: number,
-    take: number,
-    termino: string = ''
-  ): Observable<Usuario[]> {
+  obtenerUsuarios(skip: number, take: number): Observable<Usuario[]> {
+    const termino = this.termino.value;
     return this.usuarioService.obtenerUsuarios(skip, take, termino)
     .pipe(
       map(resp => {
@@ -63,30 +74,22 @@ export class UsuariosComponent implements OnInit {
     );
   }
 
-  buscar(): void {
-    this.usuarios$ = this.obtenerUsuarios(0, this.pageSize, this.termino);
-  }
-
   limpiarBusqueda(): void {
-    this.termino = '';
-    this.usuarios$ = this.obtenerUsuarios(0, this.pageSize);
+    this.termino.setValue('');
   }
 
-  eliminarUsuario(id: number, nombreCompleto: string): void {
-    Swal.fire({
-      title: `Eliminar usuario: ${nombreCompleto}`,
-      showCancelButton: true,
-      showConfirmButton: true,
-      cancelButtonText: 'Cancelar',
-      confirmButtonText: 'Eliminar',
-      confirmButtonColor: '#f44336'
-    }).then(result => {
-      if (result.isConfirmed) {
-        this.usuarioService.eliminarUsuario(id).subscribe(resp => {
-          this.usuarios$ = this.obtenerUsuarios(0, this.pageSize);
-          Swal.fire(resp.mensaje);
-        });
-      }
+  cambiarEstado(usuario: Usuario): void {
+    this.usuarioService.cambiarEstado(usuario.id)
+    .pipe(takeRxJS(1))
+    .subscribe(resp => {
+      this.usuarios$ = this.obtenerUsuarios(
+        this.paginator.pageSize * this.paginator.pageIndex, this.pageSize
+      );
+      this.snackBar.open(resp.mensaje, 'Aceptar', { duration: 2000 });
     });
+  }
+
+  get termino(): AbstractControl {
+    return this.buscadorForm.get('termino');
   }
 }

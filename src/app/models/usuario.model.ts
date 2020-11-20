@@ -13,6 +13,7 @@ export class Usuario {
     public correoElectronico: string,
     public fotoPerfil: string,
     public esEmpleado: boolean,
+    public estado: boolean,
     public rolesUsuarios: RolUsuario[]
   ) {}
 }

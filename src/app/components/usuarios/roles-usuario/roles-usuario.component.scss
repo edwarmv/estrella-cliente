@@ -4,25 +4,19 @@
   flex-direction: column;
   align-items: center;
 
-  form {
-    display: flex;
-    flex-direction: column;
+  .inner-container {
     background: white;
     border-radius: 5px;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
 
-    img {
-      width: 200px;
-      padding-bottom: 50px;
+    .asignar-rol-btn {
       align-self: center;
     }
 
-    .buttons {
-      text-align: left;
-
-      .button {
-        margin-right: 8px;
-      }
+    .eliminar-rol {
+      margin-left: 20px;
     }
   }
 }

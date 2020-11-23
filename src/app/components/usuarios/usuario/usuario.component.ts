@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { Usuario } from '@models/usuario.model';
@@ -28,7 +28,7 @@ export class UsuarioComponent implements OnInit {
     this.usuarioForm = this.fb.group({
       nombre: ['', [Validators.required]],
       apellido: ['', [Validators.required]],
-      nitCI: [''],
+      nitCI: ['', [Validators.required]],
       telefonoMovil: [''],
       telefonoFijo: [''],
       direccionDomicilio: [''],
@@ -53,7 +53,6 @@ export class UsuarioComponent implements OnInit {
   }
 
   actualizarUsuario(id: number): void {
-    console.log(this.usuarioForm);
     if (this.usuarioForm.valid) {
       this.usuarioService
       .actualizarUsuario(this.usuarioForm.value, id)
@@ -62,5 +61,17 @@ export class UsuarioComponent implements OnInit {
         this.snackBar.open(resp.mensaje, 'Aceptar', { duration: 2000 });
       });
     }
+  }
+
+  get nombre(): AbstractControl {
+    return this.usuarioForm.get('nombre');
+  }
+
+  get apellido(): AbstractControl {
+    return this.usuarioForm.get('apellido');
+  }
+
+  get nitCI(): AbstractControl {
+    return this.usuarioForm.get('nitCI');
   }
 }

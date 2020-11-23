@@ -9,16 +9,19 @@
     <mat-form-field>
       <mat-label>Nombre</mat-label>
       <input matInput formControlName="nombre">
+      <mat-error *ngIf="nombre.invalid">El nombre es requerido</mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>Apellido</mat-label>
       <input matInput formControlName="apellido">
+      <mat-error *ngIf="apellido.invalid">El apellido es requerido</mat-error>
     </mat-form-field>
 
     <mat-form-field>
       <mat-label>NIT/CI</mat-label>
       <input matInput formControlName="nitCI">
+      <mat-error *ngIf="nitCI.invalid">El NIT/CI es requerido</mat-error>
     </mat-form-field>
 
     <mat-form-field>
@@ -70,7 +73,10 @@
         Volver
       </a>
 
-      <button mat-stroked-button color="primary" type="submit">
+      <button
+        mat-stroked-button
+        [color]="usuarioForm.valid ? 'primary' : 'warn'"
+        type="submit">
         Guardar cambios
       </button>
 

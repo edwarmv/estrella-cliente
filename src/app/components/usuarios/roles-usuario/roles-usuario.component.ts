@@ -1,16 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { RolUsuario } from '@models/rol-usuario.model';
 import { Rol } from '@models/rol.model';
 import { Usuario } from '@models/usuario.model';
 import { RolUsuarioService } from '@services/rol-usuario.service';
-import { RolService } from '@services/rol.service';
 import { UsuarioService } from '@services/usuario.service';
 import { Observable, Subscription } from 'rxjs';
-import { map, startWith, switchMap, take } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { AsignarRolComponent } from './asignar-rol/asignar-rol.component';
 
 @Component({
@@ -44,7 +42,6 @@ export class RolesUsuarioComponent implements OnInit, OnDestroy {
     dialogRef.afterClosed()
     .pipe(take(1))
     .subscribe(rol => {
-      console.log(rol);
       if (rol) {
         const rolUsuario = {
           usuario: { id: this.idUsuario },
@@ -55,12 +52,6 @@ export class RolesUsuarioComponent implements OnInit, OnDestroy {
         .subscribe(resp => {
           this.usuario$ = this.usuarioService.obtenerUsuario(this.idUsuario);
           this.snackBar.open(resp.mensaje, 'Aceptar', { duration: 2000 });
-        }, error => {
-          this.snackBar.open(
-            error.error.mensaje,
-            'Aceptar',
-            { duration: 2000 }
-          );
         });
       }
     });

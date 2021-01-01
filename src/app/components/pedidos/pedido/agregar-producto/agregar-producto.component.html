@@ -1,0 +1,46 @@
+<div class="content" mat-dialog-content>
+
+  <h1>
+    Agregar producto
+  </h1>
+
+  <form [formGroup]="buscador">
+    <mat-form-field>
+      <mat-label>Buscador</mat-label>
+      <input
+        matInput
+        placeholder="Nombre"
+        formControlName="termino"
+        type="text">
+    </mat-form-field>
+  </form>
+
+  <ul
+    *ngIf="productos$ | async as productos"
+    class="productos">
+
+    <li
+      matRipple
+      class="producto"
+      (click)="agregarProducto(producto)"
+      *ngFor="let producto of productos">
+
+      <p class="nombre">{{ producto.nombre }}</p>
+      <p class="precio">
+        {{ producto.precio | currency: 'BOB' }}
+      </p>
+
+    </li>
+
+  </ul>
+
+</div>
+
+<div mat-dialog-actions class="dialog-actions">
+  <button
+    class="cancelar"
+    mat-stroked-button
+    (click)="closeDialog()">
+    Cancelar
+  </button>
+</div>

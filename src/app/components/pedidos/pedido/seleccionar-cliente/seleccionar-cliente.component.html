@@ -1,0 +1,52 @@
+<div class="content" mat-dialog-content>
+
+  <h1>
+    Seleccionar cliente
+  </h1>
+
+  <form [formGroup]="buscador">
+    <mat-form-field>
+      <mat-label>Buscador</mat-label>
+      <input
+        matInput
+        placeholder="Nombre/Apellido/NIT/CI"
+        formControlName="termino"
+        type="text">
+    </mat-form-field>
+  </form>
+
+  <ul class="clientes" *ngIf="clientes$ | async as clientes">
+
+    <li
+      matRipple
+      class="cliente"
+      (click)="seleccionarCliente(cliente)"
+      *ngFor="let cliente of clientes">
+
+      <p class="nombre">
+        {{ cliente.nombre + ' ' + cliente.apellido }}
+      </p>
+      <p>
+        {{ 'NIT/CI: ' + cliente.nitCI }}
+      </p>
+
+    </li>
+
+  </ul>
+
+</div>
+
+<div mat-dialog-actions class="dialog-actions">
+  <button
+    class="cancelar"
+    mat-stroked-button
+    (click)="closeDialog()">
+    Cancelar
+  </button>
+  <a
+    class="registrar-cliente"
+    mat-stroked-button
+    color="primary">
+    Registrar cliente
+  </a>
+</div>

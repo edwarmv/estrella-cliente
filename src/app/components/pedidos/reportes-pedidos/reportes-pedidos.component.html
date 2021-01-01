@@ -1,0 +1,28 @@
+<div class="container">
+
+  <form [formGroup]="reporteForm" (ngSubmit)="generarReporte()">
+
+    <h1>Reporte</h1>
+
+    <mat-form-field>
+      <mat-label>Estado</mat-label>
+      <mat-select formControlName="estado">
+        <mat-option [value]="''">ninguno</mat-option>
+        <mat-option *ngFor="let estadoPedido of estadosPedido" [value]="estadoPedido">
+          {{ estadoPedido }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Número de registros</mat-label>
+      <input matInput formControlName="numeroRegistros" type="number">
+    </mat-form-field>
+
+    <button mat-stroked-button type="submit">
+      Generar reporte
+    </button>
+
+  </form>
+
+</div>

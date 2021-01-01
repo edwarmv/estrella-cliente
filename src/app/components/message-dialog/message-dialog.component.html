@@ -9,19 +9,19 @@
 <div mat-dialog-actions>
 
   <button
-    *ngIf="showConfirmButton"
-    mat-button
-    [color]="confirmButtonColor"
-    (click)="closeDialog(true)">
-    {{ confirmButtonText }}
-  </button>
-
-  <button
     *ngIf="showCancelButton"
-    mat-button
+    mat-stroked-button
     [color]="cancelButtonColor"
     (click)="closeDialog(false)">
     {{ cancelButtonText }}
+  </button>
+
+  <button
+    *ngIf="showConfirmButton"
+    mat-stroked-button
+    [color]="confirmButtonColor"
+    (click)="closeDialog(true)">
+    {{ confirmButtonText }}
   </button>
 
 </div>

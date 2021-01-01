@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  padding: 40px;
+  padding: 40px 20px;
 
   .title-container {
     display: grid;
@@ -140,7 +140,7 @@
   }
 }
 
-.out-mounth {
+.out-month {
   color: #00000080;
 
   .badge {
@@ -154,3 +154,45 @@
   }
 }
 
+.table-container {
+  margin: 0 20px 40px 20px;
+  max-width: calc(100vw - 40px);
+  overflow: auto;
+  box-shadow:
+    0 5px 5px -3px rgba(0,0,0,.2),
+    0 8px 10px 1px rgba(0,0,0,.14),
+    0 3px 14px 2px rgba(0,0,0,.12);
+
+  table {
+    width: 100%;
+
+    th, td {
+      padding: 0 20px;
+    }
+
+    .estado-pedido {
+      padding: 5px;
+      border-radius: 5px;
+
+      &.pendiente {
+        background: var(--pendiente);
+      }
+
+      &.listo {
+        background: var(--listo);
+      }
+
+      &.entregado {
+        background: var(--entregado);
+      }
+
+      &.completado {
+        background: var(--completado);
+      }
+
+      &.cancelado {
+        background: var(--cancelado);
+      }
+    }
+  }
+}

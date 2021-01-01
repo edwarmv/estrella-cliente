@@ -1,7 +1,11 @@
 .container {
-  margin: 40px;
+  margin: 40px 20px;
   display: flex;
   flex-direction: column;
+
+  @media only screen and (min-width: 1024px) {
+  align-items: center;
+  }
 
   form {
     display: flex;
@@ -19,6 +23,15 @@
         'nombre'
         'apellido'
         'nit-ci';
+
+      @media only screen and (min-width: 1024px) {
+        grid-template-columns: auto;
+        column-gap: 10px;
+        grid-template-areas:
+          'titulo titulo titulo'
+          'seleccionar-cliente seleccionar-cliente seleccionar-cliente'
+          'nombre apellido nit-ci';
+      }
 
       .titulo {
         grid-area: titulo;
@@ -47,10 +60,35 @@
       .nit-ci {
         grid-area: nit-ci;
       }
-    }
+    } // fin .cliente
 
     .con-servicio-entrega {
       margin-bottom: 16px;
+      margin-left: auto;
+      margin-right: 0;
+    }
+
+    .google-maps {
+      margin-bottom: 16px;
+    }
+
+    .direccion-fecha {
+      display: grid;
+      grid-template-areas: 'direccion-entrega' 'fecha-entrega';
+
+      @media only screen and(min-width: 1024px) {
+        grid-template-columns: 1fr 1fr;
+        column-gap: 10px;
+        grid-template-areas: 'direccion-entrega fecha-entrega';
+      }
+
+      .direccion-entrega {
+        grid-area: direccion-entrega;
+      }
+
+      .fecha-entrega {
+        grid-area: fecha-entrega;
+      }
     }
 
     .detalle {
@@ -74,22 +112,43 @@
         .producto {
           display: grid;
           grid-template-rows: auto;
+          grid-template-columns: auto;
           grid-template-areas:
-            'indice'
-            'nombre'
-            'precio-unitario'
-            'cantidad'
-            'subtotal';
+            'indice eliminar-producto'
+            'nombre nombre'
+            'precio-unitario precio-unitario'
+            'cantidad cantidad'
+            'subtotal subtotal';
           margin-bottom: 16px;
+
+          @media only screen and (min-width: 1024px) {
+            grid-template-columns: min-content repeat(4, auto) min-content;
+            column-gap: 10px;
+            grid-template-areas:
+              'indice nombre precio-unitario cantidad subtotal eliminar-producto';
+            // grid-template-columns: min-content repeat(3, auto) min-content;
+            // column-gap: 10px;
+            // grid-template-areas:
+              // 'indice nombre nombre nombre eliminar-producto'
+              // 'indice precio-unitario cantidad subtotal .';
+          }
+
+          @media only screen and (min-width: 1200px) {
+            grid-template-columns: min-content repeat(4, auto) min-content;
+            column-gap: 10px;
+            grid-template-areas:
+              'indice nombre precio-unitario cantidad subtotal eliminar-producto';
+          }
 
           .indice {
             grid-area: indice;
             display: flex;
             justify-content: space-between;
+          }
 
-            .numero {
-              margin-top: 8px;
-            }
+          .eliminar-producto {
+            grid-area: eliminar-producto;
+            justify-self: end;
           }
 
           .nombre {
@@ -98,17 +157,97 @@
 
           .precio-unitario {
             grid-area: precio-unitario;
+            text-align: right;
+
+            @media only screen and (min-width: 1024px) and (max-width: 1024px) {
+              width: 100px;
+            }
           }
 
           .cantidad {
             grid-area: cantidad;
+            text-align: right;
+
+            @media only screen and (min-width: 1024px) and (max-width: 1024px) {
+              width: 100px;
+            }
           }
 
           .subtotal {
             grid-area: subtotal;
+            text-align: right;
+
+            @media only screen and (min-width: 1024px) {
+              width: 100px;
+            }
           }
+        }
+      } // fin .productos
+    } // fin .detalle
+
+    .total-estado {
+      display: grid;
+      grid-template-areas: 'estado' 'total';
+
+      @media only screen and (min-width: 1024px) {
+        grid-gap: 10px;
+        grid-template-areas: 'estado total';
+      }
+
+      .total {
+        grid-area: total;
+        text-align: right;
+      }
+
+      .estado {
+        grid-area: estado;
+    }
+
+      .mat-form-field {
+        display: block;
+      }
+
+      .icon {
+        margin-bottom: 16px;
+
+        &.pendiente {
+          color: var(--pendiente);
+        }
+
+        &.listo {
+          color: var(--listo);
+        }
+
+        &.entregado {
+          color: var(--entregado);
+        }
+
+        &.completado {
+          color: var(--completado);
+        }
+
+        &.cancelado {
+          color: var(--cancelado);
+        }
+      } // fin icon
+    } // fin .estado
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+
+      @media only screen and (min-width: 1024px) {
+        flex-direction: row;
+        justify-content: flex-end;
+      }
+
+      .generar-factura {
+        margin: 0 0 16px 0;
+
+        @media only screen and (min-width: 1024px) {
+          margin: 0 8px 0 0;
         }
       }
     }
-  }
+  } // fin form
 }

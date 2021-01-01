@@ -1,5 +1,6 @@
 import { Cliente } from './cliente.model';
 import { DetallePedido } from './detalle-pedido.model';
+import { Factura } from './factura';
 import { PedidoRepartidor } from './pedido-repartidor.model';
 import { Usuario } from './usuario.model';
 
@@ -18,12 +19,13 @@ export class Pedido {
     public fechaEntrega: Date,
     public conServicioEntrega: boolean,
     public direccionEntrega: string,
-    public coordenadasDireccionEntrega: string,
+    public coordenadasDireccionEntrega: { lat: number, lng: number },
     public estado: EstadoPedido,
     public usuario: Usuario,
     public cliente: Cliente,
     public pedidosRepartidores: PedidoRepartidor[],
     public detallesPedidos: DetallePedido[],
+    public factura: Factura,
   ) {}
 }
 

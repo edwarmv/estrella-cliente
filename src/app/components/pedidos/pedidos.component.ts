@@ -15,27 +15,22 @@ import {
   isSameDay,
   isSameMonth,
   addHours,
+  startOfMonth,
+  format,
+  startOfWeek,
+  endOfWeek
 } from 'date-fns';
-import { Subject } from 'rxjs';
+import esLocale from 'date-fns/locale/es';
+import { Observable, Subject } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import {
   DayClickedDialogComponent
 } from './day-clicked-dialog/day-clicked-dialog.component';
-
-const colors: any = {
-  red: {
-    primary: '#ad2121',
-    secondary: '#FAE3E3',
-  },
-  blue: {
-    primary: '#1e90ff',
-    secondary: '#D1E8FF',
-  },
-  yellow: {
-    primary: '#e3bc08',
-    secondary: '#FDF1BA',
-  },
-};
+import { Pedido } from '@models/pedido.model';
+import { PedidoService } from '@services/pedido.service';
+import { map } from 'rxjs/operators';
+import { MessageDialogService } from '@components/message-dialog/message-dialog.service';
+import { colors } from './colors';
 
 @Component({
   selector: 'app-pedidos',
@@ -62,222 +57,92 @@ export class PedidosComponent implements OnInit, OnDestroy {
 
   refresh: Subject<any> = new Subject();
 
-  actions: CalendarEventAction[] = [
-    {
-      label: '<i class="fas fa-fw fa-pencil-alt"></i>',
-      a11yLabel: 'Edit',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.handleEvent('Edited', event);
-      },
-    },
-    {
-      label: '<i class="fas fa-fw fa-trash-alt"></i>',
-      a11yLabel: 'Delete',
-      onClick: ({ event }: { event: CalendarEvent }): void => {
-        this.events = this.events.filter((iEvent) => iEvent !== event);
-        this.handleEvent('Deleted', event);
-      },
-    },
-  ];
+  // actions: CalendarEventAction[] = [
+    // {
+      // label: '<i class="fas fa-fw fa-pencil-alt"></i>',
+      // a11yLabel: 'Edit',
+      // onClick: ({ event }: { event: CalendarEvent }): void => {
+        // this.handleEvent('Edited', event);
+      // },
+    // },
+    // {
+      // label: '<i class="fas fa-fw fa-trash-alt"></i>',
+      // a11yLabel: 'Delete',
+      // onClick: ({ event }: { event: CalendarEvent }): void => {
+        // this.events = this.events.filter((iEvent) => iEvent !== event);
+        // this.handleEvent('Deleted', event);
+      // },
+    // },
+  // ];
 
-  events: CalendarEvent[] = [
-    {
-      start: startOfDay(new Date()),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: startOfDay(new Date()),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: startOfDay(new Date()),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: startOfDay(new Date()),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: startOfDay(new Date()),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: startOfDay(new Date()),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: startOfDay(new Date()),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: startOfDay(new Date()),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: startOfDay(new Date()),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: startOfDay(new Date()),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: startOfDay(new Date()),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: startOfDay(new Date()),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: new Date(),
-      end: addHours(new Date(), 3),
-      title: 'An event with no end date',
-      color: colors.yellow,
-      actions: this.actions,
-    },
-    {
-      start: new Date(),
-      end: addDays(new Date(), 1),
-      title: 'A long event that spans 2 months',
-      color: colors.blue,
-      allDay: true,
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: addHours(new Date(), 2),
-      title: 'A draggable and resizable event',
-      color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
+  pedidos$: Observable<CalendarEvent<{ pedido: Pedido }>[]>;
+  events: Pedido[] = [];
+  tableColumns: string[] = [
+    'cliente',
+    'estado',
+    'fechaRegistro',
+    'fechaEntrega',
+    'verPedido'
   ];
 
   constructor(
     private mediaMatcher: MediaMatcher,
     private changeDetectorRef: ChangeDetectorRef,
     public dialog: MatDialog,
+    private pedidoService: PedidoService,
+    private messageDialogService: MessageDialogService,
   ) { }
 
   ngOnInit(): void {
     this.mediaQueryList = this.mediaMatcher.matchMedia('(max-width: 749px)');
     this.mediaQueryListener = () => this.changeDetectorRef.detectChanges();
     this.mediaQueryList.addEventListener('change', this.mediaQueryListener);
+    this.obtenerPedidos();
   }
 
-  dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
+  obtenerPedidos(): void {
+    const getStart = {
+      month: startOfMonth,
+      week: startOfWeek,
+      day: startOfDay
+    }[this.view];
+
+    const getEnd = {
+      month: endOfMonth,
+      week: endOfWeek,
+      day: endOfDay
+    }[this.view];
+
+    const start = format(getStart(this.viewDate), 'yyyy-MM-dd');
+
+    const end = format(getEnd(this.viewDate), 'yyyy-MM-dd');
+
+    console.log('start: ', start, 'end: ', end);
+
+    this.pedidos$ = this.pedidoService.obtenerPedidos(start, end)
+    .pipe(
+      map(result => {
+        console.log(result);
+        return result.pedidos.map(pedido => {
+          return {
+            title: `${pedido.cliente.nombre} ${pedido.cliente.apellido}`,
+            start: new Date(pedido.fechaEntrega),
+            color: colors[pedido.estado],
+            meta: {
+              pedido
+            }
+          };
+        });
+      })
+    );
+  }
+
+  dayClicked(
+    { date, events }: {
+      date: Date,
+      events: CalendarEvent<{ pedido: Pedido }>[]
+    }
+  ): void {
     console.log('date', date);
     console.log('events', events);
     if (isSameMonth(date, this.viewDate)) {
@@ -285,38 +150,50 @@ export class PedidosComponent implements OnInit, OnDestroy {
         (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
         events.length === 0
       ) {
+        this.events = [];
         this.activeDayIsOpen = false;
       } else {
+        this.events = events.map(event => event.meta.pedido);
+        console.log(this.events);
         this.activeDayIsOpen = true;
       }
       this.viewDate = date;
     }
 
-    const dialogRef = this.dialog.open(
-      DayClickedDialogComponent,
-      {
-        data: { date, events }
-      }
-    );
+    // if (events.length === 0) {
+      // this.messageDialogService.openDialog({
+        // title: format(
+          // date,
+          // 'EEEE\',\' d \'de\' MMMM \'de\' yyyy',
+          // { locale: esLocale }
+        // ),
+        // message: '¿Registrar nuevo pedido?',
+        // messageDialogConfig: {
+          // confirmButtonText: 'Si',
+          // confirmButtonColor: 'primary',
+          // showCancelButton: true,
+        // }
+      // });
+    // }
   }
 
-  eventTimesChanged({
-    event,
-    newStart,
-    newEnd,
-  }: CalendarEventTimesChangedEvent): void {
-    this.events = this.events.map((iEvent) => {
-      if (iEvent === event) {
-        return {
-          ...event,
-          start: newStart,
-          end: newEnd,
-        };
-      }
-      return iEvent;
-    });
-    this.handleEvent('Dropped or resized', event);
-  }
+  // eventTimesChanged({
+    // event,
+    // newStart,
+    // newEnd,
+  // }: CalendarEventTimesChangedEvent): void {
+    // this.events = this.events.map((iEvent) => {
+      // if (iEvent === event) {
+        // return {
+          // ...event,
+          // start: newStart,
+          // end: newEnd,
+        // };
+      // }
+      // return iEvent;
+    // });
+    // this.handleEvent('Dropped or resized', event);
+  // }
 
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };

@@ -8,10 +8,16 @@ import { PedidoComponent } from './pedido/pedido.component';
 import { ListaPedidosComponent } from './lista-pedidos/lista-pedidos.component';
 import {
   SeleccionarClienteComponent
-} from './seleccionar-cliente/seleccionar-cliente.component';
+} from './pedido/seleccionar-cliente/seleccionar-cliente.component';
 import {
   AgregarProductoComponent
-} from './agregar-producto/agregar-producto.component';
+} from './pedido/agregar-producto/agregar-producto.component';
+import {
+  FacturasPedidosComponent
+} from './facturas-pedidos/facturas-pedidos.component';
+import {
+  ReportesPedidosComponent
+} from './reportes-pedidos/reportes-pedidos.component';
 
 import {
   DayClickedDialogComponent
@@ -30,6 +36,12 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTableModule } from '@angular/material/table';
+import { MatSelectModule } from '@angular/material/select';
+import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
+import { customPaginator } from '@components/paginator/custom.paginator';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 const routes: Routes = [
   {
@@ -48,6 +60,20 @@ const routes: Routes = [
     }
   },
   {
+    path: 'facturas',
+    component: FacturasPedidosComponent,
+    data: {
+      breadcrumb: 'Facturas'
+    }
+  },
+  {
+    path: 'reportes',
+    component: ReportesPedidosComponent,
+    data: {
+      breadcrumb: 'Reportes'
+    }
+  },
+  {
     path: ':id',
     component: PedidoComponent,
     data: {
@@ -63,7 +89,9 @@ const routes: Routes = [
     PedidoComponent,
     SeleccionarClienteComponent,
     AgregarProductoComponent,
-    ListaPedidosComponent
+    ListaPedidosComponent,
+    FacturasPedidosComponent,
+    ReportesPedidosComponent
   ],
   imports: [
     CommonModule,
@@ -84,6 +112,17 @@ const routes: Routes = [
     MatListModule,
     MatIconModule,
     MatSnackBarModule,
+    MatProgressSpinnerModule,
+    MatTableModule,
+    MatSelectModule,
+    MatPaginatorModule,
+    GoogleMapsModule,
+  ],
+  providers: [
+    {
+      provide: MatPaginatorIntl,
+      useValue: customPaginator('Pedidos por página')
+    }
   ]
 })
 export class PedidosModule { }

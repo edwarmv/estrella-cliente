@@ -57,6 +57,9 @@ export class UsuariosComponent implements OnInit {
   }
 
   updateTable(pageEvent: PageEvent): void {
+    this.pageSize = pageEvent.pageSize;
+    this.pageIndex = pageEvent.pageIndex;
+
     const take = pageEvent.pageSize;
     const skip = pageEvent.pageIndex * take;
 

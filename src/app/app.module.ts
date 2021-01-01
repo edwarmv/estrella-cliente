@@ -4,7 +4,7 @@ import localeEsBO from '@angular/common/locales/es-BO';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { LayoutModule } from './layout/layout.module';
@@ -29,6 +29,7 @@ registerLocaleData(localeEsBO);
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    HttpClientJsonpModule,
     LayoutModule,
     MessageDialogModule,
     MatLayoutModule,

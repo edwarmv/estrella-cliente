@@ -46,6 +46,13 @@ $estrella-cliente-theme: mat-light-theme((
   --header-height: 64px;
   --breadcrumbs-height: 76px;
   --footer-height: 64px;
+
+  // EstadoPedido colors
+  --pendiente: #FF9800;
+  --listo: #FFEB3B;
+  --entregado: #03A9F4;
+  --completado: #4CAF50;
+  --cancelado: #F44336;
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

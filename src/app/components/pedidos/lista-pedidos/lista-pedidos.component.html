@@ -1,1 +1,90 @@
-<p>lista-pedidos works!</p>
+<div class="container">
+
+  <form class="buscador" [formGroup]="buscadorForm">
+    <mat-form-field class="mat-input-white" appearance="outline">
+
+      <mat-label>Buscador</mat-label>
+
+      <input
+        type="text"
+        matInput formControlName="termino"
+        placeholder="Nombre del submenú">
+
+      <button
+        mat-icon-button
+        matSuffix
+        *ngIf="termino.value"
+        (click)="limpiarBusqueda()"
+        type="button"
+        matTooltip="Limpiar búsqueda">
+        <mat-icon>clear</mat-icon>
+      </button>
+
+    </mat-form-field>
+  </form>
+
+  <div class="table-container">
+
+    <div class="table-overflow">
+      <table mat-table [dataSource]="pedidos$ | async">
+
+        <!-- posicion -->
+        <ng-container matColumnDef="posicion">
+          <th mat-header-cell *matHeaderCellDef>No.</th>
+          <td mat-cell *matCellDef="let i = index">
+            {{ (i + 1) + pageIndex * pageSize }}
+          </td>
+        </ng-container>
+
+        <!-- cliente -->
+        <ng-container matColumnDef="cliente">
+          <th mat-header-cell *matHeaderCellDef>Nombre</th>
+          <td mat-cell *matCellDef="let pedido">
+            {{ pedido.cliente.nombre + ' ' + pedido.cliente.apellido }}
+          </td>
+        </ng-container>
+
+        <!-- fechaEntrega -->
+        <ng-container matColumnDef="fechaEntrega">
+          <th mat-header-cell *matHeaderCellDef>Fecha de entrega</th>
+          <td class="icon" mat-cell *matCellDef="let pedido">
+            {{ pedido.fechaEntrega | date: 'dd/MM/yyyy - HH:mm' }}
+          </td>
+        </ng-container>
+
+        <!-- estado -->
+        <ng-container matColumnDef="estado">
+          <th mat-header-cell *matHeaderCellDef>Estado</th>
+          <td class="icon" mat-cell *matCellDef="let pedido">
+            <span class="estado-pedido" [ngClass]="pedido.estado">
+              {{ pedido.estado }}
+            </span>
+          </td>
+        </ng-container>
+
+        <!-- Detalles -->
+        <ng-container matColumnDef="detalles">
+          <th mat-header-cell *matHeaderCellDef>Detalles</th>
+          <td class="icon" mat-cell *matCellDef="let pedido">
+            <a [routerLink]="['/pedidos', pedido.id]" mat-mini-fab color="accent">
+              <mat-icon>edit</mat-icon>
+            </a>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div> <!--end table-overflow-->
+
+    <mat-paginator
+      #paginator
+      [length]="totalPedidos"
+      [pageSizeOptions]="[5, 10, 20]"
+      (page)="updateTable($event)"
+      showFirstLastButtons>
+    </mat-paginator>
+
+  </div> <!--end table-container-->
+
+</div>

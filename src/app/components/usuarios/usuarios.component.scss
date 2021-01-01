@@ -1,11 +1,19 @@
 .container {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 40px 20px;
+
+  @media only screen and (min-width: 900px) {
+    align-items: center;
+  }
 
   .buscador {
     .mat-form-field {
       width: 100%;
+
+      @media only screen and (min-width: 900px) {
+        width: 900px;
+      }
     }
   }
 
@@ -16,16 +24,16 @@
       0 8px 10px 1px rgba(0,0,0,.14),
       0 3px 14px 2px rgba(0,0,0,.12);
 
-    @media only screen and (min-width: 1000px) {
-      width: 100%;
+    @media only screen and (min-width: 940px) {
+      width: 900px;
     }
 
     .table-overflow {
       width: calc(100vw - 40px);
       overflow: auto;
 
-      @media only screen and (min-width: 1000px) {
-        width: 100%;
+      @media only screen and (min-width: 940px) {
+        width: 900px;
       }
 
       table {

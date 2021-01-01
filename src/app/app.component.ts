@@ -10,6 +10,7 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { SidebarService } from '@services/sidebar.service';
+import { GoogleMapsService } from '@services/google-maps.service';
 
 @Component({
   selector: 'app-root',
@@ -32,7 +33,8 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     private activatedRoute: ActivatedRoute,
     private mediaMatcher: MediaMatcher,
     private changeDetectorRef: ChangeDetectorRef,
-    private sidebarService: SidebarService
+    private sidebarService: SidebarService,
+    // private googleMapsService: GoogleMapsService,
   ) {}
 
   ngAfterViewInit(): void {

@@ -22,7 +22,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     .pipe(
       catchError((error: HttpErrorResponse) => {
         this.snackBar.open(
-          `Error: ${error.error.mensaje}`,
+          `Error: ${error.error.mensaje ? error.error.mensaje : error.error}`,
           'Aceptar',
           {
             duration: 3000,

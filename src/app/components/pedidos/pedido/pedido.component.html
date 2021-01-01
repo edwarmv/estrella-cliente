@@ -1,6 +1,7 @@
 <div class="container">
 
-  <form [formGroup]="pedidoForm" (ngSubmit)="registrarPedido()">
+  <form [formGroup]="pedidoForm"
+    (ngSubmit)="idPedido ? actualizarPedido() : registrarPedido()">
 
     <!--cliente-->
     <div class="cliente" formGroupName="cliente">
@@ -50,25 +51,52 @@
 
     </div> <!--fin-cliente-->
 
-    <mat-checkbox
-      class="con-servicio-entrega"
-      formControlName="conServicioEntrega">
-      ¬øCon entrega a domicilio?
+    <mat-checkbox class="con-servicio-entrega"
+                  formControlName="conServicioEntrega">
+      ¿Con entrega a domicilio?
     </mat-checkbox>
 
-    <mat-form-field *ngIf="conServicioEntrega.value">
-      <textarea
-        placeholder="Direcci√≥n de entrega"
-        matInput
-        formControlName="direccionEntrega"
-        type="text">
-      </textarea>
-    </mat-form-field>
+    <div *ngIf="conServicioEntrega.value && apiLoaded" class="google-maps">
+      <google-map
+        [width]="'auto'"
+        [height]="'400px'"
+        [options]="options"
+        [center]="center"
+        (mapClick)="addMarker($event)">
+        <map-marker
+          *ngIf="coordenadasDireccionEntrega.value
+                 && coordenadasDireccionEntrega.value.lat
+                 && coordenadasDireccionEntrega.value.lng"
+          [position]="coordenadasDireccionEntrega.value">
+        </map-marker>
+      </google-map>
+    </div>
 
-    <mat-form-field class="fecha-entrega">
-      <mat-label>Fecha de entrega</mat-label>
-      <input matInput formControlName="fechaEntrega" type="datetime-local">
-    </mat-form-field>
+    <div class="direccion-fecha">
+
+      <mat-form-field *ngIf="conServicioEntrega.value"
+                      class="direccion-entrega">
+        <mat-label>Dirección de entrega</mat-label>
+        <textarea
+          rows="1"
+          matInput
+          formControlName="direccionEntrega"
+          type="text">
+        </textarea>
+      </mat-form-field>
+
+      <mat-form-field class="fecha-entrega">
+        <mat-label>Fecha de entrega</mat-label>
+        <input matInput formControlName="fechaEntrega" type="datetime-local">
+        <mat-error *ngIf="fechaEntrega.errors">
+          <span *ngIf="fechaEntrega.errors.required">Fecha requerida</span>
+          <span *ngIf="fechaEntrega.errors.invalidMinDate">
+            La fecha no puede ser menor a la actual
+          </span>
+        </mat-error>
+      </mat-form-field>
+
+    </div>
 
     <!--detalle-->
     <div class="detalle" formArrayName="detallesPedidos">
@@ -79,36 +107,42 @@
         <button mat-stroked-button
           (click)="abrirAgregarProducto()"
           [color]="detallesPedidos.pristine && detallesPedidos.untouched ?
-                  '' : detallesPedidos.errors?.invalidSize ?
+                  '' : detallesPedidos.errors ?
                   'warn' : 'primary'"
           type="button">
           Agregar producto
         </button>
-        <p class="error" *ngIf="detallesPedidos.errors?.invalidSize && cliente.touched">
-          Debe seleccionar un cliente
-        </p>
+        <ng-container *ngIf="detallesPedidos.errors as errors">
+          <p class="error" *ngIf="errors.invalidSize && cliente.touched">
+            Debe agregar un producto
+          </p>
+          <div class="error" *ngIf="errors.productosDuplicados">
+            <ul>
+              <li *ngFor="let value of errors.values">
+                {{ value.producto.nombre }}
+              </li>
+            </ul>
+          </div>
+        </ng-container>
       </div>
 
-      <div
-        *ngFor="let detallePedido of detallesPedidos.controls; let i = index"
-        class="productos">
+      <!--productos-->
+      <div *ngFor="let detallePedido of detallesPedidos.controls; let i = index"
+            class="productos">
 
-        <div
-          [formGroupName]="i"
-          class="producto">
+        <div [formGroupName]="i"
+             class="producto">
 
           <div class="indice">
-            <h3 class="numero">
-              <span>Nº</span>
-              {{ i + 1 }}
-            </h3>
-            <button
-              (click)="eliminarProducto(i)"
-              mat-icon-button
-              color="warn">
-              <mat-icon>delete</mat-icon>
-            </button>
+            Nº {{ i + 1 }}
           </div>
+
+          <button (click)="eliminarProducto(i)"
+                  mat-icon-button
+                  class="eliminar-producto"
+                  color="warn">
+            <mat-icon>delete</mat-icon>
+          </button>
 
           <ng-container formGroupName="producto">
             <mat-form-field class="nombre">
@@ -162,24 +196,61 @@
 
         </div>
 
-      </div>
+      </div> <!--fin productos-->
 
     </div> <!--fin - detalle-->
 
-    <mat-form-field class="total" *ngIf="detallesPedidos.length > 0">
-      <mat-label>Total (Bs)</mat-label>
-      <input
-        matInput
-        readonly
-        formControlName="total"
-        type="number">
-    </mat-form-field>
+    <div class="total-estado">
 
-    <button
-      mat-stroked-button
-      type="submit">
-      Registrar pedido
-    </button>
+      <mat-form-field class="total">
+        <mat-label>Total (Bs)</mat-label>
+        <input
+          matInput
+          readonly
+          formControlName="total"
+          type="number">
+      </mat-form-field>
+
+      <div class="estado">
+        <mat-form-field>
+          <mat-label>Estado</mat-label>
+          <mat-select formControlName="estado">
+            <mat-option
+              *ngFor="let estadoPedido of estadosPedido"
+              [value]="estadoPedido">
+              {{ estadoPedido | titlecase }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-icon *ngIf="estado.value" class="icon" [ngClass]="estado.value">
+          fiber_manual_record
+        </mat-icon>
+      </div>
+
+    </div>
+
+    <div class="buttons">
+
+      <button
+        type="button"
+        mat-stroked-button
+        (click)="crearFactura(idPedido)"
+        class="generar-factura"
+        *ngIf="idPedido">
+        Generar factura
+      </button>
+
+      <button
+        mat-stroked-button
+        [color]="pedidoForm.untouched ||
+                pedidoForm.valid ? 'primary' : 'warn'"
+        class="submit"
+        type="submit">
+        {{ idPedido ? 'Actualizar pedido' : 'Registrar pedido' }}
+      </button>
+
+    </div>
 
   </form>
 

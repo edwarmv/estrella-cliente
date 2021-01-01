@@ -1,4 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
 import {
   AbstractControl,
   FormArray,
@@ -8,17 +14,26 @@ import {
 } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
 import { Cliente } from '@models/cliente.model';
+import { EstadoPedido, Pedido } from '@models/pedido.model';
 import { Producto } from '@models/producto.model';
-import { ClienteService } from '@services/cliente.service';
 import { PedidoService } from '@services/pedido.service';
 import { UsuarioService } from '@services/usuario.service';
 import { Observable, Subject } from 'rxjs';
-import { debounceTime, map, startWith, switchMap, take, takeUntil } from 'rxjs/operators';
-import { AgregarProductoComponent } from '../agregar-producto/agregar-producto.component';
+import { map, mergeMap, startWith, take, takeUntil } from 'rxjs/operators';
+import { format } from 'date-fns';
+import {
+  AgregarProductoComponent
+} from './agregar-producto/agregar-producto.component';
 import {
   SeleccionarClienteComponent
-} from '../seleccionar-cliente/seleccionar-cliente.component';
+} from './seleccionar-cliente/seleccionar-cliente.component';
+import { formArraySize } from '@validators/form-array-size.validator';
+import { DetallePedido } from '@models/detalle-pedido.model';
+import { GoogleMapsService } from '@services/google-maps.service';
+import { GoogleMap } from '@angular/google-maps';
+import { FacturaService } from '@services/factura.service';
 
 @Component({
   selector: 'app-pedido',
@@ -26,21 +41,56 @@ import {
   styleUrls: ['./pedido.component.scss']
 })
 export class PedidoComponent implements OnInit, OnDestroy {
+  idPedido: number;
   pedidoForm: FormGroup;
+  estadosPedido = Object.values(EstadoPedido);
   clientes$: Observable<Cliente[]>;
   private unsubscribe$ = new Subject<void>();
 
+  // Google Maps
+  apiLoaded = false;
+  options: google.maps.MapOptions = {
+    disableDefaultUI: true,
+    clickableIcons: false
+  };
+  center: google.maps.LatLngLiteral = { lat: -21.530233, lng: -64.729882 };
+  markPosition: google.maps.LatLngLiteral = null;
+  @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
+
   constructor(
-    private clienteService: ClienteService,
     private usuarioService: UsuarioService,
     private pedidoService: PedidoService,
     private fb: FormBuilder,
     private dialog: MatDialog,
     private snackBar: MatSnackBar,
+    private route: ActivatedRoute,
+    private googleMapsService: GoogleMapsService,
+    private changeDetectorRef: ChangeDetectorRef,
+    private facturaService: FacturaService,
   ) { }
 
   ngOnInit(): void {
-    this.pedidoForm = this.fb.group({
+    this.pedidoForm = this.pedidoFormGroup();
+
+    this.idPedido = this.route.snapshot.params.id;
+
+    if (this.idPedido) {
+      this.pedidoService.obtenerPedido(this.idPedido)
+      .subscribe(pedido => {
+        if (pedido) {
+          this.setPedidoForm(pedido);
+        }
+      });
+    } else {
+      this.establecerUsuario();
+    }
+
+    this.loadGoogleMaps();
+  }
+
+  pedidoFormGroup(): FormGroup {
+    const pedidoFormGroup =  this.fb.group({
+      id: [],
       usuario: this.fb.group({
         id: []
       }),
@@ -52,26 +102,109 @@ export class PedidoComponent implements OnInit, OnDestroy {
       }),
       conServicioEntrega: [false],
       direccionEntrega: [''],
+      coordenadasDireccionEntrega: this.fb.group({
+        lat: [],
+        lng: []
+      })
+      ,
       fechaEntrega: [undefined, [Validators.required]],
-      detallesPedidos: this.fb.array([], this.validateSize),
-      total: [0]
+      detallesPedidos: this.fb.array(
+        [],
+        [formArraySize(), this.productosDuplicados]
+      ),
+      total: [0],
+      estado: ['pendiente']
     });
 
-    this.establecerUsuario();
-
-    this.clientes$ = this.cliente.valueChanges
-    .pipe(
-      debounceTime(500),
-      startWith(''),
-      switchMap(value => {
-        return this.clienteService.obtenerClientes(0, 0, value)
-        .pipe(map(resp => resp.clientes));
-      })
-    );
+    return pedidoFormGroup;
   }
 
-  private validateSize(formArray: FormArray): { invalidSize: boolean } {
-    return formArray.length > 0 ? null : { invalidSize: true };
+  loadGoogleMaps(): void {
+    this.conServicioEntrega.valueChanges
+      .pipe(
+        mergeMap(conServicioEntrega => {
+          return this.googleMapsService.apiLoaded
+            .pipe(
+              map(apiLoaded => {
+                return { apiLoaded, conServicioEntrega };
+              })
+            );
+        }),
+      ).subscribe(resp => {
+        if (resp.apiLoaded && resp.conServicioEntrega) {
+          this.apiLoaded = resp.apiLoaded;
+          this.changeDetectorRef.detectChanges();
+          const controlDiv = document.createElement('div');
+          const controlUI = document.createElement('div');
+          controlUI.style.backgroundColor = '#fff';
+          controlUI.style.borderRadius = '8px';
+          controlUI.style.boxShadow = '0 1px 4px rgba(0, 0, 0, 0.3)';
+          controlUI.style.cursor = 'pointer';
+          controlUI.style.width = '29px';
+          controlUI.style.height = '29px';
+          controlUI.style.margin = '10px';
+          controlUI.title = 'Mostrar mi ubicación';
+          controlUI.style.display = 'flex';
+          controlUI.style.justifyContent = 'center';
+          controlUI.style.alignItems = 'center';
+          controlDiv.appendChild(controlUI);
+
+          const icon = document.createElement('img');
+          icon.setAttribute('src', 'assets/icons/gps_fixed.svg');
+          icon.setAttribute('id', 'gps-icon');
+          icon.style.height = '18px';
+          controlUI.appendChild(icon);
+          controlUI.addEventListener('click', () => {
+            navigator.geolocation.getCurrentPosition(position => {
+              this.center = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+              };
+              document.getElementById('gps-icon')
+                .setAttribute('src', 'assets/icons/gps_fixed-active.svg');
+            });
+          });
+          this.map.mapDrag.subscribe(() => {
+            document.getElementById('gps-icon')
+            .setAttribute('src', 'assets/icons/gps_fixed.svg');
+          });
+          this.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM]
+            .push(controlDiv);
+          console.log(this.map);
+        }
+      });
+  }
+
+  addMarker(event: google.maps.MouseEvent): void {
+    console.log(event.latLng.toJSON());
+    this.coordenadasDireccionEntrega.setValue(event.latLng.toJSON());
+  }
+
+  productosDuplicados(formArray: FormArray): {
+    productosDuplicados: boolean,
+    values: { count: number, producto: Producto }[]
+  } {
+    const values = formArray.value;
+    if (values.length > 1) {
+      const dict = {};
+      for (const value of values) {
+        if (value.producto.id in dict) {
+          ++dict[value.producto.id].count;
+        } else {
+          dict[value.producto.id] = { count: 1, producto: value.producto };
+        }
+      }
+      for (const value in dict) {
+        if (dict[value].count === 1) {
+          delete dict[value];
+        }
+      }
+
+      return Object.values(dict).length > 0 ?
+        { productosDuplicados: true, values: Object.values(dict) } : null;
+    } else {
+      return null;
+    }
   }
 
   abrirSeleccionarCliente(): void {
@@ -81,7 +214,6 @@ export class PedidoComponent implements OnInit, OnDestroy {
     .pipe(take(1))
     .subscribe((resp: Cliente) => {
       if (resp) {
-        console.log(resp);
         this.cliente.patchValue(resp);
         this.direccionEntrega.setValue(resp.direccionDomicilio);
         this.cliente.markAsDirty();
@@ -96,21 +228,25 @@ export class PedidoComponent implements OnInit, OnDestroy {
     .pipe(take(1))
     .subscribe((producto: Producto) => {
       if (producto) {
-        console.log(producto);
-        this.agregarProducto(producto);
+        this.agregarDetallePedido({ producto } as DetallePedido);
       }
     });
   }
 
-  agregarProducto(producto: Producto): void {
-    const detallePedido = this.fb.group({
+  agregarDetallePedido(detallePedido: DetallePedido): void {
+    const producto = detallePedido.producto;
+    const detallePedidoControl = this.fb.group({
+      id: detallePedido.id,
       producto: this.fb.group({
         id: [producto.id],
         nombre: [producto.nombre]
       }),
-      precioUnitario: [producto.precio],
+      precioUnitario: [
+        detallePedido.precioUnitario ?
+          detallePedido.precioUnitario : producto.precio
+      ],
       cantidad: [
-        0,
+        detallePedido.cantidad ? detallePedido.cantidad : 0,
         [
           Validators.required,
           Validators.min(1),
@@ -122,21 +258,24 @@ export class PedidoComponent implements OnInit, OnDestroy {
 
     // Calculamos el subtotal
     let subtotalPrevio = 0;
-    detallePedido.get('cantidad').valueChanges
-    .pipe(takeUntil(this.unsubscribe$))
+    detallePedidoControl.get('cantidad').valueChanges
+    .pipe(
+      startWith(detallePedido.cantidad ? detallePedido.cantidad : 0),
+      takeUntil(this.unsubscribe$)
+    )
     .subscribe(cantidad => {
       if (cantidad) {
         const subtotal = cantidad * producto.precio;
-        detallePedido.get('subtotal').setValue(subtotal.toFixed(2));
+        detallePedidoControl.get('subtotal').setValue(subtotal.toFixed(2));
         const total = this.total.value - subtotalPrevio + subtotal;
         this.total.setValue(total.toFixed(2));
         subtotalPrevio = subtotal;
       } else {
-        detallePedido.get('subtotal').setValue(0);
+        detallePedidoControl.get('subtotal').setValue(0);
       }
     });
 
-    this.detallesPedidos.push(detallePedido);
+    this.detallesPedidos.push(detallePedidoControl);
   }
 
   private onlyInteger(cantidad: AbstractControl): { noInteger: boolean } {
@@ -145,18 +284,28 @@ export class PedidoComponent implements OnInit, OnDestroy {
   }
 
   registrarPedido(): void {
-    console.log(this.pedidoForm);
     this.cliente.markAsTouched();
     this.detallesPedidos.markAsTouched();
     if (this.pedidoForm.valid) {
       if (!this.conServicioEntrega.value) {
         this.direccionEntrega.setValue('');
+        this.coordenadasDireccionEntrega.reset();
       }
       this.pedidoService.crear(this.pedidoForm.value)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(resp => {
         this.resetPedidoForm();
         this.establecerUsuario();
+        this.snackBar.open(resp.mensaje, 'Aceptar', { duration: 2000 });
+      });
+    }
+  }
+
+  actualizarPedido(): void {
+    console.log(this.pedidoForm);
+    if (this.pedidoForm.valid) {
+      this.pedidoService.actualizar(this.pedidoForm.value)
+      .subscribe(resp => {
         this.snackBar.open(resp.mensaje, 'Aceptar', { duration: 2000 });
       });
     }
@@ -180,6 +329,9 @@ export class PedidoComponent implements OnInit, OnDestroy {
     this.cliente.reset();
     this.detallesPedidos.reset();
     this.pedidoForm.reset();
+    this.conServicioEntrega.setValue(false);
+    this.coordenadasDireccionEntrega.reset();
+    this.establecerUsuario();
   }
 
   establecerUsuario(): void {
@@ -188,6 +340,45 @@ export class PedidoComponent implements OnInit, OnDestroy {
     .subscribe(usuario => {
       this.usuario.get('id').setValue(usuario.id);
     });
+  }
+
+  setPedidoForm(pedido: Pedido): void {
+    console.log('setPedidoForm', pedido);
+    this.pedidoForm.patchValue({
+      id: pedido.id,
+      usuario: pedido.usuario,
+      cliente: pedido.cliente,
+      conServicioEntrega: pedido.conServicioEntrega,
+      coordenadasDireccionEntrega: pedido.coordenadasDireccionEntrega ?
+        pedido.coordenadasDireccionEntrega : {},
+      direccionEntrega: pedido.direccionEntrega,
+      fechaEntrega: format(
+        new Date(pedido.fechaEntrega),
+        'yyyy-MM-dd\'T\'HH:mm'
+      ),
+      detallesPedidos: [
+        [],
+        [formArraySize, this.productosDuplicados]
+      ],
+      total: 0,
+      estado: pedido.estado
+    });
+
+    pedido.detallesPedidos.forEach(detallePedido => {
+      this.agregarDetallePedido(detallePedido);
+    });
+    console.log(this.pedidoForm);
+    if (pedido.coordenadasDireccionEntrega) {
+      this.center = {
+        lat: pedido.coordenadasDireccionEntrega.lat,
+        lng: pedido.coordenadasDireccionEntrega.lng
+      };
+    }
+  }
+
+  crearFactura(idPedido: number): void {
+    const url = this.facturaService.crearFacturaPedidoURL(idPedido);
+    window.open(url, '_blank');
   }
 
   get usuario(): AbstractControl {
@@ -202,6 +393,10 @@ export class PedidoComponent implements OnInit, OnDestroy {
     return this.pedidoForm.get('conServicioEntrega');
   }
 
+  get coordenadasDireccionEntrega(): AbstractControl {
+    return this.pedidoForm.get('coordenadasDireccionEntrega');
+  }
+
   get direccionEntrega(): AbstractControl {
     return this.pedidoForm.get('direccionEntrega');
   }
@@ -210,8 +405,16 @@ export class PedidoComponent implements OnInit, OnDestroy {
     return this.pedidoForm.get('detallesPedidos') as FormArray;
   }
 
+  get fechaEntrega(): AbstractControl {
+    return this.pedidoForm.get('fechaEntrega');
+  }
+
   get total(): AbstractControl {
     return this.pedidoForm.get('total');
+  }
+
+  get estado(): AbstractControl {
+    return this.pedidoForm.get('estado');
   }
 
   ngOnDestroy(): void {

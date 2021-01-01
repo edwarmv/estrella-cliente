@@ -61,6 +61,9 @@ export class MenusComponent implements OnInit, OnDestroy {
   }
 
   updateTable(pageEvent: PageEvent): void {
+    this.pageSize = pageEvent.pageSize;
+    this.pageIndex = pageEvent.pageIndex;
+
     const take = pageEvent.pageSize;
     const skip = pageEvent.pageIndex * take;
 

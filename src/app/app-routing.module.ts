@@ -62,7 +62,7 @@ const routes: Routes = [
     loadChildren: () => import('@components/menus/menus.module')
     .then(m => m.MenusModule),
     data: {
-      breadcrumb: 'Gestionar Men√∫s'
+      breadcrumb: 'Gestionar Menús'
     }
   },
   {
@@ -70,7 +70,7 @@ const routes: Routes = [
     loadChildren: () => import('@components/submenus/submenus.module')
     .then(m => m.SubmenusModule),
     data: {
-      breadcrumb: 'Gestionar Submen√∫s'
+      breadcrumb: 'Gestionar Submenús'
     }
   },
   {

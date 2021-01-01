@@ -6,7 +6,6 @@ import { Usuario } from '../models/usuario.model';
 import { throwError, Observable, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 type CrearUsuario = { token: string, mensaje: string };
 export type ObtenerUsuarios = { usuarios: Usuario[], total: number };
@@ -21,7 +20,6 @@ export class UsuarioService {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private snackBar: MatSnackBar,
   ) { }
 
   get usuario(): Observable<Usuario> {

@@ -1,5 +1,5 @@
-import { Factura } from './factura';
-import { Sucursal } from './sucursal';
+import { Factura } from './factura.model';
+import { Sucursal } from './sucursal.model';
 
 export class Dosificacion {
   constructor(

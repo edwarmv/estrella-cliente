@@ -1,0 +1,70 @@
+<div class="container">
+  <form [formGroup]="casaMatrizForm" (ngSubmit)="actualizarCasaMatriz()">
+
+    <h1>Casa matriz</h1>
+
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre">
+      <mat-error *ngIf="nombre.errors?.required">
+        Campo requerido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Ubicación</mat-label>
+      <input matInput formControlName="ubicacion">
+      <mat-error *ngIf="ubicacion.errors?.required">
+        Campo requerido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Dirección</mat-label>
+      <input matInput formControlName="direccion">
+      <mat-error *ngIf="direccion.errors?.required">
+        Campo requerido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Descripción de la actividad económica</mat-label>
+      <textarea matInput formControlName="descripcionActividadEconomica">
+      </textarea>
+      <mat-error *ngIf="descripcionActividadEconomica.errors?.required">
+        Campo requerido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Número de teléfono</mat-label>
+      <input matInput formControlName="numeroTelefono">
+      <mat-error *ngIf="numeroTelefono.errors?.required">
+        Campo requerido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Correo electrónico</mat-label>
+      <input matInput formControlName="correoElectronico">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>NIT</mat-label>
+      <input matInput formControlName="nit">
+      <mat-error *ngIf="nit.errors?.required">
+        Campo requerido
+      </mat-error>
+    </mat-form-field>
+
+    <button
+      class="submit"
+      mat-stroked-button
+      [color]="casaMatrizForm.valid ? 'primary' : 'warn'"
+      type="submit"
+    >
+      Actualizar
+    </button>
+
+  </form>
+</div>

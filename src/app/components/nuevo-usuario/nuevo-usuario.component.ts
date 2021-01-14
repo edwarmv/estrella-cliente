@@ -40,11 +40,11 @@ export class NuevoUsuarioComponent implements OnInit, OnDestroy {
   }
 
   get nombre(): AbstractControl {
-    return this.nuevoUsuarioForm.get('nombres');
+    return this.nuevoUsuarioForm.get('nombre');
   }
 
   get apellido(): AbstractControl {
-    return this.nuevoUsuarioForm.get('apellidos');
+    return this.nuevoUsuarioForm.get('apellido');
   }
 
   get correoElectronico(): AbstractControl {

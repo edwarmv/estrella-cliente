@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 40px 20px;
+
+  @media only screen and (min-width: 550px) {
+    align-items: center;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    background: #ffff;
+    padding: 20px;
+    border-radius: 5px;
+
+    @media only screen and (min-width: 550px) {
+      width: 460px;
+    }
+
+    .submit {
+      margin-top: 16px;
+    }
+
+    .limpiar-formulario {
+      margin-top: 16px;
+    }
+  }
+
+  .codigo-control {
+    background: #ffff;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 40px 0;
+    display: flex;
+    flex-direction: column;
+
+    @media only screen and (min-width: 550px) {
+      width: 460px;
+    }
+  }
+}

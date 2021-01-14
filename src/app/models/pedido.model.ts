@@ -1,6 +1,6 @@
 import { Cliente } from './cliente.model';
 import { DetallePedido } from './detalle-pedido.model';
-import { Factura } from './factura';
+import { Factura } from './factura.model';
 import { PedidoRepartidor } from './pedido-repartidor.model';
 import { Usuario } from './usuario.model';
 

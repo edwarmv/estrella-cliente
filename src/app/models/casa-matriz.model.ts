@@ -1,4 +1,4 @@
-import { Sucursal } from './sucursal';
+import { Sucursal } from './sucursal.model';
 
 export class CasaMatriz {
   constructor(
@@ -6,7 +6,7 @@ export class CasaMatriz {
     public nombre: string,
     public ubicacion: string,
     public direccion: string,
-    public descripcionActivadEconomica: string,
+    public descripcionActividadEconomica: string,
     public numeroTelefono: string,
     public correoElectronico: string,
     public nit: string,

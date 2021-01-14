@@ -1,0 +1,93 @@
+<div class="container">
+
+  <form [formGroup]="codigoControlForm" (ngSubmit)="generarCodigoControl()">
+
+    <mat-form-field>
+      <mat-label>Nº de autorización</mat-label>
+      <input matInput formControlName="numeroAutorizacion">
+      <mat-error *ngIf="numeroAutorizacion.errors as errors">
+        <p *ngIf="errors.required">Campo requerido</p>
+        <p *ngIf="errors.isntInteger">Solo números</p>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Nº de factura</mat-label>
+      <input matInput formControlName="numeroFactura">
+      <mat-error *ngIf="numeroFactura.errors as errors">
+        <p *ngIf="errors.required">Campo requerido</p>
+        <p *ngIf="errors.isntInteger">Solo números</p>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>NIT/CI del cliente</mat-label>
+      <input matInput formControlName="nitCI">
+      <mat-error *ngIf="nitCI.errors as errors">
+        <p *ngIf="errors.required">Campo requerido</p>
+        <p *ngIf="errors.isntInteger">Solo números</p>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Fecha de la transacción</mat-label>
+      <input matInput formControlName="fechaTransaccion">
+      <mat-error *ngIf="fechaTransaccion.errors as errors">
+        <p *ngIf="errors.required">Campo requerido</p>
+        <p *ngIf="errors.pattern">dd/mm/aaaa</p>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Monto de la transacción</mat-label>
+      <input matInput formControlName="montoTransaccion">
+      <mat-error *ngIf="montoTransaccion.errors as errors">
+        <p *ngIf="errors.required">Campo requerido</p>
+        <p *ngIf="errors.isntFloat">Solo números</p>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Llave de dosificación</mat-label>
+      <input matInput formControlName="llaveDosificacion">
+      <mat-error *ngIf="llaveDosificacion.errors?.required">
+        Campo requerido
+      </mat-error>
+    </mat-form-field>
+
+    <button
+      class="limpiar-formulario"
+      mat-stroked-button
+      type="button"
+      (click)="limpiarFormulario()"
+    >
+      Limpiar formulario
+    </button>
+
+    <button
+      class="submit"
+      mat-stroked-button
+      [color]="codigoControlForm.valid ? 'primary' : 'warn'"
+      type="submit"
+    >
+      Generar código de control
+    </button>
+
+  </form>
+
+  <div class="codigo-control">
+    <mat-form-field>
+      <mat-label>Código de control</mat-label>
+      <input matInput [(ngModel)]="codigoControl">
+    </mat-form-field>
+    <button
+      mat-stroked-button
+      type="button"
+      color="primary"
+      (click)="copiarCodigoControl()"
+    >
+      Copiar
+    </button>
+  </div>
+
+</div>

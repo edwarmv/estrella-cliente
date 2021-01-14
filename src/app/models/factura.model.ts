@@ -1,4 +1,4 @@
-import { Dosificacion } from './dosificacion';
+import { Dosificacion } from './dosificacion.model';
 import { Pedido } from './pedido.model';
 
 export class Factura {

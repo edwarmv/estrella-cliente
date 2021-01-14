@@ -106,6 +106,14 @@ const routes: Routes = [
     }
   },
   {
+    path: 'configuracion',
+    loadChildren: () => import('@components/configuracion/configuracion.module')
+    .then(m => m.ConfiguracionModule),
+    data: {
+      breadcrumb: 'Configuracion'
+    }
+  },
+  {
     path: '',
     redirectTo: '/home',
     pathMatch: 'full'

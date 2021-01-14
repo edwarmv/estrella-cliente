@@ -13,16 +13,17 @@
     .cliente {
       border-bottom: solid 0.5px;
       margin-bottom: 16px;
+      padding: 5px;
+
+      &:hover {
+        cursor: pointer;
+        background: #F7F7E8;
+        border-radius: 5px;
+      }
 
       .nombre {
         font-weight: bold;
       }
-    }
-  }
-
-  .list-item {
-    &:hover {
-      cursor: pointer;
     }
   }
 }

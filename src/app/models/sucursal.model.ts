@@ -1,5 +1,5 @@
-import { CasaMatriz } from './casa-matriz';
-import { Dosificacion } from './dosificacion';
+import { CasaMatriz } from './casa-matriz.model';
+import { Dosificacion } from './dosificacion.model';
 
 export class Sucursal {
   constructor(

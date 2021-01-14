@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 40px 20px;
+
+  @media only screen and (min-width: 500px) {
+    align-items: center;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    background: #ffff;
+    padding: 20px;
+    border-radius: 5px;
+
+    @media only screen and (min-width: 500px) {
+      width: 400px;
+    }
+
+    .submit {
+      margin-top: 16px;
+    }
+  }
+}

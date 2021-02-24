@@ -1,21 +1,23 @@
 .container {
-  margin: 40px 20px;
   display: flex;
   flex-direction: column;
+  margin: 40px 20px;
 
-  @media only screen and (min-width: 550px) {
-    align-items: center;
-  }
-
-  form {
+  .pedido {
     background: #ffff;
     border-radius: 5px;
     padding: 20px;
     display: flex;
     flex-direction: column;
 
-    @media only screen and (min-width: 550px) {
-      width: 400px;
+    .cliente {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .factura {
+      display: flex;
+      flex-direction: column;
     }
   }
 }

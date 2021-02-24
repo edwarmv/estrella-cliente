@@ -4,15 +4,24 @@
   flex-direction: column;
 
   @media only screen and (min-width: 1024px) {
-  align-items: center;
+   align-items: center;
+  }
+
+  .mat-form-field {
+    min-width: 0;
   }
 
   form {
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     padding: 20px;
     border-radius: 5px;
     background: white;
+
+    @media only screen and (min-width: 1024px) {
+      width: 700px;
+    }
 
     .cliente {
       display: grid;
@@ -77,9 +86,9 @@
       grid-template-areas: 'direccion-entrega' 'fecha-entrega';
 
       @media only screen and(min-width: 1024px) {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
         column-gap: 10px;
-        grid-template-areas: 'direccion-entrega fecha-entrega';
+        grid-template-areas: 'direccion-entrega direccion-entrega fecha-entrega';
       }
 
       .direccion-entrega {
@@ -122,19 +131,7 @@
           margin-bottom: 16px;
 
           @media only screen and (min-width: 1024px) {
-            grid-template-columns: min-content repeat(4, auto) min-content;
-            column-gap: 10px;
-            grid-template-areas:
-              'indice nombre precio-unitario cantidad subtotal eliminar-producto';
-            // grid-template-columns: min-content repeat(3, auto) min-content;
-            // column-gap: 10px;
-            // grid-template-areas:
-              // 'indice nombre nombre nombre eliminar-producto'
-              // 'indice precio-unitario cantidad subtotal .';
-          }
-
-          @media only screen and (min-width: 1200px) {
-            grid-template-columns: min-content repeat(4, auto) min-content;
+            grid-template-columns: min-content 2fr repeat(3, 1fr) min-content;
             column-gap: 10px;
             grid-template-areas:
               'indice nombre precio-unitario cantidad subtotal eliminar-producto';
@@ -142,8 +139,9 @@
 
           .indice {
             grid-area: indice;
-            display: flex;
-            justify-content: space-between;
+            line-height: 100%;
+            color: rgba(0, 0, 0, 0.42);
+            font-size: 12px;
           }
 
           .eliminar-producto {
@@ -158,28 +156,16 @@
           .precio-unitario {
             grid-area: precio-unitario;
             text-align: right;
-
-            @media only screen and (min-width: 1024px) and (max-width: 1024px) {
-              width: 100px;
-            }
           }
 
           .cantidad {
             grid-area: cantidad;
             text-align: right;
-
-            @media only screen and (min-width: 1024px) and (max-width: 1024px) {
-              width: 100px;
-            }
           }
 
           .subtotal {
             grid-area: subtotal;
             text-align: right;
-
-            @media only screen and (min-width: 1024px) {
-              width: 100px;
-            }
           }
         }
       } // fin .productos
@@ -201,10 +187,10 @@
 
       .estado {
         grid-area: estado;
-    }
 
-      .mat-form-field {
-        display: block;
+        .mat-form-field {
+          display: block;
+        }
       }
 
       .icon {

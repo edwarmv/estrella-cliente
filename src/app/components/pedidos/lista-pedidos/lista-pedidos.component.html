@@ -23,6 +23,33 @@
     </mat-form-field>
   </form>
 
+  <div class="filtrar-button">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="showFiltros = !showFiltros">
+      Filtrar
+    </button>
+  </div>
+
+  <div class="filtros" [hidden]="!showFiltros">
+    <p class="title">Filtrar por estado</p>
+    <mat-radio-group [(ngModel)]="estado" (change)="reloadPedidos()">
+      <ul class="lista-filtros">
+        <li *ngFor="let filtro of filtroEstados">
+          <mat-radio-button [value]="filtro">
+            {{ filtro | titlecase }}
+          </mat-radio-button>
+        </li>
+        <li>
+          <mat-radio-button value="">
+            Ninguno
+          </mat-radio-button>
+        </li>
+      </ul>
+    </mat-radio-group>
+  </div>
+
   <div class="table-container">
 
     <div class="table-overflow">

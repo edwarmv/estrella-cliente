@@ -119,7 +119,7 @@ export class PedidosComponent implements OnInit, OnDestroy {
 
     console.log('start: ', start, 'end: ', end);
 
-    this.pedidos$ = this.pedidoService.obtenerPedidos(start, end)
+    this.pedidos$ = this.pedidoService.obtenerPedidos({ start, end })
     .pipe(
       map(result => {
         console.log(result);

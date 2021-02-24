@@ -14,10 +14,9 @@
 
   <h4 mat-line>{{ file ? file.name : '' }}</h4>
 
-  <mat-progress-bar
-    *ngIf="uploading"
-    mode="deter55minate"
-    [value]="progress" >
+  <mat-progress-bar *ngIf="uploading"
+                    mode="determinate"
+                    [value]="progress">
   </mat-progress-bar>
 
   <button

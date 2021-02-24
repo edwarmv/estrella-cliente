@@ -15,7 +15,12 @@
                   '' : cliente.valid ? 'primary' : 'warn'"
           (click)="abrirSeleccionarCliente()"
           type="button">
-          Seleccionar cliente
+          <span *ngIf="cliente.invalid; else seleccionarCliente">
+            Seleccionar cliente
+          </span>
+          <ng-template #seleccionarCliente>
+            <span>Cambiar cliente</span>
+          </ng-template>
         </button>
         <p class="error" *ngIf="cliente.invalid && cliente.touched">
           Debe seleccionar un cliente
@@ -57,12 +62,11 @@
     </mat-checkbox>
 
     <div *ngIf="conServicioEntrega.value && apiLoaded" class="google-maps">
-      <google-map
-        [width]="'auto'"
-        [height]="'400px'"
-        [options]="options"
-        [center]="center"
-        (mapClick)="addMarker($event)">
+      <google-map [width]="'auto'"
+                  [height]="'400px'"
+                  [options]="options"
+                  [center]="center"
+                  (mapClick)="addMarker($event)">
         <map-marker
           *ngIf="coordenadasDireccionEntrega.value
                  && coordenadasDireccionEntrega.value.lat
@@ -106,9 +110,7 @@
       <div class="agregar-producto">
         <button mat-stroked-button
           (click)="abrirAgregarProducto()"
-          [color]="detallesPedidos.pristine && detallesPedidos.untouched ?
-                  '' : detallesPedidos.errors ?
-                  'warn' : 'primary'"
+          [color]="(detallesPedidos.pristine && detallesPedidos.untouched) ? '' : detallesPedidos.errors ? 'warn' : 'primary'"
           type="button">
           Agregar producto
         </button>
@@ -130,49 +132,45 @@
       <div *ngFor="let detallePedido of detallesPedidos.controls; let i = index"
             class="productos">
 
-        <div [formGroupName]="i"
-             class="producto">
+        <div [formGroupName]="i" class="producto">
 
           <div class="indice">
-            Nº {{ i + 1 }}
+            Nº{{ i + 1 }}
           </div>
 
           <button (click)="eliminarProducto(i)"
                   mat-icon-button
                   class="eliminar-producto"
                   color="warn">
-            <mat-icon>delete</mat-icon>
+            <mat-icon>clear</mat-icon>
           </button>
 
           <ng-container formGroupName="producto">
             <mat-form-field class="nombre">
               <mat-label>Nombre</mat-label>
-              <input
-                matInput
-                formControlName="nombre"
-                readonly
-                type="text">
+              <input matInput
+                     formControlName="nombre"
+                     readonly
+                     type="text">
             </mat-form-field>
           </ng-container>
 
           <mat-form-field class="precio-unitario">
             <mat-label>Precio unitario (Bs)</mat-label>
-            <input
-              matInput
-              formControlName="precioUnitario"
-              readonly
-              type="number">
+            <input matInput
+                   formControlName="precioUnitario"
+                   readonly
+                   type="number">
+            <span matSuffix>Bs.</span>
           </mat-form-field>
 
           <mat-form-field class="cantidad">
             <mat-label>Cantidad</mat-label>
-            <input
-              matInput
-              formControlName="cantidad"
-              type="number">
-            <mat-error
-              *ngIf="obtenerDetallePedido(i)
-                    .get('cantidad').errors as errors">
+            <input matInput
+                   formControlName="cantidad"
+                   type="number">
+            <mat-error *ngIf="obtenerDetallePedido(i)
+                             .get('cantidad').errors as errors">
               <ng-container *ngIf="errors.required">
                 El campo es requerido
               </ng-container>
@@ -187,11 +185,11 @@
 
           <mat-form-field class="subtotal">
             <mat-label>Subtotal (Bs)</mat-label>
-            <input
-              matInput
-              readonly
-              formControlName="subtotal"
-              type="number">
+            <input matInput
+                   readonly
+                   formControlName="subtotal"
+                   type="number">
+            <span matSuffix>Bs.</span>
           </mat-form-field>
 
         </div>
@@ -204,20 +202,19 @@
 
       <mat-form-field class="total">
         <mat-label>Total (Bs)</mat-label>
-        <input
-          matInput
-          readonly
-          formControlName="total"
-          type="number">
+        <input matInput
+               readonly
+               formControlName="total"
+               type="number">
+        <span matSuffix>Bs.</span>
       </mat-form-field>
 
       <div class="estado">
         <mat-form-field>
           <mat-label>Estado</mat-label>
           <mat-select formControlName="estado">
-            <mat-option
-              *ngFor="let estadoPedido of estadosPedido"
-              [value]="estadoPedido">
+            <mat-option *ngFor="let estadoPedido of estadosPedido"
+                        [value]="estadoPedido">
               {{ estadoPedido | titlecase }}
             </mat-option>
           </mat-select>
@@ -227,6 +224,22 @@
           fiber_manual_record
         </mat-icon>
       </div>
+
+    </div> <!-- fin total-estado -->
+
+    <div class="factura" formGroupName="factura">
+
+      <h2>Factura</h2>
+
+      <mat-form-field>
+        <mat-label>Número de factura</mat-label>
+        <input matInput type="text" value="1" formControlName="numeroFactura">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Fecha de emisión</mat-label>
+        <!-- <input type="text" formControlName> -->
+      </mat-form-field>
 
     </div>
 

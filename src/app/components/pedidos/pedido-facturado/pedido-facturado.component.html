@@ -1,0 +1,73 @@
+<div class="container">
+  <form class="pedido" [formGroup]="pedidoForm">
+
+    <!-- cliente -->
+    <div class="cliente" formGroupName="cliente">
+
+      <h2>Cliente</h2>
+
+      <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input matInput formControlName="nombre" readonly>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Apellido</mat-label>
+        <input matInput formControlName="apellido" readonly>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>NIT/CI</mat-label>
+        <input matInput formControlName="nitCI" readonly>
+      </mat-form-field>
+
+    </div>
+
+    <!-- factura -->
+    <div class="factura" formGroupName="factura">
+
+      <h2>Factura</h2>
+
+      <mat-form-field>
+        <mat-label>N° Factura</mat-label>
+        <input matInput formControlName="numeroFactura" readonly>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Fecha de emisión</mat-label>
+        <input type="date" matInput formControlName="fechaEmision" readonly>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Anulado</mat-label>
+        <input matInput formControlName="numeroFactura" readonly>
+      </mat-form-field>
+
+    </div> <!-- fin factura -->
+
+    <!-- detalle -->
+    <div class="detalle" formArrayName="detallesPedidos">
+
+      <h2>Detalle</h2>
+
+      <div class="detallesPedidos"
+           *ngFor="let detallePedido of detallesPedidos.controls; let i = index">
+
+        <div class="detallePedido" [formGroupName]="i">
+          <ng-container formGroupName="producto">
+            <mat-form-field class="nombre">
+              <mat-label>Nombre</mat-label>
+              <input matInput
+                     formControlName="nombre"
+                     readonly
+                     type="text">
+            </mat-form-field>
+          </ng-container>
+        </div>
+
+      </div>
+
+    </div> <!-- fin detalle -->
+
+  </form>
+</div>

@@ -17,6 +17,9 @@
         "build": {
           "builder": "@angular-builders/custom-webpack:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "big.js"
+            ],
             "customWebpackConfig": {
               "path": "src/../config/webpack-dev.config.js"
             },

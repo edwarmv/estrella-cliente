@@ -17,37 +17,6 @@
     }
   }
 
-  .filtrar-button {
-    box-sizing: border-box;
-    margin-bottom: 20px;
-
-    @media only screen and (min-width: 700px) {
-      width: 660px;
-    }
-  }
-
-  .filtros {
-    box-sizing: border-box;
-    padding: 20px;
-    margin-bottom: 20px;
-    background: #fff;
-    border-radius: 5px;
-    border: 1px solid #e0e0e0;
-
-    @media only screen and (min-width: 700px) {
-      width: 660px;
-    }
-
-    .title {
-      font-weight: bold;
-      font-size: 16px;
-    }
-
-    .lista-filtros {
-      list-style-type: none;
-    }
-  }
-
   .table-container {
     width: calc(100vw - 40px);
     box-shadow:

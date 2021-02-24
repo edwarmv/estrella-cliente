@@ -26,9 +26,9 @@ export class PedidoService {
     skip: number = 0,
     take: number = 5,
     termino: string = '',
+    estado: string = ''
   ): Observable<{ pedidos: Pedido[], total: number }> {
-    const url = `${this.pedidoURL}?\
-&skip=${skip}&take=${take}&termino=${termino}`;
+    const url = `${this.pedidoURL}?&skip=${skip}&take=${take}&termino=${termino}`;
 
     return this.http.get<{ pedidos: Pedido[], total: number }>(url);
   }
@@ -38,24 +38,50 @@ export class PedidoService {
    * @param end Fecha final YYYY/MM/DD
    */
   obtenerPedidos(
-    start: string = '',
-    end: string = '',
-    skip: number = 0,
-    take: number = 5,
-    termino: string = '',
-    sort: string = 'fechaEntrega',
-    order: 'DESC' | 'ASC' = 'DESC',
+    {
+      skip = 0,
+      take = 5,
+      start = '',
+      end = '',
+      termino = '',
+      sort = 'fechaEntrega',
+      order = 'DESC',
+      estado = ''
+    }: {
+      skip?: number,
+      take?: number,
+      start?: string,
+      end?: string,
+      termino?: string,
+      sort?: string,
+      order?: 'DESC' | 'ASC',
+      estado?: string,
+    }
   ): Observable<{ pedidos: Pedido[], total: number }> {
-    const url = `${this.pedidoURL}?\
-start=${start}&end=${end}\
-&skip=${skip}&take=${take}&termino=${termino}\
-&sort=${sort}&order=${order}`;
+    const url = `${this.pedidoURL}?start=${start}&end=${end}&skip=${skip}&take=${take}&termino=${termino}&sort=${sort}&order=${order}&estado=${estado}`;
 
     return this.http.get<{ pedidos: Pedido[], total: number }>(url);
   }
 
   obtenerPedido(idPedido: number): Observable<Pedido> {
     const url = `${this.pedidoURL}/${idPedido}`;
+
+    return this.http.get<Pedido>(url);
+  }
+
+  pedidosFacturados(
+    skip: number,
+    take: number,
+    termino: string = ''
+  ): Observable<{ pedidos: Pedido[], total: number }> {
+    const url = `${environment.apiURL}/pedido-factura?\
+skip=${skip}&take=${take}&termino=${termino}`;
+
+    return this.http.get<{ pedidos: Pedido[], total: number }>(url);
+  }
+
+  pedidoFacturado(idPedido: number): Observable<Pedido> {
+    const url = `${environment.apiURL}/pedido-factura/${idPedido}`;
 
     return this.http.get<Pedido>(url);
   }

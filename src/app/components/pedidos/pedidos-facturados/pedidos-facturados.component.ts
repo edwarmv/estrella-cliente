@@ -4,14 +4,14 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Pedido } from '@models/pedido.model';
 import { PedidoService } from '@services/pedido.service';
 import { Observable, Subject } from 'rxjs';
-import { debounceTime, map, takeUntil, tap } from 'rxjs/operators';
+import { debounceTime, map, takeUntil } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-lista-pedidos',
-  templateUrl: './lista-pedidos.component.html',
-  styleUrls: ['./lista-pedidos.component.scss']
+  selector: 'app-pedidos-facturados',
+  templateUrl: './pedidos-facturados.component.html',
+  styleUrls: ['./pedidos-facturados.component.scss']
 })
-export class ListaPedidosComponent implements OnInit, OnDestroy {
+export class PedidosFacturadosComponent implements OnInit, OnDestroy {
   pedidos$: Observable<Pedido[]>;
   unsubscribe = new Subject<void>();
   buscadorForm: FormGroup;
@@ -21,20 +21,10 @@ export class ListaPedidosComponent implements OnInit, OnDestroy {
   displayedColumns: string [] = [
     'posicion',
     'cliente',
-    'fechaEntrega',
-    'estado',
-    'detalles'
+    'fechaFacturacion',
+    'detalle'
   ];
   @ViewChild('paginator') paginator: MatPaginator;
-  filtroEstados = [
-    'pendiente',
-    'listo',
-    'entregado',
-    'completado',
-    'cancelado'
-  ];
-  estado = '';
-  showFiltros = false;
 
   constructor(
     private pedidoService: PedidoService,
@@ -52,27 +42,16 @@ export class ListaPedidosComponent implements OnInit, OnDestroy {
     .pipe(
       takeUntil(this.unsubscribe),
       debounceTime(300),
-      tap(() => {
-        this.paginator.firstPage();
-        this.reloadPedidos();
-      })
-    )
-    .subscribe();
-  }
-
-  reloadPedidos(): void {
-    this.pedidos$ = this.obtenerPedidos(0, this.pageSize);
+    ).subscribe(() => {
+      this.paginator.firstPage();
+      this.pedidos$ = this.obtenerPedidos(0, this.pageSize);
+    });
   }
 
   obtenerPedidos(skip: number, take: number): Observable<Pedido[]> {
     const termino = this.termino.value;
 
-    return this.pedidoService.obtenerPedidos({
-      skip,
-      take,
-      termino,
-      estado: this.estado
-    })
+    return this.pedidoService.pedidosFacturados(skip, take, termino)
     .pipe(
       map(resp => {
         this.totalPedidos = resp.total;
@@ -85,10 +64,10 @@ export class ListaPedidosComponent implements OnInit, OnDestroy {
     this.pageSize = pageEvent.pageSize;
     this.pageIndex = pageEvent.pageIndex;
 
-    const take = pageEvent.pageSize;
-    const skip = pageEvent.pageIndex * take;
-
-    this.pedidos$ = this.obtenerPedidos(skip, take);
+    this.pedidos$ = this.obtenerPedidos(
+      this.pageSize,
+      this.pageIndex * this.pageSize
+    );
   }
 
   limpiarBusqueda(): void {

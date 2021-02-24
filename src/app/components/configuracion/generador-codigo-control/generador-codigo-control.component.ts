@@ -7,7 +7,7 @@ import { isntInteger, isntFloat } from '@validators/number.validator';
 import { take } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-verificador-codigo-control',
+  selector: 'app-generador-codigo-control',
   templateUrl: './generador-codigo-control.component.html',
   styleUrls: ['./generador-codigo-control.component.scss']
 })

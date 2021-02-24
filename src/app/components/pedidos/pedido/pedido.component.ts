@@ -113,7 +113,12 @@ export class PedidoComponent implements OnInit, OnDestroy {
         [formArraySize(), this.productosDuplicados]
       ),
       total: [0],
-      estado: ['pendiente']
+      estado: ['pendiente'],
+      factura: this.fb.group({
+        numeroFactura: ['', Validators.required],
+        fechaEmision: ['', Validators.required],
+        anulado: ['', Validators.required],
+      })
     });
 
     return pedidoFormGroup;
@@ -284,6 +289,7 @@ export class PedidoComponent implements OnInit, OnDestroy {
   }
 
   registrarPedido(): void {
+    console.log(this.pedidoForm);
     this.cliente.markAsTouched();
     this.detallesPedidos.markAsTouched();
     if (this.pedidoForm.valid) {
@@ -361,14 +367,17 @@ export class PedidoComponent implements OnInit, OnDestroy {
         [formArraySize, this.productosDuplicados]
       ],
       total: 0,
-      estado: pedido.estado
+      estado: pedido.estado,
+      factura: pedido.factura
     });
 
     pedido.detallesPedidos.forEach(detallePedido => {
       this.agregarDetallePedido(detallePedido);
     });
     console.log(this.pedidoForm);
-    if (pedido.coordenadasDireccionEntrega) {
+    if (pedido.coordenadasDireccionEntrega &&
+        pedido.coordenadasDireccionEntrega.lat &&
+        pedido.coordenadasDireccionEntrega.lng) {
       this.center = {
         lat: pedido.coordenadasDireccionEntrega.lat,
         lng: pedido.coordenadasDireccionEntrega.lng

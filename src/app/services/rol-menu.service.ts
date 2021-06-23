@@ -2,21 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Menu } from '@models/menu.model';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-
-type SubmenuSidebar = {
-  nombre: string,
-  path: string,
-  activated: boolean
-};
-
-export type MenuSidebar = {
-  nombre: string,
-  collapsed: boolean,
-  activated: boolean,
-  submenus: SubmenuSidebar[],
-};
 
 @Injectable({
   providedIn: 'root'
@@ -29,35 +16,12 @@ export class RolMenuService {
     private http: HttpClient
   ) { }
 
-  get menus(): Observable<MenuSidebar[]> {
+  get menus(): Observable<Menu[]> {
     const idUsuario = Number.parseInt(localStorage.getItem('idUsuario'), 10);
 
     return this.menusSubject.pipe(
       switchMap(() => {
-        return this.obtenerMenusRolPorDefecto(idUsuario)
-        .pipe(
-          map(menus => {
-            const menusSidebar = menus.map(menu => {
-              const submenusSidebar: SubmenuSidebar[] = menu.submenus
-              .map(submenu => {
-                return {
-                  nombre: submenu.nombre,
-                  activated: false,
-                  path: submenu.path,
-                } as SubmenuSidebar;
-              });
-
-              return {
-                nombre: menu.nombre,
-                collapsed: true,
-                activated: false,
-                submenus: submenusSidebar
-              } as MenuSidebar;
-            });
-
-            return menusSidebar;
-          })
-        );
+        return this.obtenerMenusRolPorDefecto(idUsuario);
       })
     );
   }

@@ -1,0 +1,49 @@
+<div class="container">
+
+  <div class="actions">
+    <a routerLink="nuevo-pedido" mat-raised-button color="primary">
+      Nuevo pedido
+    </a>
+  </div>
+
+  <app-calendar
+    class="calendar"
+    [events]="pedidos$"
+    [(viewDate)]="viewDate"
+    (viewDateChange)="obtenerPedidos()"
+    [(view)]="view"
+    (viewchange)="obtenerPedidos()"
+    (dayClicked)="dayClicked($event)">
+  </app-calendar>
+
+  <app-table
+    *ngIf="pedidosTable && pedidosTable.length"
+    [columns]="tableColumns"
+    [rows]="pedidosTable">
+  </app-table>
+
+  <ng-template #clienteColumn let-pedido="element">
+    {{ pedido.cliente.nombre + ' ' + pedido.cliente.apellido }}
+  </ng-template>
+
+  <ng-template #estadoColumn let-pedido="element">
+    <span class="estado-pedido" [ngClass]="pedido.estado">
+      {{ pedido.estado }}
+    </span>
+  </ng-template>
+
+  <ng-template #fechaRegistroColumn let-pedido="element">
+    {{ pedido.fechaRegistro | date: 'short' }}
+  </ng-template>
+
+  <ng-template #fechaEntregaColumn let-pedido="element">
+    {{ pedido.fechaEntrega | date: 'short' }}
+  </ng-template>
+
+  <ng-template #verPedidoColumn let-pedido="element">
+    <a [routerLink]="pedido.id" mat-raised-button color="primary" type="button">
+      Ver pedido
+    </a>
+  </ng-template>
+
+</div>

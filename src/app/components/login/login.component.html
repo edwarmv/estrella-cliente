@@ -18,8 +18,7 @@
           type="button"
           mat-stroked-button
           color="primary"
-          (click)="reenviarCorreoVerificacion()"
-        >
+          (click)="reenviarCorreoVerificacion()">
           Reenviar correo de virificación
         </button>
       </p>
@@ -31,9 +30,8 @@
           matInput
           type="email"
           errorState="true"
-          formControlName="correoElectronico"
-        >
-        <mat-icon matSuffix *ngIf="!correoElectronico.value">email</mat-icon>
+          formControlName="correoElectronico">
+        <mat-icon matSuffix>email</mat-icon>
 
         <mat-error *ngIf="correoElectronico.errors?.email">
           Correo electrónico inválido.
@@ -50,7 +48,11 @@
         <mat-label>Contraseña</mat-label>
         <input matInput type="password" formControlName="password" #passwordTemplateRef>
         <mat-icon matSuffix *ngIf="!password.value">vpn_key</mat-icon>
-        <button mat-button matSuffix  mat-icon-button type="button"
+        <button
+          mat-button
+          matSuffix
+          mat-icon-button
+          type="button"
           *ngIf="password.value"
           tabindex="-1"
           (click)="passwordTemplateRef.type === 'password'?
@@ -80,8 +82,7 @@
         <button
           mat-raised-button
           color="primary"
-          type="submit"
-        >
+          type="submit">
           Ingresar
         </button>
       </div>

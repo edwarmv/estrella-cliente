@@ -7,17 +7,13 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { Menu } from '@models/menu.model';
-import { RolMenuService } from '@services/rol-menu.service';
+import { MenuService } from '@services/menu.service';
 import { RolService } from '@services/rol.service';
-import { formArraySize } from '@validators/form-array-size.validator';
-import { take, tap } from 'rxjs/operators';
-import {
-  SeleccionarMenuComponent
-} from '../seleccionar-menu/seleccionar-menu.component';
+import { SelectionListDialogService } from '@shared/selection-list-dialog/selection-list-dialog.service';
+import { map, take as takeRxJS, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-rol',
@@ -32,10 +28,10 @@ export class RolComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private rolService: RolService,
-    private rolMenuService: RolMenuService,
+    private menuService: MenuService,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
-    private dialog: MatDialog,
+    private selectionListDialogService: SelectionListDialogService,
   ) { }
 
   ngOnInit(): void {
@@ -81,7 +77,7 @@ export class RolComponent implements OnInit {
   actualizarFormulario(idRol: number): void {
     this.rolService.obtenerRol(idRol)
     .pipe(
-      take(1),
+      takeRxJS(1),
       tap(rol => {
         this.rolForm.patchValue(rol);
         rol.rolesMenus.forEach(rolMenu => {
@@ -102,7 +98,7 @@ export class RolComponent implements OnInit {
   actualizarRol(): void {
     if (this.rolForm.valid) {
       this.rolService.actualiarRol(this.idRol, this.rolForm.value)
-      .pipe(take(1))
+      .pipe(takeRxJS(1))
       .subscribe(() => {
         this.snackBar.open('Rol actualizado', 'Hecho', { duration: 2000 });
       });
@@ -110,7 +106,6 @@ export class RolComponent implements OnInit {
   }
 
   crearRol(): void {
-    console.log(this.rolForm);
     if (this.rolForm.valid) {
       this.rolService.crearRol(this.rolForm.value)
       .subscribe(resp => {
@@ -121,8 +116,21 @@ export class RolComponent implements OnInit {
   }
 
   seleccionarMenu(): void {
-    const dialogRef = this.dialog.open(SeleccionarMenuComponent);
-    dialogRef.afterClosed().subscribe(menu => {
+    this.selectionListDialogService.open<Menu>({
+      title: 'Seleccionar menú',
+      search: { placeholder: 'Nombre del menú' },
+      cb: (skip, take, termino) => {
+        return this.menuService.obtenerMenus(skip, take, termino)
+        .pipe(
+          map(resp => {
+            const values = resp.menus.map(menu => {
+              return { label: menu.nombre, value: menu };
+            });
+            return { values, total: resp.total };
+          })
+        );
+      }
+    }).subscribe(menu => {
       if (menu) {
         this.asignarMenu(menu);
       }
@@ -141,14 +149,6 @@ export class RolComponent implements OnInit {
   }
 
   eliminarMenu(id: number): void {
-    if (this.idRol) {
-      const menu = this.rolesMenus.get(id.toString()).value.menu;
-      this.rolMenuService.borrarRolMenu(this.idRol, menu.id)
-      .pipe(take(1))
-      .subscribe(resp => {
-        this.snackBar.open(resp.mensaje, 'Aceptar', { duration: 2000 });
-      });
-    }
     this.rolesMenus.removeAt(id);
   }
 

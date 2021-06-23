@@ -22,10 +22,10 @@ $estrella-cliente-warn: mat-palette($mat-red);
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
 $estrella-cliente-theme: mat-light-theme((
-  color: (
-    primary: $estrella-cliente-primary,
-    accent: $estrella-cliente-accent,
-    warn: $estrella-cliente-warn,
+  "color": (
+    "primary": $estrella-cliente-primary,
+    "accent": $estrella-cliente-accent,
+    "warn": $estrella-cliente-warn,
   )
 ));
 
@@ -53,6 +53,8 @@ $estrella-cliente-theme: mat-light-theme((
   --entregado: #03A9F4;
   --completado: #4CAF50;
   --cancelado: #F44336;
+
+  --default-border-radius: 5px;
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

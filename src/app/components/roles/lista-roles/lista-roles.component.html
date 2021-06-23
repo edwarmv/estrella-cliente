@@ -1,0 +1,45 @@
+<div class="container">
+
+  <div class="actions">
+    <a routerLink="nuevo-rol" mat-raised-button color="primary">
+      Nuevo rol
+    </a>
+  </div>
+
+  <app-table
+    searchPlaceholder="Nombre del rol"
+    [columns]="tableColumns"
+    [rowsCB]="rolesCB">
+  </app-table>
+
+  <ng-template #nombreColumn let-rol="element">
+    {{ rol.nombre }}
+  </ng-template>
+
+  <ng-template #descripcionColumn let-rol="element">
+    <button
+      (click)="verDescripcion(rol.nombre, rol.descripcion)"
+      mat-mini-fab
+      color="primary"
+      [disabled]="rol.descripcion ? false : true">
+      <mat-icon>article</mat-icon>
+    </button>
+  </ng-template>
+
+  <ng-template #modificarColumn let-rol="element">
+    <a [routerLink]="rol.id" mat-mini-fab color="accent">
+      <mat-icon>edit</mat-icon>
+    </a>
+  </ng-template>
+
+  <ng-template #eliminarColumn let-rol="element">
+    <button
+      mat-mini-fab
+      color="warn"
+      (click)="eliminarRol(rol)">
+      <mat-icon>delete_forever</mat-icon>
+    </button>
+  </ng-template>
+
+</div>
+

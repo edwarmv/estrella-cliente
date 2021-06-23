@@ -6,80 +6,95 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { PedidosComponent } from './pedidos.component';
 import { PedidoComponent } from './pedido/pedido.component';
 import { ListaPedidosComponent } from './lista-pedidos/lista-pedidos.component';
-import { SeleccionarClienteComponent } from './pedido/seleccionar-cliente/seleccionar-cliente.component';
-import { AgregarProductoComponent } from './pedido/agregar-producto/agregar-producto.component';
-import { PedidosFacturadosComponent } from './pedidos-facturados/pedidos-facturados.component';
 import { ReportesPedidosComponent } from './reportes-pedidos/reportes-pedidos.component';
 
 import {
   DayClickedDialogComponent
-} from './day-clicked-dialog/day-clicked-dialog.component';
-import { DateAdapter, CalendarModule } from 'angular-calendar';
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+} from './calendario-pedidos/day-clicked-dialog/day-clicked-dialog.component';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatRippleModule } from '@angular/material/core';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatTableModule } from '@angular/material/table';
 import { MatSelectModule } from '@angular/material/select';
-import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { MatRadioModule } from '@angular/material/radio';
-import { customPaginator } from '@components/paginator/custom.paginator';
 import { GoogleMapsModule } from '@angular/google-maps';
-import { PedidoFacturadoComponent } from './pedido-facturado/pedido-facturado.component';
+import { SelectionListDialogModule } from '@shared/selection-list-dialog/selection-list-dialog.module';
+import { CalendarioPedidosComponent } from './calendario-pedidos/calendario-pedidos.component';
+import { TabsModule } from '@shared/tabs/tabs.module';
+import { BuscadorModule } from '@shared/buscador/buscador.module';
+import { TableModule } from '@shared/table/table.module';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { CalendarModule } from '@shared/calendar/calendar.module';
 
 const routes: Routes = [
   {
     path: '',
-    component: PedidosComponent
-  },
-  {
-    path: 'lista-pedidos',
-    component: ListaPedidosComponent
-  },
-  {
-    path: 'nuevo-pedido',
-    component: PedidoComponent,
-    data: {
-      breadcrumb: 'Nuevo pedido'
-    }
-  },
-  {
-    path: 'facturas',
-    component: PedidosFacturadosComponent,
-    data: {
-      breadcrumb: 'Facturas'
-    }
-  },
-  {
-    path: 'facturas/:id',
-    component: PedidoFacturadoComponent,
-    data: {
-      breadcrumb: 'Factura'
-    }
-  },
-  {
-    path: 'reportes',
-    component: ReportesPedidosComponent,
-    data: {
-      breadcrumb: 'Reportes'
-    }
-  },
-  {
-    path: ':id',
-    component: PedidoComponent,
-    data: {
-      breadcrumb: 'Editar pedido'
-    }
+    component: PedidosComponent,
+    children: [
+      { path: '', redirectTo: 'calendario-pedidos', pathMatch: 'full' },
+      {
+        path: 'calendario-pedidos',
+        data: {
+          breadcrumb: 'Calendario de pedidos'
+        },
+        children: [
+          { path: '', component: CalendarioPedidosComponent },
+          {
+            path: 'nuevo-pedido',
+            component: PedidoComponent,
+            data: {
+              breadcrumb: 'Nuevo pedido'
+            }
+          },
+          {
+            path: ':id',
+            component: PedidoComponent,
+            data: {
+              breadcrumb: 'Editar pedido'
+            }
+          },
+        ]
+      },
+      {
+        path: 'lista-pedidos',
+        data: {
+          breadcrumb: 'Lista de pedidos'
+        },
+        children: [
+          {
+            path: '',
+            component: ListaPedidosComponent
+          },
+          {
+            path: 'nuevo-pedido',
+            component: PedidoComponent,
+            data: {
+              breadcrumb: 'Nuevo pedido'
+            }
+          },
+          {
+            path: ':id',
+            component: PedidoComponent,
+            data: {
+              breadcrumb: 'Editar pedido'
+            }
+          },
+        ]
+      },
+      {
+        path: 'reportes',
+        component: ReportesPedidosComponent,
+        data: {
+          breadcrumb: 'Reportes'
+        }
+      },
+    ]
   }
 ];
 
@@ -88,19 +103,12 @@ const routes: Routes = [
     PedidosComponent,
     DayClickedDialogComponent,
     PedidoComponent,
-    SeleccionarClienteComponent,
-    AgregarProductoComponent,
     ListaPedidosComponent,
-    PedidosFacturadosComponent,
     ReportesPedidosComponent,
-    PedidoFacturadoComponent
+    CalendarioPedidosComponent,
   ],
   imports: [
     CommonModule,
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory
-    }),
     RouterModule.forChild(routes),
     ReactiveFormsModule,
     FormsModule,
@@ -109,24 +117,20 @@ const routes: Routes = [
     MatRadioModule,
     MatBadgeModule,
     MatDialogModule,
-    MatAutocompleteModule,
     MatFormFieldModule,
     MatInputModule,
     MatCheckboxModule,
-    MatListModule,
     MatIconModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
-    MatTableModule,
     MatSelectModule,
-    MatPaginatorModule,
     GoogleMapsModule,
+    SelectionListDialogModule,
+    TabsModule,
+    TableModule,
+    BuscadorModule,
+    CalendarModule,
   ],
-  providers: [
-    {
-      provide: MatPaginatorIntl,
-      useValue: customPaginator('Pedidos por página')
-    }
-  ]
+  providers: [ ]
 })
 export class PedidosModule { }

@@ -1,0 +1,23 @@
+<form class="buscador" [formGroup]="buscadorForm">
+  <mat-form-field class="mat-input-white" appearance="outline">
+
+    <mat-label>Buscador</mat-label>
+
+    <input
+      type="text"
+      matInput
+      formControlName="termino"
+      [placeholder]="placeholder">
+
+    <button
+      mat-icon-button
+      matSuffix
+      *ngIf="termino.value"
+      (click)="limpiarBusqueda()"
+      type="button"
+      matTooltip="Limpiar búsqueda">
+      <mat-icon>clear</mat-icon>
+    </button>
+
+  </mat-form-field>
+</form>

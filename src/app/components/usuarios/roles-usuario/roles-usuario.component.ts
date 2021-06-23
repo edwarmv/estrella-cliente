@@ -1,15 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { RolUsuario } from '@models/rol-usuario.model';
 import { Rol } from '@models/rol.model';
 import { Usuario } from '@models/usuario.model';
 import { RolUsuarioService } from '@services/rol-usuario.service';
+import { RolService } from '@services/rol.service';
 import { UsuarioService } from '@services/usuario.service';
+import { SelectionListDialogService } from '@shared/selection-list-dialog/selection-list-dialog.service';
 import { Observable, Subscription } from 'rxjs';
-import { take } from 'rxjs/operators';
-import { AsignarRolComponent } from './asignar-rol/asignar-rol.component';
+import { map, take as takeRxJS } from 'rxjs/operators';
 
 @Component({
   selector: 'app-roles',
@@ -24,8 +24,9 @@ export class RolesUsuarioComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private rolUsuarioService: RolUsuarioService,
+    private rolService: RolService,
     private usuarioService: UsuarioService,
-    private dialog: MatDialog,
+    private selectionListDialogService: SelectionListDialogService,
     private snackBar: MatSnackBar
   ) { }
 
@@ -37,18 +38,35 @@ export class RolesUsuarioComponent implements OnInit, OnDestroy {
   }
 
   asignarRol(): void {
-    const dialogRef = this.dialog.open(AsignarRolComponent);
+    this.selectionListDialogService.open<Rol>({
+      title: 'Selecciona un rol',
+      search: { placeholder: 'Nombre del rol' },
+      cb: (skip, take, termino) => {
+        return this.rolService.obtenerRoles(skip, take, termino)
+        .pipe(
+          map(resp => {
+            const roles = resp.roles.map(rol => {
+              return {
+                label: rol.nombre,
+                value: rol,
+              };
+            });
 
-    dialogRef.afterClosed()
-    .pipe(take(1))
-    .subscribe(rol => {
+            return {
+              total: resp.total,
+              values: roles
+            };
+          })
+        );
+      }
+    }).subscribe(rol => {
       if (rol) {
         const rolUsuario = {
           usuario: { id: this.idUsuario },
           rol
         } as RolUsuario;
         this.rolUsuarioService.asignarRolUsuario(rolUsuario)
-        .pipe(take(1))
+        .pipe(takeRxJS(1))
         .subscribe(resp => {
           this.usuario$ = this.usuarioService.obtenerUsuario(this.idUsuario);
           this.snackBar.open(resp.mensaje, 'Aceptar', { duration: 2000 });

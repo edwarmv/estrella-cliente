@@ -46,7 +46,7 @@ const routes: Routes = [
     loadChildren: () => import('@components/usuarios/usuarios.module')
     .then(m => m.UsuariosModule),
     data: {
-      breadcrumb: 'Gestionar usuarios'
+      breadcrumb: 'Usuarios'
     }
   },
   {
@@ -54,7 +54,7 @@ const routes: Routes = [
     loadChildren: () => import('@components/roles/roles.module')
     .then(m => m.RolesModule),
     data: {
-      breadcrumb: 'Gestionar roles'
+      breadcrumb: 'Roles'
     }
   },
   {
@@ -62,15 +62,7 @@ const routes: Routes = [
     loadChildren: () => import('@components/menus/menus.module')
     .then(m => m.MenusModule),
     data: {
-      breadcrumb: 'Gestionar Menús'
-    }
-  },
-  {
-    path: 'submenus',
-    loadChildren: () => import('@components/submenus/submenus.module')
-    .then(m => m.SubmenusModule),
-    data: {
-      breadcrumb: 'Gestionar Submenús'
+      breadcrumb: 'Menús'
     }
   },
   {
@@ -78,7 +70,7 @@ const routes: Routes = [
     loadChildren: () => import('@components/clientes/clientes.module')
     .then(m => m.ClientesModule),
     data: {
-      breadcrumb: 'Gestionar Clientes'
+      breadcrumb: 'Clientes'
     }
   },
   {
@@ -103,6 +95,14 @@ const routes: Routes = [
     .then(m => m.PedidosModule),
     data: {
       breadcrumb: 'Pedidos'
+    }
+  },
+  {
+    path: 'deliveries',
+    loadChildren: () => import('@components/deliveries/deliveries.module')
+    .then(m => m.DeliveriesModule),
+    data: {
+      breadcrumb: 'Delivery'
     }
   },
   {

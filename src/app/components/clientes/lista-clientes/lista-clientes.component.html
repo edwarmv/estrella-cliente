@@ -1,0 +1,29 @@
+<div class="container">
+
+  <div class="actions">
+    <a mat-raised-button color="primary" routerLink="nuevo-cliente">
+      Nuevo cliente
+    </a>
+  </div>
+
+  <app-table
+    searchPlaceholder="Nombre/CI/NIT"
+    [columns]="tableColumns"
+    [rowsCB]="clientesCB">
+  </app-table>
+
+  <ng-template #nombreColumn let-cliente="element">
+    {{ cliente.nombre + ' ' + cliente.apellido }}
+  </ng-template>
+
+  <ng-template #nitCIColumn let-cliente="element">
+    {{ cliente.nitCI }}
+  </ng-template>
+
+  <ng-template #modificarColumn let-cliente="element">
+    <a [routerLink]="cliente.id" mat-mini-fab color="accent">
+      <mat-icon>edit</mat-icon>
+    </a>
+  </ng-template>
+
+</div>

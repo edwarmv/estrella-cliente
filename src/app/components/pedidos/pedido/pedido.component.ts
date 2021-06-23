@@ -3,6 +3,7 @@ import {
   Component,
   OnDestroy,
   OnInit,
+  TemplateRef,
   ViewChild
 } from '@angular/core';
 import {
@@ -12,28 +13,25 @@ import {
   FormGroup,
   Validators
 } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Cliente } from '@models/cliente.model';
 import { EstadoPedido, Pedido } from '@models/pedido.model';
 import { Producto } from '@models/producto.model';
 import { PedidoService } from '@services/pedido.service';
 import { UsuarioService } from '@services/usuario.service';
-import { Observable, Subject } from 'rxjs';
-import { map, mergeMap, startWith, take, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { map, mergeMap, startWith, take as takeRxJS, takeUntil } from 'rxjs/operators';
 import { format } from 'date-fns';
-import {
-  AgregarProductoComponent
-} from './agregar-producto/agregar-producto.component';
-import {
-  SeleccionarClienteComponent
-} from './seleccionar-cliente/seleccionar-cliente.component';
 import { formArraySize } from '@validators/form-array-size.validator';
 import { DetallePedido } from '@models/detalle-pedido.model';
 import { GoogleMapsService } from '@services/google-maps.service';
 import { GoogleMap } from '@angular/google-maps';
-import { FacturaService } from '@services/factura.service';
+import { MessageDialogService } from '@shared/message-dialog/message-dialog.service';
+import { SnackBarService } from '@services/snack-bar.service';
+import { SelectionListDialogService } from '@shared/selection-list-dialog/selection-list-dialog.service';
+import { ClienteService } from '@services/cliente.service';
+import { ProductoService } from '@services/producto.service';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-pedido',
@@ -44,7 +42,6 @@ export class PedidoComponent implements OnInit, OnDestroy {
   idPedido: number;
   pedidoForm: FormGroup;
   estadosPedido = Object.values(EstadoPedido);
-  clientes$: Observable<Cliente[]>;
   private unsubscribe$ = new Subject<void>();
 
   // Google Maps
@@ -57,16 +54,24 @@ export class PedidoComponent implements OnInit, OnDestroy {
   markPosition: google.maps.LatLngLiteral = null;
   @ViewChild(GoogleMap, { static: false }) map: GoogleMap;
 
+  isDesktop: boolean;
+
+  @ViewChild('customElement', { static: true }) customElement: TemplateRef<any>;
+
   constructor(
     private usuarioService: UsuarioService,
     private pedidoService: PedidoService,
-    private fb: FormBuilder,
-    private dialog: MatDialog,
-    private snackBar: MatSnackBar,
-    private route: ActivatedRoute,
+    private snackBarService: SnackBarService,
     private googleMapsService: GoogleMapsService,
+    private selectionListDialogService: SelectionListDialogService,
+    private messageDialogService: MessageDialogService,
+    private clienteService: ClienteService,
+    private productoService: ProductoService,
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
     private changeDetectorRef: ChangeDetectorRef,
-    private facturaService: FacturaService,
+    private breakpointObserver: BreakpointObserver,
   ) { }
 
   ngOnInit(): void {
@@ -86,6 +91,16 @@ export class PedidoComponent implements OnInit, OnDestroy {
     }
 
     this.loadGoogleMaps();
+
+    this.breakpointObserver.observe('(max-width: 1024px)')
+    .subscribe(resp => {
+      console.log(resp);
+      if (resp.breakpoints['(max-width: 1024px)'] === true) {
+        this.isDesktop = false;
+      } else {
+        this.isDesktop = true;
+      }
+    });
   }
 
   pedidoFormGroup(): FormGroup {
@@ -115,9 +130,9 @@ export class PedidoComponent implements OnInit, OnDestroy {
       total: [0],
       estado: ['pendiente'],
       factura: this.fb.group({
-        numeroFactura: ['', Validators.required],
-        fechaEmision: ['', Validators.required],
-        anulado: ['', Validators.required],
+        numeroFactura: [''],
+        fechaEmision: [''],
+        anulado: [''],
       })
     });
 
@@ -175,7 +190,6 @@ export class PedidoComponent implements OnInit, OnDestroy {
           });
           this.map.controls[google.maps.ControlPosition.RIGHT_BOTTOM]
             .push(controlDiv);
-          console.log(this.map);
         }
       });
   }
@@ -213,25 +227,70 @@ export class PedidoComponent implements OnInit, OnDestroy {
   }
 
   abrirSeleccionarCliente(): void {
-    const dialogRef = this.dialog.open(SeleccionarClienteComponent);
+    this.selectionListDialogService.open<Cliente>({
+      title: 'Seleccionar cliente',
+      search: {
+        placeholder: 'Nombre/Apellido/NIT/CI'
+      },
+      cb: (skip, take, termino) => {
+        return this.clienteService
+        .obtenerClientes(skip, take, termino)
+        .pipe(
+          map(resp => {
+            const clientes = resp.clientes.map(cliente => {
+              return {
+                label: `${cliente.nombre} ${cliente.apellido}`,
+                value: cliente
+              };
+            });
 
-    dialogRef.afterClosed()
-    .pipe(take(1))
-    .subscribe((resp: Cliente) => {
-      if (resp) {
-        this.cliente.patchValue(resp);
-        this.direccionEntrega.setValue(resp.direccionDomicilio);
+            return {
+              values: clientes,
+              total: resp.total
+            };
+          })
+        );
+      },
+      customElement: this.customElement,
+    })
+    .pipe(takeRxJS(1))
+    .subscribe(cliente => {
+      if (cliente) {
+        this.cliente.patchValue(cliente);
+        this.direccionEntrega.setValue(cliente.direccionDomicilio);
         this.cliente.markAsDirty();
       }
     });
   }
 
   abrirAgregarProducto(): void {
-    const dialogRef = this.dialog.open(AgregarProductoComponent);
+    this.selectionListDialogService.open<Producto>({
+      title: 'Agregar producto',
+      search: {
+        placeholder: 'Nombre del producto'
+      },
+      cb: (skip, take, termino) => {
+        return this.productoService
+        .obtenerProductos(skip, take, termino)
+        .pipe(
+          map(resp => {
+            const productos = resp.productos.map(producto => {
+              return {
+                label: `${producto.nombre}`,
+                value: producto
+              };
+            });
 
-    dialogRef.afterClosed()
-    .pipe(take(1))
-    .subscribe((producto: Producto) => {
+            return {
+              values: productos,
+              total: resp.total
+            };
+          })
+        );
+      }
+    })
+    .pipe(takeRxJS(1))
+    .subscribe(producto => {
       if (producto) {
         this.agregarDetallePedido({ producto } as DetallePedido);
       }
@@ -289,7 +348,6 @@ export class PedidoComponent implements OnInit, OnDestroy {
   }
 
   registrarPedido(): void {
-    console.log(this.pedidoForm);
     this.cliente.markAsTouched();
     this.detallesPedidos.markAsTouched();
     if (this.pedidoForm.valid) {
@@ -300,9 +358,14 @@ export class PedidoComponent implements OnInit, OnDestroy {
       this.pedidoService.crear(this.pedidoForm.value)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(resp => {
-        this.resetPedidoForm();
-        this.establecerUsuario();
-        this.snackBar.open(resp.mensaje, 'Aceptar', { duration: 2000 });
+        this.snackBarService.open(resp.mensaje);
+        // is es un nuevo pedido
+        if (!this.idPedido) {
+          this.router.navigate(
+            [`../${resp.pedido.id}`],
+            { relativeTo: this.route }
+          );
+        }
       });
     }
   }
@@ -312,7 +375,11 @@ export class PedidoComponent implements OnInit, OnDestroy {
     if (this.pedidoForm.valid) {
       this.pedidoService.actualizar(this.pedidoForm.value)
       .subscribe(resp => {
-        this.snackBar.open(resp.mensaje, 'Aceptar', { duration: 2000 });
+        const facturaAnulada: boolean = this.factura.get('anulado').value;
+        if (facturaAnulada) {
+          this.factura.get('anulado').disable({ onlySelf: true });
+        }
+        this.snackBarService.open(resp.mensaje);
       });
     }
   }
@@ -342,7 +409,7 @@ export class PedidoComponent implements OnInit, OnDestroy {
 
   establecerUsuario(): void {
     this.usuarioService.usuario
-    .pipe(take(1))
+    .pipe(takeRxJS(1))
     .subscribe(usuario => {
       this.usuario.get('id').setValue(usuario.id);
     });
@@ -368,8 +435,19 @@ export class PedidoComponent implements OnInit, OnDestroy {
       ],
       total: 0,
       estado: pedido.estado,
-      factura: pedido.factura
+      factura: pedido.factura ? {
+        numeroFactura: pedido.factura.numeroFactura,
+        fechaEmision: format(
+          new Date(pedido.factura.fechaEmision),
+          'yyyy-MM-dd\'T\'HH:mm'
+        ),
+        anulado: pedido.factura.anulado
+      } : {}
     });
+
+    if (pedido.factura && pedido.factura.anulado) {
+      this.factura.get('anulado').disable({ onlySelf: true });
+    }
 
     pedido.detallesPedidos.forEach(detallePedido => {
       this.agregarDetallePedido(detallePedido);
@@ -386,8 +464,34 @@ export class PedidoComponent implements OnInit, OnDestroy {
   }
 
   crearFactura(idPedido: number): void {
-    const url = this.facturaService.crearFacturaPedidoURL(idPedido);
+    const url = this.pedidoService.crearFactura(idPedido);
     window.open(url, '_blank');
+  }
+
+  anularFactura(checked: boolean): void {
+    console.log('anulado', checked);
+    if (checked) {
+      this.messageDialogService.openDialog({
+        title: 'Anular Factura',
+        message: '¿Desea anular esta factura? este proceso irrebersible',
+        messageDialogConfig: {
+          showCancelButton: true,
+          confirmButtonText: 'Si',
+          confirmButtonColor: 'warn'
+        }
+      })
+      .afterClosed()
+      .subscribe(aceptado => {
+        this.factura.get('anulado').setValue(aceptado);
+        if (aceptado) {
+          this.pedidoService.anularFactura(this.idPedido)
+          .subscribe(resp => {
+            this.factura.get('anulado').disable();
+            this.snackBarService.open(resp.mensaje);
+          });
+        }
+      });
+    }
   }
 
   get usuario(): AbstractControl {
@@ -416,6 +520,10 @@ export class PedidoComponent implements OnInit, OnDestroy {
 
   get fechaEntrega(): AbstractControl {
     return this.pedidoForm.get('fechaEntrega');
+  }
+
+  get factura(): AbstractControl {
+    return this.pedidoForm.get('factura');
   }
 
   get total(): AbstractControl {

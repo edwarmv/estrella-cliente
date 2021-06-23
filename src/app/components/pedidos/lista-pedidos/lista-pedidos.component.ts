@@ -1,31 +1,42 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup } from '@angular/forms';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { Pedido } from '@models/pedido.model';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { EstadoPedido, Pedido } from '@models/pedido.model';
 import { PedidoService } from '@services/pedido.service';
-import { Observable, Subject } from 'rxjs';
-import { debounceTime, map, takeUntil, tap } from 'rxjs/operators';
+import { Column } from '@shared/table/column.interface';
+import { ServerDataSourceCB, ServerDataSourceCBRes } from '@shared/table/server.data-source';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-lista-pedidos',
   templateUrl: './lista-pedidos.component.html',
   styleUrls: ['./lista-pedidos.component.scss']
 })
-export class ListaPedidosComponent implements OnInit, OnDestroy {
-  pedidos$: Observable<Pedido[]>;
-  unsubscribe = new Subject<void>();
-  buscadorForm: FormGroup;
+export class ListaPedidosComponent implements OnInit {
+  pedidosCB: ServerDataSourceCB<Pedido>;
   totalPedidos: number;
   pageIndex = 0;
   pageSize = 5;
-  displayedColumns: string [] = [
-    'posicion',
-    'cliente',
-    'fechaEntrega',
-    'estado',
-    'detalles'
+  tableColumns: Column[] = [
+    { name: 'No.',              type: 'index'        },
+    { name: 'Nombre',           type: 'customColumn' },
+    { name: 'Fecha de entrega', type: 'customColumn' },
+    { name: 'Estado',           type: 'customColumn' },
+    { name: 'Detalles',         type: 'customColumn' },
   ];
-  @ViewChild('paginator') paginator: MatPaginator;
+
+  @ViewChild('nombreColumn', { static: true })
+  nombreColumn: TemplateRef<any>;
+
+  @ViewChild('fechaEntregaColumn', { static: true })
+  fechaEntregaColumn: TemplateRef<any>;
+
+  @ViewChild('estadoColumn', { static: true })
+  estadoColumn: TemplateRef<any>;
+
+  @ViewChild('detallesColumn', { static: true })
+  detallesColumn: TemplateRef<any>;
+
+  termino: string;
+
   filtroEstados = [
     'pendiente',
     'listo',
@@ -33,74 +44,47 @@ export class ListaPedidosComponent implements OnInit, OnDestroy {
     'completado',
     'cancelado'
   ];
-  estado = '';
+  estado: EstadoPedido | '' = '';
   showFiltros = false;
 
   constructor(
     private pedidoService: PedidoService,
-    private fb: FormBuilder,
   ) { }
 
   ngOnInit(): void {
-    this.buscadorForm = this.fb.group({
-      termino: ['']
-    });
+    this.tableColumns[1].template = this.nombreColumn;
+    this.tableColumns[2].template = this.fechaEntregaColumn;
+    this.tableColumns[3].template = this.estadoColumn;
+    this.tableColumns[4].template = this.detallesColumn;
 
-    this.pedidos$ = this.obtenerPedidos(0, this.pageSize);
-
-    this.termino.valueChanges
-    .pipe(
-      takeUntil(this.unsubscribe),
-      debounceTime(300),
-      tap(() => {
-        this.paginator.firstPage();
-        this.reloadPedidos();
-      })
-    )
-    .subscribe();
+    this.pedidosCB = this.obtenerPedidosCB();
   }
 
-  reloadPedidos(): void {
-    this.pedidos$ = this.obtenerPedidos(0, this.pageSize);
+  filtrarPedidos(): void {
+    this.pedidosCB = this.obtenerPedidosCB();
   }
 
-  obtenerPedidos(skip: number, take: number): Observable<Pedido[]> {
-    const termino = this.termino.value;
-
-    return this.pedidoService.obtenerPedidos({
-      skip,
+  obtenerPedidosCB(): ServerDataSourceCB<Pedido> {
+    return ({
       take,
+      skip,
       termino,
-      estado: this.estado
-    })
-    .pipe(
-      map(resp => {
-        this.totalPedidos = resp.total;
-        return resp.pedidos;
-      })
-    );
-  }
-
-  updateTable(pageEvent: PageEvent): void {
-    this.pageSize = pageEvent.pageSize;
-    this.pageIndex = pageEvent.pageIndex;
-
-    const take = pageEvent.pageSize;
-    const skip = pageEvent.pageIndex * take;
-
-    this.pedidos$ = this.obtenerPedidos(skip, take);
-  }
-
-  limpiarBusqueda(): void {
-    this.termino.setValue('');
-  }
-
-  get termino(): AbstractControl {
-    return this.buscadorForm.get('termino');
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscribe.next();
-    this.unsubscribe.complete();
+    }) => {
+      return this.pedidoService.obtenerPedidos({
+        skip,
+        take,
+        estado: this.estado,
+        termino,
+      }).pipe(
+        map((res): ServerDataSourceCBRes<Pedido> => {
+          return {
+            rows: res.pedidos.map(pedido => {
+              return { values: pedido };
+            }),
+            total: res.total,
+          };
+        })
+      );
+    };
   }
 }

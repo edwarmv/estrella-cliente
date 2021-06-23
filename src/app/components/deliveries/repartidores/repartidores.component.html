@@ -1,0 +1,23 @@
+<div class="container">
+
+  <app-table
+    searchPlaceholder="Nombre/NIT/CI del repartidor"
+    [columns]="tableColumns"
+    [rowsCB]="repartidoresCB">
+  </app-table>
+
+  <ng-template #repartidorColumn let-repartidor="element">
+    {{ repartidor.nombre + ' ' + repartidor.apellido }}
+  </ng-template>
+
+  <ng-template #verPedidosColumn let-repartidor="element">
+    <a
+      mat-raised-button
+      type="button"
+      color="primary"
+      [routerLink]="['pedidos-asignados', repartidor.id]">
+      Ver pedidos
+    </a>
+  </ng-template>
+
+</div>

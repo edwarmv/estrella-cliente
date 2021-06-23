@@ -6,63 +6,67 @@ import { CommonModule } from '@angular/common';
 
 import { MenusComponent } from './menus.component';
 import { MenuComponent } from './menu/menu.component';
-import {
-  SeleccionarSubmenuComponent
-} from './seleccionar-submenu/seleccionar-submenu.component';
-import { customPaginator } from '@components/paginator/custom.paginator';
 
-import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatRippleModule } from '@angular/material/core';
+import { ListaMenusComponent } from './lista-menus/lista-menus.component';
+import { TabsModule } from '@shared/tabs/tabs.module';
+import { TableModule } from '@shared/table/table.module';
 
 const routes: Routes = [
   {
     path: '',
-    component: MenusComponent
+    component: MenusComponent,
+    children: [
+      { path: '', redirectTo: 'lista-menus', pathMatch: 'full' },
+      {
+        path: 'lista-menus',
+        data: {
+          breadcrumb: 'Lista de menús'
+        },
+        children: [
+          { path: '', component: ListaMenusComponent },
+          {
+            path: 'nuevo-menu',
+            component: MenuComponent,
+            data: {
+              breadcrumb: 'Nuevo menú'
+            }
+          },
+          {
+            path: ':id',
+            component: MenuComponent,
+            data: {
+              breadcrumb: 'Modificar menú'
+            }
+          }
+        ],
+      },
+    ]
   },
-  {
-    path: 'nuevo-menu',
-    component: MenuComponent,
-    data: {
-      breadcrumb: 'Nuevo menú'
-    }
-  },
-  {
-    path: ':id',
-    component: MenuComponent,
-    data: {
-      breadcrumb: 'Modificar menú'
-    }
-  }
 ];
 
 @NgModule({
-  declarations: [MenusComponent, MenuComponent, SeleccionarSubmenuComponent],
+  declarations: [ MenusComponent, MenuComponent, ListaMenusComponent ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
-    MatTableModule,
     MatButtonModule,
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    MatPaginatorModule,
     MatSnackBarModule,
     MatDialogModule,
     MatRippleModule,
+    TabsModule,
+    TableModule,
   ],
-  providers: [
-    {
-      provide: MatPaginatorIntl,
-      useValue: customPaginator('Menús por página')
-    }
-  ]
+  providers: [ ]
 })
 export class MenusModule { }

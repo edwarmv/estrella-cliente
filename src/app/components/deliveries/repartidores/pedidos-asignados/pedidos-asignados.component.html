@@ -1,0 +1,40 @@
+<div class="container">
+
+  <app-calendar
+    class="calendar"
+    [events]="pedidos$"
+    [(viewDate)]="viewDate"
+    (viewDateChange)="obtenerPedidos()"
+    [(view)]="view"
+    (viewChange)="obtenerPedidos()">
+  </app-calendar>
+
+  <h1>
+    Lista de pedidos
+  </h1>
+
+  <app-table
+    [columns]="tableColumns"
+    [totalRows]="total"
+    [rows]="pedidosTable$ | async"
+    (page)="updateTable($event)">
+  </app-table>
+
+  <ng-template #clienteColumn let-pedido="element">
+    {{ pedido.cliente.nombre + ' ' + pedido.cliente.apellido }}
+  </ng-template>
+
+  <ng-template #fechaEntregaColumn let-pedido="element">
+    {{ pedido.fechaEntrega | date: 'fullDate' }}
+  </ng-template>
+
+  <ng-template #verPedidoColumn let-pedido="element">
+    <a
+      mat-raised-button
+      color="primary"
+      [routerLink]="['/pedidos', pedido.id]">
+      Ver pedido
+    </a>
+  </ng-template>
+
+</div>

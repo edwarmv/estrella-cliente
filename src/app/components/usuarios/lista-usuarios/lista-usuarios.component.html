@@ -1,0 +1,44 @@
+<div class="container">
+
+  <app-table
+    searchPlaceholder="Nombre/CI/NIT"
+    [rowsCB]="usuariosCB"
+    [columns]="tableColumns">
+  </app-table>
+
+  <ng-template #nombreColumn let-usuario="element">
+    {{ usuario.nombre + ' ' + usuario.apellido }}
+  </ng-template>
+
+  <ng-template #nitCiColumn let-usuario="element">
+    {{ usuario.nitCI }}
+  </ng-template>
+
+  <ng-template #emailColumn let-usuario="element">
+    {{ usuario.correoElectronico }}
+  </ng-template>
+
+  <ng-template #rolesColumn let-usuario="element">
+    <a [routerLink]="[usuario.id, 'roles']" mat-mini-fab color="accent">
+      <mat-icon>business</mat-icon>
+    </a>
+  </ng-template>
+
+  <ng-template #masInformacionColumn let-usuario="element">
+    <a [routerLink]="usuario.id" mat-mini-fab color="accent">
+      <mat-icon>edit</mat-icon>
+    </a>
+  </ng-template>
+
+  <ng-template #estadoColumn let-usuario="element">
+    <button
+      mat-mini-fab
+      [color]="usuario.estado ? 'primary' : 'warn'"
+      (click)="cambiarEstado(usuario)">
+      <mat-icon>
+        {{ usuario.estado ? 'check' : 'close'}}
+      </mat-icon>
+    </button>
+  </ng-template>
+
+</div>

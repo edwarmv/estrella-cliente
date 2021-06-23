@@ -1,0 +1,34 @@
+<div class="container">
+
+  <div class="actions">
+    <a routerLink="nuevo-menu" mat-raised-button color="primary">
+      Nuevo menú
+    </a>
+  </div>
+
+  <app-table
+    searchPlaceholder="Nombre del menú"
+    [columns]="tableColumns"
+    [rowsCB]="menusCB">
+  </app-table>
+
+  <ng-template #nombreColumn let-menu="element">
+    {{ menu.nombre }}
+  </ng-template>
+
+  <ng-template #modificarColumn let-menu="element">
+    <a [routerLink]="menu.id" mat-mini-fab color="accent">
+      <mat-icon>edit</mat-icon>
+    </a>
+  </ng-template>
+
+  <ng-template #eliminarColumn let-menu="element">
+    <button
+      mat-mini-fab
+      color="warn"
+      (click)="borrarMenu(menu)">
+      <mat-icon>delete_forever</mat-icon>
+    </button>
+  </ng-template>
+
+</div>

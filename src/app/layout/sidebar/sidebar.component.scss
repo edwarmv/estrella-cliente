@@ -12,15 +12,7 @@
     color: #306816;
   }
 
-  .mat-list-base {
-    padding: 0;
-  }
-
-  .child {
-    a {
-      span{
-        padding-left: 10px;
-      }
-    }
+  .mat-list-item {
+    min-width: 236px;
   }
 }

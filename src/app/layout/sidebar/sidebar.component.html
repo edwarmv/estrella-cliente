@@ -1,38 +1,15 @@
 <mat-nav-list class="container">
 
   <ng-container *ngIf="menus && menus.length > 0; else noMenus">
+    <a
+      *ngFor="let menu of menus; let i = index"
+      mat-list-item
+      [routerLinkActive]="'activated'"
+      [routerLink]="menu.path">
 
-    <ng-container *ngFor="let menu of menus; let i = index">
+      <span matLine>{{ menu.nombre }}</span>
 
-      <a
-        mat-list-item
-        [ngClass]="menu.activated ? 'activated' : ''"
-        (click)="toggleMenu(i)">
-
-        <span matLine>{{ menu.nombre }}</span>
-
-        <mat-icon *ngIf="menu.submenus.length > 0"
-          [@arrow]="menu.collapsed? 'right' : 'down'">
-          keyboard_arrow_right
-        </mat-icon>
-
-      </a>
-
-      <div
-        class="child"
-        *ngIf="!menu.collapsed">
-        <a
-          mat-list-item
-          class="animate__animated animate__fadeIn"
-          [ngClass]="submenu.activated ? 'activated' : ''"
-          *ngFor="let submenu of menu.submenus"
-          [routerLink]="submenu.path">
-          <span matLine>{{ submenu.nombre }}</span>
-        </a>
-      </div>
-
-    </ng-container>
-
+    </a>
   </ng-container>
 
   <ng-template #noMenus>

@@ -1,0 +1,80 @@
+<form class="buscador" [formGroup]="buscadorForm" *ngIf="showSearch && isServerDataSource">
+  <mat-form-field class="mat-input-white" appearance="outline">
+
+    <mat-label>Buscador</mat-label>
+
+    <input
+      type="text"
+      matInput
+      formControlName="termino"
+      [placeholder]="searchPlaceholder">
+
+    <button
+      mat-icon-button
+      matSuffix
+      *ngIf="termino.value"
+      (click)="termino.setValue('')"
+      type="button"
+      matTooltip="Limpiar búsqueda">
+      <mat-icon>clear</mat-icon>
+    </button>
+
+  </mat-form-field>
+</form>
+
+<div class="table-container">
+
+  <div class="table-overflow">
+    <table mat-table [dataSource]="isServerDataSource ? serverDataSource : clientDataSource">
+
+
+      <ng-container
+        *ngFor="let column of columns"
+        [matColumnDef]="column.name">
+
+          <th
+            mat-header-cell
+            *matHeaderCellDef
+            [ngClass]="{'center-column': column.position === 'center'}">
+            {{ column.name }}
+          </th>
+
+            <td
+              mat-cell
+              [ngSwitch]="column.type"
+              [ngClass]="{'center-column': column.position === 'center'}"
+              *matCellDef="let element; let i = index">
+
+              <ng-container *ngSwitchCase="'index'">
+                {{
+                  (i + 1) +
+                  (paginator ? (paginator.pageIndex * paginator.pageSize) : 0)
+                }}
+              </ng-container>
+
+              <ng-container *ngSwitchCase="'customColumn'">
+                <ng-container *ngTemplateOutlet="column.template; context: { element: element.values }">
+                </ng-container>
+              </ng-container>
+
+            </td>
+
+
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnNames"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnNames"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No hay Datos</td>
+      </tr>
+    </table>
+  </div>
+
+  <mat-paginator
+    *ngIf="!hidePaginator"
+    [length]="totalRows"
+    [pageSizeOptions]="paginationSizes"
+    [pageSize]="defaultPageSize"
+    showFirstLastButtons>
+  </mat-paginator>
+</div>

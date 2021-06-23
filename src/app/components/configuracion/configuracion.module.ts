@@ -10,26 +10,30 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { GeneradorCodigoControlComponent } from './generador-codigo-control/generador-codigo-control.component';
+import { TabsModule } from '@shared/tabs/tabs.module';
 
 const routes: Routes = [
   {
     path: '',
-    component: ConfiguracionComponent
+    component: ConfiguracionComponent,
+    children: [
+      { path: '', redirectTo: 'casa-matriz', pathMatch: 'full' },
+      {
+        path: 'casa-matriz',
+        component: CasaMatrizComponent,
+        data: {
+          breadcrumb: 'Casa matriz'
+        }
+      },
+      {
+        path: 'generador-codigo-control',
+        component: GeneradorCodigoControlComponent,
+        data: {
+          breadcrumb: 'Generador de código de control'
+        }
+      }
+    ]
   },
-  {
-    path: 'casa-matriz',
-    component: CasaMatrizComponent,
-    data: {
-      breadcrumb: 'Casa matriz'
-    }
-  },
-  {
-    path: 'generador-codigo-control',
-    component: GeneradorCodigoControlComponent,
-    data: {
-      breadcrumb: 'Generador de código de control'
-    }
-  }
 ];
 
 @NgModule({
@@ -48,6 +52,7 @@ const routes: Routes = [
     MatInputModule,
     MatButtonModule,
     MatSnackBarModule,
+    TabsModule,
   ]
 })
 export class ConfiguracionModule { }

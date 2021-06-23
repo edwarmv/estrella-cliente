@@ -12,57 +12,14 @@
       <mat-error *ngIf="nombre.invalid">El nombre es requerido</mat-error>
     </mat-form-field>
 
-    <div class="submenus" formArrayName="submenus">
-
-      <h2>Submenús asignados</h2>
-
-      <div class="agregar-submenu">
-        <button mat-stroked-button
-          (click)="seleccionarSubmenu()"
-          [color]="submenus.invalid ? 'warn' : 'primary'"
-          type="button">
-          Seleccionar submenú
-        </button>
-        <div class="error submenus-duplicados"
-          *ngIf="submenus.errors?.idsDuplicados">
-          <p>
-            Submenús duplicados
-          </p>
-          <ul>
-            <li *ngFor="let submenu of submenus.errors.values">
-              {{ submenu.value.nombre }}
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <ng-container *ngFor="let submenu of submenus.controls; let i = index">
-        <div class="submenu" [formGroupName]="i">
-
-          <div class="nombre">
-
-            <mat-form-field>
-              <mat-label>Nombre</mat-label>
-              <input matInput formControlName="nombre" readonly type="text">
-            </mat-form-field>
-
-            <button
-              (click)="eliminarSubmenu(i)"
-              mat-icon-button
-              type="button"
-              color="warn">
-              <mat-icon>delete</mat-icon>
-            </button>
-
-          </div>
-
-        </div>
-      </ng-container>
-
-    </div>
+    <mat-form-field>
+      <mat-label>Path</mat-label>
+      <input matInput formControlName="path">
+      <mat-error *ngIf="nombre.invalid">El path es requerido</mat-error>
+    </mat-form-field>
 
     <div class="buttons">
-      <a class="button" mat-stroked-button type="button" routerLink="/menus">
+      <a class="button" mat-stroked-button type="button" routerLink="../">
         Volver
       </a>
 

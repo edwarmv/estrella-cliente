@@ -22,10 +22,6 @@ export class FacturaService {
     private http: HttpClient,
   ) { }
 
-  crearFacturaPedidoURL(idPedido: number): string {
-    return `${environment.apiURL}/factura-pedido/${idPedido}`;
-  }
-
   generarCodigoControl(codigoControl: CodigoControl): Observable<string> {
     const url = `${environment.apiURL}/factura/codigo-control`;
 

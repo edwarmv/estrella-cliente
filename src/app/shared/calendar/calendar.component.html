@@ -1,0 +1,151 @@
+<div class="title-container">
+  <div class="date-changer button-group item-1">
+
+    <button
+      class="button"
+      matRipple
+      mwlCalendarPreviousView
+      [view]="view"
+      [(viewDate)]="viewDate"
+      (viewDateChange)="closeOpenMonthViewDay()">
+      Anterior
+    </button>
+
+    <button
+      class="button"
+      matRipple
+      mwlCalendarToday
+      [(viewDate)]="viewDate"
+      (viewDateChange)="closeOpenMonthViewDay()">
+      Hoy
+    </button>
+
+    <button
+      class="button"
+      matRipple
+      mwlCalendarNextView
+      [view]="view"
+      [(viewDate)]="viewDate"
+      (viewDateChange)="closeOpenMonthViewDay()">
+      Siguiente
+    </button>
+
+  </div>
+
+  <h3 class="title item-2">
+    {{ viewDate | date: 'longDate' }}
+  </h3>
+
+  <div class="button-group item-3">
+
+    <button
+      class="button"
+      matRipple
+      (click)="viewChange.emit(CalendarView.Month)"
+      [class.active]="view === CalendarView.Month">
+      Mes
+    </button>
+
+    <button
+      class="button"
+      matRipple
+      (click)="viewChange.emit(CalendarView.Week)"
+      [class.active]="view === CalendarView.Week">
+      Semana
+    </button>
+
+    <button
+      class="button"
+      matRipple
+      (click)="viewChange.emit(CalendarView.Day)"
+      [class.active]="view === CalendarView.Day">
+      Día
+    </button>
+
+  </div>
+
+</div>
+
+<ng-container *ngIf="events$ | async; else loading; let events">
+
+  <div class="calendar-container animate__animated animate__fadeIn animate__fast" [ngSwitch]="view">
+
+    <mwl-calendar-month-view
+      *ngSwitchCase="CalendarView.Month"
+      [headerTemplate]="customHeaderTemplate"
+      [cellTemplate]="customCellTemplate"
+      [viewDate]="viewDate"
+      [events]="events"
+      [activeDayIsOpen]="activeDayIsOpen"
+      (dayClicked)="dayClicked($event.day)"
+      (eventClicked)="handleEvent.emit({ event: $event.event })">
+    </mwl-calendar-month-view>
+
+    <ng-container *ngIf="!mediaQueryList.matches">
+      <mwl-calendar-week-view
+        *ngSwitchCase="CalendarView.Week"
+        [viewDate]="viewDate"
+        [events]="events"
+        (eventClicked)="handleEvent.emit({ event: $event.event })">
+      </mwl-calendar-week-view>
+    </ng-container>
+
+    <mwl-calendar-day-view
+      *ngSwitchCase="CalendarView.Day"
+      [viewDate]="viewDate"
+      [events]="events"
+      (eventClicked)="handleEvent.emit({ event: $event.event })">
+    </mwl-calendar-day-view>
+
+  </div>
+
+</ng-container>
+
+<ng-template #loading>
+  <mat-spinner></mat-spinner>
+</ng-template>
+
+<ng-template #customHeaderTemplate let-days="days">
+
+  <div class="background-grip">
+
+    <div class="custom-header">
+
+      <div *ngFor="let day of days" class="day-item">
+        {{
+          mediaQueryList.matches ?
+          (day.date
+            | calendarDate: 'weekViewColumnHeader'
+            | titlecase
+            | slice: 0 : 1
+          )
+          : (day.date | calendarDate: 'weekViewColumnHeader' | titlecase)
+        }}
+      </div>
+
+    </div>
+
+  </div>
+
+</ng-template>
+
+<ng-template #customCellTemplate let-day="day" let-locale="locale">
+  <div
+    class="custom-cell"
+    [ngClass]="[
+      day.inMonth ? 'in-mounth' : 'out-mounth',
+      day.isToday ? 'is-today' : '']">
+
+    <span class="day-number">
+      {{ day.date | calendarDate:'monthViewDayNumber' }}
+    </span>
+
+    <span class="badge" *ngIf="day.badgeTotal">
+      {{ day.badgeTotal }}
+    </span>
+
+  </div>
+  <!-- <small style="margin: 5px;">
+    There are {{ day.events.length }} events on this day
+  </small> -->
+</ng-template>

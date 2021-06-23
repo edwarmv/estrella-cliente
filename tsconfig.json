@@ -4,6 +4,7 @@
     "baseUrl": "./",
     "paths": {
       "@components/*": ["src/app/components/*"],
+      "@shared/*": ["src/app/shared/*"],
       "@validators/*": ["src/app/validators/*"],
       "@services/*": ["src/app/services/*"],
       "@directives/*": ["src/app/directives/*"],
@@ -22,9 +23,12 @@
     "lib": [
       "es2018",
       "dom"
+    ],
+    "plugins": [
+      { "name": "typescript-tslint-plugin" }
     ]
   },
   "angularCompilerOptions": {
-    "strictTemplates": true
+    "strictTemplates": true,
   }
 }

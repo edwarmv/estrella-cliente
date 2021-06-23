@@ -1,0 +1,39 @@
+<div class="container">
+
+  <app-table
+    searchPlaceholder="Nombre del cliente"
+    [columns]="tableColumns"
+    [rowsCB]="pedidosCB">
+  </app-table>
+
+  <ng-template #clienteColumn let-pedido="element">
+    {{ pedido.cliente.nombre + ' ' + pedido.cliente.apellido }}
+  </ng-template>
+
+  <ng-template #fechaEntregaColumn let-pedido="element">
+    {{ pedido.fechaEntrega | date: 'dd/MM/yyyy - HH:mm' }}
+  </ng-template>
+
+  <ng-template #detallePedidoColumn let-pedido="element">
+    <a mat-raised-button
+      color="accent"
+      [routerLink]="['/pedidos/lista-pedidos', pedido.id]">
+      Ver detalle
+    </a>
+  </ng-template>
+
+  <ng-template #repartidorColumn let-pedido="element">
+    {{
+      pedido.repartidor ?
+        pedido.repartidor.nombre + ' ' + pedido.repartidor.apellido :
+        'Sin repartidor asignado'
+    }}
+  </ng-template>
+
+  <ng-template #asignarRepartidorColumn let-pedido="element">
+    <button mat-mini-fab color="primary" (click)="asignarRepartidor(pedido.id)">
+      <mat-icon>add</mat-icon>
+    </button>
+  </ng-template>
+
+</div>

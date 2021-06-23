@@ -7,9 +7,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { RolComponent } from './rol/rol.component';
 
-import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
-import { customPaginator } from '@components/paginator/custom.paginator';
-import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -17,40 +14,56 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { SeleccionarMenuComponent } from './seleccionar-menu/seleccionar-menu.component';
 import { MatRippleModule } from '@angular/material/core';
+import { ListaRolesComponent } from './lista-roles/lista-roles.component';
+import { TabsModule } from '@shared/tabs/tabs.module';
+import { TableModule } from '@shared/table/table.module';
+import { SelectionListDialogModule } from '@shared/selection-list-dialog/selection-list-dialog.module';
 
 const routes: Routes = [
-  { path: '', component: RolesComponent },
   {
-    path: 'nuevo-rol',
-    component: RolComponent,
-    data: {
-      breadcrumb: 'Registrar rol'
-    }
+    path: '',
+    component: RolesComponent,
+    children: [
+      { path: '', redirectTo: 'lista-roles', pathMatch: 'full' },
+      {
+        path: 'lista-roles',
+        data: {
+          breadcrumb: 'Lista de roles'
+        },
+        children: [
+          { path: '', component: ListaRolesComponent },
+          {
+            path: 'nuevo-rol',
+            component: RolComponent,
+            data: {
+              breadcrumb: 'Registrar rol'
+            }
+          },
+          {
+            path: ':id',
+            component: RolComponent,
+            data: {
+              breadcrumb: 'Modificar rol'
+            }
+          }
+        ]
+      }
+    ]
   },
-  {
-    path: ':id',
-    component: RolComponent,
-    data: {
-      breadcrumb: 'Modificar rol'
-    }
-  }
 ];
 
 @NgModule({
   declarations: [
     RolesComponent,
     RolComponent,
-    SeleccionarMenuComponent,
+    ListaRolesComponent,
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
     FormsModule,
     ReactiveFormsModule,
-    MatPaginatorModule,
-    MatTableModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
@@ -59,12 +72,10 @@ const routes: Routes = [
     MatDialogModule,
     MatSnackBarModule,
     MatRippleModule,
+    TabsModule,
+    TableModule,
+    SelectionListDialogModule,
   ],
-  providers: [
-    {
-      provide: MatPaginatorIntl,
-      useValue: customPaginator('Roles por página')
-    }
-  ]
+  providers: [ ]
 })
 export class RolesModule { }

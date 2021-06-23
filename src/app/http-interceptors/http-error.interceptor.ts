@@ -21,8 +21,15 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     return next.handle(req)
     .pipe(
       catchError((error: HttpErrorResponse) => {
+        let message: string;
+        if (error.error.mensaje) {
+          message = error.error.mensaje;
+        }
+        if (error.error.message) {
+          message = error.error.message;
+        }
         this.snackBar.open(
-          `Error: ${error.error.mensaje ? error.error.mensaje : error.error}`,
+          `Error: ${message}`,
           'Aceptar',
           {
             duration: 3000,

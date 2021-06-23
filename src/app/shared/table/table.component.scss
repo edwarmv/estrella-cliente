@@ -1,0 +1,41 @@
+.buscador {
+  .mat-form-field {
+    width: 100%;
+  }
+
+  ::ng-deep .mat-form-field-wrapper {
+    margin-bottom: 17.5px;
+    padding: 0;
+  }
+}
+
+.table-container {
+  border-radius: var(--default-border-radius);
+  box-shadow:
+    0 5px 5px -3px rgba(0,0,0,.2),
+    0 8px 10px 1px rgba(0,0,0,.14),
+    0 3px 14px 2px rgba(0,0,0,.12);
+
+  .table-overflow {
+    border-top-left-radius: var(--default-border-radius);
+    border-top-right-radius: var(--default-border-radius);
+    overflow: auto;
+
+    table {
+      width: 100%;
+
+      th, td {
+        padding: 0 20px;
+      }
+
+      .center-column {
+        text-align: center;
+      }
+    }
+  }
+}
+
+mat-paginator {
+  border-bottom-left-radius: var(--default-border-radius);
+  border-bottom-right-radius: var(--default-border-radius);
+}

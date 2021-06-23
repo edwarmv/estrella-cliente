@@ -19,13 +19,13 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private activatedRoute: ActivatedRoute,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
     // cuando se recarga la pagina
     this.breadcrumbs = this.buildBreadCrumb(
-      this.activatedRoute.root
+      this.route.root
     );
 
     // solo se activa si hay un cambio en el path
@@ -34,7 +34,7 @@ export class BreadcrumbsComponent implements OnInit, OnDestroy {
       distinctUntilChanged()
     ).subscribe(() => {
       this.breadcrumbs = this.buildBreadCrumb(
-        this.activatedRoute.root
+        this.route.root
       );
     });
   }

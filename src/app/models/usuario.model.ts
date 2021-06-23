@@ -1,3 +1,4 @@
+import { Pedido } from './pedido.model';
 import { RolUsuario } from './rol-usuario.model';
 
 export class Usuario {
@@ -14,6 +15,7 @@ export class Usuario {
     public fotoPerfil: string,
     public esEmpleado: boolean,
     public estado: boolean,
-    public rolesUsuarios: RolUsuario[]
+    public rolesUsuarios: RolUsuario[],
+    public pedidos: Pedido[],
   ) {}
 }

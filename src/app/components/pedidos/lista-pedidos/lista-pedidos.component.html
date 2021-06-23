@@ -1,27 +1,10 @@
 <div class="container">
 
-  <form class="buscador" [formGroup]="buscadorForm">
-    <mat-form-field class="mat-input-white" appearance="outline">
-
-      <mat-label>Buscador</mat-label>
-
-      <input
-        type="text"
-        matInput formControlName="termino"
-        placeholder="Nombre del submenú">
-
-      <button
-        mat-icon-button
-        matSuffix
-        *ngIf="termino.value"
-        (click)="limpiarBusqueda()"
-        type="button"
-        matTooltip="Limpiar búsqueda">
-        <mat-icon>clear</mat-icon>
-      </button>
-
-    </mat-form-field>
-  </form>
+  <div class="actions">
+    <a routerLink="nuevo-pedido" mat-raised-button color="primary">
+      Nuevo pedido
+    </a>
+  </div>
 
   <div class="filtrar-button">
     <button
@@ -34,7 +17,7 @@
 
   <div class="filtros" [hidden]="!showFiltros">
     <p class="title">Filtrar por estado</p>
-    <mat-radio-group [(ngModel)]="estado" (change)="reloadPedidos()">
+    <mat-radio-group [(ngModel)]="estado" (change)="filtrarPedidos()">
       <ul class="lista-filtros">
         <li *ngFor="let filtro of filtroEstados">
           <mat-radio-button [value]="filtro">
@@ -50,68 +33,31 @@
     </mat-radio-group>
   </div>
 
-  <div class="table-container">
+  <app-table
+    class="table"
+    [columns]="tableColumns"
+    searchPlaceholder="Nombre del cliente"
+    [rowsCB]="pedidosCB">
+  </app-table>
 
-    <div class="table-overflow">
-      <table mat-table [dataSource]="pedidos$ | async">
+  <ng-template #nombreColumn let-pedido="element">
+    {{ pedido.cliente.nombre + ' ' + pedido.cliente.apellido }}
+  </ng-template>
 
-        <!-- posicion -->
-        <ng-container matColumnDef="posicion">
-          <th mat-header-cell *matHeaderCellDef>No.</th>
-          <td mat-cell *matCellDef="let i = index">
-            {{ (i + 1) + pageIndex * pageSize }}
-          </td>
-        </ng-container>
+  <ng-template #fechaEntregaColumn let-pedido="element">
+    {{ pedido.fechaEntrega | date: 'dd/MM/yyyy - HH:mm' }}
+  </ng-template>
 
-        <!-- cliente -->
-        <ng-container matColumnDef="cliente">
-          <th mat-header-cell *matHeaderCellDef>Nombre</th>
-          <td mat-cell *matCellDef="let pedido">
-            {{ pedido.cliente.nombre + ' ' + pedido.cliente.apellido }}
-          </td>
-        </ng-container>
+  <ng-template #estadoColumn let-pedido="element">
+    <span class="estado-pedido" [ngClass]="pedido.estado">
+      {{ pedido.estado }}
+    </span>
+  </ng-template>
 
-        <!-- fechaEntrega -->
-        <ng-container matColumnDef="fechaEntrega">
-          <th mat-header-cell *matHeaderCellDef>Fecha de entrega</th>
-          <td class="icon" mat-cell *matCellDef="let pedido">
-            {{ pedido.fechaEntrega | date: 'dd/MM/yyyy - HH:mm' }}
-          </td>
-        </ng-container>
-
-        <!-- estado -->
-        <ng-container matColumnDef="estado">
-          <th mat-header-cell *matHeaderCellDef>Estado</th>
-          <td class="icon" mat-cell *matCellDef="let pedido">
-            <span class="estado-pedido" [ngClass]="pedido.estado">
-              {{ pedido.estado }}
-            </span>
-          </td>
-        </ng-container>
-
-        <!-- Detalles -->
-        <ng-container matColumnDef="detalles">
-          <th mat-header-cell *matHeaderCellDef>Detalles</th>
-          <td class="icon" mat-cell *matCellDef="let pedido">
-            <a [routerLink]="['/pedidos', pedido.id]" mat-mini-fab color="accent">
-              <mat-icon>edit</mat-icon>
-            </a>
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>
-    </div> <!--end table-overflow-->
-
-    <mat-paginator
-      #paginator
-      [length]="totalPedidos"
-      [pageSizeOptions]="[5, 10, 20]"
-      (page)="updateTable($event)"
-      showFirstLastButtons>
-    </mat-paginator>
-
-  </div> <!--end table-container-->
+  <ng-template #detallesColumn let-pedido="element">
+    <a [routerLink]="[pedido.id]" mat-mini-fab color="accent">
+      <mat-icon>edit</mat-icon>
+    </a>
+  </ng-template>
 
 </div>

@@ -1,7 +1,6 @@
 import { Cliente } from './cliente.model';
 import { DetallePedido } from './detalle-pedido.model';
 import { Factura } from './factura.model';
-import { PedidoRepartidor } from './pedido-repartidor.model';
 import { Usuario } from './usuario.model';
 
 export enum EstadoPedido {
@@ -23,7 +22,7 @@ export class Pedido {
     public estado: EstadoPedido,
     public usuario: Usuario,
     public cliente: Cliente,
-    public pedidosRepartidores: PedidoRepartidor[],
+    public repartidor: Usuario,
     public detallesPedidos: DetallePedido[],
     public factura: Factura,
   ) {}

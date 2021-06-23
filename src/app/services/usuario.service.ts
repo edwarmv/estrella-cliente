@@ -46,12 +46,20 @@ export class UsuarioService {
   }
 
   obtenerUsuarios(
-    skip: number,
-    take: number,
-    termino: string = ''
+    {
+      skip = 0,
+      take = 5,
+      termino = '',
+      rol = '',
+    }: {
+      skip?: number,
+      take?: number,
+      termino?: string,
+      rol?: string,
+    }
   ): Observable<ObtenerUsuarios> {
     const url = `${this.usuarioURL}\
-?skip=${skip}&take=${take}&termino=${termino}`;
+?skip=${skip}&take=${take}&termino=${termino}&rol=${rol}`;
     return this.http.get<ObtenerUsuarios>(url);
   }
 

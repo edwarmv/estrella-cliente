@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
 import { AutenticacionService } from '@services/autenticacion.service';
 import {
   MessageDialogService
-} from '@components/message-dialog/message-dialog.service';
+} from '@shared/message-dialog/message-dialog.service';
 
 @Component({
   selector: 'app-login',

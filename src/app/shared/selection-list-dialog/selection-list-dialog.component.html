@@ -1,0 +1,47 @@
+<h1 mat-dialog-title>
+  {{ data.title }}
+</h1>
+
+<div mat-dialog-content class="content">
+
+  <form [formGroup]="buscador" class="buscador" *ngIf="!data.search.hide">
+    <mat-form-field>
+      <mat-label>Buscador</mat-label>
+      <input
+        matInput
+        [placeholder]="data.search.placeholder"
+        formControlName="termino"
+        type="text">
+    </mat-form-field>
+  </form>
+
+  <cdk-virtual-scroll-viewport [itemSize]="50" class="virtual-scroll">
+    <div
+      matRipple
+      class="item"
+      (click)="seleccionarItem(item.value)"
+      *cdkVirtualFor="let item of items">
+
+      <ng-container *ngIf="data.customElement; else label">
+        <ng-container
+          *ngTemplateOutlet="data.customElement; context: { item: item ? item.value : {} }">
+        </ng-container>
+      </ng-container>
+
+      <ng-template #label>
+        <span>
+          {{ item? item.label : 'Cargando...' }}
+        </span>
+      </ng-template>
+
+    </div>
+    <p *ngIf="items.length === 0">Sin resultados</p>
+  </cdk-virtual-scroll-viewport>
+
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="">
+    Cancelar
+  </button>
+</div>

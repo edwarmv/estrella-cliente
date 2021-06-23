@@ -1,0 +1,30 @@
+.content {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 32px - 68px);
+
+  .buscador {
+    position: sticky;
+    top: 0;
+    background: #ffffff;
+
+    .mat-form-field {
+      width: 100%;
+    }
+  }
+
+  .virtual-scroll {
+    height: 100%;
+
+    .item {
+      border-bottom: solid #c3c3c3 0.5px;
+      margin-bottom: 16px;
+      padding: 5px;
+
+      &:hover {
+        cursor: pointer;
+        background: #efefef;
+      }
+    }
+  }
+}

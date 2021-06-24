@@ -1,22 +1,19 @@
+@use 'src/styles' as styles;
+
 .container {
   display: flex;
   flex-direction: column;
-  margin: 40px 20px;
-
-  @media only screen and (min-width: 500px) {
-    align-items: center;
-  }
+  padding: 40px 20px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 370px;
 
   form {
     display: flex;
     flex-direction: column;
     background: #ffff;
     padding: 20px;
-    border-radius: 5px;
-
-    @media only screen and (min-width: 500px) {
-      width: 400px;
-    }
+    @include styles.shadow-border;
 
     .submit {
       margin-top: 16px;

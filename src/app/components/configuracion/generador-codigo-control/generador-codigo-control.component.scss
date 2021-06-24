@@ -1,22 +1,15 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  margin: 40px 20px;
+@use 'src/styles' as styles;
 
-  @media only screen and (min-width: 550px) {
-    align-items: center;
-  }
+.container {
+  @include styles.default-container;
+  max-width: 370px;
 
   form {
     display: flex;
     flex-direction: column;
     background: #ffff;
     padding: 20px;
-    border-radius: 5px;
-
-    @media only screen and (min-width: 550px) {
-      width: 460px;
-    }
+    @include styles.shadow-border;
 
     .submit {
       margin-top: 16px;
@@ -34,9 +27,6 @@
     margin: 40px 0;
     display: flex;
     flex-direction: column;
-
-    @media only screen and (min-width: 550px) {
-      width: 460px;
-    }
+    @include styles.shadow-border;
   }
 }

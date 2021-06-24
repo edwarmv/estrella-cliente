@@ -1,15 +1,15 @@
+@use 'src/styles' as styles;
+
 .container {
-  padding: 40px 20px;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 280px;
+  @include styles.default-container;
+  max-width: 300px;
 
   .inner-container {
     background: white;
-    border-radius: 5px;
     padding: 20px;
     display: flex;
     flex-direction: column;
+    @include styles.shadow-border;
 
     .asignar-rol-btn {
       align-self: center;

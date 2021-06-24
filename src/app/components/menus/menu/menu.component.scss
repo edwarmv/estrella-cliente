@@ -1,15 +1,15 @@
+@use 'src/styles' as styles;
+
 .container {
-  padding: 40px 20px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  @include styles.default-container;
+  max-width: 300px;
 
   form {
     display: flex;
     flex-direction: column;
     background: white;
-    border-radius: 5px;
     padding: 20px;
+    @include styles.shadow-border;
 
     .buttons {
       .button {

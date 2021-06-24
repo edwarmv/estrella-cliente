@@ -1,27 +1,16 @@
+@use 'src/styles' as styles;
+
 .container {
-  margin: 40px 20px;
-  display: flex;
-  flex-direction: column;
-
-  @media only screen and (min-width: 1024px) {
-   align-items: center;
-  }
-
-  .mat-form-field {
-    min-width: 0;
-  }
+  @include styles.default-container;
+  max-width: 800px;
 
   form {
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     padding: 20px;
-    border-radius: 5px;
     background: white;
-
-    @media only screen and (min-width: 1024px) {
-      width: 700px;
-    }
+    @include styles.shadow-border;
 
     .cliente {
       display: grid;

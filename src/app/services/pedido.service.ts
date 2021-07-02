@@ -16,8 +16,8 @@ export class PedidoService {
 
   crear(pedido: Pedido): Observable<{ mensaje: string, pedido: Pedido }> {
     return this.http.post<{
-    mensaje: string,
-    pedido: Pedido
+      mensaje: string,
+      pedido: Pedido
     }>(this.url, pedido);
   }
 
@@ -83,8 +83,7 @@ export class PedidoService {
     take: number,
     termino: string = ''
   ): Observable<{ pedidos: Pedido[], total: number }> {
-    const url = `${this.url}/factura?\
-skip=${skip}&take=${take}&termino=${termino}`;
+    const url = `${this.url}/factura?skip=${skip}&take=${take}&termino=${termino}`;
 
     return this.http.get<{ pedidos: Pedido[], total: number }>(url);
   }

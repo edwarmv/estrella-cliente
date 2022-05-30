@@ -1,0 +1,73 @@
+.container {
+  .table-container {
+    max-height: 250px;
+    overflow: auto;
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+
+      tbody {
+        tr {
+          &:hover {
+            background-color: #e7f4e9;
+          }
+
+          .monto {
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+      }
+
+      th, td {
+        padding: 8px;
+
+        &.eliminar {
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .editar-monto {
+    border: 2px solid var(--primary-color);
+    border-radius: var(--default-border-radius);
+    padding: 10px;
+    box-sizing: border-box;
+    width: 100%;
+    margin-top: 16.5px;
+
+    .id-fecha-pago {
+      .id {
+        margin-right: 16.5px;
+      }
+    }
+
+    form {
+      display: flex;
+      align-items: baseline;
+
+      .index {
+        padding-right: 8px;
+      }
+
+      .mat-form-field {
+        width: 100%;
+        padding-right: 8px;
+        ::ng-deep .mat-form-field-infix {
+          width: auto;
+        }
+      }
+
+      button {
+        width: 100%;
+      }
+    }
+
+    .error {
+      color: var(--warn-color);
+    }
+  }
+}

@@ -1,5 +1,7 @@
+import { Caja } from './caja.model';
 import { CasaMatriz } from './casa-matriz.model';
 import { Dosificacion } from './dosificacion.model';
+import { ProductoSucursal } from './producto-sucursal.model';
 
 export class Sucursal {
   constructor(
@@ -8,8 +10,10 @@ export class Sucursal {
     public direccion: string,
     public ubicacion: string,
     public numeroTelefono: string,
-    public correoElectronico: string,
+    public estado: boolean,
     public casaMatriz: CasaMatriz,
     public dosificaciones: Dosificacion[],
+    public cajas: Caja[],
+    public productosSucursales: ProductoSucursal[],
   ) {}
 }

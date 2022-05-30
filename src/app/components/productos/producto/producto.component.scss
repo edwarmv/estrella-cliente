@@ -1,14 +1,14 @@
+@use 'src/styles/styles' as styles;
+
 .container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
-  margin: 40px;
+  @include styles.default-container;
+  max-width: 400px;
 
   .content {
     padding: 20px;
     border-radius: 5px;
     background: white;
+    @include styles.shadow-border;
 
     .foto-producto {
       display: flex;
@@ -26,20 +26,47 @@
       }
     }
 
-    form {
-      max-width: 300px;
-
-      mat-form-field {
+    .form {
+      .mat-form-field {
         width: 100%;
       }
 
       .buttons {
         margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
 
-        .button {
-          margin: 4px 4px 0 0;
+        @media only screen and (min-width: 700px) {
+          flex-direction: row;
+          justify-content: flex-end;
         }
       }
     }
+  }
+}
+
+.agregar-categoria {
+  margin: {
+    left: auto;
+    right: auto;
+  }
+}
+
+.categorias {
+  list-style-type: none;
+  padding: 0;
+}
+
+.categorias__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+
+  &:hover {
+    background-color: rgba(63, 181, 64, 0.15);
+    border-radius: 5px;
+    cursor: pointer;
   }
 }

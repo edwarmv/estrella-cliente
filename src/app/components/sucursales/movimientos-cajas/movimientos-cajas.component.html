@@ -1,0 +1,59 @@
+<div class="my-container">
+  <div class="filtro my-section">
+    <h2>Buscar por fechas</h2>
+    <form class="form" [formGroup]="dateFilterForm">
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha inicial</mat-label>
+        <input matInput type="date" formControlName="startDate">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha final</mat-label>
+        <input matInput type="date" formControlName="endDate">
+      </mat-form-field>
+    </form>
+  </div>
+
+  <app-table
+    [showSearch]="false"
+    [columns]="tableColumns"
+    [rowsCB]="movimientosCajasCB"
+  ></app-table>
+
+  <ng-template #cajaColumn let-movimientoCaja="element">
+    {{ movimientoCaja.caja.nombre }}
+  </ng-template>
+
+  <ng-template #fechaHoraColumn let-movimientoCaja="element">
+    {{ movimientoCaja.fechaMovimiento | date: 'dd/MM/yyyy - HH:mm' }}
+  </ng-template>
+
+  <ng-template #tipoColumn let-movimientoCaja="element">
+    {{
+      movimientoCaja.tipo === "ingreso_efectivo"
+        ? "Ingreso de efectivo"
+        : "Retiro de efectivo"
+    }}
+  </ng-template>
+
+  <ng-template #estadoAnteriorColumn let-movimientoCaja="element">
+    {{ movimientoCaja.estadoAnterior }}
+  </ng-template>
+
+  <ng-template #cantidadColumn let-movimientoCaja="element">
+    {{ movimientoCaja.cantidad }}
+  </ng-template>
+
+  <ng-template #estadoActualColumn let-movimientoCaja="element">
+    {{ movimientoCaja.estadoActual }}
+  </ng-template>
+
+  <ng-template #usuarioColumn let-movimientoCaja="element">
+    {{ movimientoCaja.usuario.nombre + " " + movimientoCaja.usuario.apellido }}
+  </ng-template>
+
+  <ng-template #motivoColumn let-movimientoCaja="element">
+    <button mat-raised-button color="primary" (click)="openMotivoDialog(movimientoCaja)">
+      Ver
+    </button>
+  </ng-template>
+</div>

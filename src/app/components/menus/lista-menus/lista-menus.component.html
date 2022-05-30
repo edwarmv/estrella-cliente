@@ -1,16 +1,13 @@
 <div class="container">
-
   <div class="actions">
-    <a routerLink="nuevo-menu" mat-raised-button color="primary">
-      Nuevo menú
-    </a>
+    <a routerLink="nuevo-menu" mat-raised-button color="primary">Nuevo menú</a>
   </div>
 
   <app-table
     searchPlaceholder="Nombre del menú"
     [columns]="tableColumns"
-    [rowsCB]="menusCB">
-  </app-table>
+    [rowsCB]="menusCB"
+  ></app-table>
 
   <ng-template #nombreColumn let-menu="element">
     {{ menu.nombre }}
@@ -23,12 +20,8 @@
   </ng-template>
 
   <ng-template #eliminarColumn let-menu="element">
-    <button
-      mat-mini-fab
-      color="warn"
-      (click)="borrarMenu(menu)">
+    <button mat-mini-fab color="warn" (click)="borrarMenu(menu)">
       <mat-icon>delete_forever</mat-icon>
     </button>
   </ng-template>
-
 </div>

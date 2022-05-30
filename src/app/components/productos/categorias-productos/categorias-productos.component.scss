@@ -1,0 +1,9 @@
+@use 'src/styles/styles' as styles;
+.container {
+  @include styles.default-container;
+  max-width: 500px;
+}
+
+.my-section {
+  text-align: right;
+}

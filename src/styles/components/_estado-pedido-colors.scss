@@ -1,0 +1,17 @@
+  .estado-pedido-colors {
+    &.pendiente {
+      color: var(--pendiente);
+    }
+
+    &.listo {
+      color: var(--listo);
+    }
+
+    &.entregado {
+      color: var(--entregado);
+    }
+
+    &.completado {
+      color: var(--completado);
+    }
+  }

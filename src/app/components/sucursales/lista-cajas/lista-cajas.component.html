@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="my-section actions">
+    <a routerLink="nueva-caja" mat-raised-button color="primary">
+      Nueva caja
+    </a>
+  </div>
+  <app-table
+    [columns]="tableColumns"
+    [rowsCB]="cajasCB"
+    searchPlaceholder="Nombre de caja y sucursal"
+  ></app-table>
+
+  <ng-template #nombreColumn let-caja="element">
+    {{ caja.nombre }}
+  </ng-template>
+
+  <ng-template #sucursalColumn let-caja="element">
+    {{ caja.sucursal.nombre }}
+  </ng-template>
+
+  <ng-template #estadoColumn let-caja="element">
+    <span
+      class="estado-caja"
+      [ngClass]="{
+        'estado-caja--activo': caja.estado,
+        'estado-caja--inactivo': !caja.estado
+      }"
+    >
+      {{ caja.estado ? 'Activo' : 'Inactivo' }}
+    </span>
+  </ng-template>
+
+  <ng-template #editarColumn let-caja="element">
+    <a [routerLink]="[caja.id]" mat-mini-fab color="accent">
+      <mat-icon>edit</mat-icon>
+    </a>
+  </ng-template>
+</div>

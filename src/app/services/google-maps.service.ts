@@ -11,7 +11,6 @@ export class GoogleMapsService {
   apiLoaded =  new BehaviorSubject<boolean>(false);
 
   constructor(private httpClient: HttpClient) {
-    console.log('googleMapsService');
     this.httpClient.jsonp(
       `https://maps.googleapis.com/maps/api/js?\
 key=${environment.googleMapsKey}`,

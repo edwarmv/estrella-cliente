@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>{{ title }}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="categoriaProductoForm" class="form">
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre" />
+      <mat-error *ngIf="nombre.errors && nombre.errors.required">
+        El nombre es requerido
+      </mat-error>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="closeDialog()">Cancelar</button>
+  <button
+    mat-button
+    cdkFocusInitial
+    (click)="
+      this.data && this.data.idCategoriaProducto
+        ? actualizarCategoriaProducto()
+        : crearCategoriaProducto()
+    "
+  >
+    {{
+      data && data.idCategoriaProducto ? "Guardar cambios" : "Crear categoria"
+    }}
+  </button>
+</div>

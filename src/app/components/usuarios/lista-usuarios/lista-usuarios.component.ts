@@ -1,12 +1,9 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { UsuarioService } from '@services/usuario.service';
 import { Usuario } from '@models/usuario.model';
-import { Observable } from 'rxjs';
 import { map, take as takeRxJS } from 'rxjs/operators';
-import { PageEvent } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Column } from '@shared/table/column.interface';
-import { Row } from '@shared/table/row.interface';
 import { ServerDataSourceCB } from '@shared/table/server.data-source';
 
 @Component({
@@ -19,7 +16,6 @@ export class ListaUsuariosComponent implements OnInit {
   tableColumns: Column[] = [
     { name: 'No.',                type: 'index'        },
     { name: 'Nombre',             type: 'customColumn' },
-    { name: 'NIT/CI',             type: 'customColumn' },
     { name: 'Correo electrónico', type: 'customColumn' },
     { name: 'Roles',              type: 'customColumn' },
     { name: 'Más información',    type: 'customColumn' },
@@ -28,9 +24,6 @@ export class ListaUsuariosComponent implements OnInit {
 
   @ViewChild('nombreColumn', { static: true })
   nombreColumn: TemplateRef<any>;
-
-  @ViewChild('nitCiColumn', { static: true })
-  nitCiColumn: TemplateRef<any>;
 
   @ViewChild('emailColumn', { static: true })
   emailColumn: TemplateRef<any>;
@@ -51,11 +44,10 @@ export class ListaUsuariosComponent implements OnInit {
 
   ngOnInit(): void {
     this.tableColumns[1].template = this.nombreColumn;
-    this.tableColumns[2].template = this.nitCiColumn;
-    this.tableColumns[3].template = this.emailColumn;
-    this.tableColumns[4].template = this.rolesColumn;
-    this.tableColumns[5].template = this.masInformacionColumn;
-    this.tableColumns[6].template = this.estadoColumn;
+    this.tableColumns[2].template = this.emailColumn;
+    this.tableColumns[3].template = this.rolesColumn;
+    this.tableColumns[4].template = this.masInformacionColumn;
+    this.tableColumns[5].template = this.estadoColumn;
 
     this.usuariosCB = this.obtenerUsuariosCB();
   }

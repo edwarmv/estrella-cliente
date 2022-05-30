@@ -12,9 +12,6 @@ import { map } from 'rxjs/operators';
 })
 export class ListaPedidosComponent implements OnInit {
   pedidosCB: ServerDataSourceCB<Pedido>;
-  totalPedidos: number;
-  pageIndex = 0;
-  pageSize = 5;
   tableColumns: Column[] = [
     { name: 'No.',              type: 'index'        },
     { name: 'Nombre',           type: 'customColumn' },
@@ -42,7 +39,6 @@ export class ListaPedidosComponent implements OnInit {
     'listo',
     'entregado',
     'completado',
-    'cancelado'
   ];
   estado: EstadoPedido | '' = '';
   showFiltros = false;
@@ -76,14 +72,10 @@ export class ListaPedidosComponent implements OnInit {
         estado: this.estado,
         termino,
       }).pipe(
-        map((res): ServerDataSourceCBRes<Pedido> => {
-          return {
-            rows: res.pedidos.map(pedido => {
-              return { values: pedido };
-            }),
-            total: res.total,
-          };
-        })
+        map((res): ServerDataSourceCBRes<Pedido> => ({
+          rows: res.pedidos.map(pedido => ({ values: pedido })),
+          total: res.total,
+        }))
       );
     };
   }

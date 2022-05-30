@@ -1,0 +1,32 @@
+<h1 mat-dialog-title>{{data.nombre}}</h1>
+<div mat-dialog-content>
+  <div class="field">
+    <span class="label">Nombre:</span>
+    <p>{{ data.nombre }}</p>
+  </div>
+
+  <div class="field">
+    <span class="label">Direccion:</span>
+    <p>{{ data.direccion }}</p>
+  </div>
+
+  <div class="field">
+    <span class="label">Ubicación:</span>
+    <p>{{ data.ubicacion }}</p>
+  </div>
+
+  <div class="field">
+    <span class="label">Número de teléfono:</span>
+    <p>{{ data.numeroTelefono }}</p>
+  </div>
+
+  <div class="field">
+    <span class="label">Estado:</span>
+    <p>{{ data.estado ? 'Activo' : 'Inactivo' }}</p>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close cdkFocusInitial>
+    Aceptar
+  </button>
+</div>

@@ -5,7 +5,7 @@ import {
   FormArray,
   FormBuilder,
   FormGroup,
-  Validators
+  Validators,
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
@@ -18,7 +18,7 @@ import { map, take as takeRxJS, tap } from 'rxjs/operators';
 @Component({
   selector: 'app-rol',
   templateUrl: './rol.component.html',
-  styleUrls: ['./rol.component.scss']
+  styleUrls: ['./rol.component.scss'],
 })
 export class RolComponent implements OnInit {
   idRol: number;
@@ -31,14 +31,14 @@ export class RolComponent implements OnInit {
     private menuService: MenuService,
     private route: ActivatedRoute,
     private snackBar: MatSnackBar,
-    private selectionListDialogService: SelectionListDialogService,
-  ) { }
+    private selectionListDialogService: SelectionListDialogService
+  ) {}
 
   ngOnInit(): void {
     this.rolForm = this.fb.group({
       nombre: ['', [Validators.required]],
       descripcion: [''],
-      rolesMenus: this.fb.array([], [this.idsDuplicados])
+      rolesMenus: this.fb.array([], [this.idsDuplicados]),
     });
 
     this.idRol = this.route.snapshot.params.id;
@@ -48,9 +48,10 @@ export class RolComponent implements OnInit {
     }
   }
 
-  idsDuplicados(
-    formArray: FormArray
-  ): { idsDuplicados: boolean, values: any[] } {
+  idsDuplicados(formArray: FormArray): {
+    idsDuplicados: boolean;
+    values: any[];
+  } {
     const values: any[] = formArray.value;
     if (values.length > 1) {
       const dict = {};
@@ -58,7 +59,7 @@ export class RolComponent implements OnInit {
         if (value.menu.id in dict) {
           ++dict[value.menu.id].count;
         } else {
-          dict[value.menu.id] = {count: 1, nombre: value.menu.nombre};
+          dict[value.menu.id] = { count: 1, nombre: value.menu.nombre };
         }
       }
       for (const value in dict) {
@@ -67,27 +68,29 @@ export class RolComponent implements OnInit {
         }
       }
 
-      return Object.values(dict).length > 0 ?
-        { idsDuplicados: true, values: Object.values(dict) } : null;
+      return Object.values(dict).length > 0
+        ? { idsDuplicados: true, values: Object.values(dict) }
+        : null;
     } else {
       return null;
     }
   }
 
   actualizarFormulario(idRol: number): void {
-    this.rolService.obtenerRol(idRol)
-    .pipe(
-      takeRxJS(1),
-      tap(rol => {
-        this.rolForm.patchValue(rol);
-        rol.rolesMenus.forEach(rolMenu => {
-          if (rolMenu.menu) {
-            this.asignarMenu(rolMenu.menu);
-          }
-        });
-      })
-    )
-    .subscribe();
+    this.rolService
+      .obtenerRol(idRol)
+      .pipe(
+        takeRxJS(1),
+        tap(rol => {
+          this.rolForm.patchValue(rol);
+          rol.rolesMenus.forEach(rolMenu => {
+            if (rolMenu.menu) {
+              this.asignarMenu(rolMenu.menu);
+            }
+          });
+        })
+      )
+      .subscribe();
   }
 
   resetForm(): void {
@@ -97,18 +100,18 @@ export class RolComponent implements OnInit {
 
   actualizarRol(): void {
     if (this.rolForm.valid) {
-      this.rolService.actualiarRol(this.idRol, this.rolForm.value)
-      .pipe(takeRxJS(1))
-      .subscribe(() => {
-        this.snackBar.open('Rol actualizado', 'Hecho', { duration: 2000 });
-      });
+      this.rolService
+        .actualiarRol(this.idRol, this.rolForm.value)
+        .pipe(takeRxJS(1))
+        .subscribe(() => {
+          this.snackBar.open('Rol actualizado', 'Hecho', { duration: 2000 });
+        });
     }
   }
 
   crearRol(): void {
     if (this.rolForm.valid) {
-      this.rolService.crearRol(this.rolForm.value)
-      .subscribe(resp => {
+      this.rolService.crearRol(this.rolForm.value).subscribe(resp => {
         this.resetForm();
         this.snackBar.open(resp.mensaje, 'Aceptar', { duration: 2000 });
       });
@@ -116,33 +119,34 @@ export class RolComponent implements OnInit {
   }
 
   seleccionarMenu(): void {
-    this.selectionListDialogService.open<Menu>({
-      title: 'Seleccionar menú',
-      search: { placeholder: 'Nombre del menú' },
-      cb: (skip, take, termino) => {
-        return this.menuService.obtenerMenus(skip, take, termino)
-        .pipe(
-          map(resp => {
-            const values = resp.menus.map(menu => {
-              return { label: menu.nombre, value: menu };
-            });
-            return { values, total: resp.total };
-          })
-        );
-      }
-    }).subscribe(menu => {
-      if (menu) {
-        this.asignarMenu(menu);
-      }
-    });
+    this.selectionListDialogService
+      .open<Menu>({
+        title: 'Seleccionar menú',
+        search: { placeholder: 'Nombre del menú' },
+        cb: (skip, take, termino) => {
+          return this.menuService.obtenerMenus(skip, take, termino).pipe(
+            map(resp => {
+              const values = resp.menus.map(menu => {
+                return { label: menu.nombre, value: menu };
+              });
+              return { values, total: resp.total };
+            })
+          );
+        },
+      })
+      .subscribe(menu => {
+        if (menu) {
+          this.asignarMenu(menu);
+        }
+      });
   }
 
   asignarMenu(menu: Menu): void {
     const rolMenu = this.fb.group({
       menu: this.fb.group({
         id: [menu.id],
-        nombre: [menu.nombre]
-      })
+        nombre: [menu.nombre],
+      }),
     });
 
     this.rolesMenus.push(rolMenu);

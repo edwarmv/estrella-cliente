@@ -1,6 +1,7 @@
 import { Cliente } from './cliente.model';
 import { DetallePedido } from './detalle-pedido.model';
 import { Factura } from './factura.model';
+import { PagoPedido } from './pago-pedido.model';
 import { Usuario } from './usuario.model';
 
 export enum EstadoPedido {
@@ -8,7 +9,6 @@ export enum EstadoPedido {
   LISTO = 'listo',
   ENTREGADO = 'entregado',
   COMPLETADO = 'completado',
-  CANCELADO = 'cancelado'
 }
 
 export class Pedido {
@@ -20,11 +20,12 @@ export class Pedido {
     public direccionEntrega: string,
     public coordenadasDireccionEntrega: { lat: number, lng: number },
     public estado: EstadoPedido,
-    public usuario: Usuario,
+    public cancelado: boolean,
     public cliente: Cliente,
     public repartidor: Usuario,
     public detallesPedidos: DetallePedido[],
     public factura: Factura,
+    public pagosPedido: PagoPedido[]
   ) {}
 }
 

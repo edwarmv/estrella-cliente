@@ -1,0 +1,23 @@
+@use 'src/styles/styles' as styles;
+
+.container {
+  @include styles.default-container;
+  max-width: 800px;
+}
+
+.actions {
+  text-align: right;
+}
+
+.estado-sucursal {
+  padding: 5px;
+  border-radius: 5px;
+
+  &--activo {
+    background-color: var(--primary-color-transparent);
+  }
+
+  &--inactivo {
+    background-color: var(--warn-color-transparent);
+  }
+}

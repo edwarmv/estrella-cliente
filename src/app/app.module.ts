@@ -17,12 +17,14 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { registerLocaleData } from '@angular/common';
 import { httpInterceptorProviders } from './http-interceptors';
+import { RouterOutletComponent } from './components/router-outlet/router-outlet.component';
 
 registerLocaleData(localeEsBO);
 
 @NgModule({
   declarations: [
     AppComponent,
+    RouterOutletComponent,
   ],
   imports: [
     BrowserModule,

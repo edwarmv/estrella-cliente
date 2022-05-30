@@ -1,0 +1,49 @@
+<h2 mat-dialog-title>{{ event.title }}</h2>
+
+<mat-dialog-content>
+  <div class="pedido">
+
+    <div class="fechaEntrega field">
+      <span class="label">Fecha de entrega:</span>
+      {{ pedido.fechaEntrega | date: 'dd/MM/yyyy - HH:mm' }}
+    </div>
+
+    <div class="repartidor field" *ngIf="pedido.repartidor">
+      <span class="label">Repartidor asignado:</span>
+      {{ pedido.repartidor.nombre + ' ' + pedido.repartidor.apellido }}
+    </div>
+
+    <div class="estado field">
+      <span class="label">Estado:</span>
+      <p class="estado-value" [ngClass]="pedido.estado">
+        {{ pedido.estado }}
+      </p>
+    </div>
+  </div>
+
+  <div class="factura">
+    <div class="nro-factura">
+      <b>Nro factura:</b>
+      {{ pedido.factura.numeroFactura }}
+    </div>
+    <div class="fecha-emision">
+      <b>Fecha emisión:</b>
+      {{ pedido.factura.fechaEmision | date: 'short' }}
+    </div>
+    <div class="anulado">
+      <b>Anulado:</b>
+      {{ pedido.factura.anulado ? 'Si' : 'No' }}
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cerrar</button>
+  <a
+    [routerLink]="['/pedidos/calendario-pedidos', event.meta.id]"
+    mat-button
+    mat-dialog-close
+    color="primary">
+    Ver Pedido
+  </a>
+</mat-dialog-actions>

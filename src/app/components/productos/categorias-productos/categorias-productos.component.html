@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="my-section">
+    <button
+      mat-raised-button
+      (click)="openDialog()"
+      color="primary"
+      type="button"
+    >
+      Nueva categoria
+    </button>
+  </div>
+
+  <app-table
+    [columns]="tableColumns"
+    [rowsCB]="categoriasProductosCB"
+  ></app-table>
+
+  <ng-template #nombreColumn let-categoriaProducto="element">
+    {{ categoriaProducto.nombre }}
+  </ng-template>
+
+  <ng-template #editarColumn let-categoriaProducto="element">
+    <button
+      mat-mini-fab
+      type="button"
+      (click)="openDialog(categoriaProducto.id)"
+    >
+      <mat-icon>edit</mat-icon>
+    </button>
+  </ng-template>
+
+  <ng-template #borrarColumn let-categoriaProducto="element">
+    <button
+      mat-mini-fab
+      color="warn"
+      type="button"
+      (click)="borrarCategoriaProducto(categoriaProducto.id)"
+    >
+      <mat-icon>delete_forever</mat-icon>
+    </button>
+  </ng-template>
+</div>

@@ -1,17 +1,13 @@
 <div class="container">
 
   <app-table
-    searchPlaceholder="Nombre/CI/NIT"
+    searchPlaceholder="Nombre"
     [rowsCB]="usuariosCB"
     [columns]="tableColumns">
   </app-table>
 
   <ng-template #nombreColumn let-usuario="element">
     {{ usuario.nombre + ' ' + usuario.apellido }}
-  </ng-template>
-
-  <ng-template #nitCiColumn let-usuario="element">
-    {{ usuario.nitCI }}
   </ng-template>
 
   <ng-template #emailColumn let-usuario="element">

@@ -1,0 +1,30 @@
+@use 'src/styles/styles' as styles;
+
+.container {
+  @include styles.default-container;
+  max-width: 450px;
+}
+
+.form {
+  @include styles.shadow-border;
+  padding: 20px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  row-gap: 17.5px;
+
+  &__actions {
+    display: flex;
+    flex-direction: column;
+    column-gap: 10px;
+    row-gap: 17.5px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .form__actions {
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+}

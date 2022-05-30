@@ -22,9 +22,9 @@ export class NuevoUsuarioComponent implements OnInit, OnDestroy {
       apellido: ['', Validators.required],
       correoElectronico: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
-      confirmarPassword: ['', Validators.required]
+      confirmarPassword: ['', [Validators.required, Validators.minLength(8)]]
     }, {
-      validator: passwordMatch('password', 'confirmarPassword')
+      validators: passwordMatch('password', 'confirmarPassword')
     });
   }
 

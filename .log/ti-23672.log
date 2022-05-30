@@ -1,0 +1,36 @@
+[15:28:43.359] Global cache location '/Users/edwar/Library/Caches/typescript/4.2', safe file path '/users/edwar/documents/taller/estrella-cliente/node_modules/typescript/lib/typingsafelist.json', types map path /users/edwar/documents/taller/estrella-cliente/node_modules/typescript/lib/typesmap.json
+[15:28:43.361] Processing cache location '/Users/edwar/Library/Caches/typescript/4.2'
+[15:28:43.361] Trying to find '/Users/edwar/Library/Caches/typescript/4.2/package.json'...
+[15:28:43.363] Loaded content of '/Users/edwar/Library/Caches/typescript/4.2/package.json': {"private":true,"dependencies":{"types-registry":"^0.1.552"},"devDependencies":{"@types/async":"^3.2.7","@types/atob":"^2.1.2","@types/big.js":"^6.1.1","@types/dotenv-webpack":"^7.0.3","@types/karma":"^6.3.1","@types/karma-chrome-launcher":"^3.1.1","@types/karma-coverage-istanbul-reporter":"^2.1.1","@types/karma-jasmine":"^4.0.1","@types/karma-jasmine-html-reporter":"^1.5.2","@types/less":"^3.0.3","@types/sprintf":"^0.1.0","@types/ua-parser-js":"^0.7.36","@types/webpack-dev-server":"^3.11.5"}}
+[15:28:43.363] Loaded content of '/Users/edwar/Library/Caches/typescript/4.2/package-lock.json'
+[15:28:43.380] Adding entry into typings cache: 'async' => '/Users/edwar/Library/Caches/typescript/4.2/node_modules/@types/async/index.d.ts'
+[15:28:43.384] Adding entry into typings cache: 'atob' => '/Users/edwar/Library/Caches/typescript/4.2/node_modules/@types/atob/index.d.ts'
+[15:28:43.388] Adding entry into typings cache: 'big.js' => '/Users/edwar/Library/Caches/typescript/4.2/node_modules/@types/big.js/index.d.ts'
+[15:28:43.392] Adding entry into typings cache: 'dotenv-webpack' => '/Users/edwar/Library/Caches/typescript/4.2/node_modules/@types/dotenv-webpack/index.d.ts'
+[15:28:43.396] Adding entry into typings cache: 'karma' => '/Users/edwar/Library/Caches/typescript/4.2/node_modules/@types/karma/index.d.ts'
+[15:28:43.399] Adding entry into typings cache: 'karma-chrome-launcher' => '/Users/edwar/Library/Caches/typescript/4.2/node_modules/@types/karma-chrome-launcher/index.d.ts'
+[15:28:43.403] Adding entry into typings cache: 'karma-coverage-istanbul-reporter' => '/Users/edwar/Library/Caches/typescript/4.2/node_modules/@types/karma-coverage-istanbul-reporter/index.d.ts'
+[15:28:43.405] Adding entry into typings cache: 'karma-jasmine' => '/Users/edwar/Library/Caches/typescript/4.2/node_modules/@types/karma-jasmine/index.d.ts'
+[15:28:43.408] Adding entry into typings cache: 'karma-jasmine-html-reporter' => '/Users/edwar/Library/Caches/typescript/4.2/node_modules/@types/karma-jasmine-html-reporter/index.d.ts'
+[15:28:43.411] Adding entry into typings cache: 'less' => '/Users/edwar/Library/Caches/typescript/4.2/node_modules/@types/less/index.d.ts'
+[15:28:43.416] Adding entry into typings cache: 'sprintf' => '/Users/edwar/Library/Caches/typescript/4.2/node_modules/@types/sprintf/index.d.ts'
+[15:28:43.420] Adding entry into typings cache: 'ua-parser-js' => '/Users/edwar/Library/Caches/typescript/4.2/node_modules/@types/ua-parser-js/index.d.ts'
+[15:28:43.423] Adding entry into typings cache: 'webpack-dev-server' => '/Users/edwar/Library/Caches/typescript/4.2/node_modules/@types/webpack-dev-server/index.d.ts'
+[15:28:43.423] Finished processing cache location '/Users/edwar/Library/Caches/typescript/4.2'
+[15:28:43.424] Process id: 23760
+[15:28:43.424] NPM location: /Users/edwar/.asdf/installs/nodejs/14.17.1/bin/npm (explicit '--npmLocation' not  provided)
+[15:28:43.424] validateDefaultNpmLocation: false
+[15:28:43.424] Npm config file: /Users/edwar/Library/Caches/typescript/4.2/package.json
+[15:28:43.425] Updating types-registry npm package...
+[15:28:43.425] Exec: /Users/edwar/.asdf/installs/nodejs/14.17.1/bin/npm install --ignore-scripts types-registry@latest
+[15:28:45.436]     Succeeded. stdout:
+    + types-registry@0.1.552
+    updated 1 package and audited 131 packages in 1.394s
+
+13 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+
+[15:28:45.437] Updated types-registry npm package

@@ -69,10 +69,6 @@ export class UsuarioService {
         Swal.fire(resp.mensaje);
         this.router.navigate(['/login']);
       }),
-      catchError(error => {
-        Swal.fire(error.error.mensaje);
-        return throwError(error);
-      })
     );
   }
 

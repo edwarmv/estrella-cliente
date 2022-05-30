@@ -7,10 +7,10 @@ import { PedidosComponent } from './pedidos.component';
 import { PedidoComponent } from './pedido/pedido.component';
 import { ListaPedidosComponent } from './lista-pedidos/lista-pedidos.component';
 import { ReportesPedidosComponent } from './reportes-pedidos/reportes-pedidos.component';
-
 import {
-  DayClickedDialogComponent
-} from './calendario-pedidos/day-clicked-dialog/day-clicked-dialog.component';
+  EventClickedDialogComponent
+} from './calendario-pedidos/event-clicked-dialog/event-clicked-dialog.component';
+import { PagosDialogComponent } from './pedido/pagos-dialog/pagos-dialog.component';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatRippleModule } from '@angular/material/core';
@@ -23,21 +23,23 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+
 import { GoogleMapsModule } from '@angular/google-maps';
 import { SelectionListDialogModule } from '@shared/selection-list-dialog/selection-list-dialog.module';
 import { CalendarioPedidosComponent } from './calendario-pedidos/calendario-pedidos.component';
 import { TabsModule } from '@shared/tabs/tabs.module';
 import { BuscadorModule } from '@shared/buscador/buscador.module';
 import { TableModule } from '@shared/table/table.module';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { CalendarModule } from '@shared/calendar/calendar.module';
+import { PagosDialogService } from './pedido/pagos-dialog/pagos-dialog.service';
 
 const routes: Routes = [
   {
     path: '',
     component: PedidosComponent,
     children: [
-      { path: '', redirectTo: 'calendario-pedidos', pathMatch: 'full' },
       {
         path: 'calendario-pedidos',
         data: {
@@ -94,6 +96,7 @@ const routes: Routes = [
           breadcrumb: 'Reportes'
         }
       },
+      { path: '', redirectTo: 'calendario-pedidos', pathMatch: 'full' },
     ]
   }
 ];
@@ -101,11 +104,12 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     PedidosComponent,
-    DayClickedDialogComponent,
+    EventClickedDialogComponent,
     PedidoComponent,
     ListaPedidosComponent,
     ReportesPedidosComponent,
     CalendarioPedidosComponent,
+    PagosDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -124,6 +128,7 @@ const routes: Routes = [
     MatSnackBarModule,
     MatProgressSpinnerModule,
     MatSelectModule,
+    MatButtonToggleModule,
     GoogleMapsModule,
     SelectionListDialogModule,
     TabsModule,
@@ -131,6 +136,8 @@ const routes: Routes = [
     BuscadorModule,
     CalendarModule,
   ],
-  providers: [ ]
+  providers: [
+    PagosDialogService,
+  ]
 })
 export class PedidosModule { }

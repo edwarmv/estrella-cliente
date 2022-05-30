@@ -1,12 +1,6 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  padding: 40px 20px;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 900px;
+@use 'src/styles/styles';
 
-  .buscador {
-    margin-bottom: 17.5px;
-  }
+.container {
+  @include styles.default-container;
+  max-width: 900px;
 }

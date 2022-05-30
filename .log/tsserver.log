@@ -1,0 +1,865 @@
+Info 0    [15:28:43.139] Starting TS Server
+Info 1    [15:28:43.140] Version: 4.2.4
+Info 2    [15:28:43.140] Arguments: /Users/edwar/.asdf/installs/nodejs/14.17.1/bin/node /Users/edwar/Documents/taller/estrella-cliente/node_modules/.bin/tsserver --logFile /Users/edwar/Documents/taller/estrella-cliente/.log/tsserver.log --logVerbosity info --cancellationPipeName /private/var/folders/_w/9vcm34nj5h59zvmdxp31vwbr0000gn/T/dd89dcc8ccbf11831cb515715540ff91/tscancellation*
+Info 3    [15:28:43.140] Platform: darwin NodeVersion: 14 CaseSensitive: false
+Info 4    [15:28:43.140] ServerMode: undefined syntaxOnly: false hasUnknownServerMode: undefined
+Info 5    [15:28:43.495] Search path: /Users/edwar/Documents/taller/estrella-cliente/src/app/components/pedidos/pedido
+Info 6    [15:28:43.499] For info: /Users/edwar/Documents/taller/estrella-cliente/src/app/components/pedidos/pedido/pedido.component.ts :: Config file name: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 7    [15:28:43.499] Opened configuration file /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 8    [15:28:43.610] Config: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json : {
+ "rootNames": [
+  "/Users/edwar/Documents/taller/estrella-cliente/e2e/src/app.e2e-spec.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/e2e/src/app.po.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/main.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/polyfills.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/test.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/app-routing.module.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/app.component.spec.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/app.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/app.module.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/clientes/clientes.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/clientes/clientes.module.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/clientes/cliente/cliente.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/clientes/lista-clientes/lista-clientes.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/configuracion/configuracion.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/configuracion/configuracion.module.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/configuracion/casa-matriz/casa-matriz.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/configuracion/generador-codigo-control/generador-codigo-control.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/deliveries/deliveries.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/deliveries/deliveries.module.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/deliveries/lista-deliveries/lista-deliveries.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/deliveries/repartidores/repartidores.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/deliveries/repartidores/pedidos-asignados/pedidos-asignados.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/home/home.component.spec.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/home/home.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/home/home.module.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/login/login.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/login/login.module.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/menus/menus.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/menus/menus.module.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/menus/lista-menus/lista-menus.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/menus/menu/menu.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/nuevo-usuario/nuevo-usuario.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/nuevo-usuario/nuevo-usuario.module.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/page-not-found/page-not-found.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/page-not-found/page-not-found.module.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/paginator/custom.paginator.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/pedidos/colors.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/pedidos/filtros-pedidos.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/pedidos/pedidos.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/pedidos/pedidos.module.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/pedidos/calendario-pedidos/calendario-pedidos.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/pedidos/calendario-pedidos/event-clicked-dialog/event-clicked-dialog.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/pedidos/lista-pedidos/lista-pedidos.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/pedidos/pedido/pedido.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/pedidos/pedido/pagos-dialog/pagos-dialog.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/pedidos/pedido/pagos-dialog/pagos-dialog.service.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/pedidos/reportes-pedidos/reportes-pedidos.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/perfil/pefil.module.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/perfil/perfil.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/perfil/descripcion-rol/descripcion-rol.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/productos/productos-data-source.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/productos/productos.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/productos/productos.module.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/productos/detalles-producto-dialog/detalles-producto-dialog.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/productos/producto/producto.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/roles/roles.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/roles/roles.module.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/roles/lista-roles/lista-roles.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/roles/rol/rol.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/upload/upload.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/upload/upload.module.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/upload/upload.service.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/upload/dialog/dialog.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/usuarios/usuarios.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/usuarios/usuarios.module.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/usuarios/lista-usuarios/lista-usuarios.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/usuarios/roles-usuario/roles-usuario.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/usuarios/usuario/usuario.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/verificar-usuario/verificar-usuario.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/components/verificar-usuario/verificar-usuario.module.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/http-interceptors/http-error.interceptor.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/http-interceptors/index.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/layout/layout.module.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/layout/breadcrumbs/breadcrumbs.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/layout/footer/footer.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/layout/header/header.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/layout/sidebar/sidebar.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/models/casa-matriz.model.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/models/cliente.model.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/models/detalle-pedido.model.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/models/dosificacion.model.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/models/factura.model.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/models/menu.model.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/models/pago-pedido.model.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/models/pedido-repartidor.model.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/models/pedido.model.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/models/producto.model.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/models/rol-menu.model.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/models/rol-usuario.model.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/models/rol.model.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/models/sucursal.model.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/models/usuario.model.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/pipes/images.pipe.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/pipes/pipes-shared.module.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/services/autenticacion.service.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/services/casa-matriz.service.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/services/cliente.service.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/services/factura.service.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/services/google-maps.service.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/services/menu.data.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/services/menu.service.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/services/pago-pedido.service.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/services/pedido.service.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/services/producto.service.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/services/rol-menu.service.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/services/rol-usuario.service.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/services/rol.service.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/services/sidebar.service.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/services/snack-bar.service.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/services/usuario.service.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/shared/custom-paginator.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/shared/buscador/buscador.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/shared/buscador/buscador.module.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/shared/calendar/calendar.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/shared/calendar/calendar.module.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/shared/calendar/calendar.service.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/shared/dialog/dialog.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/shared/dialog/dialog.module.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/shared/message-dialog/message-dialog.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/shared/message-dialog/message-dialog.module.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/shared/message-dialog/message-dialog.service.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/shared/selection-list-dialog/selection-list-data-source.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/shared/selection-list-dialog/selection-list-dialog.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/shared/selection-list-dialog/selection-list-dialog.module.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/shared/selection-list-dialog/selection-list-dialog.service.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/shared/table/column.interface.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/shared/table/row.interface.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/shared/table/server.data-source.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/shared/table/table-colum.interface.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/shared/table/table.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/shared/table/table.module.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/shared/table/pipes/data-property-getter.pipe.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/shared/table/pipes/href.pipe.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/shared/tabs/tabs-links.type.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/shared/tabs/tabs.component.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/shared/tabs/tabs.module.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/validators/form-array-size.validator.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/validators/number.validator.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/app/validators/password-match.validator.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/environments/environment.prod.ts",
+  "/Users/edwar/Documents/taller/estrella-cliente/src/environments/environment.ts"
+ ],
+ "options": {
+  "baseUrl": "/Users/edwar/Documents/taller/estrella-cliente",
+  "paths": {
+   "@components/*": [
+    "src/app/components/*"
+   ],
+   "@shared/*": [
+    "src/app/shared/*"
+   ],
+   "@validators/*": [
+    "src/app/validators/*"
+   ],
+   "@services/*": [
+    "src/app/services/*"
+   ],
+   "@directives/*": [
+    "src/app/directives/*"
+   ],
+   "@models/*": [
+    "src/app/models/*"
+   ],
+   "@pipes/*": [
+    "src/app/pipes/*"
+   ]
+  },
+  "outDir": "/Users/edwar/Documents/taller/estrella-cliente/dist/out-tsc",
+  "sourceMap": true,
+  "declaration": false,
+  "downlevelIteration": true,
+  "experimentalDecorators": true,
+  "moduleResolution": 2,
+  "importHelpers": true,
+  "target": 2,
+  "module": 6,
+  "lib": [
+   "lib.es2018.d.ts",
+   "lib.dom.d.ts"
+  ],
+  "plugins": [],
+  "pathsBasePath": "/Users/edwar/Documents/taller/estrella-cliente",
+  "configFilePath": "/Users/edwar/Documents/taller/estrella-cliente/tsconfig.json"
+ }
+}
+Info 9    [15:28:43.703] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 10   [15:28:48.209] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 1 structureChanged: true Elapsed: 4506.430784001946ms
+Info 11   [15:28:48.210] Project '/Users/edwar/Documents/taller/estrella-cliente/tsconfig.json' (Configured)
+Info 12   [15:28:48.210] 	Files (993)
+
+Info 13   [15:28:48.210] -----------------------------------------------
+Info 14   [15:28:48.239] Starting updateGraphWorker: Project: /dev/null/autoImportProviderProject1*
+Info 15   [15:28:48.454] Finishing updateGraphWorker: Project: /dev/null/autoImportProviderProject1* Version: 1 structureChanged: true Elapsed: 214.9766119942069ms
+Info 16   [15:28:48.454] Project '/dev/null/autoImportProviderProject1*' (AutoImportProvider)
+Info 17   [15:28:48.454] 	Files (70)
+
+Info 18   [15:28:48.454] -----------------------------------------------
+Info 19   [15:28:48.542] DirectoryWatcher:: Triggered with /users/edwar/documents/taller/estrella-cliente/.log/ti-23672.log :: WatchInfo: /users/edwar/documents/taller/estrella-cliente 1 undefined Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json WatchType: Wild card directory
+Info 20   [15:28:48.543] Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Detected file add/remove of non supported extension: /users/edwar/documents/taller/estrella-cliente/.log/ti-23672.log
+Info 21   [15:28:48.543] Elapsed:: 0.4855379983782768ms DirectoryWatcher:: Triggered with /users/edwar/documents/taller/estrella-cliente/.log/ti-23672.log :: WatchInfo: /users/edwar/documents/taller/estrella-cliente 1 undefined Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json WatchType: Wild card directory
+Info 22   [15:28:49.281] DirectoryWatcher:: Triggered with /users/edwar/documents/taller/estrella-cliente/node_modules/@angular/compiler-cli/ngcc/__ngcc_lock_file__ :: WatchInfo: /users/edwar/documents/taller/estrella-cliente 1 undefined Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json WatchType: Wild card directory
+Info 23   [15:28:49.282] Elapsed:: 0.5282450020313263ms DirectoryWatcher:: Triggered with /users/edwar/documents/taller/estrella-cliente/node_modules/@angular/compiler-cli/ngcc/__ngcc_lock_file__ :: WatchInfo: /users/edwar/documents/taller/estrella-cliente 1 undefined Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json WatchType: Wild card directory
+Info 24   [15:28:49.282] DirectoryWatcher:: Triggered with /users/edwar/documents/taller/estrella-cliente/node_modules/@angular/compiler-cli/ngcc/__ngcc_lock_file__ :: WatchInfo: /users/edwar/documents/taller/estrella-cliente/node_modules 1 undefined Project:  WatchType: node_modules for closed script infos in them
+Info 25   [15:28:49.282] Elapsed:: 0.4048900008201599ms DirectoryWatcher:: Triggered with /users/edwar/documents/taller/estrella-cliente/node_modules/@angular/compiler-cli/ngcc/__ngcc_lock_file__ :: WatchInfo: /users/edwar/documents/taller/estrella-cliente/node_modules 1 undefined Project:  WatchType: node_modules for closed script infos in them
+Info 26   [15:28:49.282] DirectoryWatcher:: Triggered with /Users/edwar/Documents/taller/estrella-cliente/node_modules/@angular/compiler-cli/ngcc/__ngcc_lock_file__ :: WatchInfo: /Users/edwar/Documents/taller/estrella-cliente/node_modules 1 undefined Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json WatchType: Failed Lookup Locations
+Info 27   [15:28:49.282] Elapsed:: 0.1338529959321022ms DirectoryWatcher:: Triggered with /Users/edwar/Documents/taller/estrella-cliente/node_modules/@angular/compiler-cli/ngcc/__ngcc_lock_file__ :: WatchInfo: /Users/edwar/Documents/taller/estrella-cliente/node_modules 1 undefined Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json WatchType: Failed Lookup Locations
+Info 28   [15:28:49.282] DirectoryWatcher:: Triggered with /Users/edwar/Documents/taller/estrella-cliente/node_modules/@angular/compiler-cli/ngcc/__ngcc_lock_file__ :: WatchInfo: /Users/edwar/Documents/taller/estrella-cliente/node_modules 1 undefined Project: /dev/null/autoImportProviderProject1* WatchType: Failed Lookup Locations
+Info 29   [15:28:49.282] Elapsed:: 0.027279004454612732ms DirectoryWatcher:: Triggered with /Users/edwar/Documents/taller/estrella-cliente/node_modules/@angular/compiler-cli/ngcc/__ngcc_lock_file__ :: WatchInfo: /Users/edwar/Documents/taller/estrella-cliente/node_modules 1 undefined Project: /dev/null/autoImportProviderProject1* WatchType: Failed Lookup Locations
+Info 30   [15:28:49.545] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 31   [15:28:49.554] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 2 structureChanged: false Elapsed: 8.605620995163918ms
+Info 32   [15:28:49.751] DirectoryWatcher:: Triggered with /users/edwar/documents/taller/estrella-cliente/node_modules/@angular/compiler-cli/ngcc/__ngcc_lock_file__ :: WatchInfo: /users/edwar/documents/taller/estrella-cliente 1 undefined Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json WatchType: Wild card directory
+Info 33   [15:28:49.752] Elapsed:: 0.35816700011491776ms DirectoryWatcher:: Triggered with /users/edwar/documents/taller/estrella-cliente/node_modules/@angular/compiler-cli/ngcc/__ngcc_lock_file__ :: WatchInfo: /users/edwar/documents/taller/estrella-cliente 1 undefined Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json WatchType: Wild card directory
+Info 34   [15:28:49.752] DirectoryWatcher:: Triggered with /users/edwar/documents/taller/estrella-cliente/node_modules/@angular/compiler-cli/ngcc/__ngcc_lock_file__ :: WatchInfo: /users/edwar/documents/taller/estrella-cliente/node_modules 1 undefined Project:  WatchType: node_modules for closed script infos in them
+Info 35   [15:28:49.752] Elapsed:: 0.3115600049495697ms DirectoryWatcher:: Triggered with /users/edwar/documents/taller/estrella-cliente/node_modules/@angular/compiler-cli/ngcc/__ngcc_lock_file__ :: WatchInfo: /users/edwar/documents/taller/estrella-cliente/node_modules 1 undefined Project:  WatchType: node_modules for closed script infos in them
+Info 36   [15:28:49.752] DirectoryWatcher:: Triggered with /Users/edwar/Documents/taller/estrella-cliente/node_modules/@angular/compiler-cli/ngcc/__ngcc_lock_file__ :: WatchInfo: /Users/edwar/Documents/taller/estrella-cliente/node_modules 1 undefined Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json WatchType: Failed Lookup Locations
+Info 37   [15:28:49.752] Elapsed:: 0.028658002614974976ms DirectoryWatcher:: Triggered with /Users/edwar/Documents/taller/estrella-cliente/node_modules/@angular/compiler-cli/ngcc/__ngcc_lock_file__ :: WatchInfo: /Users/edwar/Documents/taller/estrella-cliente/node_modules 1 undefined Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json WatchType: Failed Lookup Locations
+Info 38   [15:28:49.752] DirectoryWatcher:: Triggered with /Users/edwar/Documents/taller/estrella-cliente/node_modules/@angular/compiler-cli/ngcc/__ngcc_lock_file__ :: WatchInfo: /Users/edwar/Documents/taller/estrella-cliente/node_modules 1 undefined Project: /dev/null/autoImportProviderProject1* WatchType: Failed Lookup Locations
+Info 39   [15:28:49.753] Elapsed:: 0.019492000341415405ms DirectoryWatcher:: Triggered with /Users/edwar/Documents/taller/estrella-cliente/node_modules/@angular/compiler-cli/ngcc/__ngcc_lock_file__ :: WatchInfo: /Users/edwar/Documents/taller/estrella-cliente/node_modules 1 undefined Project: /dev/null/autoImportProviderProject1* WatchType: Failed Lookup Locations
+Info 40   [15:28:50.016] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 41   [15:28:50.025] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 3 structureChanged: false Elapsed: 8.836974002420902ms
+Info 42   [15:28:52.256] Before ensureProjectForOpenFiles:
+Info 43   [15:28:52.256] After ensureProjectForOpenFiles:
+Info 44   [15:28:52.256] got projects updated in background, updating diagnostics for /Users/edwar/Documents/taller/estrella-cliente/src/app/components/pedidos/pedido/pedido.component.ts
+Info 45   [15:29:30.784] DirectoryWatcher:: Triggered with /users/edwar/documents/taller/estrella-cliente/.git/.gitstatus.U8oxvg :: WatchInfo: /users/edwar/documents/taller/estrella-cliente 1 undefined Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json WatchType: Wild card directory
+Info 46   [15:29:30.785] Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Detected ignored path: /users/edwar/documents/taller/estrella-cliente/.git/.gitstatus.U8oxvg
+Info 47   [15:29:30.785] Elapsed:: 0.13893800228834152ms DirectoryWatcher:: Triggered with /users/edwar/documents/taller/estrella-cliente/.git/.gitstatus.U8oxvg :: WatchInfo: /users/edwar/documents/taller/estrella-cliente 1 undefined Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json WatchType: Wild card directory
+Info 48   [15:29:30.785] DirectoryWatcher:: Triggered with /users/edwar/documents/taller/estrella-cliente/.git/.gitstatus.U8oxvg/a :: WatchInfo: /users/edwar/documents/taller/estrella-cliente 1 undefined Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json WatchType: Wild card directory
+Info 49   [15:29:30.785] Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Detected ignored path: /users/edwar/documents/taller/estrella-cliente/.git/.gitstatus.U8oxvg/a
+Info 50   [15:29:30.785] Elapsed:: 0.07471800595521927ms DirectoryWatcher:: Triggered with /users/edwar/documents/taller/estrella-cliente/.git/.gitstatus.U8oxvg/a :: WatchInfo: /users/edwar/documents/taller/estrella-cliente 1 undefined Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json WatchType: Wild card directory
+Info 51   [15:29:30.785] DirectoryWatcher:: Triggered with /users/edwar/documents/taller/estrella-cliente/.git/.gitstatus.U8oxvg/b :: WatchInfo: /users/edwar/documents/taller/estrella-cliente 1 undefined Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json WatchType: Wild card directory
+Info 52   [15:29:30.785] Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Detected ignored path: /users/edwar/documents/taller/estrella-cliente/.git/.gitstatus.U8oxvg/b
+Info 53   [15:29:30.785] Elapsed:: 0.05500699579715729ms DirectoryWatcher:: Triggered with /users/edwar/documents/taller/estrella-cliente/.git/.gitstatus.U8oxvg/b :: WatchInfo: /users/edwar/documents/taller/estrella-cliente 1 undefined Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json WatchType: Wild card directory
+Info 54   [15:29:31.742] DirectoryWatcher:: Triggered with /users/edwar/documents/taller/estrella-cliente/.git/.gitstatus.U8oxvg/b/1 :: WatchInfo: /users/edwar/documents/taller/estrella-cliente 1 undefined Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json WatchType: Wild card directory
+Info 55   [15:29:31.742] Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Detected ignored path: /users/edwar/documents/taller/estrella-cliente/.git/.gitstatus.U8oxvg/b/1
+Info 56   [15:29:31.742] Elapsed:: 0.08290400356054306ms DirectoryWatcher:: Triggered with /users/edwar/documents/taller/estrella-cliente/.git/.gitstatus.U8oxvg/b/1 :: WatchInfo: /users/edwar/documents/taller/estrella-cliente 1 undefined Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json WatchType: Wild card directory
+Info 57   [15:29:31.742] DirectoryWatcher:: Triggered with /users/edwar/documents/taller/estrella-cliente/.git/.gitstatus.U8oxvg/a/1 :: WatchInfo: /users/edwar/documents/taller/estrella-cliente 1 undefined Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json WatchType: Wild card directory
+Info 58   [15:29:31.742] Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Detected ignored path: /users/edwar/documents/taller/estrella-cliente/.git/.gitstatus.U8oxvg/a/1
+Info 59   [15:29:31.742] Elapsed:: 0.05829499661922455ms DirectoryWatcher:: Triggered with /users/edwar/documents/taller/estrella-cliente/.git/.gitstatus.U8oxvg/a/1 :: WatchInfo: /users/edwar/documents/taller/estrella-cliente 1 undefined Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json WatchType: Wild card directory
+Info 60   [15:29:31.742] DirectoryWatcher:: Triggered with /users/edwar/documents/taller/estrella-cliente/.git/.gitstatus.U8oxvg/b :: WatchInfo: /users/edwar/documents/taller/estrella-cliente 1 undefined Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json WatchType: Wild card directory
+Info 61   [15:29:31.742] Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Detected ignored path: /users/edwar/documents/taller/estrella-cliente/.git/.gitstatus.U8oxvg/b
+Info 62   [15:29:31.742] Elapsed:: 0.05069500207901001ms DirectoryWatcher:: Triggered with /users/edwar/documents/taller/estrella-cliente/.git/.gitstatus.U8oxvg/b :: WatchInfo: /users/edwar/documents/taller/estrella-cliente 1 undefined Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json WatchType: Wild card directory
+Info 63   [15:29:31.742] DirectoryWatcher:: Triggered with /users/edwar/documents/taller/estrella-cliente/.git/.gitstatus.U8oxvg/a :: WatchInfo: /users/edwar/documents/taller/estrella-cliente 1 undefined Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json WatchType: Wild card directory
+Info 64   [15:29:31.742] Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Detected ignored path: /users/edwar/documents/taller/estrella-cliente/.git/.gitstatus.U8oxvg/a
+Info 65   [15:29:31.742] Elapsed:: 0.04230800271034241ms DirectoryWatcher:: Triggered with /users/edwar/documents/taller/estrella-cliente/.git/.gitstatus.U8oxvg/a :: WatchInfo: /users/edwar/documents/taller/estrella-cliente 1 undefined Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json WatchType: Wild card directory
+Info 66   [15:29:31.742] DirectoryWatcher:: Triggered with /users/edwar/documents/taller/estrella-cliente/.git/.gitstatus.U8oxvg :: WatchInfo: /users/edwar/documents/taller/estrella-cliente 1 undefined Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json WatchType: Wild card directory
+Info 67   [15:29:31.742] Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Detected ignored path: /users/edwar/documents/taller/estrella-cliente/.git/.gitstatus.U8oxvg
+Info 68   [15:29:31.742] Elapsed:: 0.04011400043964386ms DirectoryWatcher:: Triggered with /users/edwar/documents/taller/estrella-cliente/.git/.gitstatus.U8oxvg :: WatchInfo: /users/edwar/documents/taller/estrella-cliente 1 undefined Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json WatchType: Wild card directory
+Info 69   [15:30:01.051] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 70   [15:30:01.134] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 4 structureChanged: false Elapsed: 82.96415100246668ms
+Info 71   [15:30:01.135] Different program with same set of files:: structureIsReused:: 2
+Info 72   [15:30:01.984] forEachExternalModuleToImportFrom: filtered out 52 modules by package.json contents
+Info 73   [15:30:01.992] forEachExternalModuleToImportFrom: filtered out 0 modules by package.json contents
+Info 74   [15:30:01.992] forEachExternalModuleToImportFrom autoImportProvider: 7.462983995676041
+Info 75   [15:30:03.770] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 76   [15:30:03.839] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 5 structureChanged: false Elapsed: 69.39533799886703ms
+Info 77   [15:30:03.839] Different program with same set of files:: structureIsReused:: 2
+Info 78   [15:30:04.352] forEachExternalModuleToImportFrom: filtered out 52 modules by package.json contents
+Info 79   [15:30:04.356] forEachExternalModuleToImportFrom: filtered out 0 modules by package.json contents
+Info 80   [15:30:04.356] forEachExternalModuleToImportFrom autoImportProvider: 4.571276001632214
+Info 81   [15:30:04.654] forEachExternalModuleToImportFrom: filtered out 52 modules by package.json contents
+Info 82   [15:30:04.659] forEachExternalModuleToImportFrom: filtered out 0 modules by package.json contents
+Info 83   [15:30:04.659] forEachExternalModuleToImportFrom autoImportProvider: 4.637338995933533
+Info 84   [15:30:20.616] DirectoryWatcher:: Triggered with /users/edwar/documents/taller/estrella-cliente/.git/index.lock :: WatchInfo: /users/edwar/documents/taller/estrella-cliente 1 undefined Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json WatchType: Wild card directory
+Info 85   [15:30:20.616] Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Detected ignored path: /users/edwar/documents/taller/estrella-cliente/.git/index.lock
+Info 86   [15:30:20.616] Elapsed:: 0.08980000019073486ms DirectoryWatcher:: Triggered with /users/edwar/documents/taller/estrella-cliente/.git/index.lock :: WatchInfo: /users/edwar/documents/taller/estrella-cliente 1 undefined Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json WatchType: Wild card directory
+Info 87   [15:30:22.396] Search path: /Users/edwar/Documents/taller/estrella-cliente/src/app/services
+Info 88   [15:30:22.397] For info: /Users/edwar/Documents/taller/estrella-cliente/src/app/services/producto.service.ts :: Config file name: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 89   [15:30:26.870] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 90   [15:30:26.915] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 6 structureChanged: false Elapsed: 45.35757700353861ms
+Info 91   [15:30:26.915] Different program with same set of files:: structureIsReused:: 2
+Info 92   [15:30:27.128] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 93   [15:30:27.164] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 7 structureChanged: false Elapsed: 35.92855500429869ms
+Info 94   [15:30:27.164] Different program with same set of files:: structureIsReused:: 2
+Info 95   [15:30:27.368] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 96   [15:30:27.409] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 8 structureChanged: false Elapsed: 41.20008799433708ms
+Info 97   [15:30:27.409] Different program with same set of files:: structureIsReused:: 2
+Info 98   [15:30:28.328] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 99   [15:30:28.360] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 9 structureChanged: false Elapsed: 32.312954001128674ms
+Info 100  [15:30:28.360] Different program with same set of files:: structureIsReused:: 2
+Info 101  [15:30:36.053] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 102  [15:30:36.090] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 10 structureChanged: false Elapsed: 36.93594800680876ms
+Info 103  [15:30:36.090] Different program with same set of files:: structureIsReused:: 2
+Info 104  [15:30:36.092] getCompletionData: Get current token: 0.04199500381946564
+Info 105  [15:30:36.092] getCompletionData: Is inside comment: 0.04266400635242462
+Info 106  [15:30:36.092] getCompletionData: Get previous token 1: 0.020836003124713898
+Info 107  [15:30:36.092] getCompletionData: Get previous token 2: 0.02206999808549881
+Info 108  [15:30:36.093] getCompletionsAtPosition: isCompletionListBlocker: 0.19514100253582
+Info 109  [15:30:36.093] Returning an empty list because completion was requested in an invalid position.
+Info 110  [15:30:36.118] getCompletionData: Get current token: 0.011036999523639679
+Info 111  [15:30:36.118] getCompletionData: Is inside comment: 0.025505997240543365
+Info 112  [15:30:36.118] getCompletionData: Get previous token 1: 0.020381994545459747
+Info 113  [15:30:36.118] getCompletionData: Get previous token 2: 0.014277994632720947
+Info 114  [15:30:36.118] getCompletionsAtPosition: isCompletionListBlocker: 0.0038340017199516296
+Info 115  [15:30:36.118] Returning an empty list because completion was requested in an invalid position.
+Info 116  [15:30:36.121] getCompletionData: Get current token: 0.012020006775856018
+Info 117  [15:30:36.121] getCompletionData: Is inside comment: 0.02471499890089035
+Info 118  [15:30:36.121] getCompletionData: Get previous token 1: 0.018081001937389374
+Info 119  [15:30:36.121] getCompletionData: Get previous token 2: 0.01525900512933731
+Info 120  [15:30:36.121] getCompletionsAtPosition: isCompletionListBlocker: 0.0038350000977516174
+Info 121  [15:30:36.121] Returning an empty list because completion was requested in an invalid position.
+Info 122  [15:30:37.096] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 123  [15:30:37.128] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 11 structureChanged: false Elapsed: 31.98572900146246ms
+Info 124  [15:30:37.128] Different program with same set of files:: structureIsReused:: 2
+Info 125  [15:30:37.612] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 126  [15:30:37.641] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 12 structureChanged: false Elapsed: 29.111646994948387ms
+Info 127  [15:30:37.641] Different program with same set of files:: structureIsReused:: 2
+Info 128  [15:30:37.754] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 129  [15:30:37.799] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 13 structureChanged: false Elapsed: 45.23208500444889ms
+Info 130  [15:30:37.800] Different program with same set of files:: structureIsReused:: 2
+Info 131  [15:30:38.242] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 132  [15:30:38.272] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 14 structureChanged: false Elapsed: 29.574579000473022ms
+Info 133  [15:30:38.272] Different program with same set of files:: structureIsReused:: 2
+Info 134  [15:30:38.272] getCompletionData: Get current token: 0.011131003499031067
+Info 135  [15:30:38.272] getCompletionData: Is inside comment: 0.021154001355171204
+Info 136  [15:30:38.272] getCompletionData: Get previous token 1: 0.015370003879070282
+Info 137  [15:30:38.272] getCompletionData: Get previous token 2: 0.018139995634555817
+Info 138  [15:30:38.272] getCompletionsAtPosition: isCompletionListBlocker: 0.007798001170158386
+Info 139  [15:30:38.272] Returning an empty list because completion was requested in an invalid position.
+Info 140  [15:30:38.273] getCompletionData: Get current token: 0.009549006819725037
+Info 141  [15:30:38.273] getCompletionData: Is inside comment: 0.020082004368305206
+Info 142  [15:30:38.273] getCompletionData: Get previous token 1: 0.01578400284051895
+Info 143  [15:30:38.273] getCompletionData: Get previous token 2: 0.012272998690605164
+Info 144  [15:30:38.273] getCompletionsAtPosition: isCompletionListBlocker: 0.003265000879764557
+Info 145  [15:30:38.273] Returning an empty list because completion was requested in an invalid position.
+Info 146  [15:30:38.273] getCompletionData: Get current token: 0.008904002606868744
+Info 147  [15:30:38.273] getCompletionData: Is inside comment: 0.019809000194072723
+Info 148  [15:30:38.273] getCompletionData: Get previous token 1: 0.01574699580669403
+Info 149  [15:30:38.273] getCompletionData: Get previous token 2: 0.012194998562335968
+Info 150  [15:30:38.273] getCompletionsAtPosition: isCompletionListBlocker: 0.002786003053188324
+Info 151  [15:30:38.273] Returning an empty list because completion was requested in an invalid position.
+Info 152  [15:30:38.517] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 153  [15:30:38.555] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 15 structureChanged: false Elapsed: 38.257257997989655ms
+Info 154  [15:30:38.555] Different program with same set of files:: structureIsReused:: 2
+Info 155  [15:30:38.555] getCompletionData: Get current token: 0.012219004333019257
+Info 156  [15:30:38.555] getCompletionData: Is inside comment: 0.03735800087451935
+Info 157  [15:30:38.555] getCompletionData: Get previous token 1: 0.01811099797487259
+Info 158  [15:30:38.555] getCompletionData: Get previous token 2: 0.01788099855184555
+Info 159  [15:30:38.556] getCompletionsAtPosition: isCompletionListBlocker: 0.003779001533985138
+Info 160  [15:30:38.556] Returning an empty list because completion was requested in an invalid position.
+Info 161  [15:30:38.556] getCompletionData: Get current token: 0.010314002633094788
+Info 162  [15:30:38.556] getCompletionData: Is inside comment: 0.022044003009796143
+Info 163  [15:30:38.556] getCompletionData: Get previous token 1: 0.016620002686977386
+Info 164  [15:30:38.556] getCompletionData: Get previous token 2: 0.013167999684810638
+Info 165  [15:30:38.556] getCompletionsAtPosition: isCompletionListBlocker: 0.0031410008668899536
+Info 166  [15:30:38.556] Returning an empty list because completion was requested in an invalid position.
+Info 167  [15:30:38.556] getCompletionData: Get current token: 0.009637005627155304
+Info 168  [15:30:38.556] getCompletionData: Is inside comment: 0.021005995571613312
+Info 169  [15:30:38.556] getCompletionData: Get previous token 1: 0.016402997076511383
+Info 170  [15:30:38.556] getCompletionData: Get previous token 2: 0.01333000510931015
+Info 171  [15:30:38.556] getCompletionsAtPosition: isCompletionListBlocker: 0.0030749961733818054
+Info 172  [15:30:38.556] Returning an empty list because completion was requested in an invalid position.
+Info 173  [15:30:38.557] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 174  [15:30:38.591] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 16 structureChanged: false Elapsed: 34.37312600016594ms
+Info 175  [15:30:38.591] Different program with same set of files:: structureIsReused:: 2
+Info 176  [15:30:38.591] getCompletionData: Get current token: 0.014221996068954468
+Info 177  [15:30:38.591] getCompletionData: Is inside comment: 0.026422999799251556
+Info 178  [15:30:38.591] getCompletionData: Get previous token 1: 0.01859399676322937
+Info 179  [15:30:38.591] getCompletionData: Get previous token 2: 0.014323003590106964
+Info 180  [15:30:38.591] getCompletionsAtPosition: isCompletionListBlocker: 0.008597999811172485
+Info 181  [15:30:38.591] Returning an empty list because completion was requested in an invalid position.
+Info 182  [15:30:38.592] getCompletionData: Get current token: 0.010305002331733704
+Info 183  [15:30:38.592] getCompletionData: Is inside comment: 0.02149999886751175
+Info 184  [15:30:38.592] getCompletionData: Get previous token 1: 0.0172170028090477
+Info 185  [15:30:38.592] getCompletionData: Get previous token 2: 0.014068998396396637
+Info 186  [15:30:38.592] getCompletionsAtPosition: isCompletionListBlocker: 0.0030430033802986145
+Info 187  [15:30:38.592] Returning an empty list because completion was requested in an invalid position.
+Info 188  [15:30:38.592] getCompletionData: Get current token: 0.009952999651432037
+Info 189  [15:30:38.592] getCompletionData: Is inside comment: 0.0213639959692955
+Info 190  [15:30:38.592] getCompletionData: Get previous token 1: 0.3773680031299591
+Info 191  [15:30:38.593] getCompletionData: Get previous token 2: 0.01913999766111374
+Info 192  [15:30:38.593] getCompletionsAtPosition: isCompletionListBlocker: 0.0038800016045570374
+Info 193  [15:30:38.593] Returning an empty list because completion was requested in an invalid position.
+Info 194  [15:30:38.593] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 195  [15:30:38.626] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 17 structureChanged: false Elapsed: 32.84036099910736ms
+Info 196  [15:30:38.626] Different program with same set of files:: structureIsReused:: 2
+Info 197  [15:30:38.626] getCompletionData: Get current token: 0.021618999540805817
+Info 198  [15:30:38.626] getCompletionData: Is inside comment: 0.02562999725341797
+Info 199  [15:30:38.626] getCompletionData: Get previous token 1: 0.019557997584342957
+Info 200  [15:30:38.627] getCompletionData: Get previous token 2: 0.6555590033531189
+Info 201  [15:30:38.627] getCompletionsAtPosition: isCompletionListBlocker: 0.008660994470119476
+Info 202  [15:30:38.628] Returning an empty list because completion was requested in an invalid position.
+Info 203  [15:30:38.699] getCompletionData: Get current token: 0.00944499671459198
+Info 204  [15:30:38.699] getCompletionData: Is inside comment: 0.05236399918794632
+Info 205  [15:30:38.699] getCompletionData: Get previous token 1: 0.021334998309612274
+Info 206  [15:30:38.699] getCompletionData: Get previous token 2: 0.014527000486850739
+Info 207  [15:30:38.699] getCompletionsAtPosition: isCompletionListBlocker: 0.0058379992842674255
+Info 208  [15:30:38.699] Returning an empty list because completion was requested in an invalid position.
+Info 209  [15:30:38.699] getCompletionData: Get current token: 0.008078999817371368
+Info 210  [15:30:38.699] getCompletionData: Is inside comment: 0.020802997052669525
+Info 211  [15:30:38.700] getCompletionData: Get previous token 1: 0.01583699882030487
+Info 212  [15:30:38.700] getCompletionData: Get previous token 2: 0.01277100294828415
+Info 213  [15:30:38.700] getCompletionsAtPosition: isCompletionListBlocker: 0.005681999027729034
+Info 214  [15:30:38.700] Returning an empty list because completion was requested in an invalid position.
+Info 215  [15:30:39.029] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 216  [15:30:39.064] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 18 structureChanged: false Elapsed: 34.21681199967861ms
+Info 217  [15:30:39.064] Different program with same set of files:: structureIsReused:: 2
+Info 218  [15:30:39.064] getCompletionData: Get current token: 0.008927002549171448
+Info 219  [15:30:39.064] getCompletionData: Is inside comment: 0.02339000254869461
+Info 220  [15:30:39.064] getCompletionData: Get previous token 1: 0.016749002039432526
+Info 221  [15:30:39.064] getCompletionData: Get previous token 2: 0.013516001403331757
+Info 222  [15:30:39.064] getCompletionsAtPosition: isCompletionListBlocker: 0.008483000099658966
+Info 223  [15:30:39.064] Returning an empty list because completion was requested in an invalid position.
+Info 224  [15:30:39.099] getCompletionData: Get current token: 0.0087989941239357
+Info 225  [15:30:39.099] getCompletionData: Is inside comment: 0.022127002477645874
+Info 226  [15:30:39.099] getCompletionData: Get previous token 1: 0.016554005444049835
+Info 227  [15:30:39.100] getCompletionData: Get previous token 2: 0.013022996485233307
+Info 228  [15:30:39.100] getCompletionsAtPosition: isCompletionListBlocker: 0.007798999547958374
+Info 229  [15:30:39.100] Returning an empty list because completion was requested in an invalid position.
+Info 230  [15:30:39.100] getCompletionData: Get current token: 0.008814997971057892
+Info 231  [15:30:39.100] getCompletionData: Is inside comment: 0.021964997053146362
+Info 232  [15:30:39.100] getCompletionData: Get previous token 1: 0.016489997506141663
+Info 233  [15:30:39.100] getCompletionData: Get previous token 2: 0.013061001896858215
+Info 234  [15:30:39.100] getCompletionsAtPosition: isCompletionListBlocker: 0.0036910027265548706
+Info 235  [15:30:39.100] Returning an empty list because completion was requested in an invalid position.
+Info 236  [15:30:39.212] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 237  [15:30:39.246] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 19 structureChanged: false Elapsed: 34.20218499749899ms
+Info 238  [15:30:39.246] Different program with same set of files:: structureIsReused:: 2
+Info 239  [15:30:40.372] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 240  [15:30:40.408] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 20 structureChanged: false Elapsed: 35.58557200431824ms
+Info 241  [15:30:40.408] Different program with same set of files:: structureIsReused:: 2
+Info 242  [15:30:40.702] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 243  [15:30:40.733] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 21 structureChanged: false Elapsed: 31.452238999307156ms
+Info 244  [15:30:40.733] Different program with same set of files:: structureIsReused:: 2
+Info 245  [15:30:41.792] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 246  [15:30:41.824] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 22 structureChanged: false Elapsed: 32.1688290014863ms
+Info 247  [15:30:41.824] Different program with same set of files:: structureIsReused:: 2
+Info 248  [15:30:41.913] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 249  [15:30:41.944] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 23 structureChanged: false Elapsed: 31.336250998079777ms
+Info 250  [15:30:41.944] Different program with same set of files:: structureIsReused:: 2
+Info 251  [15:30:43.460] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 252  [15:30:43.492] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 24 structureChanged: false Elapsed: 31.91227899491787ms
+Info 253  [15:30:43.492] Different program with same set of files:: structureIsReused:: 2
+Info 254  [15:30:44.263] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 255  [15:30:44.299] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 25 structureChanged: false Elapsed: 36.372758001089096ms
+Info 256  [15:30:44.299] Different program with same set of files:: structureIsReused:: 2
+Info 257  [15:30:44.389] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 258  [15:30:44.420] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 26 structureChanged: false Elapsed: 31.290878005325794ms
+Info 259  [15:30:44.420] Different program with same set of files:: structureIsReused:: 2
+Info 260  [15:30:45.911] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 261  [15:30:45.946] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 27 structureChanged: false Elapsed: 34.57539100199938ms
+Info 262  [15:30:45.946] Different program with same set of files:: structureIsReused:: 2
+Info 263  [15:30:45.946] getCompletionData: Get current token: 0.008524000644683838
+Info 264  [15:30:45.946] getCompletionData: Is inside comment: 0.022670000791549683
+Info 265  [15:30:45.946] getCompletionData: Get previous token 1: 0.030744001269340515
+Info 266  [15:30:45.946] getCompletionData: Get previous token 2: 0.01280900090932846
+Info 267  [15:30:45.946] getCompletionsAtPosition: isCompletionListBlocker: 0.012630000710487366
+Info 268  [15:30:45.946] Returning an empty list because completion was requested in an invalid position.
+Info 269  [15:30:45.964] getCompletionData: Get current token: 0.00803299993276596
+Info 270  [15:30:45.964] getCompletionData: Is inside comment: 0.02386699616909027
+Info 271  [15:30:45.964] getCompletionData: Get previous token 1: 0.018125995993614197
+Info 272  [15:30:45.964] getCompletionData: Get previous token 2: 0.014247000217437744
+Info 273  [15:30:45.964] getCompletionsAtPosition: isCompletionListBlocker: 0.0076849982142448425
+Info 274  [15:30:45.964] Returning an empty list because completion was requested in an invalid position.
+Info 275  [15:30:45.964] getCompletionData: Get current token: 0.007022000849246979
+Info 276  [15:30:45.964] getCompletionData: Is inside comment: 0.02047700434923172
+Info 277  [15:30:45.964] getCompletionData: Get previous token 1: 0.015915997326374054
+Info 278  [15:30:45.964] getCompletionData: Get previous token 2: 0.013746999204158783
+Info 279  [15:30:45.964] getCompletionsAtPosition: isCompletionListBlocker: 0.003192000091075897
+Info 280  [15:30:45.964] Returning an empty list because completion was requested in an invalid position.
+Info 281  [15:30:45.967] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 282  [15:30:45.997] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 28 structureChanged: false Elapsed: 30.04873500019312ms
+Info 283  [15:30:45.997] Different program with same set of files:: structureIsReused:: 2
+Info 284  [15:30:46.784] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 285  [15:30:46.816] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 29 structureChanged: false Elapsed: 32.08669000118971ms
+Info 286  [15:30:46.816] Different program with same set of files:: structureIsReused:: 2
+Info 287  [15:30:47.161] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 288  [15:30:47.193] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 30 structureChanged: false Elapsed: 32.35120099782944ms
+Info 289  [15:30:47.193] Different program with same set of files:: structureIsReused:: 2
+Info 290  [15:30:56.663] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 291  [15:30:56.705] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 31 structureChanged: false Elapsed: 42.45635499805212ms
+Info 292  [15:30:56.705] Different program with same set of files:: structureIsReused:: 2
+Info 293  [15:30:56.706] getCompletionData: Get current token: 0.014857999980449677
+Info 294  [15:30:56.706] getCompletionData: Is inside comment: 0.004616998136043549
+Info 295  [15:30:56.706] getCompletionData: Get previous token 1: 0.045778997242450714
+Info 296  [15:30:56.706] getCompletionsAtPosition: isCompletionListBlocker: 0.2230609953403473
+Info 297  [15:30:56.706] Returning an empty list because completion was requested in an invalid position.
+Info 298  [15:30:56.739] getCompletionData: Get current token: 0.010871998965740204
+Info 299  [15:30:56.739] getCompletionData: Is inside comment: 0.004963994026184082
+Info 300  [15:30:56.739] getCompletionData: Get previous token 1: 0.03452300280332565
+Info 301  [15:30:56.739] getCompletionsAtPosition: isCompletionListBlocker: 0.006887003779411316
+Info 302  [15:30:56.739] Returning an empty list because completion was requested in an invalid position.
+Info 303  [15:30:56.741] getCompletionData: Get current token: 0.012021996080875397
+Info 304  [15:30:56.741] getCompletionData: Is inside comment: 0.008559994399547577
+Info 305  [15:30:56.741] getCompletionData: Get previous token 1: 0.03915800154209137
+Info 306  [15:30:56.741] getCompletionsAtPosition: isCompletionListBlocker: 0.011140003800392151
+Info 307  [15:30:56.741] Returning an empty list because completion was requested in an invalid position.
+Info 308  [15:30:58.614] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 309  [15:30:58.654] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 32 structureChanged: false Elapsed: 39.99632300436497ms
+Info 310  [15:30:58.654] Different program with same set of files:: structureIsReused:: 2
+Info 311  [15:30:58.675] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 312  [15:30:58.716] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 33 structureChanged: false Elapsed: 40.83150400221348ms
+Info 313  [15:30:58.716] Different program with same set of files:: structureIsReused:: 2
+Info 314  [15:31:00.404] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 315  [15:31:00.438] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 34 structureChanged: false Elapsed: 33.76505300402641ms
+Info 316  [15:31:00.438] Different program with same set of files:: structureIsReused:: 2
+Info 317  [15:31:00.438] getCompletionData: Get current token: 0.012551002204418182
+Info 318  [15:31:00.438] getCompletionData: Is inside comment: 0.005070999264717102
+Info 319  [15:31:00.439] getCompletionData: Get previous token 1: 0.04766999930143356
+Info 320  [15:31:00.439] getCompletionsAtPosition: isCompletionListBlocker: 0.01079600304365158
+Info 321  [15:31:00.439] Returning an empty list because completion was requested in an invalid position.
+Info 322  [15:31:00.458] getCompletionData: Get current token: 0.011590994894504547
+Info 323  [15:31:00.458] getCompletionData: Is inside comment: 0.004909001290798187
+Info 324  [15:31:00.458] getCompletionData: Get previous token 1: 0.03749300539493561
+Info 325  [15:31:00.458] getCompletionsAtPosition: isCompletionListBlocker: 0.007821999490261078
+Info 326  [15:31:00.458] Returning an empty list because completion was requested in an invalid position.
+Info 327  [15:31:00.460] getCompletionData: Get current token: 0.012282997369766235
+Info 328  [15:31:00.460] getCompletionData: Is inside comment: 0.006439998745918274
+Info 329  [15:31:00.460] getCompletionData: Get previous token 1: 0.03941500186920166
+Info 330  [15:31:00.460] getCompletionsAtPosition: isCompletionListBlocker: 0.010270997881889343
+Info 331  [15:31:00.460] Returning an empty list because completion was requested in an invalid position.
+Info 332  [15:31:01.320] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 333  [15:31:01.356] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 35 structureChanged: false Elapsed: 36.30254299938679ms
+Info 334  [15:31:01.356] Different program with same set of files:: structureIsReused:: 2
+Info 335  [15:31:01.357] getCompletionData: Get current token: 0.014392003417015076
+Info 336  [15:31:01.357] getCompletionData: Is inside comment: 0.004905998706817627
+Info 337  [15:31:01.357] getCompletionData: Get previous token 1: 0.052907995879650116
+Info 338  [15:31:01.357] getCompletionsAtPosition: isCompletionListBlocker: 0.013874001801013947
+Info 339  [15:31:01.357] Returning an empty list because completion was requested in an invalid position.
+Info 340  [15:31:01.380] getCompletionData: Get current token: 0.013353005051612854
+Info 341  [15:31:01.380] getCompletionData: Is inside comment: 0.005399003624916077
+Info 342  [15:31:01.380] getCompletionData: Get previous token 1: 0.09768199920654297
+Info 343  [15:31:01.380] getCompletionsAtPosition: isCompletionListBlocker: 0.011679001152515411
+Info 344  [15:31:01.380] Returning an empty list because completion was requested in an invalid position.
+Info 345  [15:31:01.383] getCompletionData: Get current token: 0.012391000986099243
+Info 346  [15:31:01.383] getCompletionData: Is inside comment: 0.010761000216007233
+Info 347  [15:31:01.383] getCompletionData: Get previous token 1: 0.04841599613428116
+Info 348  [15:31:01.383] getCompletionsAtPosition: isCompletionListBlocker: 0.011215999722480774
+Info 349  [15:31:01.383] Returning an empty list because completion was requested in an invalid position.
+Info 350  [15:31:01.477] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 351  [15:31:01.519] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 36 structureChanged: false Elapsed: 41.80529300123453ms
+Info 352  [15:31:01.519] Different program with same set of files:: structureIsReused:: 2
+Info 353  [15:31:03.246] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 354  [15:31:03.283] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 37 structureChanged: false Elapsed: 36.662067003548145ms
+Info 355  [15:31:03.283] Different program with same set of files:: structureIsReused:: 2
+Info 356  [15:31:03.303] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 357  [15:31:03.337] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 38 structureChanged: false Elapsed: 34.05953099578619ms
+Info 358  [15:31:03.337] Different program with same set of files:: structureIsReused:: 2
+Info 359  [15:31:03.558] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 360  [15:31:03.592] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 39 structureChanged: false Elapsed: 33.65634900331497ms
+Info 361  [15:31:03.592] Different program with same set of files:: structureIsReused:: 2
+Info 362  [15:31:03.592] getCompletionData: Get current token: 0.012853994965553284
+Info 363  [15:31:03.592] getCompletionData: Is inside comment: 0.00511699914932251
+Info 364  [15:31:03.592] getCompletionData: Get previous token 1: 0.054176002740859985
+Info 365  [15:31:03.592] getCompletionsAtPosition: isCompletionListBlocker: 0.00902799516916275
+Info 366  [15:31:03.592] Returning an empty list because completion was requested in an invalid position.
+Info 367  [15:31:03.593] getCompletionData: Get current token: 0.01505899429321289
+Info 368  [15:31:03.593] getCompletionData: Is inside comment: 0.0063569992780685425
+Info 369  [15:31:03.593] getCompletionData: Get previous token 1: 0.04085399955511093
+Info 370  [15:31:03.593] getCompletionsAtPosition: isCompletionListBlocker: 0.008105002343654633
+Info 371  [15:31:03.593] Returning an empty list because completion was requested in an invalid position.
+Info 372  [15:31:03.594] getCompletionData: Get current token: 0.010260000824928284
+Info 373  [15:31:03.594] getCompletionData: Is inside comment: 0.004332996904850006
+Info 374  [15:31:03.594] getCompletionData: Get previous token 1: 0.03447199612855911
+Info 375  [15:31:03.594] getCompletionsAtPosition: isCompletionListBlocker: 0.006763003766536713
+Info 376  [15:31:03.594] Returning an empty list because completion was requested in an invalid position.
+Info 377  [15:31:03.594] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 378  [15:31:03.626] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 40 structureChanged: false Elapsed: 32.373864002525806ms
+Info 379  [15:31:03.627] Different program with same set of files:: structureIsReused:: 2
+Info 380  [15:31:04.776] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 381  [15:31:04.811] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 41 structureChanged: false Elapsed: 35.336756996810436ms
+Info 382  [15:31:04.812] Different program with same set of files:: structureIsReused:: 2
+Info 383  [15:31:07.094] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 384  [15:31:07.125] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 42 structureChanged: false Elapsed: 31.325176998972893ms
+Info 385  [15:31:07.125] Different program with same set of files:: structureIsReused:: 2
+Info 386  [15:31:07.126] getCompletionData: Get current token: 0.010219000279903412
+Info 387  [15:31:07.126] getCompletionData: Is inside comment: 0.0038670003414154053
+Info 388  [15:31:07.126] getCompletionData: Get previous token 1: 0.047804005444049835
+Info 389  [15:31:07.126] getCompletionsAtPosition: isCompletionListBlocker: 0.008302003145217896
+Info 390  [15:31:07.126] Returning an empty list because completion was requested in an invalid position.
+Info 391  [15:31:07.126] getCompletionData: Get current token: 0.008737996220588684
+Info 392  [15:31:07.126] getCompletionData: Is inside comment: 0.0033930018544197083
+Info 393  [15:31:07.126] getCompletionData: Get previous token 1: 0.032986000180244446
+Info 394  [15:31:07.127] getCompletionsAtPosition: isCompletionListBlocker: 0.006893999874591827
+Info 395  [15:31:07.127] Returning an empty list because completion was requested in an invalid position.
+Info 396  [15:31:07.127] getCompletionData: Get current token: 0.008489996194839478
+Info 397  [15:31:07.127] getCompletionData: Is inside comment: 0.0031829997897148132
+Info 398  [15:31:07.127] getCompletionData: Get previous token 1: 0.03233399987220764
+Info 399  [15:31:07.127] getCompletionsAtPosition: isCompletionListBlocker: 0.005313999950885773
+Info 400  [15:31:07.127] Returning an empty list because completion was requested in an invalid position.
+Info 401  [15:31:07.220] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 402  [15:31:07.254] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 43 structureChanged: false Elapsed: 33.25860499590635ms
+Info 403  [15:31:07.254] Different program with same set of files:: structureIsReused:: 2
+Info 404  [15:31:07.254] getCompletionData: Get current token: 0.010465003550052643
+Info 405  [15:31:07.254] getCompletionData: Is inside comment: 0.0037369951605796814
+Info 406  [15:31:07.254] getCompletionData: Get previous token 1: 0.04694800078868866
+Info 407  [15:31:07.254] getCompletionsAtPosition: isCompletionListBlocker: 0.007677994668483734
+Info 408  [15:31:07.254] Returning an empty list because completion was requested in an invalid position.
+Info 409  [15:31:07.371] getCompletionData: Get current token: 0.00805799663066864
+Info 410  [15:31:07.371] getCompletionData: Is inside comment: 0.0037890002131462097
+Info 411  [15:31:07.371] getCompletionData: Get previous token 1: 0.03892499953508377
+Info 412  [15:31:07.371] getCompletionsAtPosition: isCompletionListBlocker: 0.007709994912147522
+Info 413  [15:31:07.371] Returning an empty list because completion was requested in an invalid position.
+Info 414  [15:31:07.371] getCompletionData: Get current token: 0.00841599702835083
+Info 415  [15:31:07.371] getCompletionData: Is inside comment: 0.0032939985394477844
+Info 416  [15:31:07.371] getCompletionData: Get previous token 1: 0.03314300626516342
+Info 417  [15:31:07.371] getCompletionsAtPosition: isCompletionListBlocker: 0.006273001432418823
+Info 418  [15:31:07.371] Returning an empty list because completion was requested in an invalid position.
+Info 419  [15:31:09.230] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 420  [15:31:09.265] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 44 structureChanged: false Elapsed: 35.106182999908924ms
+Info 421  [15:31:09.265] Different program with same set of files:: structureIsReused:: 2
+Info 422  [15:31:09.266] getCompletionData: Get current token: 0.010614998638629913
+Info 423  [15:31:09.266] getCompletionData: Is inside comment: 0.004365995526313782
+Info 424  [15:31:09.266] getCompletionData: Get previous token 1: 0.04979600012302399
+Info 425  [15:31:09.266] getCompletionsAtPosition: isCompletionListBlocker: 0.016217000782489777
+Info 426  [15:31:09.266] Returning an empty list because completion was requested in an invalid position.
+Info 427  [15:31:09.266] getCompletionData: Get current token: 0.00947900116443634
+Info 428  [15:31:09.266] getCompletionData: Is inside comment: 0.0043800026178359985
+Info 429  [15:31:09.266] getCompletionData: Get previous token 1: 0.03571599721908569
+Info 430  [15:31:09.267] getCompletionsAtPosition: isCompletionListBlocker: 0.010503999888896942
+Info 431  [15:31:09.267] Returning an empty list because completion was requested in an invalid position.
+Info 432  [15:31:09.267] getCompletionData: Get current token: 0.008270002901554108
+Info 433  [15:31:09.267] getCompletionData: Is inside comment: 0.003533005714416504
+Info 434  [15:31:09.267] getCompletionData: Get previous token 1: 0.033270999789237976
+Info 435  [15:31:09.267] getCompletionsAtPosition: isCompletionListBlocker: 0.010144002735614777
+Info 436  [15:31:09.267] Returning an empty list because completion was requested in an invalid position.
+Info 437  [15:31:09.284] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 438  [15:31:09.319] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 45 structureChanged: false Elapsed: 34.51247199624777ms
+Info 439  [15:31:09.319] Different program with same set of files:: structureIsReused:: 2
+Info 440  [15:31:09.987] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 441  [15:31:10.015] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 46 structureChanged: false Elapsed: 28.493004001677036ms
+Info 442  [15:31:10.015] Different program with same set of files:: structureIsReused:: 2
+Info 443  [15:31:10.016] getCompletionData: Get current token: 0.009473003447055817
+Info 444  [15:31:10.016] getCompletionData: Is inside comment: 0.0037679970264434814
+Info 445  [15:31:10.016] getCompletionData: Get previous token 1: 0.043379999697208405
+Info 446  [15:31:10.016] getCompletionsAtPosition: isCompletionListBlocker: 0.00980299711227417
+Info 447  [15:31:10.016] Returning an empty list because completion was requested in an invalid position.
+Info 448  [15:31:10.032] getCompletionData: Get current token: 0.007881000638008118
+Info 449  [15:31:10.032] getCompletionData: Is inside comment: 0.0036960020661354065
+Info 450  [15:31:10.032] getCompletionData: Get previous token 1: 0.034376002848148346
+Info 451  [15:31:10.032] getCompletionsAtPosition: isCompletionListBlocker: 0.0057310014963150024
+Info 452  [15:31:10.032] Returning an empty list because completion was requested in an invalid position.
+Info 453  [15:31:10.095] getCompletionData: Get current token: 0.008616000413894653
+Info 454  [15:31:10.095] getCompletionData: Is inside comment: 0.0037239938974380493
+Info 455  [15:31:10.095] getCompletionData: Get previous token 1: 0.03397199511528015
+Info 456  [15:31:10.095] getCompletionsAtPosition: isCompletionListBlocker: 0.006749995052814484
+Info 457  [15:31:10.095] Returning an empty list because completion was requested in an invalid position.
+Info 458  [15:31:10.344] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 459  [15:31:10.372] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 47 structureChanged: false Elapsed: 27.389025002717972ms
+Info 460  [15:31:10.372] Different program with same set of files:: structureIsReused:: 2
+Info 461  [15:31:11.183] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 462  [15:31:11.216] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 48 structureChanged: false Elapsed: 32.91921899467707ms
+Info 463  [15:31:11.216] Different program with same set of files:: structureIsReused:: 2
+Info 464  [15:31:11.298] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 465  [15:31:11.329] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 49 structureChanged: false Elapsed: 31.49006899446249ms
+Info 466  [15:31:11.329] Different program with same set of files:: structureIsReused:: 2
+Info 467  [15:31:11.494] getCompletionData: Get current token: 0.009230993688106537
+Info 468  [15:31:11.494] getCompletionData: Is inside comment: 0.003931999206542969
+Info 469  [15:31:11.494] getCompletionData: Get previous token 1: 0.04428800195455551
+Info 470  [15:31:11.494] getCompletionsAtPosition: isCompletionListBlocker: 0.007114998996257782
+Info 471  [15:31:11.494] Returning an empty list because completion was requested in an invalid position.
+Info 472  [15:31:11.625] getCompletionData: Get current token: 0.008936993777751923
+Info 473  [15:31:11.625] getCompletionData: Is inside comment: 0.003956004977226257
+Info 474  [15:31:11.625] getCompletionData: Get previous token 1: 0.033552996814250946
+Info 475  [15:31:11.625] getCompletionsAtPosition: isCompletionListBlocker: 0.007971003651618958
+Info 476  [15:31:11.625] Returning an empty list because completion was requested in an invalid position.
+Info 477  [15:31:11.626] getCompletionData: Get current token: 0.008166000247001648
+Info 478  [15:31:11.626] getCompletionData: Is inside comment: 0.0031360015273094177
+Info 479  [15:31:11.626] getCompletionData: Get previous token 1: 0.22310899943113327
+Info 480  [15:31:11.626] getCompletionsAtPosition: isCompletionListBlocker: 0.009975999593734741
+Info 481  [15:31:11.626] Returning an empty list because completion was requested in an invalid position.
+Info 482  [15:31:12.665] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 483  [15:31:12.695] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 50 structureChanged: false Elapsed: 30.787501998245716ms
+Info 484  [15:31:12.695] Different program with same set of files:: structureIsReused:: 2
+Info 485  [15:31:12.696] getCompletionData: Get current token: 0.017921999096870422
+Info 486  [15:31:12.696] getCompletionData: Is inside comment: 0.004732996225357056
+Info 487  [15:31:12.696] getCompletionData: Get previous token 1: 0.049268998205661774
+Info 488  [15:31:12.696] getCompletionsAtPosition: isCompletionListBlocker: 0.00824899971485138
+Info 489  [15:31:12.696] Returning an empty list because completion was requested in an invalid position.
+Info 490  [15:31:12.697] getCompletionData: Get current token: 0.009967997670173645
+Info 491  [15:31:12.697] getCompletionData: Is inside comment: 0.003872007131576538
+Info 492  [15:31:12.697] getCompletionData: Get previous token 1: 0.035912998020648956
+Info 493  [15:31:12.697] getCompletionsAtPosition: isCompletionListBlocker: 0.006657995283603668
+Info 494  [15:31:12.697] Returning an empty list because completion was requested in an invalid position.
+Info 495  [15:31:12.697] getCompletionData: Get current token: 0.008880995213985443
+Info 496  [15:31:12.697] getCompletionData: Is inside comment: 0.0032450035214424133
+Info 497  [15:31:12.697] getCompletionData: Get previous token 1: 0.031268998980522156
+Info 498  [15:31:12.697] getCompletionsAtPosition: isCompletionListBlocker: 0.005132004618644714
+Info 499  [15:31:12.697] Returning an empty list because completion was requested in an invalid position.
+Info 500  [15:31:13.141] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 501  [15:31:13.172] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 51 structureChanged: false Elapsed: 31.333186000585556ms
+Info 502  [15:31:13.173] Different program with same set of files:: structureIsReused:: 2
+Info 503  [15:31:13.260] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 504  [15:31:13.290] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 52 structureChanged: false Elapsed: 30.002607002854347ms
+Info 505  [15:31:13.290] Different program with same set of files:: structureIsReused:: 2
+Info 506  [15:31:13.453] getCompletionData: Get current token: 0.010113999247550964
+Info 507  [15:31:13.453] getCompletionData: Is inside comment: 0.004171997308731079
+Info 508  [15:31:13.453] getCompletionData: Get previous token 1: 0.04495200514793396
+Info 509  [15:31:13.453] getCompletionsAtPosition: isCompletionListBlocker: 0.007597997784614563
+Info 510  [15:31:13.453] Returning an empty list because completion was requested in an invalid position.
+Info 511  [15:31:13.491] getCompletionData: Get current token: 0.009879998862743378
+Info 512  [15:31:13.491] getCompletionData: Is inside comment: 0.007968001067638397
+Info 513  [15:31:13.491] getCompletionData: Get previous token 1: 0.04326099902391434
+Info 514  [15:31:13.491] getCompletionsAtPosition: isCompletionListBlocker: 0.009291000664234161
+Info 515  [15:31:13.491] Returning an empty list because completion was requested in an invalid position.
+Info 516  [15:31:13.494] getCompletionData: Get current token: 0.009544998407363892
+Info 517  [15:31:13.494] getCompletionData: Is inside comment: 0.004137001931667328
+Info 518  [15:31:13.494] getCompletionData: Get previous token 1: 0.03628700226545334
+Info 519  [15:31:13.494] getCompletionsAtPosition: isCompletionListBlocker: 0.007529996335506439
+Info 520  [15:31:13.494] Returning an empty list because completion was requested in an invalid position.
+Info 521  [15:31:14.352] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 522  [15:31:14.384] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 53 structureChanged: false Elapsed: 32.54154700040817ms
+Info 523  [15:31:14.384] Different program with same set of files:: structureIsReused:: 2
+Info 524  [15:31:14.385] getCompletionData: Get current token: 0.010795995593070984
+Info 525  [15:31:14.385] getCompletionData: Is inside comment: 0.0038880035281181335
+Info 526  [15:31:14.385] getCompletionData: Get previous token 1: 0.043327994644641876
+Info 527  [15:31:14.385] getCompletionsAtPosition: isCompletionListBlocker: 0.00766899436712265
+Info 528  [15:31:14.385] Returning an empty list because completion was requested in an invalid position.
+Info 529  [15:31:14.400] getCompletionData: Get current token: 0.008681997656822205
+Info 530  [15:31:14.400] getCompletionData: Is inside comment: 0.003828994929790497
+Info 531  [15:31:14.400] getCompletionData: Get previous token 1: 0.03433499485254288
+Info 532  [15:31:14.400] getCompletionsAtPosition: isCompletionListBlocker: 0.009048998355865479
+Info 533  [15:31:14.400] Returning an empty list because completion was requested in an invalid position.
+Info 534  [15:31:14.400] getCompletionData: Get current token: 0.008484996855258942
+Info 535  [15:31:14.400] getCompletionData: Is inside comment: 0.003134995698928833
+Info 536  [15:31:14.401] getCompletionData: Get previous token 1: 0.03448300063610077
+Info 537  [15:31:14.401] getCompletionsAtPosition: isCompletionListBlocker: 0.007634997367858887
+Info 538  [15:31:14.401] Returning an empty list because completion was requested in an invalid position.
+Info 539  [15:31:14.401] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 540  [15:31:14.434] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 54 structureChanged: false Elapsed: 32.566532000899315ms
+Info 541  [15:31:14.434] Different program with same set of files:: structureIsReused:: 2
+Info 542  [15:31:15.251] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 543  [15:31:15.283] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 55 structureChanged: false Elapsed: 31.715647995471954ms
+Info 544  [15:31:15.283] Different program with same set of files:: structureIsReused:: 2
+Info 545  [15:31:15.283] getCompletionData: Get current token: 0.009845003485679626
+Info 546  [15:31:15.283] getCompletionData: Is inside comment: 0.003862999379634857
+Info 547  [15:31:15.284] getCompletionData: Get previous token 1: 0.049286000430583954
+Info 548  [15:31:15.284] getCompletionsAtPosition: isCompletionListBlocker: 0.007819004356861115
+Info 549  [15:31:15.284] Returning an empty list because completion was requested in an invalid position.
+Info 550  [15:31:15.284] getCompletionData: Get current token: 0.008397996425628662
+Info 551  [15:31:15.284] getCompletionData: Is inside comment: 0.003496997058391571
+Info 552  [15:31:15.284] getCompletionData: Get previous token 1: 0.03239499777555466
+Info 553  [15:31:15.284] getCompletionsAtPosition: isCompletionListBlocker: 0.006349004805088043
+Info 554  [15:31:15.284] Returning an empty list because completion was requested in an invalid position.
+Info 555  [15:31:15.284] getCompletionData: Get current token: 0.007877998054027557
+Info 556  [15:31:15.284] getCompletionData: Is inside comment: 0.0032229945063591003
+Info 557  [15:31:15.284] getCompletionData: Get previous token 1: 0.03088200092315674
+Info 558  [15:31:15.285] getCompletionsAtPosition: isCompletionListBlocker: 0.005635999143123627
+Info 559  [15:31:15.285] Returning an empty list because completion was requested in an invalid position.
+Info 560  [15:31:15.285] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 561  [15:31:15.315] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 56 structureChanged: false Elapsed: 30.125301003456116ms
+Info 562  [15:31:15.315] Different program with same set of files:: structureIsReused:: 2
+Info 563  [15:31:15.652] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 564  [15:31:15.682] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 57 structureChanged: false Elapsed: 29.949323005974293ms
+Info 565  [15:31:15.682] Different program with same set of files:: structureIsReused:: 2
+Info 566  [15:31:16.119] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 567  [15:31:16.145] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 58 structureChanged: false Elapsed: 26.11845699697733ms
+Info 568  [15:31:16.145] Different program with same set of files:: structureIsReused:: 2
+Info 569  [15:31:16.148] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 570  [15:31:16.174] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 59 structureChanged: false Elapsed: 26.568128004670143ms
+Info 571  [15:31:16.174] Different program with same set of files:: structureIsReused:: 2
+Info 572  [15:31:16.332] getCompletionData: Get current token: 0.010439001023769379
+Info 573  [15:31:16.332] getCompletionData: Is inside comment: 0.004098996520042419
+Info 574  [15:31:16.332] getCompletionData: Get previous token 1: 0.047993004322052
+Info 575  [15:31:16.333] getCompletionsAtPosition: isCompletionListBlocker: 0.00777599960565567
+Info 576  [15:31:16.333] Returning an empty list because completion was requested in an invalid position.
+Info 577  [15:31:16.397] getCompletionData: Get current token: 0.009490005671977997
+Info 578  [15:31:16.397] getCompletionData: Is inside comment: 0.004753999412059784
+Info 579  [15:31:16.397] getCompletionData: Get previous token 1: 0.03544300049543381
+Info 580  [15:31:16.397] getCompletionsAtPosition: isCompletionListBlocker: 0.007197000086307526
+Info 581  [15:31:16.397] Returning an empty list because completion was requested in an invalid position.
+Info 582  [15:31:16.397] getCompletionData: Get current token: 0.008333995938301086
+Info 583  [15:31:16.398] getCompletionData: Is inside comment: 0.0033119991421699524
+Info 584  [15:31:16.398] getCompletionData: Get previous token 1: 0.030819997191429138
+Info 585  [15:31:16.398] getCompletionsAtPosition: isCompletionListBlocker: 0.004732996225357056
+Info 586  [15:31:16.398] Returning an empty list because completion was requested in an invalid position.
+Info 587  [15:31:16.398] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 588  [15:31:16.430] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 60 structureChanged: false Elapsed: 31.940537996590137ms
+Info 589  [15:31:16.430] Different program with same set of files:: structureIsReused:: 2
+Info 590  [15:31:17.086] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 591  [15:31:17.123] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 61 structureChanged: false Elapsed: 35.93178999423981ms
+Info 592  [15:31:17.123] Different program with same set of files:: structureIsReused:: 2
+Info 593  [15:31:17.123] getCompletionData: Get current token: 0.01133900135755539
+Info 594  [15:31:17.123] getCompletionData: Is inside comment: 0.003729000687599182
+Info 595  [15:31:17.123] getCompletionData: Get previous token 1: 0.04806199669837952
+Info 596  [15:31:17.123] getCompletionsAtPosition: isCompletionListBlocker: 0.01257399469614029
+Info 597  [15:31:17.123] Returning an empty list because completion was requested in an invalid position.
+Info 598  [15:31:17.143] getCompletionData: Get current token: 0.0080299973487854
+Info 599  [15:31:17.143] getCompletionData: Is inside comment: 0.00371599942445755
+Info 600  [15:31:17.143] getCompletionData: Get previous token 1: 0.03360600024461746
+Info 601  [15:31:17.143] getCompletionsAtPosition: isCompletionListBlocker: 0.006554998457431793
+Info 602  [15:31:17.143] Returning an empty list because completion was requested in an invalid position.
+Info 603  [15:31:17.145] getCompletionData: Get current token: 0.010040000081062317
+Info 604  [15:31:17.145] getCompletionData: Is inside comment: 0.004464998841285706
+Info 605  [15:31:17.145] getCompletionData: Get previous token 1: 0.03622099757194519
+Info 606  [15:31:17.146] getCompletionsAtPosition: isCompletionListBlocker: 0.00837000459432602
+Info 607  [15:31:17.146] Returning an empty list because completion was requested in an invalid position.
+Info 608  [15:31:17.534] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 609  [15:31:17.568] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 62 structureChanged: false Elapsed: 33.98388899862766ms
+Info 610  [15:31:17.568] Different program with same set of files:: structureIsReused:: 2
+Info 611  [15:31:18.002] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 612  [15:31:18.035] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 63 structureChanged: false Elapsed: 32.8083910048008ms
+Info 613  [15:31:18.035] Different program with same set of files:: structureIsReused:: 2
+Info 614  [15:31:18.336] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 615  [15:31:18.365] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 64 structureChanged: false Elapsed: 28.842617996037006ms
+Info 616  [15:31:18.365] Different program with same set of files:: structureIsReused:: 2
+Info 617  [15:31:18.365] getCompletionData: Get current token: 0.010140001773834229
+Info 618  [15:31:18.365] getCompletionData: Is inside comment: 0.003591001033782959
+Info 619  [15:31:18.365] getCompletionData: Get previous token 1: 0.04520099610090256
+Info 620  [15:31:18.365] getCompletionsAtPosition: isCompletionListBlocker: 0.00717800110578537
+Info 621  [15:31:18.365] Returning an empty list because completion was requested in an invalid position.
+Info 622  [15:31:18.520] getCompletionData: Get current token: 0.008960001170635223
+Info 623  [15:31:18.520] getCompletionData: Is inside comment: 0.00401199609041214
+Info 624  [15:31:18.521] getCompletionData: Get previous token 1: 0.0406470000743866
+Info 625  [15:31:18.521] getCompletionsAtPosition: isCompletionListBlocker: 0.008155003190040588
+Info 626  [15:31:18.521] Returning an empty list because completion was requested in an invalid position.
+Info 627  [15:31:18.523] getCompletionData: Get current token: 0.008475996553897858
+Info 628  [15:31:18.523] getCompletionData: Is inside comment: 0.0037949979305267334
+Info 629  [15:31:18.523] getCompletionData: Get previous token 1: 0.03248000144958496
+Info 630  [15:31:18.523] getCompletionsAtPosition: isCompletionListBlocker: 0.006923995912075043
+Info 631  [15:31:18.523] Returning an empty list because completion was requested in an invalid position.
+Info 632  [15:31:19.952] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 633  [15:31:19.980] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 65 structureChanged: false Elapsed: 27.06631100177765ms
+Info 634  [15:31:19.980] Different program with same set of files:: structureIsReused:: 2
+Info 635  [15:31:20.407] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 636  [15:31:20.436] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 66 structureChanged: false Elapsed: 29.342772006988525ms
+Info 637  [15:31:20.436] Different program with same set of files:: structureIsReused:: 2
+Info 638  [15:31:20.439] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 639  [15:31:20.470] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 67 structureChanged: false Elapsed: 30.76994200050831ms
+Info 640  [15:31:20.470] Different program with same set of files:: structureIsReused:: 2
+Info 641  [15:31:20.736] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 642  [15:31:20.765] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 68 structureChanged: false Elapsed: 28.68180199712515ms
+Info 643  [15:31:20.765] Different program with same set of files:: structureIsReused:: 2
+Info 644  [15:31:20.765] getCompletionData: Get current token: 0.009782001376152039
+Info 645  [15:31:20.765] getCompletionData: Is inside comment: 0.0037460029125213623
+Info 646  [15:31:20.765] getCompletionData: Get previous token 1: 0.045385003089904785
+Info 647  [15:31:20.765] getCompletionsAtPosition: isCompletionListBlocker: 0.00821799784898758
+Info 648  [15:31:20.765] Returning an empty list because completion was requested in an invalid position.
+Info 649  [15:31:20.784] getCompletionData: Get current token: 0.010079003870487213
+Info 650  [15:31:20.784] getCompletionData: Is inside comment: 0.004815004765987396
+Info 651  [15:31:20.784] getCompletionData: Get previous token 1: 0.037842996418476105
+Info 652  [15:31:20.785] getCompletionsAtPosition: isCompletionListBlocker: 0.012202002108097076
+Info 653  [15:31:20.785] Returning an empty list because completion was requested in an invalid position.
+Info 654  [15:31:20.847] getCompletionData: Get current token: 0.010255001485347748
+Info 655  [15:31:20.847] getCompletionData: Is inside comment: 0.004014000296592712
+Info 656  [15:31:20.847] getCompletionData: Get previous token 1: 0.033734001219272614
+Info 657  [15:31:20.847] getCompletionsAtPosition: isCompletionListBlocker: 0.007437996566295624
+Info 658  [15:31:20.847] Returning an empty list because completion was requested in an invalid position.
+Info 659  [15:31:21.879] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 660  [15:31:21.911] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 69 structureChanged: false Elapsed: 31.60037899762392ms
+Info 661  [15:31:21.911] Different program with same set of files:: structureIsReused:: 2
+Info 662  [15:31:21.926] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 663  [15:31:21.958] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 70 structureChanged: false Elapsed: 31.567408993840218ms
+Info 664  [15:31:21.958] Different program with same set of files:: structureIsReused:: 2
+Info 665  [15:31:22.529] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 666  [15:31:22.558] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 71 structureChanged: false Elapsed: 28.823051996529102ms
+Info 667  [15:31:22.558] Different program with same set of files:: structureIsReused:: 2
+Info 668  [15:31:22.637] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 669  [15:31:22.667] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 72 structureChanged: false Elapsed: 29.93265600502491ms
+Info 670  [15:31:22.667] Different program with same set of files:: structureIsReused:: 2
+Info 671  [15:31:24.122] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 672  [15:31:24.152] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 73 structureChanged: false Elapsed: 30.418507002294064ms
+Info 673  [15:31:24.153] Different program with same set of files:: structureIsReused:: 2
+Info 674  [15:31:24.609] Starting updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json
+Info 675  [15:31:24.638] Finishing updateGraphWorker: Project: /Users/edwar/Documents/taller/estrella-cliente/tsconfig.json Version: 74 structureChanged: false Elapsed: 29.17790400236845ms
+Info 676  [15:31:24.638] Different program with same set of files:: structureIsReused:: 2

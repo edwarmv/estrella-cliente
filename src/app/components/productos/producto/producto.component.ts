@@ -1,23 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CategoriaProducto } from '@models/categoria-producto.model';
 import { Producto } from '@models/producto.model';
+import { CategoriaProductoProductoService } from '@services/categoria-producto-producto.service';
+import { CategoriaProductoService } from '@services/categoria-producto.service';
 import { ProductoService } from '@services/producto.service';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { mergeMap, tap } from 'rxjs/operators';
+import { SnackBarService } from '@services/snack-bar.service';
+import { SelectionListDialogService } from '@shared/selection-list-dialog/selection-list-dialog.service';
+import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-producto',
   templateUrl: './producto.component.html',
-  styleUrls: ['./producto.component.scss']
+  styleUrls: ['./producto.component.scss'],
 })
 export class ProductoComponent implements OnInit {
-  producto$: Observable<Producto>;
-
-  subject = new BehaviorSubject(undefined);
-
+  idProducto: string;
+  producto: Producto;
   productoForm: FormGroup;
 
   constructor(
@@ -25,46 +31,32 @@ export class ProductoComponent implements OnInit {
     private router: Router,
     private productoService: ProductoService,
     private fb: FormBuilder,
-    private snackBar: MatSnackBar
-  ) { }
+    private snackBarService: SnackBarService,
+    private selectionListDialogService: SelectionListDialogService,
+    private categoriaProductoService: CategoriaProductoService,
+    private categoriaProductoProductoService: CategoriaProductoProductoService
+  ) {}
 
   ngOnInit(): void {
     this.productoForm = this.fb.group({
-      nombre: [''],
+      nombre: ['', Validators.required],
       descripcion: [''],
-      precio: [0]
+      precio: [0.1, [Validators.required, Validators.min(0.1)]],
+      estado: [true],
     });
 
-    const id = this.route.snapshot.params.id;
-
-    if (id) {
-      this.producto$ = this.subject.pipe(
-        mergeMap(() => {
-          return this.productoService.obtenerProducto(id).pipe(
-            tap(producto => {
-              this.productoForm.setValue({
-                nombre: producto.nombre,
-                descripcion: producto.descripcion,
-                precio: producto.precio
-              });
-            })
-          );
-        })
-      );
-    }
-  }
-
-  obtenerNuevoProducto(): void {
-    this.subject.next(undefined);
+    this.idProducto = this.route.snapshot.params.id;
+    this.fetchProducto();
   }
 
   actualizarProducto(id: number): void {
-    this.productoService.actualizarProducto(id, this.productoForm.value)
-    .subscribe(resp => {
-      this.snackBar.open(resp.mensaje, 'Aceptar', {
-        duration: 2000
-      });
-    });
+    if (this.productoForm.valid) {
+      this.productoService
+        .actualizarProducto(id, this.productoForm.value)
+        .subscribe(resp => {
+          this.snackBarService.open(resp.mensaje);
+        });
+    }
   }
 
   urlActualizarFoto(idProducto: number): string {
@@ -72,17 +64,88 @@ export class ProductoComponent implements OnInit {
   }
 
   crearProducto(): void {
-    this.productoService.crearProducto(this.productoForm.value)
-    .subscribe(resp => {
-      this.snackBar.open(resp.mensaje, 'Aceptar', { duration: 2000 });
-    });
+    if (this.productoForm.valid) {
+      this.productoService
+        .crearProducto(this.productoForm.value)
+        .subscribe(resp => {
+          this.snackBarService.open(resp.mensaje);
+          this.router.navigate(['/productos', resp.producto.id])
+        });
+    }
   }
 
-  borrarProducto(id: number): void {
-    this.productoService.borrarProducto(id)
-    .subscribe(resp => {
-      this.snackBar.open(resp.mensaje, 'Aceptar', { duration: 2000 });
-      this.router.navigate(['/productos']);
-    });
+  abrirSeleccionarCategoriaProduct(): void {
+    this.selectionListDialogService
+      .open<CategoriaProducto>({
+        title: 'Seleccionar categoria',
+        search: {
+          placeholder: 'Nombre categoria',
+        },
+        cb: (skip, take, termino) => {
+          return this.categoriaProductoService
+            .obtenerCategoriasProductos({
+              skip,
+              take,
+              termino,
+            })
+            .pipe(
+              map(resp => {
+                const categoriasProductos = resp.categoriasProductos.map(
+                  categoriaProducto => ({
+                    label: `${categoriaProducto.nombre}`,
+                    value: categoriaProducto,
+                  })
+                );
+                return {
+                  values: categoriasProductos,
+                  total: resp.total,
+                };
+              })
+            );
+        },
+      })
+      .subscribe(categoriaProducto => {
+        if (categoriaProducto) {
+          this.categoriaProductoProductoService
+            .crear({
+              producto: this.producto,
+              categoriaProducto: categoriaProducto,
+            })
+            .subscribe(resp => {
+              this.snackBarService.open(resp.mensaje);
+              this.fetchProducto();
+            });
+        }
+      });
+  }
+
+  borrarCategoria(idCategoria: number): void {
+    this.categoriaProductoProductoService
+      .borrar(idCategoria, parseInt(this.idProducto))
+      .subscribe(resp => {
+        this.fetchProducto();
+        this.snackBarService.open(resp.mensaje);
+      });
+  }
+
+  fetchProducto(): void {
+    if (this.idProducto) {
+      this.productoService
+        .obtenerProducto(parseInt(this.idProducto))
+        .subscribe(producto => {
+          if (producto) {
+            this.producto = producto;
+            this.productoForm.patchValue(producto);
+          }
+        });
+    }
+  }
+
+  get nombre(): AbstractControl {
+    return this.productoForm.get('nombre');
+  }
+
+  get precio(): AbstractControl {
+    return this.productoForm.get('precio');
   }
 }

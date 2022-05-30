@@ -1,11 +1,9 @@
 <div class="container">
 
-  <div class="nuevo-usuario">
+  <div class="inner-container">
 
-    <div class="encabezado">
-      <img src="assets/images/logo.svg" alt="logo" class="logo">
-      <h1>Nuevo Usuario</h1>
-    </div>
+    <img src="assets/images/logo.svg" alt="logo" class="logo">
+    <h1 class="title">Nuevo Usuario</h1>
 
     <form [formGroup]="nuevoUsuarioForm" (ngSubmit)="crearUsuario()">
 
@@ -32,8 +30,6 @@
         </mat-error>
 
       </mat-form-field>
-
-      <div class="hr"></div>
 
       <mat-form-field appearance="outline">
 
@@ -76,6 +72,7 @@
       </mat-form-field>
 
       <mat-form-field appearance="outline">
+
         <mat-label>Confirmar Contraseña</mat-label>
         <input matInput type="password" formControlName="confirmarPassword" #confirmarPasswordRef>
         <button mat-button matSuffix  mat-icon-button type="button"
@@ -87,16 +84,29 @@
           <mat-icon *ngIf="confirmarPasswordRef.type === 'text'">visibility</mat-icon>
         </button>
         <mat-hint>Campo requerido</mat-hint>
+
         <mat-error *ngIf="confirmarPassword.errors?.required">
           Campo requerido
         </mat-error>
+
         <mat-error *ngIf="confirmarPassword.errors?.passwordMatch">
           La contraseña no coincide
         </mat-error>
+
+        <mat-error *ngIf="confirmarPassword.errors?.minlength">
+          Al menos 8 caracteres
+        </mat-error>
+
       </mat-form-field>
 
-      <div class="registrarse">
-        <button mat-raised-button type="submit" color="primary">registrarse</button>
+      <div class="actions">
+        <div class="iniciar-sesion">
+          <a mat-button routerLink="/login">Iniciar sesión</a>
+        </div>
+
+        <div class="registrarse">
+          <button mat-raised-button type="submit" color="primary">Registrarse</button>
+        </div>
       </div>
 
     </form>

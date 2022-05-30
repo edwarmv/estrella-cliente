@@ -1,0 +1,5 @@
+{
+  "bracketSameLine": false,
+  "htmlWhitespaceSensitivity": "ignore",
+  "arrowParens": "avoid"
+}

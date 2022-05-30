@@ -25,10 +25,9 @@
       "dom"
     ],
     "plugins": [
-      { "name": "typescript-tslint-plugin" }
     ]
   },
   "angularCompilerOptions": {
-    "strictTemplates": true,
+    "strictTemplates": true
   }
 }

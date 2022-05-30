@@ -1,0 +1,121 @@
+<div class="container">
+  <h2 class="my-section">Productos disponibles</h2>
+
+  <div class="my-section actions">
+    <div class="my-section actions__buttons">
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="showActionsFilter = !showActionsFilter"
+      >
+        Filtros
+      </button>
+      <a
+        mat-raised-button
+        class="nuevo-producto"
+        color="primary"
+        routerLink="../nuevo-producto"
+      >
+        Nuevo producto
+      </a>
+    </div>
+    <div class="actions__filter" *ngIf="showActionsFilter">
+      <div class="my-section actions__filter-buttons">
+        <mat-form-field>
+          <mat-label>Estado de producto</mat-label>
+          <mat-select
+            [(value)]="estadoProductoSeleccionado"
+            (valueChange)="obtenerProductos()"
+          >
+            <mat-option
+              *ngFor="let estadoProducto of estadosProducto"
+              [value]="estadoProducto"
+            >
+              {{ estadoProducto.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="seleccionarFiltroCategoriaProducto()"
+        >
+          Filtrar por categorias
+        </button>
+      </div>
+      <mat-chip-list *ngIf="categoriasProductosFilter.length > 0">
+        <mat-chip
+          *ngFor="let categoriaProducto of categoriasProductosFilter"
+          [removable]="true"
+          (removed)="removeCategoriasProductosFilter(categoriaProducto)"
+        >
+          {{ categoriaProducto.nombre }}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+  </div>
+
+  <!--buscador-->
+  <!--{{{-->
+  <form class="buscador" [formGroup]="buscadorForm">
+    <mat-form-field class="mat-input-white" appearance="outline">
+      <mat-label>Buscador</mat-label>
+
+      <input matInput type="text" formControlName="termino" />
+
+      <button
+        mat-icon-button
+        matSuffix
+        *ngIf="termino.value"
+        (click)="limpiarBusqueda()"
+      >
+        <mat-icon>clear</mat-icon>
+      </button>
+    </mat-form-field>
+  </form>
+  <!--}}}-->
+
+  <div class="productos" *ngIf="productos$ | async as productos">
+    <div class="producto" *ngFor="let producto of productos">
+      <p class="nombre">
+        {{ producto.nombre }}
+        <mat-icon color="warn" *ngIf="!producto.estado">highlight_off</mat-icon>
+      </p>
+
+      <img class="imagen" [src]="producto.foto | images: 'producto'" />
+
+      <p class="precio">
+        <span>Precio:</span>
+        {{ producto.precio | currency: "BOB" }}
+      </p>
+
+      <mat-chip-list
+        class="chips"
+        *ngIf="producto.categoriasProductosProductos.length > 0"
+      >
+        <mat-chip
+          *ngFor="
+            let categoriaProductoProducto of producto.categoriasProductosProductos
+          "
+        >
+          {{ categoriaProductoProducto.categoriaProducto.nombre }}
+        </mat-chip>
+      </mat-chip-list>
+
+      <button class="buttons" mat-button (click)="verDetalles(producto)">
+        Ver más
+      </button>
+    </div>
+  </div>
+
+  <mat-paginator
+    class="paginator"
+    #paginator
+    hidePageSize
+    showFirstLastButtons
+    [length]="totalProductos"
+    [pageSize]="12"
+    (page)="updateTable($event)"
+  ></mat-paginator>
+</div>

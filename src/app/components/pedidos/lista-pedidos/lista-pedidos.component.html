@@ -1,18 +1,17 @@
 <div class="container">
 
   <div class="actions">
-    <a routerLink="nuevo-pedido" mat-raised-button color="primary">
-      Nuevo pedido
-    </a>
-  </div>
-
-  <div class="filtrar-button">
     <button
+      class="filtrar"
       mat-raised-button
       color="primary"
       (click)="showFiltros = !showFiltros">
       Filtrar
     </button>
+
+    <a routerLink="nuevo-pedido" mat-raised-button color="primary">
+      Nuevo pedido
+    </a>
   </div>
 
   <div class="filtros" [hidden]="!showFiltros">

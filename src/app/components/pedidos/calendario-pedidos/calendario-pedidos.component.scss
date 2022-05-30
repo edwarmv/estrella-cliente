@@ -1,54 +1,34 @@
+@use 'src/styles/styles' as styles;
+
 .container {
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  padding: 40px 20px;
+  @include styles.default-container;
+  max-width: 1000px;
 
   .actions {
+    display: flex;
+    justify-content: flex-end;
     margin-bottom: 17.5px;
-    text-align: right;
+
+    .filtrar {
+      margin-right: 10px;
+    }
   }
-}
 
-.table-container {
-  margin: 0 20px 40px 20px;
-  max-width: calc(100vw - 40px);
-  overflow: auto;
-  box-shadow:
-    0 5px 5px -3px rgba(0,0,0,.2),
-    0 8px 10px 1px rgba(0,0,0,.14),
-    0 3px 14px 2px rgba(0,0,0,.12);
+  .filtros {
+    box-sizing: border-box;
+    padding: 20px;
+    margin-bottom: 20px;
+    background: #fff;
+    border-radius: 5px;
+    border: 1px solid #e0e0e0;
 
-  table {
-    width: 100%;
-
-    th, td {
-      padding: 0 20px;
+    .title {
+      font-weight: bold;
+      font-size: 16px;
     }
 
-    .estado-pedido {
-      padding: 5px;
-      border-radius: 5px;
-
-      &.pendiente {
-        background: var(--pendiente);
-      }
-
-      &.listo {
-        background: var(--listo);
-      }
-
-      &.entregado {
-        background: var(--entregado);
-      }
-
-      &.completado {
-        background: var(--completado);
-      }
-
-      &.cancelado {
-        background: var(--cancelado);
-      }
+    .lista-filtros {
+      list-style-type: none;
     }
   }
 }

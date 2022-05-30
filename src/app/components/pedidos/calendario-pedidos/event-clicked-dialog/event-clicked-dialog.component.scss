@@ -1,0 +1,37 @@
+.pedido {
+  .label {
+    display: block;
+  }
+
+  .field {
+    margin-bottom: 15px;
+  }
+
+  .estado {
+    .estado-value {
+      border-radius: var(--default-border-radius);
+      padding: 5px;
+      width: fit-content;
+    }
+
+    .pendiente {
+      background-color: var(--pendiente);
+    }
+
+    .listo {
+      background-color: var(--listo);
+    }
+
+    .entregado {
+      background-color: var(--entregado);
+    }
+
+    .completado {
+      background-color: var(--completado);
+    }
+
+    .cancelado {
+      background-color: var(--cancelado);
+    }
+  }
+}

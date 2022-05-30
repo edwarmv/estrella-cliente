@@ -14,36 +14,60 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { TextFieldModule } from '@angular/cdk/text-field';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialogModule } from '@angular/material/dialog';
+import { ProductosViewComponent } from './productos-view/productos-view.component';
+import { TabsModule } from '@shared/tabs/tabs.module';
+import { CategoriasProductosComponent } from './categorias-productos/categorias-productos.component';
+import { CategoriaProductoComponentDialog } from './categorias-productos/categoria-producto-dialog/categoria-producto-dialog.component';
+import { TableModule } from '@shared/table/table.module';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { SelectionListDialogModule } from '@shared/selection-list-dialog/selection-list-dialog.module';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatSelectModule } from '@angular/material/select';
 
 const routes: Routes = [
-  { path: '', component: ProductosComponent },
   {
-    path: 'nuevo-producto',
-    component: ProductoComponent,
-    data: {
-      breadcrumb: 'Nuevo producto'
-    }
+    path: '',
+    component: ProductosComponent,
+    children: [
+      { path: 'view', component: ProductosViewComponent },
+      {
+        path: 'categorias',
+        children: [
+          { path: '', component: CategoriasProductosComponent },
+        ]
+      },
+      {
+        path: 'nuevo-producto',
+        component: ProductoComponent,
+        data: {
+          breadcrumb: 'Nuevo producto'
+        }
+      },
+      {
+        path: ':id',
+        component: ProductoComponent,
+        data: {
+          breadcrumb: 'Editar información del producto'
+        }
+      },
+      { path: '', redirectTo: 'view', pathMatch: 'full' },
+    ]
   },
-  {
-    path: ':id',
-    component: ProductoComponent,
-    data: {
-      breadcrumb: 'Editar información del producto'
-    }
-  }
 ];
 
 @NgModule({
   declarations: [
     ProductosComponent,
     ProductoComponent,
-    DetallesProductoDialogComponent
+    DetallesProductoDialogComponent,
+    ProductosViewComponent,
+    CategoriasProductosComponent,
+    CategoriaProductoComponentDialog
   ],
   imports: [
     CommonModule,
@@ -56,9 +80,15 @@ const routes: Routes = [
     MatInputModule,
     MatIconModule,
     TextFieldModule,
-    MatSnackBarModule,
+    MatCheckboxModule,
     MatPaginatorModule,
-    MatDialogModule
+    MatDialogModule,
+    TabsModule,
+    TableModule,
+    SelectionListDialogModule,
+    MatChipsModule,
+    MatSelectModule,
+    FormsModule,
   ],
   providers: [
     {

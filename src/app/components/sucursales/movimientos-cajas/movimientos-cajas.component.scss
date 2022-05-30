@@ -1,0 +1,19 @@
+.my-container {
+  max-width: 1200px;
+}
+
+.filtro {
+  background-color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.form {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 0;
+}

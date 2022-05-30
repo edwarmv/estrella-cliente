@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="my-section actions">
+    <a routerLink="nueva-sucursal" mat-raised-button color="primary">
+      Nueva sucursal
+    </a>
+  </div>
+  <app-table
+    [columns]="tableColumns"
+    [rowsCB]="sucursalesCB"
+    searchPlaceholder="Nombre de la sucursal"
+  ></app-table>
+
+  <ng-template #nombreColumn let-sucursal="element">
+    {{ sucursal.nombre }}
+  </ng-template>
+
+  <ng-template #masDetallesColumn let-sucursal="element">
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="abrirMasInformacionDialog(sucursal)"
+    >
+      Más detalles
+    </button>
+  </ng-template>
+
+  <ng-template #estadoColumn let-sucursal="element">
+    <span
+      class="estado-sucursal"
+      [ngClass]="{
+        'estado-sucursal--activo': sucursal.estado,
+        'estado-sucursal--inactivo': !sucursal.estado
+      }"
+    >
+      {{ sucursal.estado ? "Activo" : "Inactivo" }}
+    </span>
+  </ng-template>
+
+  <ng-template #editarColumn let-sucursal="element">
+    <a [routerLink]="[sucursal.id]" mat-mini-fab color="accent">
+      <mat-icon>edit</mat-icon>
+    </a>
+  </ng-template>
+</div>

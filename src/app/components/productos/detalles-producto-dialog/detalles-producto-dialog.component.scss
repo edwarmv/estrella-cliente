@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   max-width: 350px;
+  gap: 17.5px;
 
   .imagen {
     width: 100%;
@@ -14,7 +15,6 @@
   }
 
   .precio {
-    grid-area: precio;
     place-self: start;
     background-color: #ffd600;
     border-radius: 4px;
@@ -27,13 +27,15 @@
     }
   }
 
+  .chips {
+    align-self: flex-start;
+  }
 }
 
 .dialog-actions {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
-  margin-top: 20px;
 
   .aceptar-btn {
     margin: 0;

@@ -2,11 +2,7 @@
 
   <app-calendar
     class="calendar"
-    [events]="pedidos$"
-    [(viewDate)]="viewDate"
-    (viewDateChange)="obtenerPedidos()"
-    [(view)]="view"
-    (viewChange)="obtenerPedidos()">
+    [eventsCB]="pedidosCB">
   </app-calendar>
 
   <h1>
@@ -15,9 +11,8 @@
 
   <app-table
     [columns]="tableColumns"
-    [totalRows]="total"
-    [rows]="pedidosTable$ | async"
-    (page)="updateTable($event)">
+    searchPlaceholder="Nombre del cliente"
+    [rowsCB]="pedidosTableCB">
   </app-table>
 
   <ng-template #clienteColumn let-pedido="element">
@@ -32,7 +27,7 @@
     <a
       mat-raised-button
       color="primary"
-      [routerLink]="['/pedidos', pedido.id]">
+      [routerLink]="['/pedidos/lista-pedidos', pedido.id]">
       Ver pedido
     </a>
   </ng-template>

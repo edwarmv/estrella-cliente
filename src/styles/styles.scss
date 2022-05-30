@@ -36,10 +36,18 @@ $estrella-cliente-theme: mat.define-light-theme((
 
 /* You can add global styles to this file, and also import other style files */
 
+@import './base/section';
+@import './components/form';
+@import './components/estado-pedido-colors';
+@import './components/container';
+
 :root {
   --primary-color: #4caf50;
   --accent-color: #ffd600;
   --warn-color: #f44336;
+  --primary-color-transparent: #4caf5090;
+  --accent-color-transparent: #ffd60090;
+  --warn-color-transparent: #f4433690;
   --bg-color: #f7f7e9;
 
   // Elements sizes

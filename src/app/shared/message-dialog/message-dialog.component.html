@@ -6,11 +6,11 @@
 
 </div>
 
-<div mat-dialog-actions>
+<div mat-dialog-actions class="actions">
 
   <button
     *ngIf="showCancelButton"
-    mat-stroked-button
+    mat-button
     [color]="cancelButtonColor"
     (click)="closeDialog(false)">
     {{ cancelButtonText }}
@@ -18,7 +18,7 @@
 
   <button
     *ngIf="showConfirmButton"
-    mat-stroked-button
+    mat-button
     [color]="confirmButtonColor"
     (click)="closeDialog(true)">
     {{ confirmButtonText }}

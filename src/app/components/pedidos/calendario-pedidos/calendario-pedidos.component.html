@@ -1,49 +1,43 @@
 <div class="container">
 
   <div class="actions">
+    <button
+      class="filtrar"
+      mat-raised-button
+      color="primary"
+      (click)="showFiltros = !showFiltros">
+      Filtrar
+    </button>
+
     <a routerLink="nuevo-pedido" mat-raised-button color="primary">
       Nuevo pedido
     </a>
   </div>
 
+  <div class="filtros" [hidden]="!showFiltros">
+    <p class="title">Filtrar por estado</p>
+    <mat-radio-group [(ngModel)]="estado" (change)="obtenerPedidos()">
+      <ul class="lista-filtros">
+        <li *ngFor="let filtro of filtroEstados">
+          <mat-radio-button [value]="filtro">
+            {{ filtro | titlecase }}
+          </mat-radio-button>
+        </li>
+        <li>
+          <mat-radio-button value="">
+            Ninguno
+          </mat-radio-button>
+        </li>
+      </ul>
+    </mat-radio-group>
+  </div>
+
   <app-calendar
     class="calendar"
-    [events]="pedidos$"
-    [(viewDate)]="viewDate"
-    (viewDateChange)="obtenerPedidos()"
-    [(view)]="view"
-    (viewchange)="obtenerPedidos()"
+    [eventsCB]="pedidosCB"
+    (eventTimesChanged)="eventTimesChanged($event)"
+    (eventClicked)="eventClicked($event)"
     (dayClicked)="dayClicked($event)">
   </app-calendar>
-
-  <app-table
-    *ngIf="pedidosTable && pedidosTable.length"
-    [columns]="tableColumns"
-    [rows]="pedidosTable">
-  </app-table>
-
-  <ng-template #clienteColumn let-pedido="element">
-    {{ pedido.cliente.nombre + ' ' + pedido.cliente.apellido }}
-  </ng-template>
-
-  <ng-template #estadoColumn let-pedido="element">
-    <span class="estado-pedido" [ngClass]="pedido.estado">
-      {{ pedido.estado }}
-    </span>
-  </ng-template>
-
-  <ng-template #fechaRegistroColumn let-pedido="element">
-    {{ pedido.fechaRegistro | date: 'short' }}
-  </ng-template>
-
-  <ng-template #fechaEntregaColumn let-pedido="element">
-    {{ pedido.fechaEntrega | date: 'short' }}
-  </ng-template>
-
-  <ng-template #verPedidoColumn let-pedido="element">
-    <a [routerLink]="pedido.id" mat-raised-button color="primary" type="button">
-      Ver pedido
-    </a>
-  </ng-template>
 
 </div>

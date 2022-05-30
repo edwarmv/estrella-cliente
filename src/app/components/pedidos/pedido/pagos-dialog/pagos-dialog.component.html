@@ -1,0 +1,110 @@
+<h1 mat-dialog-title>Pagos pedido: #{{ data.idPedido }}</h1>
+
+<div class="container" mat-dialog-content>
+  <div class="table-container" *ngIf="pagos$ | async as pagos">
+    <table>
+      <thead>
+        <tr>
+          <th>Nº</th>
+          <th>Fecha de pago</th>
+          <th>Monto</th>
+          <th class="eliminar">Eliminar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pago of pagos; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ pago.fechaPago | date: 'short' }}</td>
+          <td
+            class="monto"
+            matRipple
+            matRippleColor="#4caf5080"
+            (click)="selectPago(pago)">
+            {{ pago.monto }}
+          </td>
+          <td class="eliminar">
+            <button
+              [disabled]="data.disabled"
+              (click)="eliminarPago(pago.id)"
+              mat-icon-button
+              color="warn"
+              type="button">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="deuda">
+    <div class="cancelado">
+      <b>Cancelado: Bs. </b>
+      <span>{{ cancelado }}</span>
+    </div>
+
+    <div>
+      <b>Total: Bs. </b>
+      <span>{{ total }}</span>
+    </div>
+
+    <div>
+      <b>Saldo: Bs. </b>
+      <span>{{ saldo }}</span>
+    </div>
+  </div>
+
+  <div class="editar-monto" *ngIf="showPagoForm">
+    <p
+      class="id-fecha-pago"
+      *ngIf="pagoForm.get('id').value || pagoForm.get('fechaPago').value">
+      <span class="id" *ngIf="pagoForm.get('id').value">
+        <b>ID: </b>{{ pagoForm.get('id').value }}
+      </span>
+      <span class="fecha-pago" *ngIf="pagoForm.get('fechaPago').value">
+        <b>Fecha de pago: </b>{{ pagoForm.get('fechaPago').value | date: 'short' }}
+      </span>
+    </p>
+
+    <form
+      [formGroup]="pagoForm"
+      (ngSubmit)="pagoForm.get('id').value ? actualizarPago() : registrarPago()">
+
+      <mat-form-field>
+        <mat-label>Monto</mat-label>
+        <input type="number" matInput formControlName="monto">
+        <span matSuffix>Bs.</span>
+      </mat-form-field>
+
+      <button mat-raised-button type="submit" color="primary">
+        <ng-container *ngIf="pagoForm.get('id').value else registrarButton">
+          Actualizar
+        </ng-container>
+        <ng-template #registrarButton>
+          Registrar
+        </ng-template>
+      </button>
+    </form>
+
+    <p class="error" *ngIf="pagoForm.get('monto').errors as errors">
+      <ng-container *ngIf="errors.required">
+        El campo es requerido
+      </ng-container>
+      <ng-container *ngIf="errors.min">
+        Debe ser mayor o igual a 0
+      </ng-container>
+    </p>
+  </div>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button type="button" mat-dialog-close cdkFocusInitial>Aceptar</button>
+  <button
+    [disabled]="data.disabled"
+    (click)="resetForm()"
+    mat-button
+    color="primary"
+    type="button">
+    Registrar pago
+  </button>
+</div>

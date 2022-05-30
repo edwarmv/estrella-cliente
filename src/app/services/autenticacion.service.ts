@@ -60,6 +60,10 @@ export class AutenticacionService {
     localStorage.setItem('token', token);
   }
 
+  obtenerToken(): string {
+    return localStorage.getItem('token');
+  }
+
   limpiarLocalStorage(): void {
     localStorage.removeItem('idUsuario');
     localStorage.removeItem('roles');

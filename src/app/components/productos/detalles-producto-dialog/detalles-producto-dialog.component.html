@@ -1,29 +1,36 @@
 <div class="content" mat-dialog-content>
+  <h1>
+    {{ producto.nombre }}
+    <mat-icon color="warn" *ngIf="!producto.estado">highlight_off</mat-icon>
+  </h1>
 
-  <h1>{{ producto.nombre }}</h1>
+  <img class="imagen" [src]="producto.foto | images: 'producto'" />
 
-  <img
-    class="imagen"
-    [src]="producto.foto | images: 'producto'"
-  >
-
-  <p class="descripcion">{{ producto.descripcion + producto.descripcion }}</p>
+  <p class="descripcion" *ngIf="producto.descripcion">
+    {{ producto.descripcion }}
+  </p>
 
   <p class="precio">
     <span>Precio:</span>
-    {{ producto.precio | currency: 'BOB' }}
+    {{ producto.precio | currency: "BOB" }}
   </p>
 
+  <mat-chip-list
+    class="chips"
+    *ngIf="producto.categoriasProductosProductos.length > 0"
+  >
+    <mat-chip
+      *ngFor="
+        let categoriaProductoProducto of producto.categoriasProductosProductos
+      "
+    >
+      {{ categoriaProductoProducto.categoriaProducto.nombre }}
+    </mat-chip>
+  </mat-chip-list>
 </div>
 
 <div class="dialog-actions" mat-dialog-actions>
-
-  <button
-    class="aceptar-btn"
-    mat-button
-    (click)="onNoClick()"
-    cdkFocusInitial
-  >
+  <button class="aceptar-btn" mat-button (click)="onNoClick()" cdkFocusInitial>
     Aceptar
   </button>
 
@@ -35,5 +42,4 @@
   >
     <mat-icon>create</mat-icon>
   </button>
-
 </div>

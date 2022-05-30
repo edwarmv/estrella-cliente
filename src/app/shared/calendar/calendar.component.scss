@@ -1,3 +1,5 @@
+@use 'src/styles/styles' as styles;
+
 .title-container {
   display: grid;
   grid-template-rows: auto repeat(2, 60px);
@@ -73,10 +75,57 @@
 }
 
 .calendar-container {
-  box-shadow:
-    0 5px 5px -3px rgba(0,0,0,.2),
-    0 8px 10px 1px rgba(0,0,0,.14),
-    0 3px 14px 2px rgba(0,0,0,.12);
+  border-radius: var(--default-border-radius);
+  @include styles.shadow-border;
+
+  // rounded borders
+  ::ng-deep .cal-month-view {
+    border-radius: var(--default-border-radius);
+
+    .background-grip {
+      border-top-left-radius: var(--default-border-radius);
+      border-top-right-radius: var(--default-border-radius);
+      .custom-header {
+        border-top-left-radius: var(--default-border-radius);
+        border-top-right-radius: var(--default-border-radius);
+        .day-item {
+          &:first-child {
+            border-top-left-radius: var(--default-border-radius);
+          }
+          &:last-child {
+            border-top-right-radius: var(--default-border-radius);
+          }
+        }
+      }
+    }
+
+    .cal-days {
+      border-bottom-left-radius: var(--default-border-radius);
+      border-bottom-right-radius: var(--default-border-radius);
+      > div:last-child {
+        border-bottom-left-radius: var(--default-border-radius);
+        border-bottom-right-radius: var(--default-border-radius);
+        .cal-cell-row {
+          border-bottom-left-radius: var(--default-border-radius);
+          border-bottom-right-radius: var(--default-border-radius);
+          .cal-day-cell {
+            &:first-child {
+              border-bottom-left-radius: var(--default-border-radius);
+              .custom-cell {
+                border-bottom-left-radius: var(--default-border-radius);
+              }
+            }
+            &:last-child {
+              border-bottom-right-radius: var(--default-border-radius);
+              .custom-cell {
+                border-bottom-right-radius: var(--default-border-radius);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
 .background-grip {
@@ -108,6 +157,10 @@
     ". day-number" 1fr
     "badge badge"      1fr
     / 1fr 1fr;
+
+  &.out-mounth {
+    opacity: 0.5;
+  }
 
   .day-number {
     text-align: right;

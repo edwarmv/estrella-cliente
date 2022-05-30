@@ -1,0 +1,97 @@
+@use 'src/styles/styles' as styles;
+
+.container {
+  @include styles.default-container;
+  max-width: 1200px;
+
+  .buscador {
+    min-width: 250px;
+    margin-bottom: 40px;
+    grid-area: buscador;
+    justify-self: center;
+
+    mat-form-field {
+      width: 100%;
+    }
+  }
+
+  .productos {
+    grid-area: productos;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 1rem;
+
+    .producto {
+      border: 1px solid;
+      border-radius: 4px;
+      padding: 10px;
+      background: white;
+      display: grid;
+      grid-template-rows: auto 180px 40px 40px;
+      grid-template-areas: 'nombre' 'imagen' 'precio' 'chips' 'buttons';
+
+      .nombre {
+        grid-area: nombre;
+        font-size: 16px;
+        font-weight: 500;
+      }
+
+      .imagen {
+        grid-area: imagen;
+        place-self: center;
+        max-width: 230px;
+        max-height: 160px;
+        border-radius: 4px;
+        object-fit: cover;
+      }
+
+      .precio {
+        grid-area: precio;
+        place-self: start;
+        background-color: #ffd600;
+        border-radius: 4px;
+        padding: 2px;
+        margin: 0;
+
+        span {
+          font-weight: 500;
+          margin-right: 4px;
+        }
+      }
+
+      .chips {
+        grid-area: chips;
+      }
+
+      .buttons {
+        grid-area: buttons;
+        place-self: center;
+      }
+    }
+  }
+
+  mat-paginator {
+    margin-top: 40px;
+  }
+}
+
+.actions__buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.actions__filter {
+  padding: 10px;
+  border-radius: 5px;
+  border: rgba(0, 0, 0, 0.12) solid 0.5px;
+  background-color: #fff;
+}
+
+.actions__filter-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  column-gap: 10px;
+  row-gap: 17.5px;
+}

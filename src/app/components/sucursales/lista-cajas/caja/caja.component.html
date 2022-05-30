@@ -1,0 +1,64 @@
+<div class="my-container">
+  <form
+    class="my-form"
+    [formGroup]="cajaForm"
+    (ngSubmit)="caja ? actualizarCaja() : crearCaja()"
+  >
+    <h1>{{ caja ? caja.nombre : "Nueva caja" }}</h1>
+    <mat-form-field>
+      <mat-label>Nombre</mat-label>
+      <input matInput type="text" name="nombre" formControlName="nombre" />
+      <mat-error *ngIf="nombre.errors && nombre.errors.required">
+        El nombre es requerido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-checkbox formControlName="estado">Estado</mat-checkbox>
+
+    <div
+      class="seleccionar-sucursal"
+      [ngClass]="{
+        'seleccionar-sucursal--error': sucursal.invalid
+      }"
+    >
+      <button
+        (click)="seleccionarSucursal()"
+        class="seleccionar-sucursal__btn"
+        mat-stroked-button
+        [color]="sucursal.invalid ? 'warn' : 'primary'"
+        type="button"
+      >
+        Seleccionar Sucursal
+      </button>
+
+      <span *ngIf="sucursal.get('nombre').errors?.required">
+        Debe de seleccionar una sucursal
+      </span>
+    </div>
+
+    <ng-container formGroupName="sucursal">
+      <mat-form-field>
+        <mat-label>Sucursal</mat-label>
+        <input
+          matInput
+          type="text"
+          name="nombre"
+          readonly
+          formControlName="nombre"
+        />
+      </mat-form-field>
+    </ng-container>
+
+    <div class="actions">
+      <a mat-stroked-button routerLink="../">Regresar</a>
+
+      <a *ngIf="caja" mat-stroked-button routerLink="../nueva-caja">
+        Nueva caja
+      </a>
+
+      <button mat-stroked-button type="submit">
+        {{ caja ? "Actualizar caja" : "Registrar caja" }}
+      </button>
+    </div>
+  </form>
+</div>
